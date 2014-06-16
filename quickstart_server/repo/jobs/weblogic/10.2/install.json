@@ -1,0 +1,29 @@
+{
+    "id": "weblogic 10.2 install",
+	"script": {
+        "working_dir": "/opt/weblogic",
+        "env": {
+            "MW_HOME": "/opt/weblogic",
+            "WL_HOME": "/opt/weblogic/wlserver",
+            "NM_HOME": "/opt/weblogic/wlserver/common/nodemanager",
+            "JAVA_HOME": "/usr/java/jdk1.7.0_45",
+            "QS_INSTALL_DIR": "/home/weblogic",
+            "SETUP_HOME": "/home/weblogic/setup",
+            "QS_LIB_DIR": "/home/weblogic/setup/lib",
+            "QS_CONFIG_DIR": "/home/weblogic/setup/config"
+            	
+		},
+		"install_commands": [
+		    "echo \"install oracle jdk 1.6\"",
+		    "sudo yum -y install oracle_jdk_1.6",
+		    "sudo yum -y install qs_weblogic_dev-10.3.6",
+		    "echo \"installing from: $QS_INSTALL_DIR\"",
+            "sudo -u weblogic mv $QS_INSTALL_DIR/wl* $MW_HOME",
+            "sudo -u weblogic chmod +x $MW_HOME/configure.sh",
+			"export JAVA_HOME=$JAVA_HOME",	
+			"sudo -E -u weblogic $MW_HOME/configure.sh -silent",
+			"sudo -E -u weblogic $MW_HOME/wlserver/common/bin/wlst.sh $SETUP_HOME/Lib/qs_weblogic/createDomain.py"
+		]
+			
+    }
+}

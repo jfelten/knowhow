@@ -1,0 +1,35 @@
+{
+    "id": "atg 10.2 install",
+	"script": {
+        "working_dir": "/opt/atg",
+        "env": {
+        	"ATG_VERSION" : "10.2",
+            "ATG_HOME": "/opt/atg/${ATG_VERSION}/home",
+            "DYNAMO_ROOT": "/opt/atg/${ATG_VERSION}",
+            "DYNAMO_HOME": "${ATG_ROOT}/home",
+            "JAVA_HOME": "/usr/java/jdk1.7.0_45",
+            "JAVA_VM": "/usr/java/jdk1.7.0_45/bin/java",
+            "ANT_HOME": "/opt/ant/1.9.0",
+            "ECOM_INSTALL_PROPS" : "ecom_install.props",	
+            "ACC_INSTALL_PROPS" : "acc_install.props",	
+            "CSC_INSTALL_PROPS" : "csc_install.props",
+            "SEARCH_INSTALL_PROPS" : "srch_install.props",
+        	"ECOM_PATCH_PROPS" : "ecom_patch.props",	
+            "ACC_PATCH_PROPS" : "acc_patch.props",	
+            "CSC_PATCH_PROPS" : "csc_patch.props",
+            "SEARCH_PATCH_PROPS" : "srch_patch.props"
+		},
+		"install_commands": [
+		    "yum -y install qs_ATG_10.2",                 
+		    "unzip V377*",
+		    "chmod +x ATG*.bin",
+		    "./ATG*.bin -f ${ECOM_INSTALL_PROPS}",
+		    "echo \"installing patch\"",
+		    "yum -y install qs_ATG_PATCH_10.2.0.3",
+		    "unzip V3779*",
+		    "chmod +x ATG*.bin",
+		    "./ATGv79*.bin -f ${ECOM_PATCH_PROPS}"
+		 ]
+			
+    }
+}
