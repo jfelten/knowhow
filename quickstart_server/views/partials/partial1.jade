@@ -1,0 +1,17 @@
+p Quickstart Agents
+
+h3 Add a new Agent remotely via ssh
+form(method="POST" action="/sshagent")
+p User/Password@host
+d 
+	input(type="text" name="user")
+	&#47;
+	input(type="password" name="password")
+	&#64;
+	input(type="text" name="host")
+	input(type="submit" name="add")
+
+h3 Add a new Agent via wget: wget http:{{name}}/agent_install then ./qs_agent.bin
+
+
+d Active agents that have sucessfully connected:

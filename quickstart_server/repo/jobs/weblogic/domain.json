@@ -1,0 +1,205 @@
+{
+    "id": "test environment",
+	"name": "qs_testbed",
+    "version": "12.1.2",
+    "MW_HOME": "/opt/weblogic",
+ 	"silent_install_file": "wl_silent_install.xml","
+     "java_version": "1.7.0_45",
+     "JAVA_HOME": "/usr/java/jdk1.7.0_45", 
+     "java_vendor", "oracle",
+    "domain_dir": "/opt/weblogic/user_projects/domains",
+    "keystore": {
+    	"keystore_name": "keystore.jks",
+    	"truststore_name": "truststore.jks",
+    	"cert_directory": "security",
+		"password": "welcome1",
+		"appIdentity":"QS_REF"
+    },
+    
+    "JTA_timeout": "600",
+    "logging": {
+    	 "loggingDirectory": "/home/logs", 
+    	 "severityThreshhold": "Warning",
+    	"fileRotation": { 
+    	   "rotationType": "byTime",
+    	   "rotationTime": "00:00",
+    	   "fileTimeSpan": "24",
+    	   ""fileCount": "30"
+    	}
+    },
+    "node_manager": {
+    	"username": "weblogic",
+    	"password": "welcome1", 
+    	"port": "5556",
+    	"type": ""ssl",
+    	"node_manager_dir": "/opt/weblogic/user_projects/domains"
+    },
+    "admin_server": {
+    	"username": "weblogic", 
+    	"password"; "welcome1",
+     	"node" {
+     		"port": "7001",
+     		"sslport", "7002",
+ 	    	"managed_server_name": "AdminServer",
+ 			"machine": "bcc01"
+ 		},
+        "datasources": {
+			"name": "core_ds", 
+			"initialCapacity": "5",
+			"minimumCapacity": "2",
+			"maximumCapacity": "30", 
+			"capacityIncrement": "1",
+		    "database": "testDB",
+		    "schemaId": "core",
+			"jndiName": "ATGProductionDS",
+			"driverClass": "oracle.jdbc.xa.client.OracleXADataSource",
+			"targets": "store01,bcc01,csc01,liveIndex01,pvw01",
+			"testQuery": "SQL SELECT 1 FROM DUAL"
+		}, {
+			"name": "core_preview_ds", 
+			"initialCapacity": "5",
+			"minimumCapacity" "2", 
+			"maximumCapacity": "30", 
+			"capacityIncrement" "1",
+		    "database": "testDB",
+		    "schemaId": "core_preview",
+			"driverClass": "oracle.jdbc.xa.client.OracleXADataSource",
+			"jndiName": "ATGProductionDS_preview",
+			"targets": "pvw01,bcc01",
+			"testQuery": "SQL SELECT 1 FROM DUAL"
+		},
+		{ 
+			"name": "pub_ds",
+			"initialCapacity": "5",
+			"minimumCapacity": "2",
+			"maximumCapacity": "20", 
+			"capacityIncrement": "1",
+			"database": "testDB",
+		    "schemaId": "pub",
+			"driverClass": "oracle.jdbc.xa.client.OracleXADataSource",
+			"jndiName": "ATGPublishingDS",
+			"targets" "store01,store02,bcc01,csc01,pvw01",
+			"testQuery": "SQL SELECT 1 FROM DUAL"
+		},
+		{ 
+			"name": "core_hist_ds",
+			"initialCapacity": "5",
+			"minimumCapacity": "2",
+			"maximumCapacity": "20",
+			"capacityIncrement": "1",
+			"database": "testDB",
+		    "schemaId": "core_hist",
+			"driverClass": "oracle.jdbc.xa.client.OracleXADataSource",
+			"jndiName": "ATGCoreHistDS",
+			"targets": "store01,store02,bcc01,csc01,pvw01",
+			"testQuery", "SQL SELECT 1 FROM DUAL"
+		},
+		{ 
+			"name": "agent_ds",
+			"initialCapacity": "5", 
+			"minimumCapacity": "2", 
+			"maximumCapacity": "20",
+			"capacityIncrement" "1",
+			"database": "testDB",
+		    "schemaId": "agent",
+		    "driverClass": "oracle.jdbc.xa.client.OracleXADataSource",
+			"jndiName": "ATGAgentDS",
+			"targets": "csc01",
+			"testQuery": "SQL SELECT 1 FROM DUAL"
+		},
+		{ 
+			"name": "cata_ds",
+			"initialCapacity": "5", 
+			"minimumCapacity": "2", 
+			"maximumCapacity": "20", 
+			"capacityIncrement": "1",
+			"database" : "testDB",
+		    "schemaId": "cata",
+			"driverClass": "oracle.jdbc.xa.client.OracleXADataSource",
+			"jndiName": "ATGSwitchingDS_A",
+			"targets": "store01,store02,csc01,liveIndex01,bcc01,pvw01",
+			"testQuery": "SQL SELECT 1 FROM DUAL",
+		},
+		{ 
+			"name": "catb", 
+			"initialCapacity": "5",
+			"minimumCapacity": "2", 
+			"maximumCapacity": "20",
+			"capacityIncrement": "1",
+			"database" : "testDB",
+		    "schemaId" : "catb",
+			"driverClass": "oracle.jdbc.xa.client.OracleSource",
+			"jndiName" : "ATGSwitchingDS_B",
+			"targets": "store01,store02,csc01,liveIndex01,bcc01,pvw01",
+			"testQuery": "SQL SELECT 1 FROM DUAL"
+		},
+		{ 
+			"name": "cata_preview_ds",
+			"initialCapacity": "5", 
+			"minimumCapacity": "2",
+			"maximumCapacity": "20",
+			"capacityIncrement": "1",
+			"database": "testDB",
+		    "schemaId": "cata_preview",
+			"driverClass": "oracle.jdbc.xa.client.OracleXADataSource",
+			"jndiName": "ATGSwitchingDS_A_preview",
+			"targets": "pvw01,bcc01</targets",
+			"testQuery": "SQL SELECT 1 FROM DUAL"
+		},
+		{ 
+			"name": "catb_preview_ds",
+			"initialCapacity": "5",
+			"minimumCapacity": "2",
+			"maximumCapacity": "20", 
+			"capacityIncrement": "1",
+			"database": "testDB",
+		    "schemaId": "catb_preview",
+			"driverClass": "oracle.jdbc.xa.client.OracleXADataSource",
+			"jndiName": "ATGSwitchingDS_B_preview",
+			"targets": "pvw01,bcc01",
+			"testQuery": "SQL SELECT 1 FROM DUAL"
+		},
+    },
+    "node_group": {
+    	"name": "Commerce Nodes",
+    	"nodes": {
+ 			"port": "7100",
+ 	    	"managed_server_name": "store01",
+ 	    	"jvm_startup_args": "-Xms256m -Xmx512m -Ddisable.atg.dynamo.log=true -Datg.dynamo.server.name=qs_testbed",
+ 			"machine": "commerce01"
+    	},
+    	{
+ 			"port": "7100",
+ 	    	"managed_server_name": "store02",
+ 	    	"jvm_startup_args": "-Xms256m -Xmx512m -Ddisable.atg.dynamo.log=true -Datg.dynamo.server.name=qs_testbed</jvm_startup_args",
+ 			"machine": "commerce02"
+    	}
+    },
+ 	"node_group": {
+ 		"name"" "CSC Nodes",
+ 		"nodes" {
+ 			"port": "7200",
+ 	    	"managed_server_name": "csc01",
+ 	    	"jvm_startup_args": "-Xms256m -Xmx512m -Ddisable.atg.dynamo.log=true -Datg.dynamo.server.name=qs_testbed",
+ 			"machine": "csc01"
+ 		}
+ 	}
+ 	"node_group": {
+ 		"name": "BCC Nodes",
+ 		"nodes": {
+ 			"port", "7300",
+ 	    	"managed_server_name": "bcc01",
+ 	    	"jvm_startup_args": "-Xms256m -Xmx512m -Ddisable.atg.dynamo.log=true -Datg.dynamo.server.name=qs_testbed",
+ 			"machine": "bcc01"
+ 		}
+ 	},
+ 	"node_group": {
+ 		"name": "Live Index Nodes",
+ 		"nodes": {
+ 			"port": "7400",
+ 	    	"managed_server_name": "liveIndex01",
+ 	    	"jvm_startup_args": "-Xms256m -Xmx512m -Ddisable.atg.dynamo.log=true -Datg.dynamo.server.name=qs_testbed",
+ 			"machine": "csc01"
+ 		}
+ 	}
+}
