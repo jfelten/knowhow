@@ -1,15 +1,15 @@
 p Quickstart Agents
 
 h3 Add a new Agent remotely via ssh
-form(method="POST" action="/sshagent")
+
 p User/Password@host
-d 
-	input(type="text" name="user")
+d
+	input(type="text" name="user" ng-model='agent.user')
 	&#47;
-	input(type="password" name="password")
+	input(type="password" name="password" ng-model='agent.password')
 	&#64;
-	input(type="text" name="host")
-	input(type="submit" name="add")
+	input(type="text" name="host" ng-model='agent.host')
+	button(ng-click='addAgent(agent)' ) Add Agent
 
 h3 Add a new Agent via wget: wget http:{{name}}/agent_install then ./qs_agent.bin
 
