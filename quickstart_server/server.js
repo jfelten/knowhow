@@ -66,6 +66,9 @@ app.get('/api/name', api.name);
 //redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
 
+//agent installs
+app.post('/api/addAgent', api.addAgent);
+
 
 /**
 * Start Server
