@@ -22,11 +22,21 @@ angular.module('myApp.controllers', []).
 	  
 	    
     $scope.form = {};
+    $scope.test = ['sd','sdsds','dsdsd'];
+    
+    
+    $http.get('/api/connectedAgents').
+    success(function(data) {
+    	$scope.connectedAgents = data;
+    });
+
+    
     $scope.addAgent = function (agent) {
     	$scope.master = angular.copy(agent);
     	$http.post('/api/addAgent', agent).
         success(function(data) {
-          $location.path('/agents');
+        	$scope.connectedAgents = data;
+        	location.reload(); 
         });
     };
 	  

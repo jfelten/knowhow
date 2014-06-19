@@ -10,6 +10,7 @@ errorHandler = require('error-handler'),
 morgan = require('morgan'),
 routes = require('./routes'),
 api = require('./routes/api'),
+events = require('./routes/events'),
 //http = require('http'),
 path = require('path');
 
@@ -56,17 +57,23 @@ if (env === 'production') {
 * Routes
 */
 
+//events
+app.get('/fire-event/:event_name',events.fireEvents);
+app.get('/agent-updates',events.agentUpdateStream);
+
 //serve index and view partials
 app.get('/', routes.index);
 app.get('/partials/:name', routes.partials);
 
 //JSON API
 app.get('/api/name', api.name);
+app.get('/api/connectedAgents', api.listAgents);
 
 //redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
 
-//agent installs
+//agent routes
+
 app.post('/api/addAgent', api.addAgent);
 
 
