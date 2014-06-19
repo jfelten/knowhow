@@ -1,8 +1,12 @@
-p Quickstart Agents
+
+ 
+
+p(ng-init="test2 = ['d','c']") Quickstart Agents
 
 h3 Add a new Agent remotely via ssh
 
 p User/Password@host
+.progress.progress-success.bar(id='p')
 d
 	input(type="text" name="user" ng-model='agent.user')
 	&#47;
@@ -14,4 +18,29 @@ d
 h3 Add a new Agent via wget: wget http:{{name}}/agent_install then ./qs_agent.bin
 
 
-d Active agents that have sucessfully connected:
+Connected Agents
+table
+	thead
+		tr
+			td id
+			td host
+			td port
+			td status
+			td current task
+	tbody
+		tr(ng-repeat="agent in connectedAgents" ng-class="rowClass(agent)" id="{{agent.id}}")
+			td: {{agent.id}}
+			td: {{agent.host}}
+			td: {{agent.port}}
+			td: {{agent.status}}
+			td idle
+
+script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js')
+script(src='http://jquery-json.googlecode.com/files/jquery.json-2.2.min.js')
+script(type='text/javascript')
+	var source = new EventSource('/agent-updates');
+	
+	source.addEventListener('message', function(e) {
+		 console.log(e);
+		 
+	}, false)
