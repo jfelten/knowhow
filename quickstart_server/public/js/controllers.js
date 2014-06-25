@@ -23,7 +23,15 @@ angular.module('myApp.controllers', []).
 	    
     $scope.form = {};
     $scope.test = ['sd','sdsds','dsdsd'];
-    
+    var eventSource = new EventSource('/agent-updates');
+	
+	eventSource.addEventListener('message', function(e) {
+
+		var data = JSON.parse(e.data);
+		var agent_message_box = document.getElementById('data.id+"_messages"');
+		agent_message_box.textContent = data.msg;
+	});
+	
     
     $http.get('/api/connectedAgents').
     success(function(data) {
@@ -37,6 +45,15 @@ angular.module('myApp.controllers', []).
         success(function(data) {
         	$scope.connectedAgents = data;
         	location.reload(); 
+        });
+    };
+    
+    $scope.deleteAgent = function (agent_id) {
+    	
+    	$http.post('/api/deleteAgent', agent_id).
+        success(function(data) {
+        	$scope.connectedAgents = data;
+        	//location.reload(); 
         });
     };
 	  

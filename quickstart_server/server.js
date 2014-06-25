@@ -75,7 +75,7 @@ app.get('*', routes.index);
 //agent routes
 
 app.post('/api/addAgent', api.addAgent);
-
+app.post('/api/deleteAgent', api.deleteAgent);
 
 /**
 * Start Server
