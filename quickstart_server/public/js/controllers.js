@@ -26,7 +26,7 @@ angular.module('myApp.controllers', []).
     var eventSource = new EventSource('/agent-updates');
 	
 	eventSource.addEventListener('message', function(e) {
-
+        console.log('message received for: '+data.id);
 		var data = JSON.parse(e.data);
 		var agent_message_box = document.getElementById('data.id+"_messages"');
 		agent_message_box.textContent = data.msg;
@@ -44,7 +44,7 @@ angular.module('myApp.controllers', []).
     	$http.post('/api/addAgent', agent).
         success(function(data) {
         	$scope.connectedAgents = data;
-        	location.reload(); 
+        	//location.reload(); 
         });
     };
     
