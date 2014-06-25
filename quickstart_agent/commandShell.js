@@ -1,7 +1,7 @@
 var async = require('async');
 require('shelljs/global');
 
-var output = ''
+var output = '';
 var file_dest = 'files';	
 
 
@@ -60,4 +60,4 @@ executeSync: function(script) {
 	 
 	 
 }
-}
+};
