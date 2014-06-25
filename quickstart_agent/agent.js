@@ -5,9 +5,11 @@ var commandShell = require('./commandShell');
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var rimraf = require('rimraf');
 
 var dl = require('delivery');
 fs = require('fs');
+var status="RUNNING";
 
 //var io = require('socket.io').listen(server)
 var ns = io.of('/agent');
@@ -23,6 +25,9 @@ ns.on('connection', function (socket) {
 	        commandShell.executeSync(data);
 	        socket.emit('execute-complete', { exec: 'done' });
 	    });
+	});
+	socket.on('error', function(err) {
+		status="ERROR";
 	});
 });
 
@@ -48,6 +53,26 @@ up.on('connection', function (socket) {
 	  });
 });
 
+app.get('/delete',function(req, res) {
+	console.log("deleting agent");
+	var agent_dir = __dirname+"/../quickstart_agent";
+	rimraf(agent_dir, function(err) {
+		if (err) {
+			console.log("problem removing agent dir");
+			res.json(500, {error:"internal server error"}); // status 500 
+		} else {
+			res.json({ok:true});
+			process.exit();
+		}
+	});
+		
+});
+
+app.get('/status',function(req, res) {
+	console.log("request for agent status");
+	res.json({status: status});
+		
+});
 
 socket = http.listen(3000, function(){
 	  console.log('listening on *:3000');
