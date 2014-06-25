@@ -26,21 +26,37 @@ table
 			td host
 			td port
 			td status
-			td current task
+			td delete
+			td reinstall
+			td agent messages
 	tbody
-		tr(ng-repeat="agent in connectedAgents" ng-class="rowClass(agent)" id="{{agent.id}}")
-			td: {{agent.id}}
-			td: {{agent.host}}
-			td: {{agent.port}}
-			td: {{agent.status}}
-			td idle
+		tr(ng-repeat="agent in connectedAgents" ng-class="rowClass(agent)" id="{{agent._id}}")
+			td: d(id="{{agent._id}}_id")
+				{{agent._id}}
+			td: d
+				{{agent.host}}
+			td: d{{agent.port}}
+			td: d{{agent.status}}
+			td 
+				a(ng-click='deleteAgent(agent)')
+					img(src="images/remove.png")
+			td 
+				a(href="/api/addAgent?id={{agent._id}}")
+					img(src="images/install.png")
+			td(id="123"): "zzzzzzzzz"
 
 script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js')
 script(src='http://jquery-json.googlecode.com/files/jquery.json-2.2.min.js')
-script(type='text/javascript')
-	var source = new EventSource('/agent-updates');
+script(type='text/javascript').
+	var eventSource = new EventSource('/agent-updates');
 	
-	source.addEventListener('message', function(e) {
-		 console.log(e);
-		 
-	}, false)
+	eventSource.addEventListener('message', function(e) {
+
+		var data = JSON.parse(e.data);
+		var agent_message_box = document.getElementById('data.id+"_messages"');
+		agent_message_box.textContent = data.msg;
+	});
+	var agent_message_box1 = document.getElementById('0V1Iwgu10boM04ou_messages');
+	var agent_message_box2 = document.getElementById('123');
+	agent_message_box1.innerHTML = "Blah Blah";
+	agent_message_box2.textContent = "Blah Blah2";

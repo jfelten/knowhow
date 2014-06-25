@@ -1,8 +1,11 @@
-
+var agentControl = require('./agent-control');
+var events = require('./events');
 
 /*
  * Serve JSON to our AngularJS client
  */
+
+exports.agentControl = agentControl;
 
 var connectedAgents = [
                        {
@@ -26,7 +29,7 @@ var connectedAgents = [
 ];
 
 exports.listAgents = function(req, res) {
-	res.json(connectedAgents);
+	agentControl.listAgents(req, res);
 };
 
 exports.name = function (req, res) {
@@ -41,11 +44,19 @@ exports.addAgent = function (req, res) {
 	  console.log(params[i]);
   }
   var agent = req.body;
-  var agentControl = require('./agent-control');
+  agentControl.initAgent(agent);
   agentControl.addAgent(agent);
   
-  connectedAgents.push(agent);
-  res.json(connectedAgents);
-
+  agentControl.listAgents(req,res);
 
 };
+
+exports.deleteAgent = function (req, res) {
+	  console.log('delete agent: '+req.body._id);
+
+	  var agent = req.body;
+	  agentControl.deleteAgent(req,res,agent);
+	  
+	  //agentControl.listAgents(req,res);
+
+	};
