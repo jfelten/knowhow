@@ -1,7 +1,9 @@
 {
     "id": "atg 10.2 install",
+   
 	"script": {
         "working_dir": "/opt/atg",
+        "downloads" : ['file1','file2'],
         "env": {
         	"ATG_VERSION" : "10.2",
             "ATG_HOME": "/opt/atg/${ATG_VERSION}/home",

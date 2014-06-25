@@ -1,20 +1,19 @@
 
 var agentControl = require('./agent-control');
 
-agentControl.eventEmitter.on('package-complete', function(agent) {
-	console.log('agent packaged event');
-	publishMessage(req, res, 'agent packed', agent);
-});
+//agentControl.eventEmitter.on('package-complete', function(agent) {
+//	console.log('agent packaged event');
+//	publishMessage(req, res, 'agent packed', agent);
+//});
 
 function publishMessage(req, res, message, agent) {
 	
-	res.writeHead(200, {
-		'Content-Type': 'text/event-stream',
-		'Cache-Control': 'no-cache',
-		'Connection': 'keep-alive'
-	});
+//	res.writeHead(200, {
+//		'Content-Type': 'text/event-stream',
+//		'Cache-Control': 'no-cache',
+//		'Connection': 'keep-alive'
+//	});
 	res.write('\n');
-	messageCount++; // Increment our message count
 	res.write('id: ' + agent._id + '\n');
 	res.write("data: " + message + '\n\n'); // Note the extra newline
 };

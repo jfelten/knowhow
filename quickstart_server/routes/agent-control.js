@@ -32,7 +32,7 @@ exports.eventEmitter = eventEmitter;
 function listAgents(req,res) {
 	db.find({}, function(err, docs) {
 		console.log('found '+docs.length+' agents');
-		//console.log(docs);
+		console.log(docs);
 //		docs.forEach(function(agent) {
 //			console.log(agent);
 //		});
@@ -58,7 +58,7 @@ exports.initAgent = function(agent) {
 			 console.log('initAgent: adding property: '+agent[prop]);
 		 }
 	});
-}
+};
 
 exports.deleteAgent = function(req,res, agent) {
 	console.log("deleting agent: "+agent._id);
@@ -71,18 +71,18 @@ exports.deleteAgent = function(req,res, agent) {
 		        'Content-Type': 'application/json'
 		    }
 		};
-	var request = http.request(options, function(res) {
-		console.log("processing status response: ");
+	var request = http.request(options, function(response) {
+		console.log("processing delete response: ");
 		
 		var output = '';
-        console.log(options.host + ' ' + res.statusCode);
-        res.setEncoding('utf8');
+        console.log(options.host + ' ' + response.statusCode);
+        response.setEncoding('utf8');
 
-        res.on('data', function (chunk) {
+        response.on('data', function (chunk) {
             output += chunk;
         });
 
-        res.on('end', function() {
+        response.on('end', function() {
         	console.log("request to delete done.");
             var obj = JSON.parse(output);
         	console.log(obj.status);
@@ -164,7 +164,6 @@ install = function(main_callback) {
 	};
 	async.series(execCommands,function(err) {
         console.log("done");
-        eventEmitter.emit('added-agent',agent);
         main_callback();
     });
 	
@@ -255,6 +254,7 @@ deliverAgent = function(callback) {
 };
 exports.addAgent = function(agent) {
 	
+	eventEmitter.emit('added-agent',agent);
 	install_commands=['rm -rf quickstart_agent',
 	          	'tar xzf '+agent_archive_name,
 	            'tar xzf quickstart_agent/node*.tar.gz -C quickstart_agent',
