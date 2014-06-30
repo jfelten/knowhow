@@ -8,12 +8,27 @@ bodyParser = require('body-parser'),
 methodOverride = require('method-override'),
 errorHandler = require('error-handler'),
 morgan = require('morgan'),
+stylus = require('stylus'),
+nib = require('nib'),
 routes = require('./routes'),
 api = require('./routes/api'),
-events = require('./routes/events'),
+AgentEventHandler = require('./routes/agent-events'),
 //http = require('http'),
 path = require('path');
 
+//for stylus style sheets
+function compile(str, path) {
+	  return stylus(str)
+	    .set('filename', path)
+	    .use(nib())
+	};
+app.use(stylus.middleware(
+		  { src: __dirname + '/public'
+		  , compile: compile
+		  }
+		));
+
+var agentEventHandler = new AgentEventHandler(io);
 var dl = require('delivery');
 fs = require('fs');
 
@@ -23,9 +38,9 @@ var compress = require('compression')();
 app.use(compress);
 
 //app.use(express.static(__dirname+'/html' ));
-app.use('/repo', express.static(__dirname+'/repo'))
+app.use('/repo', express.static(__dirname+'/repo'));
 
-var port = 3001
+var port = 3001;
 
 /**
 * Configuration
@@ -58,15 +73,21 @@ if (env === 'production') {
 */
 
 //events
-app.get('/fire-event/:event_name',events.fireEvents);
-app.get('/agent-updates',events.agentUpdateStream);
+
+app.get('/agent-updates',function(req,res) {
+	io.emit('agent-update', 'test');
+	res.json({
+	    name: 'Master01'
+	  });
+});
+
 
 //serve index and view partials
 app.get('/', routes.index);
 app.get('/partials/:name', routes.partials);
 
 //JSON API
-app.get('/api/name', api.name);
+app.get('/api/serverInfo', api.serverInfo);
 app.get('/api/connectedAgents', api.listAgents);
 
 //redirect all others to the index (HTML5 history)

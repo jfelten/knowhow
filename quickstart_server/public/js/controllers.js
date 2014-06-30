@@ -7,10 +7,10 @@ angular.module('myApp.controllers', []).
 
     $http({
       method: 'GET',
-      url: '/api/name'
+      url: '/api/serverInfo'
     }).
     success(function (data, status, headers, config) {
-      $scope.name = data.name;
+      $scope.serverInfo = data.serverInfo;
     }).
     error(function (data, status, headers, config) {
       $scope.name = 'Error!';
@@ -18,20 +18,47 @@ angular.module('myApp.controllers', []).
 
   }).
   controller('AddAgentController', function ($scope, $http, $location) {
+	
+	console.log('starting add agent controller');  
 	$scope.master = {};
 	  
 	    
     $scope.form = {};
     $scope.test = ['sd','sdsds','dsdsd'];
-    var eventSource = new EventSource('/agent-updates');
-	
-	eventSource.addEventListener('message', function(e) {
-        console.log('message received for: '+data.id);
-		var data = JSON.parse(e.data);
-		var agent_message_box = document.getElementById('data.id+"_messages"');
-		agent_message_box.textContent = data.msg;
-	});
-	
+
+    var socket = io();
+
+    socket.on('agent-update', function(agent){
+      console.log('agent update message received');
+      var agent_status_box = document.getElementById(agent._id+'_status');
+      var agent_message_box = document.getElementById(agent._id+'_messages');
+      if (agent_message_box != undefined) {
+    	  agent_message_box.textContent = agent.message;
+      }
+      if (agent_status_box != undefined) {
+    	  agent_status_box.textContent = agent.status;
+      }
+      
+    });
+    
+    socket.on('agent-error', function(agent){
+        console.log('agent error message received');
+        var agent_status_box = document.getElementById(agent._id+'_status');
+        var agent_message_box = document.getElementById(agent._id+'_messages');
+        if (agent_message_box != undefined) {
+      	  agent_message_box.textContent = agent.message;
+        }
+        if (agent_status_box != undefined) {
+      	  agent_status_box.textContent = agent.status;
+        }
+        
+      });
+    socket.on('agent-add', function(agent){
+    	$http.get('/api/connectedAgents').
+        success(function(data) {
+        	$scope.connectedAgents = data;
+        });
+    });
     
     $http.get('/api/connectedAgents').
     success(function(data) {

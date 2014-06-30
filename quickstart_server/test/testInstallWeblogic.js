@@ -26,7 +26,7 @@ socket.on('execute-complete', function () {
 
 socket.on('connect', function(){
 	console.log("connected");
-	socket.emit('identify',{'server' :'localhost','port': '3001'})
+	socket.emit('identify',{'server' :'localhost','port': '3001'});
 	socket.emit('execute', weblogicInstall);
     socket.on('error', function(data){console.log('data');});
     socket.on('disconnect', function(){console.log('disconnect');});
