@@ -2,7 +2,8 @@ extends layout
 
 block body
   div(ng-controller='AppCtrl')
-    h2 Quickstart server: {{name}}
+    h2 Quickstart server: {{serverInfo.name}}
+    h5 Started: {{serverInfo.started}}
     ul.menu
       li
         a(href='partials/agents') agents
@@ -21,3 +22,4 @@ block body
   script(src='js/controllers.js')
   script(src='js/filters.js')
   script(src='js/directives.js')
+  script(src='js/socket.io.js')

@@ -16,18 +16,18 @@ var agent_dir = __dirname+"/../../quickstart_agent";
 var nodejs_dir = __dirname+"/../repo/rawpackages/node/node*";
 var agent_archive_name = 'quickstart_agent.tar.gz';
 
-eventEmitter.on('added-agent',function(agent){
-	console.log("adding agent: "+agent);
-	db.insert(agent, function (err, newDoc) {   
-			console.log("added agent: "+newDoc);
-		});
-});
 
 eventEmitter.on('package-complete',function(agent){
 	console.log("agent contol packaged agent: "+agent);
 });
 
 exports.eventEmitter = eventEmitter;
+
+exports.updateAgent = function(agent) {
+	db.update({ '_id': agent._id}, agent, function(err,docs) {
+		
+	});
+};
 
 function listAgents(req,res) {
 	db.find({}, function(err, docs) {
@@ -49,7 +49,8 @@ exports.initAgent = function(agent) {
 		user: "",
 		password: "",
 		status: "unknown",
-		type: "linux"
+		type: "linux",
+		status: "INSTALLING"
 	};
 	var props = Object.getOwnPropertyNames(agent_prototype);
 	props.forEach(function(prop){
@@ -89,6 +90,7 @@ exports.deleteAgent = function(req,res, agent) {
         	db.remove({ _id: agent._id }, {}, function (err, numRemoved) {
         		listAgents(req,res);
           	});
+        	event.emit('agent-delete',agent);
         });
 	});
 	request.on('error', function(er) {
@@ -141,8 +143,8 @@ install = function(main_callback) {
 		    	    });
 		    	    conn.on('close', function(had_error) {
 		    	      console.log('Connection :: close');
-		    	      
-		    	      eventEmitter.emit('agent-executed',agent, comm);
+		    	      agent.message=comm
+		    	      eventEmitter.emit('agent-update',agent);
 		    	      callback();
 		    	    }); 
 		    	    //.stderr.on('data', function(data) {
@@ -217,7 +219,8 @@ packAgent = function(callback) {
 	.pipe(tar.Pack()) /* Convert the directory to a .tar file */
 	.pipe(zlib.Gzip()) /* Compress the .tar file */
 	.pipe(fstream.Writer({ 'path': agent_archive_name }).on("close", function () {
-		eventEmitter.emit('package-complete', agent);
+		agent.message = 'package-complete';
+		eventEmitter.emit('agent-update', agent);
 		console.log('agent packaged.')
 		callback();
 	}));
@@ -234,27 +237,35 @@ deliverAgent = function(callback) {
 		if (err) {
 			console.log(err);
 		}
-		
-		eventEmitter.emit('transfer-complete', agent);
+		agent.message = 'transfer complete';
+		eventEmitter.emit('agent-update', agent);
 		console.log('transfer complete');
 		
 		//start the agent
 		console.log('starting agent on: '+agent.host);
+		callback();
 		
 	});
 
 	client.on('close',function (err) {
-		callback();
+		
 	    });
 	client.on('error',function (err) {
-		eventEmitter.emit('agent-error', agent, err.syscall+" "+err.code);
+		agent.message = 'unable to transfer agent';
+		eventEmitter.emit('agent-error', agent);
 		console.log('error delivering agent: ', err);
+		callback('stop');
 	});
 
 };
 exports.addAgent = function(agent) {
 	
-	eventEmitter.emit('added-agent',agent);
+	console.log("adding agent: "+agent);
+	db.insert(agent, function (err, newDoc) {   
+			console.log("added agent: "+newDoc);
+			eventEmitter.emit('agent-add',agent);
+		});
+	
 	install_commands=['rm -rf quickstart_agent',
 	          	'tar xzf '+agent_archive_name,
 	            'tar xzf quickstart_agent/node*.tar.gz -C quickstart_agent',
@@ -268,68 +279,11 @@ exports.addAgent = function(agent) {
 	            install.bind(function_vars)];
 	async.series(exec,function(err) {
 		if (err) {
-			console.log(agent_error);
+			console.log('agent error' + err);
 			eventEmitter.emit('agent-error',agent,err.syscall+" "+err.code);
 		}
 	    console.log("done");
 	});
-//	
-//	console.log('request to add: '+agent.user+'@'+agent.host);
-//	if ( status(agent)=='RUNNING') {
-//		
-//		agent.status='RUNNING';
-//		console.log('agent already running');
-//		eventEmitter.emit('added-agent',agent);
-//		return;
-//	}
-//	
-//	var agent_dir = __dirname+"/../../quickstart_agent";
-//	var nodejs_dir = __dirname+"/../repo/rawpackages/node/node*";
-//	var agent_archive_name = 'quickstart_agent.tar.gz';
-//
-//
-//	//create agent archive
-//	console.log('packaging agent');
-//	fstream.Reader({ 'path': agent_dir, 'type': 'Directory' }) /* Read the source directory */
-//	.pipe(tar.Pack()) /* Convert the directory to a .tar file */
-//	.pipe(zlib.Gzip()) /* Compress the .tar file */
-//	.pipe(fstream.Writer({ 'path': agent_archive_name }).on("close", function () {
-//		eventEmitter.emit('package-complete', agent);
-//		console.log('delivering agent files to: '+agent.host);
-//		client.scp(__dirname+"/../"+agent_archive_name, {
-//		    host: agent.host,
-//		    username: agent.user,
-//		    password: agent.password,
-//		    path: '/home/'+agent.user
-//		}, function(err) {
-//			if (err) {
-//				console.log(err);
-//				return;
-//			}
-//			
-//			eventEmitter.emit('transfer-complete', agent);
-//			console.log('transfer complete');
-//			
-//			//start the agent
-//			console.log('starting agent on: '+agent.host);
-//			commands=['rm -rf quickstart_agent',
-//			          	'tar xzf '+agent_archive_name,
-//			            'tar xzf quickstart_agent/node*.tar.gz -C quickstart_agent',
-//			            'nohup quickstart_agent/node*/bin/node quickstart_agent/agent.js > quickstart_agent.log & 2>&1',
-//			            'rm quickstart_agent.tar.gz'
-//			];
-//	        install(agent, commands);
-//		});
-//
-//		client.on('close',function (err) {
-//	
-//		    });
-//		client.on('error',function (err) {
-//			eventEmitter.emit('agent-error', agent, err.syscall+" "+err.code);
-//			console.log('error delivering agent: ', err);
-//		});
-//	}
-//			
-//	));
+
 };
 

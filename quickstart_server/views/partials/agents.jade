@@ -36,27 +36,17 @@ table
 			td: d
 				{{agent.host}}
 			td: d{{agent.port}}
-			td: d{{agent.status}}
+			td: d(id="{{agent._id}}_status"){{agent.status}}
 			td 
 				a(ng-click='deleteAgent(agent)')
 					img(src="images/remove.png")
 			td 
 				a(href="/api/addAgent?id={{agent._id}}")
 					img(src="images/install.png")
-			td(id='{{agent._id}}_messages'): "zzzzzzzzz"
+			td(id='{{agent._id}}_messages'): {{agent.message}}
 
 script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js')
 script(src='http://jquery-json.googlecode.com/files/jquery.json-2.2.min.js')
 script(type='text/javascript').
-	var eventSource = new EventSource('/agent-updates');
 	
-	eventSource.addEventListener('message', function(e) {
-
-		var data = JSON.parse(e.data);
-		var agent_message_box = document.getElementById('data.id+"_messages"');
-		agent_message_box.textContent = data.msg;
-	});
-	var agent_message_box1 = document.getElementById('0V1Iwgu10boM04ou_messages');
-	var agent_message_box2 = document.getElementById('123');
-	agent_message_box1.innerHTML = "Blah Blah";
 	agent_message_box2.textContent = "Blah Blah2";

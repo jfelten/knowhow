@@ -1,11 +1,13 @@
 var agentControl = require('./agent-control');
-var events = require('./events');
+var moment = require('moment');
 
 /*
  * Serve JSON to our AngularJS client
  */
 
 exports.agentControl = agentControl;
+var startTime = moment().format('MMMM Do YYYY, h:mm:ss a');
+
 
 var connectedAgents = [
                        {
@@ -32,9 +34,12 @@ exports.listAgents = function(req, res) {
 	agentControl.listAgents(req, res);
 };
 
-exports.name = function (req, res) {
-  res.json({
-    name: 'Master01'
+exports.serverInfo = function (req, res) {
+  var os = require("os");
+  res.json({ serverInfo: {
+	    name: os.hostname(),
+	    started: startTime
+	  }
   });
 };
 
