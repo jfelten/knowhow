@@ -1,4 +1,5 @@
 /* app css stylesheet */
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
 .menu {
   list-style: none;
@@ -28,3 +29,4 @@
   content: "";
   padding: 0;
 }
+
