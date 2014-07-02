@@ -1,52 +1,74 @@
 
- 
+.agent-form
+	table
+		thead
+			tr
+				td(colspan="7")
+					| Add via ssh here:
+			tr
+				td Login&#42;
+				td Password&#42;
+				td @
+				td host&#42;
+				td port
+				td sudo as user
+				td
+		tbody
+			tr
+				td: input(type="text" name="login" ng-model='agent.login')
+				td:	&#47;
+					input(type="password" name="password" ng-model='agent.password')
+				td:	&#64;
+				td: input(type="text" name="host" ng-model='agent.host')
+				td: input(type="text" name="port" ng-model='agent.port' size="5")
+				td: input(type="text" name="user" ng-model='agent.user')
+				td: button(ng-click='addAgent(agent)' ) Add Agent
+			tr
+				td(colspan="7") 
+					&#42; = required
+			tr
+				td(colspan="7")
 
-p(ng-init="test2 = ['d','c']") Quickstart Agents
-
-h3 Add a new Agent remotely via ssh
-
-p User/Password@host
-.progress.progress-success.bar(id='p')
-d
-	input(type="text" name="user" ng-model='agent.user')
-	&#47;
-	input(type="password" name="password" ng-model='agent.password')
-	&#64;
-	input(type="text" name="host" ng-model='agent.host')
-	button(ng-click='addAgent(agent)' ) Add Agent
-
-h3 Add a new Agent via wget: wget http:{{name}}/agent_install then ./qs_agent.bin
-
-
-Connected Agents
-table
-	thead
-		tr
-			td id
-			td host
-			td port
-			td status
-			td delete
-			td reinstall
-			td agent messages
-	tbody
-		tr(ng-repeat="agent in connectedAgents" ng-class="rowClass(agent)" id="{{agent._id}}")
-			td: d(id="{{agent._id}}_id")
-				{{agent._id}}
-			td: d
-				{{agent.host}}
-			td: d{{agent.port}}
-			td: d(id="{{agent._id}}_status"){{agent.status}}
-			td 
-				a(ng-click='deleteAgent(agent)')
-					img(src="images/remove.png")
-			td 
-				a(href="/api/addAgent?id={{agent._id}}")
-					img(src="images/install.png")
-			td(id='{{agent._id}}_messages'): {{agent.message}}
-
-script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js')
-script(src='http://jquery-json.googlecode.com/files/jquery.json-2.2.min.js')
-script(type='text/javascript').
+.agent-list
+	table
+		thead
+			tr
+				td(colspan="6")
+					h2 Connected Agents
+			tr
+				td(colspan="6" class="key")
+					img(src="images/remove.png") 
+					d  = remove 
+					img(src="images/install.png") 
+					|  = reinstall 
+					img(src="images/execute.png") 
+					|  = execute 
+			tr
+				td 
+				td 
+				td 
+				td user@host:port
+				td status
+				td agent messages
+		tbody
+			tr(ng-repeat="agent in connectedAgents" ng-class="rowClass(agent)" id="{{agent._id}}" ng-class-odd="'odd'" ng-class-even="'even'")
+				td 
+					a(ng-click='deleteAgent(agent)')
+						img(src="images/remove.png")
+				td 
+					a(href="/api/addAgent?id={{agent._id}}")
+						img(src="images/install.png")
+				td 
+					a(ng-click='execute(agent)')
+						img(src="images/execute.png")
+				td: d(id="{{agent._id}}_host" )
+					{{agent.user}}@{{agent.host}}:{{agent.port}}
+				td: d(id="{{agent._id}}_status")
+					{{agent.status}}
+				td(id='{{agent._id}}_messages'): {{agent.message}}
 	
-	agent_message_box2.textContent = "Blah Blah2";
+	script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js')
+	script(src='http://jquery-json.googlecode.com/files/jquery.json-2.2.min.js')
+	script(type='text/javascript').
+		
+		agent_message_box2.textContent = "Blah Blah2";

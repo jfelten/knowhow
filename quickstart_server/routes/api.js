@@ -1,6 +1,6 @@
 var agentControl = require('./agent-control');
 var moment = require('moment');
-
+var server = require('../server');
 /*
  * Serve JSON to our AngularJS client
  */
@@ -38,7 +38,8 @@ exports.serverInfo = function (req, res) {
   var os = require("os");
   res.json({ serverInfo: {
 	    name: os.hostname(),
-	    started: startTime
+	    started: startTime,
+	    port: server.port
 	  }
   });
 };

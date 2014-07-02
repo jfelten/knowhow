@@ -41,7 +41,7 @@ app.use(compress);
 app.use('/repo', express.static(__dirname+'/repo'));
 
 var port = 3001;
-
+exports.port = port;
 /**
 * Configuration
 */
