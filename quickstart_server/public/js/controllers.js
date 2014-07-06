@@ -2,7 +2,7 @@
 
 /* Controllers */
 
-angular.module('myApp.controllers', []).
+var myModule = angular.module('myApp.controllers', []).
   controller('AppCtrl', function ($scope, $http) {
 
     $http({
@@ -95,10 +95,76 @@ angular.module('myApp.controllers', []).
        });
      };
   }).
-  controller('MyCtrl2', function ($scope) {
-    // write Ctrl here
-	  $http.get('/api/addAgent/' + $routeParams.id).
-      success(function(data) {
-        $scope.form = data.post;
-      });
+  controller('JobsController', function ($scope, $http) {
+	  var options = {
+	    mode: 'code',
+	    modes: ['code', 'form', 'text', 'tree', 'view'], // allowed modes
+	    error: function (err) {
+	      console.log(err.toString);
+	      alert(err.toString());
+	    }
+	  };
+	  
+	  var container = document.getElementById('jsoneditor');
+	  var editor = new JSONEditor(container,options);
+	  
+	  
+	  var jobs = [] ;
+	  var tree;
+	  $scope.job_tree = tree = {};
+	  $scope.jobs = jobs;
+	  $scope.loading_jobs = true;
+	  $http.get('/api/jobList?file=repo/jobs').
+	    success(function(data) {
+	    	jobs = data.files.children;
+	    	console.log(jobs);
+	    	$scope.jobs = data.files.children;
+	    	$scope.loading_jobs = false;
+	        return tree.expand_all();    	
+	    }).error(function(data) {
+	    	console.log("errir");
+	    });
+	  $http.get('/api/connectedAgents').
+	    success(function(data) {
+	    	$scope.connectedAgents = data;
+	    });
+	  
+	  function seleectAgent(agent) {
+		  
+	  };
+	  
+	  function loadJob(path) {
+		  $http.get('/'+path,{
+              transformResponse: function (data, headers) {
+                  //MESS WITH THE DATA
+                  //data = {};
+                  //data.coolThing = 'BOOM-SHAKA-LAKA';
+                  try {
+                	  var jsonObject = JSON.parse(data);
+                	  editor.set(jsonObject, function(err) {
+      		    		console.log(err);
+      		    	});
+                	return jsonObject;
+                  } 
+                  catch (e) {
+                	  alert(e);
+                	  editor.setText(data, function(err) {
+        		    		console.log(err);
+                	  });
+                	  return data;//.replace(/\n/g, '\\n');
+                  }
+            	  
+              }
+          }).success(function(data) {
+        	  
+          });
+          
+	  }
+	  $scope.jobs_tree_handler = function(branch) {
+	      console.log('selection='+branch.label);
+	      if ('.json' == branch.ext) {
+	    	  loadJob(branch.path); 
+	      }
+	    	  
+	    };
   });

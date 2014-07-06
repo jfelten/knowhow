@@ -1,4 +1,5 @@
 var agentControl = require('./agent-control');
+var fileControl = require('./file-control');
 var moment = require('moment');
 var server = require('../server');
 /*
@@ -42,6 +43,13 @@ exports.serverInfo = function (req, res) {
 	    port: server.port
 	  }
   });
+};
+
+exports.jobList = function (req,res) {
+	var file = req.query.file;
+	console.log('request for files in: '+file);
+	var dirTree = fileControl.dirTree(file);
+	 res.json( {files : dirTree});
 };
 
 exports.addAgent = function (req, res) {
