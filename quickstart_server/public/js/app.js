@@ -8,7 +8,9 @@ angular.module('myApp', [
   'myApp.filters',
   'myApp.services',
   'myApp.directives',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'ngRoute',
+  'angularBootstrapNavTree'
 ]).
 config(function ($routeProvider, $locationProvider) {
   $routeProvider.
@@ -16,10 +18,18 @@ config(function ($routeProvider, $locationProvider) {
       templateUrl: 'partials/agents',
       controller: 'AddAgentController'
     }).
-    when('/view2', {
-      templateUrl: 'partials/partial2',
-      controller: 'MyCtrl2'
+    when('/jobs', {
+      templateUrl: 'partials/jobs',
+      controller: 'JobsController'
     }).
+    when('/environments', {
+        templateUrl: 'partials/environments',
+        controller: 'EnvironmentsController'
+      }).
+    when('/about', {
+          templateUrl: 'partials/about',
+          controller: 'AboutController'
+        }).
     otherwise({
       redirectTo: '/agents'
     });

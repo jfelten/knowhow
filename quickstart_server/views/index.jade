@@ -14,7 +14,7 @@ block body
 						ul.serverName
 							| {{serverInfo.name}}:{{serverInfo.port}}
 						ul.nav.navbar-nav
-							- var obj = { '/partials/agents':'Agents', '/partials/jobs':'Jobs', '/partials/environments':'Environments', '/partials/about':'About'  }
+							- var obj = { '/agents':'Agents', '/jobs':'Jobs', '/environments':'Environments', '/about':'About'  }
 								- each val, key in obj
 									- if (id == key)
 										li.active
@@ -22,12 +22,13 @@ block body
 									- else            
 										li
 											a(href='#{key}') #{val}
-		div(ng-view)
-		div
+		.qs-container(ng-view)
+		.qs-footer
 			|  Started: {{serverInfo.started}} Copyright 2014 v
 			span(app-version)
-	
-		script(src='js/lib/angular/angular.js')
+		
+		script(src='js/lib/angular-1.2.9/angular.js')
+		script(src='js/lib/angular-1.2.9/angular-route.js')
 		script(src='js/app.js')
 		script(src='js/services.js')
 		script(src='js/controllers.js')
@@ -35,3 +36,7 @@ block body
 		script(src='js/directives.js')
 		script(src='js/socket.io.js')
 		script(src='js/ui-bootstrap-tpls-0.11.0.min.js')
+		script(src='js/abn_tree_directive.js')
+		script(src='js/jsoneditor.js')
+		script(src='js/lib/ace/ace.js')
+		script(src='js/lib/jsonlint/jsonlint.js')

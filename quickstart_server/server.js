@@ -54,7 +54,7 @@ app.use(morgan('dev'));
 app.use(bodyParser());
 app.use(methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use('/repo', express.static(path.join(__dirname, 'repo')));
 var env = process.env.NODE_ENV || 'development';
 
 //development only
@@ -89,14 +89,15 @@ app.get('/partials/:name', routes.partials);
 //JSON API
 app.get('/api/serverInfo', api.serverInfo);
 app.get('/api/connectedAgents', api.listAgents);
+app.get('/api/jobList', api.jobList);
+
+
+//agent routes
+app.post('/api/addAgent', api.addAgent);
+app.post('/api/deleteAgent', api.deleteAgent);
 
 //redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
-
-//agent routes
-
-app.post('/api/addAgent', api.addAgent);
-app.post('/api/deleteAgent', api.deleteAgent);
 
 /**
 * Start Server

@@ -1,4 +1,24 @@
-p This is the partial for view 2.
+p Jobs(not Steve)
 p
-  | Showing of 'interpolate' filter:
-  | {{ 'Current version is v%VERSION%.' | interpolate }}
+.jobs-page
+	.jobs-nav
+		span(ng-if="loading_jobs") |...loading...
+		abn-tree(tree-data="jobs" tree-control="job_tree" on-select="jobs_tree_handler(branch)" expand-level="2" initial-selection="weblogic" )
+	.jobs-control
+		div(dropdown is-open="status.isopen").btn-group
+			button.btn.btn-primary.dropdown-toggle
+				| Select An Agent
+				span.caret
+			ul.dropdown-menu(role="menu")
+				li(ng-repeat="agent in connectedAgents")
+					a(href="#" onclick="selectAgent(agent)") {{agent.user}}@{{agent.host}}:{{agent.port}}
+				li.divider
+				li
+					| All Agents
+		.jobs-buttons.btn-group
+			button.btn.btn-primary(type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ) Execute
+			button.btn.btn-primary(type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ) Save
+		
+		div.jobs-textarea(id="jsoneditor")
+ 
+
