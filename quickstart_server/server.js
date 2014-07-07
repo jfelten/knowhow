@@ -20,7 +20,7 @@ path = require('path');
 function compile(str, path) {
 	  return stylus(str)
 	    .set('filename', path)
-	    .use(nib())
+	    .use(nib());
 	};
 app.use(stylus.middleware(
 		  { src: __dirname + '/public'
