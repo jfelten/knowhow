@@ -287,3 +287,49 @@ exports.addAgent = function(agent) {
 
 };
 
+exports.execute = function(agent,instructionSet) {
+	// prepare the header
+	var headers = {
+	    'Content-Type' : 'application/json',
+	    'Content-Length' : Buffer.byteLength(JSON.stringify(install) , 'utf8'),
+	    'Content-Disposition' : 'form-data; name="script"'
+	};
+
+	// the post options
+	var options = {
+	    host : agent.host,
+	    port : agent.port,
+	    path : '/api/quickstart_agents/execute',
+	    method : 'POST',
+	    headers : headers
+	};
+
+	console.info('Options prepared:');
+	console.info(options);
+	console.info('Do the call');
+
+	// do the POST call
+	var reqPost = https.request(options, function(res) {
+	    console.log("statusCode: ", res.statusCode);
+	    // uncomment it for header details
+	  console.log("headers: ", res.headers);
+
+	    res.on('data', function(d) {
+	        console.info('result:\n');
+	        process.stdout.write(d);
+	        console.info('\n\nPOST completed');
+	    });
+	});
+
+	// write the json data
+	var post_data = querystring.stringify({
+		'script' : install
+	});
+
+	reqPost.write(JSON.stringify(install));
+	reqPost.end();
+	reqPost.on('error', function(e) {
+	    console.error(e);
+	});
+}
+
