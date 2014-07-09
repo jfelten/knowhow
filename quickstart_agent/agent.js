@@ -1,105 +1,57 @@
-var commandShell = require('./commandShell');
+//create a ref to variables like port passed in through the command line
+var agentData = require('yargs').argv;
+var defaultPort = 3000;
+if (agentData.port != 'undefined') {
+	agentData.port = defaultPort;
+}
+exports.agentData = agentData;
 
+//set up the express app
+var path = require('path');
+var express = require('express');
+var app = express();
+app.set('port', process.env.PORT || 3000);
+app.set('views', __dirname + '/views');
+app.set('view engine', 'jade');
+bodyParser = require('body-parser');
+app.use(bodyParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
+//stylus style sheets
+//for stylus style sheets
+var stylus = require('stylus');
+var nib = require('nib');
+function compile(str, path) {
+	  return stylus(str)
+	    .set('filename', path)
+	    .use(nib());
+	};
+app.use(stylus.middleware(
+		  { src: __dirname + '/public'
+		  , compile: compile
+		  }
+		));
 
-var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-var rimraf = require('rimraf');
+exports.io = io;
+
 
 var dl = require('delivery');
 fs = require('fs');
-var status="READY";
 
-//var io = require('socket.io').listen(server)
-var ns = io.of('/agent');
-ns.on('connection', function (socket) {
-	console.log("connected from: ");
-	console.log(socket.handshake.headers['x-forwarded-for']);
-	socket.on('identify', function (data) {
-		console.log('received request from: '+data.server);
-	    socket.on('execute', function (data) {
-	        // do something useful
-	        console.log("execute");
-	        console.log(data);
-	        commandShell.executeSync(data);
-	        socket.emit('execute-complete', { exec: 'done' });
-	    });
-	});
-	socket.on('error', function(err) {
-		status="ERROR";
-	});
-});
-ns.on('register', function (socket) {
-	console.log("registration requested from: ");
-	console.log(socket.handshake.headers['x-forwarded-for']);
-	socket.on('identify', function (data) {
+var routes = require('./routes'),
+api = require('./routes/api');
+
+
+app.get('/', routes.index);
+app.get('/partials/:name', routes.partials);
+
+app.get('/delete',api.deleteAgent);
 		
-		console.log('received request from: '+data.server);
-	    socket.on('execute', function (data) {
-	        // do something useful
-	        console.log("execute");
-	        console.log(data);
-	        commandShell.executeSync(data);
-	        socket.emit('execute-complete', { exec: 'done' });
-	    });
-	});
-	socket.on('error', function(err) {
-		status="ERROR";
-	});
-});
 
-
-var up = io.of('/upload');
-
-up.on('connection', function (socket) {
-	console.log('upload request');
-	var delivery = dl.listen(socket);
-	delivery = dl.listen(socket);
-	delivery.on('receive.start',function(fileUID){
-	      console.log('receiving a file!');
-	    });
-	delivery.on('receive.success',function(file){
-
-	    fs.writeFile(file.name,file.buffer, function(err){
-	      if(err){
-	        console.log('File could not be saved.');
-	      }else{
-	        console.log('File saved.');
-	      };
-	    });
-	  });
-});
-
-app.get('/delete',function(req, res) {
-	console.log("deleting agent");
-	var agent_dir = __dirname+"/../quickstart_agent";
-	rimraf(agent_dir, function(err) {
-		if (err) {
-			console.log("problem removing agent dir");
-			res.json(500, {error:"internal server error"}); // status 500 
-		} else {
-			res.json({ok:true});
-			process.exit();
-		}
-	});
+app.get('/register',api.register);
 		
-});
-
-app.get('/register',function(req, res) {
-	console.log("adding listener agent");
-	var agent_dir = __dirname+"/../quickstart_agent";
-	rimraf(agent_dir, function(err) {
-		if (err) {
-			console.log("problem removing agent dir");
-			res.json(500, {error:"internal server error"}); // status 500 
-		} else {
-			res.json({ok:true});
-			process.exit();
-		}
-	});
-		
-});
 
 app.get('/status',function(req, res) {
 	console.log("request for agent status");
@@ -107,8 +59,18 @@ app.get('/status',function(req, res) {
 		
 });
 
-socket = http.listen(3000, function(){
-	  console.log('listening on *:3000');
+
+//JSON API
+app.post('/api/execute', api.execute);
+app.get('/api/status', api.status);
+app.get('/api/logs', api.logs);
+app.get('/api/agentInfo', api.agentInfo);
+
+//redirect all others to the index (HTML5 history)
+app.get('*', routes.index);
+
+socket = http.listen(agentData.port, function(){
+	  console.log('listening on *:'+ agentData.port);
 	  
 	});
 

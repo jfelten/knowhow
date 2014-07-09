@@ -90,7 +90,7 @@ exports.deleteAgent = function(req,res, agent) {
         	db.remove({ _id: agent._id }, {}, function (err, numRemoved) {
         		listAgents(req,res);
           	});
-        	event.emit('agent-delete',agent);
+        	eventEmitter.emit('agent-delete',agent);
         });
 	});
 	request.on('error', function(er) {
@@ -269,7 +269,7 @@ exports.addAgent = function(agent) {
 	install_commands=['rm -rf quickstart_agent',
 	          	'tar xzf '+agent_archive_name,
 	            'tar xzf quickstart_agent/node*.tar.gz -C quickstart_agent',
-	            'nohup quickstart_agent/node*/bin/node quickstart_agent/agent.js > quickstart_agent.log & 2>&1',
+	            'nohup quickstart_agent/node*/bin/node quickstart_agent/agent.js -port'+agent.port+' -user '+agent.user+' -login '+agent.login+' > quickstart_agent.log & 2>&1',
 	            'rm quickstart_agent.tar.gz'
 	];
 	function_vars = {agent: agent, commands: install_commands};
