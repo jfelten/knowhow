@@ -1,15 +1,16 @@
+var logger=require('./log-control').logger;
 
 /*
  * GET home page.
  */
 
 exports.index = function(req, res){
-  console.log('index');
+  logger.info('index');
   res.render('index');
 };
 
 exports.partials = function (req, res) {
   var name = req.params.name;
-  console.log('getting partial: '+name);
+  logger.info('getting partial: '+name);
   res.render('partials/' + name);
 };

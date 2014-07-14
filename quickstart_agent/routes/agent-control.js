@@ -5,12 +5,15 @@ var moment = require('moment');
 var status = 'READY';
 var io;
 
+var logger=require('./log-control').logger;
+
 
 initAgent = function(agent) {
+	var logger=require('./log-control').logger;
 	var os = require("os");
 	var _ = require('underscore'); 
 	var ip = _.chain(os.networkInterfaces()).flatten().filter(function(val){ return (val.family == 'IPv4' && val.internal == false); }).pluck('address').first().value(); 
-	console.log('initializing agent with ip: '+ip) ;  
+	logger.info('initializing agent with ip: '+ip) ;  
 	agentData = {
 		host: os.hostname(),
 		ip: ip,
@@ -27,18 +30,28 @@ initAgent = function(agent) {
 
 };
 
+execute = function(data) {
+	var logger=require('./log-control').logger;
+	status='EXECUTING';
+    logger.info("execute");
+    logger.debug(data);
+    commandShell.executeSync(data);
+    socket.emit('execute-complete', { exec: 'done' });
+    status = 'READY';
+};
 
 AgentControl = function(io) {
-	console.log('setting event io to:'+io);
+	logger=require('./log-control');
+	//logger.info('setting event io to:'+io);
 	this.io = io;
 	
 	var agentSocket = io.of('/agent');
 	agentSocket.on('connection', function (socket) {
-		console.log("connected from: ");
-		console.log(socket.handshake.headers['x-forwarded-for']);
+		logger.debug("connected from: ");
+		logger.debug(socket.handshake.headers['x-forwarded-for']);
 		//always require identity
 		socket.on('identify', function (data) {
-			console.log('received request from: '+data.server);
+			logger.info('received request from: '+data.server);
 			
 			//agent commands
 		    socket.on('execute', function (data) {
@@ -46,7 +59,7 @@ AgentControl = function(io) {
 		    });
 		    
 		    socket.on('register', function(data) {
-		    	console.log('register requested');
+		    	logger.info('register requested');
 		    });
 		});
 		socket.on('error', function(err) {
@@ -58,19 +71,19 @@ AgentControl = function(io) {
 	var up = io.of('/upload');
 
 	up.on('connection', function (socket) {
-		console.log('upload request');
+		logger.info('upload request');
 		var delivery = dl.listen(socket);
 		delivery = dl.listen(socket);
 		delivery.on('receive.start',function(fileUID){
-		      console.log('receiving a file!');
+		      logger.info('receiving a file!');
 		    });
 		delivery.on('receive.success',function(file){
 
 		    fs.writeFile(file.name,file.buffer, function(err){
 		      if(err){
-		        console.log('File could not be saved.');
+		        logger.error('File could not be saved.');
 		      }else{
-		        console.log('File saved.');
+		        logger.info('File saved.');
 		      };
 		    });
 		  });
@@ -79,18 +92,11 @@ AgentControl = function(io) {
 
 //var io = require('socket.io').listen(server)
 AgentControl.prototype.initAgent = initAgent;
-
+AgentControl.prototype.execute = execute;
 module.exports = AgentControl;
 
-execute = function(data) {
-	status='EXECUTING';
-    console.log("execute");
-    console.log(data);
-    commandShell.executeSync(data);
-    socket.emit('execute-complete', { exec: 'done' });
-    status = 'READY';
-};
-AgentControl.prototype.execute = execute;
+
+
 
 
 

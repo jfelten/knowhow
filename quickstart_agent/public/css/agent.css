@@ -152,6 +152,17 @@ header {
 .qs-container {
   float: bottom;
 }
+div.log-container {
+  overflow-y: scroll;
+  overflow-x: scroll;
+  width: 600px;
+  height: 650px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  color: #333;
+}
 .qs-footer {
   float: top;
   text-align: left;
@@ -162,8 +173,13 @@ header {
   padding-top: 5px;
   font-size: 13px;
 }
-.jobs-buttons {
-  float: right;
+.exec-buttons {
+  width: 600px;
+  float: top;
+}
+.btn-primary {
+  position: relative;
+  left: 415px;
 }
 .exec-editor {
   width: 600px;
