@@ -25,7 +25,35 @@ var myModule = angular.module('myApp.controllers', []).
 	
   }).
   controller('LogsController', function ($scope, $http) {
+	  var socket = io.connect();
+	  var container = document.getElementById('log-container');
 	  
+	  socket.on('new-data', function(data) {
+		  var message = JSON.parse(data.value);
+		  addMessage(message);//message.timestamp+':'+message.level+' '+message.message);
+
+
+	  });
+	  $http({
+	      method: 'POST',
+	      url: '/api/logs',
+    	  data: {
+    		  numLogs:20
+    		  }
+	    }).
+	    success(function (data, status, headers, config) {
+	      $scope.logs = data.file;
+	      for(var message in data.file) {
+	    	  addMessage(data.file[message]);
+	      }
+	    });
+	  
+	  function addMessage(message) {
+		  var newDiv = document.createElement('div');
+		  var logText=document.createTextNode(message.timestamp+':'+message.level+' '+message.message);
+		  newDiv.appendChild(logText);
+		  container.appendChild(newDiv);  
+	  }
   }).
   controller('ExecuteController', function ($scope, $http) {
 	  var options = {
