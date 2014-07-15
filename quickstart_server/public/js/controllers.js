@@ -129,8 +129,23 @@ var myModule = angular.module('myApp.controllers', []).
 	    	$scope.connectedAgents = data;
 	    });
 	  
-	  function seleectAgent(agent) {
-		  
+	  $scope.selectAgent = function(agent) {
+		  $scope.selectedAgent = agent;
+		  console.log('selected agent: '+agent);
+		  $scope.status.isopen = !$scope.status.isopen;
+		  var selectAgent = document.getElementById('selectAgent');
+		  selectAgent.textContent=agent.user+'@'+agent.host+':'+agent.port;
+	  };
+	  
+	  $scope.toggled = function(open) {
+		    console.log('Dropdown is now: ', open);
+		  };
+
+	  $scope.toggleDropdown = function($event) {
+	    $event.preventDefault();
+	    $event.stopPropagation();
+	    $scope.status.isopen = !$scope.status.isopen;
+	    
 	  };
 	  
 	  function loadJob(path) {
@@ -162,9 +177,68 @@ var myModule = angular.module('myApp.controllers', []).
 	  }
 	  $scope.jobs_tree_handler = function(branch) {
 	      console.log('selection='+branch.label);
+	      $scope.selectedFile = branch.path; 
+	      $scope.message = undefined;
 	      if ('.json' == branch.ext) {
 	    	  loadJob(branch.path); 
 	      }
 	    	  
 	    };
+	    
+	  $scope.saveJob = function() {
+		  console.log('save job');
+		  var fileName = $scope.selectedFile
+		  var job;
+		  try {
+			  job = editor.get();
+		      //JSON.parse(job);
+		    } catch (e) {
+		    	console.log('error getting job data.')
+		    	$scope.message='Invalid JSON - please fix.';
+		        return;
+		    }
+		    $http({
+			      method: 'GET',
+			      url: '/api/saveFile',
+			      params: {fileName: fileName,
+			    	  	   data: job
+			    	  }
+			    }).success(function (data, status, headers, config) {
+
+			        $scope.message = data.message;
+			    }).
+			    error(function (data, status, headers, config) {
+			    	$scope.message = 'Unable to save file status: '+status;
+			    });  
+		  
+	  };
+	  
+	  $scope.execute = function() {
+		  if (!$scope.selectedAgent) {
+			  $scope.message='Please select an agent to execute';
+			  return;
+		  }
+		  
+		  //get the content from the json editor
+		  var job;
+		  try {
+			  job = editor.get();
+		      //JSON.parse(jjob);
+		    } catch (e) {
+		    	console.log('error getting job data.')
+		    	$scope.message='Invalid JSON - please fix.';
+		        return;
+		    }
+		    $http({
+			      method: 'POST',
+			      url: 'http://'+$scope.selectedAgent.ip+':'+$scope.selectedAgent.port+'/api/execute',
+			      data: job
+			    }).success(function (data, status, headers, config) {
+			        $scope.agentInfo = data;
+			        $scope.message = job.id+' successfully submitted to agent: '+$scope.selectedAgent.user+'@'+$scope.selectedAgent.host+':'+$scope.selectedAgent.port
+			    }).
+			    error(function (data, status, headers, config) {
+			    	$scope.message = 'Unable to contact Agent http status: '+status;
+			    });
+	  };
   });

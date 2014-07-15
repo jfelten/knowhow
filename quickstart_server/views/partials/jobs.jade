@@ -7,18 +7,21 @@ p
 	.jobs-control
 		div(dropdown is-open="status.isopen").btn-group
 			button.btn.btn-primary.dropdown-toggle
-				| Select An Agent
+				span(id="selectAgent") 
+					| Select An Agent 
 				span.caret
 			ul.dropdown-menu(role="menu")
 				li(ng-repeat="agent in connectedAgents")
-					a(href="#" onclick="selectAgent(agent)") {{agent.user}}@{{agent.host}}:{{agent.port}}
+					a(ng-click="selectAgent(agent)") 
+						{{agent.user}}@{{agent.host}}:{{agent.port}}
 				li.divider
 				li
 					| All Agents
 		.jobs-buttons.btn-group
-			button.btn.btn-primary(type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ) Execute
-			button.btn.btn-primary(type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ) Save
-		
+			button.btn.btn-primary(type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="execute()" ) Execute
+			button.btn.btn-primary(type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="saveJob()") Save
+		.job-message-block(ng-show="message")
+			{{message}}
 		div.jobs-textarea(id="jsoneditor")
  
 
