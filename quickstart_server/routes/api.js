@@ -52,6 +52,12 @@ exports.jobList = function (req,res) {
 	 res.json( {files : dirTree});
 };
 
+exports.saveFile = function(req,res) {
+	var fileName = req.query.fileName;
+	var data = req.query.data;
+	fileControl.saveFile(fileName,data,res);
+};
+
 exports.addAgent = function (req, res) {
   console.log('add agent: '+req.body.host);
   for (i in req.params) {
