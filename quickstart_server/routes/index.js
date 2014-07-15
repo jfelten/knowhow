@@ -1,4 +1,4 @@
-
+var logger=require('./log-control').logger;
 /*
  * GET home page.
  */

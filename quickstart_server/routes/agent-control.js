@@ -1,3 +1,4 @@
+var logger=require('./log-control').logger;
 var async = require('async');
 var client = require('scp2');
 var zlib = require('zlib');
@@ -18,7 +19,7 @@ var agent_archive_name = 'quickstart_agent.tar.gz';
 
 
 eventEmitter.on('package-complete',function(agent){
-	console.log("agent contol packaged agent: "+agent);
+	logger.info("agent contol packaged agent: "+agent);
 });
 
 exports.eventEmitter = eventEmitter;
@@ -31,8 +32,8 @@ exports.updateAgent = function(agent) {
 
 function listAgents(req,res) {
 	db.find({}, function(err, docs) {
-		console.log('found '+docs.length+' agents');
-		console.log(docs);
+		logger.debug('found '+docs.length+' agents');
+		logger.debug(docs);
 //		docs.forEach(function(agent) {
 //			console.log(agent);
 //		});
@@ -56,13 +57,13 @@ exports.initAgent = function(agent) {
 	props.forEach(function(prop){
 		 if (Object.getOwnPropertyNames(agent).indexOf(prop) < 0) {
 			 agent[prop]=agent_prototype[prop];
-			 console.log('initAgent: adding property: '+agent[prop]);
+			 logger.debug('initAgent: adding property: '+agent[prop]);
 		 }
 	});
 };
 
 exports.deleteAgent = function(req,res, agent) {
-	console.log("deleting agent: "+agent._id);
+	logger.info("deleting agent: "+agent._id);
 	var options = {
 		    host : agent.host,
 		    port : agent.port,
@@ -73,10 +74,10 @@ exports.deleteAgent = function(req,res, agent) {
 		    }
 		};
 	var request = http.request(options, function(response) {
-		console.log("processing delete response: ");
+		logger.debug("processing delete response: ");
 		
 		var output = '';
-        console.log(options.host + ' ' + response.statusCode);
+		logger.debug(options.host + ' ' + response.statusCode);
         response.setEncoding('utf8');
 
         response.on('data', function (chunk) {
@@ -84,9 +85,9 @@ exports.deleteAgent = function(req,res, agent) {
         });
 
         response.on('end', function() {
-        	console.log("request to delete done.");
+        	logger.info("request to delete done.");
             var obj = JSON.parse(output);
-        	console.log(obj.status);
+        	logger.info(obj.status);
         	db.remove({ _id: agent._id }, {}, function (err, numRemoved) {
         		listAgents(req,res);
           	});
@@ -94,7 +95,7 @@ exports.deleteAgent = function(req,res, agent) {
         });
 	});
 	request.on('error', function(er) {
-		console.log('no agent running on agent: '+agent.host,er);
+		logger.error('no agent running on agent: '+agent.host,er);
 		db.remove({ _id: agent._id }, {}, function (err, numRemoved) {
     		listAgents(req,res);
       	});
@@ -108,25 +109,25 @@ install = function(main_callback) {
 	var commands = this.commands;
 	var execCommands = new Array(commands.length);
 	for (index in commands) {
-		console.log("queueing "+index+":"+commands[index]);
+		logger.info("queueing "+index+":"+commands[index]);
 		var command = commands[index];
 	    execCommands[index] = function(callback) {
 	    	var comm = ''+this.cmd;
-	    	console.log(this.idx+" - "+comm);
+	    	logger.debug(this.idx+" - "+comm);
 	    	var conn = new Connection();
 	    	conn.on('ready', function() {
 	    		
 	    		conn.exec(comm, function(err, stream) {
 		    	    if (err) throw err;
 		    	    stream.on('exit', function(code, signal) {
-		    	      console.log('Stream :: exit :: code: ' + code + ', signal: ' + signal);
+		    	      logger.info('Stream :: exit :: code: ' + code + ', signal: ' + signal);
 		    	    });
 		    	    stream.on('close', function() {
-		    	      console.log('Stream :: close');
+		    	    	logger.info('Stream :: close');
 		    	      conn.end();
 		    	    });
 		    	    stream.on('data', function(data, extended) {
-		    	          console.log((extended === 'stderr' ? 'STDERR: ' : '')
+		    	          logger.debug((extended === 'stderr' ? 'STDERR: ' : '')
 		    	                     + data);
 		    	    });
 		    	    stream.on('exit', function(code, signal) {
@@ -134,11 +135,11 @@ install = function(main_callback) {
 		    	          
 		    	    });
 		    	    conn.on('error', function(err) {
-		    	    	console.log('Connection :: error :: ' + err);
+		    	    	logger.error('Connection :: error :: ' + err);
 		    	    	callback('stop')
 		    	    });
 		    	    conn.on('end', function() {
-		    	      console.log('Connection :: end');
+		    	      logger.debug('Connection :: end');
 		    	      
 		    	    });
 		    	    conn.on('close', function(had_error) {
@@ -157,7 +158,7 @@ install = function(main_callback) {
 			  password: agent.password
 			});
 	    	conn.on('error', function(er) {
-	    		console.log('unable to connect to: '+agent.host,er.message);
+	    		logger.error('unable to connect to: '+agent.host,er.message);
 	    		callback('stop');
 	    	});
 	    	
@@ -165,7 +166,7 @@ install = function(main_callback) {
 		}.bind( {'cmd': command, 'idx': index});
 	};
 	async.series(execCommands,function(err) {
-        console.log("done");
+        logger.info("done");
         main_callback();
     });
 	
@@ -173,21 +174,21 @@ install = function(main_callback) {
 
 getStatus = function(callback) {
 	var agent = this.agent;
-	console.log('checking status for: '+agent.host);
+	logger.info('checking status for: '+agent.host);
 	var options = {
 		    host : agent.host,
 		    port : agent.port,
-		    path : '/status',
+		    path : '/api/agentInfo',
 		    method : 'GET',
 		    headers: {
 		        'Content-Type': 'application/json'
 		    }
 		};
 	var request = http.request(options, function(res) {
-		console.log("processing status response: ");
+		logger.ingo("processing status response: ");
 		
 		var output = '';
-        console.log(options.host + ' ' + res.statusCode);
+        logger.debug(options.host + ' ' + res.statusCode);
         res.setEncoding('utf8');
 
         res.on('data', function (chunk) {
@@ -195,7 +196,7 @@ getStatus = function(callback) {
         });
 
         res.on('end', function() {
-        	console.log("done.")
+        	logger.info("done.")
             var obj = JSON.parse(output);
         	console.log(obj.status);
             status = obj.status;
@@ -203,7 +204,7 @@ getStatus = function(callback) {
         });
 	});
 	request.on('error', function(er) {
-		console.log('no agent running on agent: '+agent.host,er);
+		logger.error('no agent running on agent: '+agent.host,er);
 		callback();
 	});
 	request.end();
@@ -214,14 +215,14 @@ packAgent = function(callback) {
 	
 	var agent = this.agent;
 	//create agent archive
-	console.log('packaging agent');
+	logger.info('packaging agent');
 	fstream.Reader({ 'path': agent_dir, 'type': 'Directory' }) /* Read the source directory */
 	.pipe(tar.Pack()) /* Convert the directory to a .tar file */
 	.pipe(zlib.Gzip()) /* Compress the .tar file */
 	.pipe(fstream.Writer({ 'path': agent_archive_name }).on("close", function () {
 		agent.message = 'package-complete';
 		eventEmitter.emit('agent-update', agent);
-		console.log('agent packaged.')
+		logger.info('agent packaged.')
 		callback();
 	}));
 };
@@ -235,14 +236,14 @@ deliverAgent = function(callback) {
 	    path: '/home/'+agent.user
 	}, function(err) {
 		if (err) {
-			console.log(err);
+			logger.info(err);
 		}
 		agent.message = 'transfer complete';
 		eventEmitter.emit('agent-update', agent);
-		console.log('transfer complete');
+		logger.info('transfer complete');
 		
 		//start the agent
-		console.log('starting agent on: '+agent.host);
+		logger.info('starting agent on: '+agent.host);
 		callback();
 		
 	});
@@ -253,16 +254,16 @@ deliverAgent = function(callback) {
 	client.on('error',function (err) {
 		agent.message = 'unable to transfer agent';
 		eventEmitter.emit('agent-error', agent);
-		console.log('error delivering agent: ', err);
+		logger.error('error delivering agent: ', err);
 		callback('stop');
 	});
 
 };
 exports.addAgent = function(agent) {
 	
-	console.log("adding agent: "+agent);
+	logger.info("adding agent: "+agent);
 	db.insert(agent, function (err, newDoc) {   
-			console.log("added agent: "+newDoc);
+		    logger.debug("added agent: "+newDoc);
 			eventEmitter.emit('agent-add',agent);
 		});
 	
@@ -279,10 +280,10 @@ exports.addAgent = function(agent) {
 	            install.bind(function_vars)];
 	async.series(exec,function(err) {
 		if (err) {
-			console.log('agent error' + err);
+			logger.error('agent error' + err);
 			eventEmitter.emit('agent-error',agent,err.syscall+" "+err.code);
 		}
-	    console.log("done");
+	    logger.info("done");
 	});
 
 };
@@ -304,20 +305,20 @@ exports.execute = function(agent,instructionSet) {
 	    headers : headers
 	};
 
-	console.info('Options prepared:');
-	console.info(options);
-	console.info('Do the call');
+	logger.debug('Options prepared:');
+	logger.debug(options);
+	logger.debug('Do the call');
 
 	// do the POST call
 	var reqPost = https.request(options, function(res) {
-	    console.log("statusCode: ", res.statusCode);
+		logger.debug("statusCode: ", res.statusCode);
 	    // uncomment it for header details
-	  console.log("headers: ", res.headers);
+		logger.debug("headers: ", res.headers);
 
 	    res.on('data', function(d) {
-	        console.info('result:\n');
+	    	logger.debug('result:\n');
 	        process.stdout.write(d);
-	        console.info('\n\nPOST completed');
+	        logger.debug('\n\nPOST completed');
 	    });
 	});
 
@@ -329,7 +330,7 @@ exports.execute = function(agent,instructionSet) {
 	reqPost.write(JSON.stringify(install));
 	reqPost.end();
 	reqPost.on('error', function(e) {
-	    console.error(e);
+	    logger.error(e);
 	});
 }
 

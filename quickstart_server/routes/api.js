@@ -1,3 +1,4 @@
+var logger=require('./log-control').logger;
 var agentControl = require('./agent-control');
 var fileControl = require('./file-control');
 var moment = require('moment');
@@ -47,7 +48,7 @@ exports.serverInfo = function (req, res) {
 
 exports.jobList = function (req,res) {
 	var file = req.query.file;
-	console.log('request for files in: '+file);
+	logger.info('request for files in: '+file);
 	var dirTree = fileControl.dirTree(file);
 	 res.json( {files : dirTree});
 };
@@ -59,9 +60,9 @@ exports.saveFile = function(req,res) {
 };
 
 exports.addAgent = function (req, res) {
-  console.log('add agent: '+req.body.host);
+  logger.info('add agent: '+req.body.host);
   for (i in req.params) {
-	  console.log(params[i]);
+	  logger.debug(params[i]);
   }
   var agent = req.body;
   agentControl.initAgent(agent);
@@ -72,7 +73,7 @@ exports.addAgent = function (req, res) {
 };
 
 exports.deleteAgent = function (req, res) {
-	  console.log('delete agent: '+req.body._id);
+	  logger.info('delete agent: '+req.body._id);
 
 	  var agent = req.body;
 	  agentControl.deleteAgent(req,res,agent);
@@ -80,3 +81,11 @@ exports.deleteAgent = function (req, res) {
 	  //agentControl.listAgents(req,res);
 
 	};
+	
+exports.logs = function(req,res) {
+    numLogs=req.body.numLogs;
+    console.log("num logs requested="+numLogs);
+    require('./log-control').getLastXLogs(numLogs,res);
+
+
+};
