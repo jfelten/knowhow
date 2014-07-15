@@ -23,7 +23,7 @@ dirTree = function (filename) {
     }
 
     return info;
-}
+};
 
 if (module.parent == undefined) {
     // node dirTree.js ~/foo/bar
@@ -31,4 +31,20 @@ if (module.parent == undefined) {
     console.log(util.inspect(dirTree(process.argv[2]), false, null));
 }
 
+saveFile = function(file, data, res) {
+
+	fs.writeFile(file, data, function(err) {
+	    if(err) {
+	        res.json({
+	        	message: err.msg
+	        });
+	    } else {
+	    	res.json({
+	        	message: 'File Saved.'
+	        });
+	    }
+	}); 
+};
+
 exports.dirTree = dirTree;
+exports.saveFile = saveFile;
