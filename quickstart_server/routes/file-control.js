@@ -1,3 +1,4 @@
+var logger=require('./log-control').logger;
 var fs = require('fs');
 path = require('path');
 
@@ -28,7 +29,7 @@ dirTree = function (filename) {
 if (module.parent == undefined) {
     // node dirTree.js ~/foo/bar
     var util = require('util');
-    console.log(util.inspect(dirTree(process.argv[2]), false, null));
+    logger.info(util.inspect(dirTree(process.argv[2]), false, null));
 }
 
 saveFile = function(file, data, res) {

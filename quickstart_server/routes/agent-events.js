@@ -1,10 +1,10 @@
-
+var logger=require('./log-control').logger;
 var agentControl = require('./agent-control');
 var io;
 
 //My module
 function AgentEventHandler(io) {
-	console.log('setting event io to:'+io);
+	logger.info('setting event io to:'+io);
 	this.io = io;
 	
 	agentControl.eventEmitter.on('agent-update', function(agent) {
@@ -14,7 +14,7 @@ function AgentEventHandler(io) {
 
 	agentControl.eventEmitter.on('agent-error', function(agent) {
 		
-		console.log('agent error detected.')
+		logger.info('agent error detected.')
 		agentControl.updateAgent(agent);
 		agent.status='ERROR';
 		io.emit('agent-error',agent);
@@ -32,7 +32,7 @@ function AgentEventHandler(io) {
 }
 
 AgentEventHandler.prototype.registerAgent = function registerAgent(agent) {
-  console.log(agent);
+  logger.info(agent);
 };
 
 module.exports = AgentEventHandler;

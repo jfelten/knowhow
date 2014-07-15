@@ -26,6 +26,10 @@ config(function ($routeProvider, $locationProvider) {
         templateUrl: 'partials/environments',
         controller: 'EnvironmentsController'
       }).
+      when('/logs', {
+          templateUrl: 'partials/logs',
+          controller: 'LogsController'
+        }).
     when('/about', {
           templateUrl: 'partials/about',
           controller: 'AboutController'

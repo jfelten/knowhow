@@ -1,3 +1,4 @@
+var logger=require('./routes/log-control').logger;
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
@@ -92,9 +93,11 @@ app.get('/api/connectedAgents', api.listAgents);
 app.get('/api/jobList', api.jobList);
 app.get('/api/saveFile', api.saveFile);
 
+
 //agent routes
 app.post('/api/addAgent', api.addAgent);
 app.post('/api/deleteAgent', api.deleteAgent);
+app.post('/api/logs',api.logs);
 
 //redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
@@ -103,10 +106,7 @@ app.get('*', routes.index);
 * Start Server
 */
 
-//http.createServer(app).listen(app.get('port'), function () {
-// console.log('Express server listening on port ' + app.get('port'));
-//});
 http.listen(port, function(){
-	  console.log('listening on *:'+port);
+	  logger.info('listening on *:'+port);
 	  
 	});
