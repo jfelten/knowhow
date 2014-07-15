@@ -90,7 +90,7 @@ app.get('/partials/:name', routes.partials);
 app.get('/api/serverInfo', api.serverInfo);
 app.get('/api/connectedAgents', api.listAgents);
 app.get('/api/jobList', api.jobList);
-
+app.get('/api/saveFile', api.saveFile);
 
 //agent routes
 app.post('/api/addAgent', api.addAgent);
