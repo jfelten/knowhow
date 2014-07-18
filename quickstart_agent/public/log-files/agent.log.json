@@ -1,0 +1,5 @@
+{"level":"info","message":"Logger initialized.","timestamp":"2014-07-18T06:08:55.839Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-07-18T06:08:56.017Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-07-18T06:08:56.017Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-07-18T06:08:56.021Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-07-18T06:08:56.025Z"}
