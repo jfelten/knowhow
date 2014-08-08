@@ -10,7 +10,7 @@ var status = 'READY';
 var io;
 
 var logger=require('./log-control').logger;
-
+var serverInfo;
 
 
 initAgent = function(agent) {
