@@ -12,17 +12,23 @@ var agentEventHandler = new AgentEventHandler(agent.io,agentControl.eventEmitter
 
 
 exports.deleteAgent = function(req,res) {
-	logger.info("deleting agent disabled");
-	var agent_dir = __dirname+"/../quickstart_agent";
-	rimraf(agent_dir, function(err) {
-		if (err) {
-			logger.error("problem removing agent dir");
-			res.json(500, {error:"internal server error"}); // status 500 
-		} else {
-			res.json({ok:true});
-			process.exit();
-		}
-	});
+	if (agentInfo.mode != "production") {
+		logger.info("deleting agent disabled in dev mode");
+		res.json({error:"deleting agent disabled in dev mode"});
+		return;
+	} else {
+	
+		var agent_dir = __dirname+"../";
+		rimraf(agent_dir, function(err) {
+			if (err) {
+				logger.error("problem removing agent dir");
+				res.json(500, {error:"internal server error"}); // status 500 
+			} else {
+				res.json({ok:true});
+				process.exit();
+			}
+		});
+	}
 };
 
 

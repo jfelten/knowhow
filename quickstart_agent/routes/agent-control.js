@@ -11,7 +11,7 @@ var io;
 
 var logger=require('./log-control').logger;
 var serverInfo;
-
+var logger=require('./log-control').logger;
 
 initAgent = function(agent) {
 
@@ -32,6 +32,7 @@ initAgent = function(agent) {
 		type: os.type(),
 		startTime: moment().format('MMMM Do YYYY, h:mm:ss a'),
 		status: "READY",
+		mode: agent.mode,
 		_id: agent._id
 	};
 
@@ -41,7 +42,6 @@ initAgent = function(agent) {
 
 
 execute = function(data) {
-	var logger=require('./log-control').logger;
 	status='EXECUTING';
     logger.info("execute");
     logger.debug(data);
@@ -51,7 +51,7 @@ execute = function(data) {
 };
 
 AgentControl = function(io) {
-	logger=require('./log-control');
+
 	//logger.info('setting event io to:'+io);
 	this.io = io;
 	
@@ -106,7 +106,7 @@ AgentControl.prototype.execute = execute;
 AgentControl.prototype.eventEmitter = eventEmitter;
 AgentControl.prototype.registerServer = function registerAgent(server) {
 	  logger.info(server);
-	  	this.serverInfo=server;
+	  this.serverInfo=server;
 	};
 
 AgentControl.prototype.serverInfo = serverInfo;
