@@ -3,8 +3,11 @@
 	table
 		thead
 			tr
-				td(colspan="7")
+				td(colspan="2")
 					| Add via ssh here:
+				td(colspan="5" align"left")
+					span(ng-show="message" style="color:red;text-align:left;")
+						{{message}}
 			tr
 				td Login&#42;
 				td Password&#42;
@@ -28,7 +31,7 @@
 					&#42; = required
 			tr
 				td(colspan="7")
-
+{{connectedAgents}}
 .agent-list
 	table
 		thead
@@ -65,8 +68,12 @@
 					a(href="http://{{agent.host}}:{{agent.port}}" target="__blank")
 						{{agent.user}}@{{agent.host}}:{{agent.port}}
 				td: d(id="{{agent._id}}_status")
-					{{agent.status}}
-				td(id='{{agent._id}}_messages'): {{agent.message}}
+					progressbar(ng-hide="agent.progress < 1" animate="agent.progress" value="agent.progress" type="success")
+						{{agent.status}}
+					p(ng-hide="agent.progress > 0")
+						{{agent.status}}
+				td(id='{{agent._id}}_messages')
+					b {{agent.message}}
 	
 	script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js')
 	script(src='http://jquery-json.googlecode.com/files/jquery.json-2.2.min.js')

@@ -1,0 +1,19 @@
+{
+    "id": "endeca Content Aquisition System 3.1.1 install",
+    "files" : [
+               /repo/rawfiles/endeca/CAS/cas-3.1.1-x86_64pc-linux.sh,
+               /repo/jobs/endeca/CAS/3.1.1/cas_silent.txt
+     ],
+	"script": {
+        "working_dir": "/opt/endeca",
+        "env": {
+            "ENDECA_HOME": "/opt/endeca",
+            "ENDECA_TOOLS_ROOT": "/opt/endeca/ToolsAndFrameworks/",
+            "ENDECA_TOOLS_CONF": "/opt/endeca/ToolsAndFrameworks/3.1.1/server/workspace"
+		},
+		"install_commands": [
+		    "./cas-3.1.1-x86_64pc-linux.sh --silent --target /opt < cas_silent.txt",
+		]
+			
+    }
+}

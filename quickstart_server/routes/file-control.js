@@ -3,12 +3,14 @@ var fs = require('fs');
 path = require('path');
 
 dirTree = function (filename) {
+	logger.debug("basename="+path.basename(filename));
     var stats = fs.lstatSync(filename),
         info = {
             path: filename,
             label: path.basename(filename),
             ext:  path.extname(filename)
         };
+    
 
     if (stats.isDirectory()) {
 //        info.type = "folder";

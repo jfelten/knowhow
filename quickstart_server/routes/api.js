@@ -36,14 +36,21 @@ exports.listAgents = function(req, res) {
 	agentControl.listAgents(req, res);
 };
 
+
+function getServerInfo() {
+    var os = require("os");
+	serverInfo = {
+			name: os.hostname(),
+		    started: startTime,
+		    port: server.port	
+	};
+	return serverInfo;
+};
+
 exports.serverInfo = function (req, res) {
   var os = require("os");
-  res.json({ serverInfo: {
-	    name: os.hostname(),
-	    started: startTime,
-	    port: server.port
-	  }
-  });
+  logger.info(req.connection.remoteAddress);
+  res.json(getServerInfo());
 };
 
 exports.jobList = function (req,res) {
@@ -65,10 +72,20 @@ exports.addAgent = function (req, res) {
 	  logger.debug(params[i]);
   }
   var agent = req.body;
-  agentControl.initAgent(agent);
-  agentControl.addAgent(agent);
-  
+  agentControl.addAgent(agent, getServerInfo());
   agentControl.listAgents(req,res);
+
+};
+
+exports.agentEvent = function (req, res) {
+	  logger.info('agent event: '+req.body.host);
+	  for (i in req.params) {
+		  logger.debug(params[i]);
+	  }
+	  var agent = req.body;
+	  agentControl.eventEmitter.emit('agent-update',agent);
+	  
+	  res.json({ok:true});
 
 };
 
