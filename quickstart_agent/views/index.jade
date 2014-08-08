@@ -1,6 +1,5 @@
 extends layout
-
-block body
+block content
 	div(ng-controller='AppCtrl') 
 		.qs-header
 			.navbar.navbar-default.navbar-static-top(role='navigation')
@@ -12,7 +11,7 @@ block body
 						img(src="/images/robot-arm.png")
 					.qs-navbar
 						ul.serverName
-							| {{agentInfo.host}}:{{agentInfo.port}}
+							| {{agentInfo.user}}@{{agentInfo.host}}:{{agentInfo.port}}
 						ul.nav.navbar-nav
 							- var obj = { '/logs':'Logs', '/execute':'Execute', '/api':'API', '/about':'About'  }
 								- each val, key in obj
@@ -26,7 +25,6 @@ block body
 		.qs-footer
 			|  Started: {{agentInfo.startTime}} Copyright 2014 v
 			span(app-version)
-		
 		script(src='js/lib/angular-1.2.9/angular.js')
 		script(src='js/lib/angular-1.2.9/angular-route.js')
 		script(src='js/lib/socket.io.js')

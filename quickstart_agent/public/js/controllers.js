@@ -68,11 +68,12 @@ var myModule = angular.module('myApp.controllers', []).
 	  var container = document.getElementById('jsoneditor');
 	  var editor = new JSONEditor(container,options);
 	  
-	  $scope.execute = function() {
-		  var data = document.getElementById('jsoneditor').value;
+	  $scope.execute = function(agent,job) {
+		  var data = editor.get();;
 		  $http({
 		      method: 'POST',
-		      url: '/api/execute'
+		      url: 'http://'+agent.ip+':'+agent.port+'/api/execute',
+		      data: job
 		    }).success(function (data, status, headers, config) {
 		        $scope.agentInfo = data;
 		    }).
@@ -101,4 +102,18 @@ var myModule = angular.module('myApp.controllers', []).
 	    			port: 'Unknown'
 	    	};
 	    });
+	    
+	    $http({
+		      method: 'GET',
+		      url: '/api/serverInfo'
+		    }).
+		    success(function (data, status, headers, config) {
+		      $scope.serverInfo = data;
+		    }).
+		    error(function (data, status, headers, config) {
+		    	$scope.agentInfo = {
+		    			name: 'Unknown',
+		    			port: 'Unknown'
+		    	};
+		    });
   });

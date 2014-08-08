@@ -1,10 +1,13 @@
 
 li
-	|host:port {{agentInfo.host}}:{{agentInfo.port}}
+	|id: {{agentInfo._id}}
+li
+	|user@host:port: {{agentInfo.user}}@{{agentInfo.host}}:{{agentInfo.port}}
 li
 	|ip: {{agentInfo.ip}}
 li
 	|type: {{agentInfo.type}}
 li
-	|started {{agentInfo.startTime}}
-li 
+	|started: {{agentInfo.startTime}}
+li
+	|registered with server: {{serverInfo.name}}:{{serverInfo.port}}

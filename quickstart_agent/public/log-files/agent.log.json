@@ -3,3 +3,454 @@
 {"level":"info","message":"Logger initializing.","timestamp":"2014-07-18T06:08:56.017Z"}
 {"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-07-18T06:08:56.021Z"}
 {"level":"info","message":"listening on *:3000","timestamp":"2014-07-18T06:08:56.025Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-07-27T05:43:12.839Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-07-27T05:43:13.024Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-07-27T05:43:13.024Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-07-27T05:43:13.028Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-07-27T05:43:13.031Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T05:43:19.804Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-07-27T05:46:01.779Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-07-27T05:46:01.968Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-07-27T05:46:01.968Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-07-27T05:46:01.973Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-07-27T05:46:01.978Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T05:46:07.200Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T05:46:10.288Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T05:46:11.170Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T05:46:47.378Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T05:47:31.429Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T05:47:32.457Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T05:48:07.733Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T05:49:02.546Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T05:49:03.793Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-07-27T05:51:07.663Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-07-27T05:51:07.853Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-07-27T05:51:07.853Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-07-27T05:51:07.857Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-07-27T05:51:07.860Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T05:51:10.705Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T05:53:23.409Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T05:53:24.712Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T05:53:25.480Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T05:54:06.056Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T05:54:46.608Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-07-27T05:57:30.191Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-07-27T05:57:30.381Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-07-27T05:57:30.381Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-07-27T05:57:30.385Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-07-27T05:57:30.388Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T05:57:32.901Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T05:57:52.644Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T05:58:09.947Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T05:58:17.338Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T05:58:35.537Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T05:58:35.734Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T05:58:35.901Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T05:58:52.125Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T05:58:57.373Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T05:59:23.343Z"}
+{"level":"info","message":"getting partial: logs","timestamp":"2014-07-27T05:59:23.850Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-07-27T06:01:54.912Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-07-27T06:01:55.096Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-07-27T06:01:55.096Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-07-27T06:01:55.100Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-07-27T06:01:55.104Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:01:58.961Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-07-27T06:02:52.234Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-07-27T06:02:52.420Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-07-27T06:02:52.420Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-07-27T06:02:52.424Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-07-27T06:02:52.428Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:02:55.450Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:02:56.756Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-07-27T06:03:32.572Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-07-27T06:03:32.757Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-07-27T06:03:32.758Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-07-27T06:03:32.762Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-07-27T06:03:32.765Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:03:35.042Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-07-27T06:05:00.407Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-07-27T06:05:00.602Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-07-27T06:05:00.602Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-07-27T06:05:00.606Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-07-27T06:05:00.609Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:05:03.094Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:05:04.404Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-07-27T06:06:06.592Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-07-27T06:06:06.783Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-07-27T06:06:06.783Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-07-27T06:06:06.787Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-07-27T06:06:06.791Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:06:09.280Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:06:10.419Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:06:50.359Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-07-27T06:07:03.880Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-07-27T06:07:04.068Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-07-27T06:07:04.068Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-07-27T06:07:04.072Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-07-27T06:07:04.075Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:07:06.112Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:07:07.154Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-07-27T06:09:46.689Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-07-27T06:09:46.873Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-07-27T06:09:46.873Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-07-27T06:09:46.877Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-07-27T06:09:46.881Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:09:49.973Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-07-27T06:11:06.913Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-07-27T06:11:07.100Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-07-27T06:11:07.100Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-07-27T06:11:07.105Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-07-27T06:11:07.108Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:11:10.691Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:11:11.776Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:11:12.939Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-07-27T06:15:56.995Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-07-27T06:15:57.183Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-07-27T06:15:57.183Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-07-27T06:15:57.187Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-07-27T06:15:57.191Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:16:02.803Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:16:04.100Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-07-27T06:21:47.591Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-07-27T06:21:47.780Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-07-27T06:21:47.780Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-07-27T06:21:47.784Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-07-27T06:21:47.787Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:21:53.752Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-07-27T06:25:13.327Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-07-27T06:25:13.516Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-07-27T06:25:13.516Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-07-27T06:25:13.520Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-07-27T06:25:13.524Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:25:18.150Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:25:19.611Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-07-27T06:25:30.348Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-07-27T06:25:30.535Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-07-27T06:25:30.536Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-07-27T06:25:30.540Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-07-27T06:25:30.543Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:25:35.738Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-07-27T06:26:31.670Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-07-27T06:26:31.858Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-07-27T06:26:31.858Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-07-27T06:26:31.862Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-07-27T06:26:31.865Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:26:35.783Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:26:36.994Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:28:49.760Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-07-27T06:29:19.840Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-07-27T06:29:20.028Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-07-27T06:29:20.028Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-07-27T06:29:20.032Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-07-27T06:29:20.035Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:29:24.148Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:29:31.921Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:32:11.824Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:32:13.342Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-07-27T06:33:46.559Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-07-27T06:33:46.741Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-07-27T06:33:46.741Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-07-27T06:33:46.745Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-07-27T06:33:46.748Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:33:49.443Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:34:13.277Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-07-27T06:34:22.957Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-07-27T06:34:23.139Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-07-27T06:34:23.139Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-07-27T06:34:23.143Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-07-27T06:34:23.146Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:34:26.669Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:37:27.491Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:37:29.773Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:42:02.526Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:45:40.935Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:46:10.908Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:47:30.439Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:48:50.890Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:49:37.986Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:49:42.955Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:49:44.438Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:49:47.037Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:54:28.334Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:54:47.479Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:57:41.801Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T06:59:47.027Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T07:01:49.379Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T07:02:15.616Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T07:08:47.362Z"}
+{"level":"info","message":"getting partial: about","timestamp":"2014-07-27T07:08:48.057Z"}
+{"level":"info","message":"getting partial: logs","timestamp":"2014-07-27T07:08:54.363Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T07:10:35.973Z"}
+{"level":"info","message":"getting partial: logs","timestamp":"2014-07-27T07:10:36.518Z"}
+{"level":"info","message":"getting partial: execute","timestamp":"2014-07-27T07:10:42.632Z"}
+{"level":"info","message":"getting partial: logs","timestamp":"2014-07-27T07:10:45.201Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T07:13:26.365Z"}
+{"level":"info","message":"getting partial: logs","timestamp":"2014-07-27T07:13:26.892Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T07:13:46.744Z"}
+{"level":"info","message":"getting partial: logs","timestamp":"2014-07-27T07:13:47.297Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T07:21:28.843Z"}
+{"level":"info","message":"getting partial: logs","timestamp":"2014-07-27T07:21:29.416Z"}
+{"level":"info","message":"getting partial: about","timestamp":"2014-07-27T07:22:21.601Z"}
+{"level":"info","message":"getting partial: api","timestamp":"2014-07-27T07:22:23.709Z"}
+{"level":"info","message":"getting partial: execute","timestamp":"2014-07-27T07:22:25.991Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T07:23:15.427Z"}
+{"level":"info","message":"getting partial: execute","timestamp":"2014-07-27T07:23:16.095Z"}
+{"level":"info","message":"getting partial: logs","timestamp":"2014-07-27T07:23:20.471Z"}
+{"level":"info","message":"getting partial: api","timestamp":"2014-07-27T07:23:22.596Z"}
+{"level":"info","message":"getting partial: about","timestamp":"2014-07-27T07:23:23.392Z"}
+{"level":"info","message":"index","timestamp":"2014-07-27T07:24:03.658Z"}
+{"level":"info","message":"getting partial: about","timestamp":"2014-07-27T07:24:04.354Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-04T19:22:27.860Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-08-04T19:22:28.039Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-08-04T19:22:28.039Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-08-04T19:22:28.043Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-08-04T19:22:28.047Z"}
+{"level":"info","message":"index","timestamp":"2014-08-04T19:23:41.064Z"}
+{"level":"info","message":"getting partial: api","timestamp":"2014-08-04T19:23:41.754Z"}
+{"level":"info","message":"index","timestamp":"2014-08-04T19:23:41.762Z"}
+{"level":"info","message":"index","timestamp":"2014-08-04T19:23:41.835Z"}
+{"level":"info","message":"getting partial: about","timestamp":"2014-08-04T19:23:44.906Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-04T19:26:41.638Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-08-04T19:26:41.819Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-08-04T19:26:41.819Z"}
+{"level":"info","message":"{\"_\":[],\"$0\":\"/usr/local/bin/node ./agent.js\",\"port\":3000}","timestamp":"2014-08-04T19:26:41.819Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-08-04T19:26:41.824Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-08-04T19:26:41.827Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-04T19:30:34.481Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-08-04T19:30:34.669Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-08-04T19:30:34.670Z"}
+{"level":"info","message":"{\"_\":[],\"$0\":\"/usr/local/bin/node ./agent.js\",\"port\":3000}","timestamp":"2014-08-04T19:30:34.670Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-08-04T19:30:34.674Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-08-04T19:30:34.677Z"}
+{"level":"info","message":"index","timestamp":"2014-08-04T19:30:41.209Z"}
+{"level":"info","message":"getting partial: about","timestamp":"2014-08-04T19:30:41.898Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-04T19:32:01.120Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-08-04T19:32:01.296Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-08-04T19:32:01.296Z"}
+{"level":"info","message":"{\"_\":[],\"$0\":\"/usr/local/bin/node ./agent.js\",\"port\":3000}","timestamp":"2014-08-04T19:32:01.297Z"}
+{"PATH":"/usr/bin:/bin:/usr/sbin:/sbin","SystemDrive":"","TEMP":"","TMP":"","__CF_USER_TEXT_ENCODING":"0x1F7:0:0","level":"info","message":"","timestamp":"2014-08-04T19:32:01.297Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-08-04T19:32:01.301Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-08-04T19:32:01.304Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-04T21:53:00.352Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-08-04T21:53:00.528Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-08-04T21:53:00.528Z"}
+{"level":"info","message":"{\"_\":[],\"u\":true,\"s\":true,\"e\":true,\"r\":[\"test\",true],\"l\":true,\"o\":true,\"g\":true,\"i\":true,\"n\":\"test\",\"p\":true,\"t\":3000,\"$0\":\"/usr/local/bin/node ./agent.js\",\"port\":3000}","timestamp":"2014-08-04T21:53:00.528Z"}
+{"PATH":"/usr/bin:/bin:/usr/sbin:/sbin","SystemDrive":"","TEMP":"","TMP":"","__CF_USER_TEXT_ENCODING":"0x1F7:0:0","level":"info","message":"","timestamp":"2014-08-04T21:53:00.529Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-08-04T21:53:00.533Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-08-04T21:53:00.536Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-04T21:56:28.610Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-08-04T21:56:28.792Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-08-04T21:56:28.792Z"}
+{"level":"info","message":"{\"_\":[],\"u\":true,\"s\":true,\"e\":true,\"r\":\"test\",\"l\":true,\"o\":true,\"g\":true,\"i\":true,\"n\":\"test\",\"p\":\"ort=3000\",\"$0\":\"/usr/local/bin/node ./agent.js\",\"port\":3000}","timestamp":"2014-08-04T21:56:28.792Z"}
+{"PATH":"/usr/bin:/bin:/usr/sbin:/sbin","SystemDrive":"","TEMP":"","TMP":"","__CF_USER_TEXT_ENCODING":"0x1F7:0:0","level":"info","message":"","timestamp":"2014-08-04T21:56:28.793Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-08-04T21:56:28.797Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-08-04T21:56:28.800Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-04T21:57:44.581Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-08-04T21:57:44.758Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-08-04T21:57:44.758Z"}
+{"level":"info","message":"{\"_\":[],\"u\":true,\"s\":true,\"e\":true,\"r\":\"test\",\"l\":true,\"o\":true,\"g\":true,\"i\":true,\"n\":\"test\",\"p\":\"ort=3000\",\"$0\":\"/usr/local/bin/node ./agent.js\",\"port\":3000}","timestamp":"2014-08-04T21:57:44.758Z"}
+{"PATH":"/usr/bin:/bin:/usr/sbin:/sbin","SystemDrive":"","TEMP":"","TMP":"","__CF_USER_TEXT_ENCODING":"0x1F7:0:0","level":"info","message":"","timestamp":"2014-08-04T21:57:44.758Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-08-04T21:57:44.762Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-08-04T21:57:44.765Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-04T21:58:05.838Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-08-04T21:58:06.015Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-08-04T21:58:06.015Z"}
+{"level":"info","message":"{\"_\":[],\"user\":\"test\",\"login\":\"test\",\"port\":3000,\"$0\":\"/usr/local/bin/node ./agent.js\"}","timestamp":"2014-08-04T21:58:06.015Z"}
+{"PATH":"/usr/bin:/bin:/usr/sbin:/sbin","SystemDrive":"","TEMP":"","TMP":"","__CF_USER_TEXT_ENCODING":"0x1F7:0:0","level":"info","message":"","timestamp":"2014-08-04T21:58:06.016Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-08-04T21:58:06.019Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-08-04T21:58:06.023Z"}
+{"level":"info","message":"index","timestamp":"2014-08-04T21:58:15.139Z"}
+{"level":"info","message":"getting partial: about","timestamp":"2014-08-04T21:58:15.820Z"}
+{"level":"info","message":"index","timestamp":"2014-08-04T21:58:32.245Z"}
+{"level":"info","message":"getting partial: about","timestamp":"2014-08-04T21:58:32.712Z"}
+{"level":"info","message":"getting partial: logs","timestamp":"2014-08-04T21:58:37.858Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-04T22:00:10.362Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-08-04T22:00:10.545Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-08-04T22:00:10.545Z"}
+{"level":"info","message":"{\"_\":[],\"user\":\"test\",\"login\":\"test\",\"port\":3000,\"$0\":\"/usr/local/bin/node ./agent.js\"}","timestamp":"2014-08-04T22:00:10.545Z"}
+{"PATH":"/usr/bin:/bin:/usr/sbin:/sbin","SystemDrive":"","TEMP":"","TMP":"","__CF_USER_TEXT_ENCODING":"0x1F7:0:0","level":"info","message":"","timestamp":"2014-08-04T22:00:10.546Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-08-04T22:00:10.549Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-08-04T22:00:10.553Z"}
+{"level":"info","message":"index","timestamp":"2014-08-04T22:00:21.296Z"}
+{"level":"info","message":"getting partial: about","timestamp":"2014-08-04T22:00:21.914Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-06T16:48:14.521Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-08-06T16:48:14.697Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-08-06T16:48:14.697Z"}
+{"level":"info","message":"{\"_\":[],\"user\":\"test\",\"login\":\"test\",\"port\":3000,\"$0\":\"/usr/local/bin/node ./agent.js\"}","timestamp":"2014-08-06T16:48:14.698Z"}
+{"PATH":"/usr/bin:/bin:/usr/sbin:/sbin","SystemDrive":"","TEMP":"","TMP":"","__CF_USER_TEXT_ENCODING":"0x1F7:0:0","level":"info","message":"","timestamp":"2014-08-06T16:48:14.698Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-08-06T16:48:14.702Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-08-06T16:48:14.705Z"}
+{"level":"info","message":"index","timestamp":"2014-08-06T17:04:16.271Z"}
+{"level":"info","message":"getting partial: api","timestamp":"2014-08-06T17:04:17.354Z"}
+{"level":"info","message":"index","timestamp":"2014-08-06T17:04:24.854Z"}
+{"level":"info","message":"getting partial: api","timestamp":"2014-08-06T17:04:25.147Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-06T19:21:10.947Z"}
+{"level":"info","message":"setting event io to:undefined","timestamp":"2014-08-06T19:21:10.969Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-08-06T19:21:11.132Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-08-06T19:21:11.132Z"}
+{"level":"info","message":"{\"_\":[],\"user\":\"test\",\"login\":\"test\",\"port\":3000,\"$0\":\"/usr/local/bin/node ./agent.js\"}","timestamp":"2014-08-06T19:21:11.133Z"}
+{"PATH":"/usr/bin:/bin:/usr/sbin:/sbin","SystemDrive":"","TEMP":"","TMP":"","__CF_USER_TEXT_ENCODING":"0x1F7:0:0","level":"info","message":"","timestamp":"2014-08-06T19:21:11.133Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-08-06T19:21:11.137Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-08-06T19:21:11.140Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-06T20:32:51.697Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-08-06T20:32:51.886Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-08-06T20:32:51.886Z"}
+{"level":"info","message":"{\"_\":[],\"user\":\"test\",\"login\":\"test\",\"port\":3000,\"$0\":\"/usr/local/bin/node ./agent.js\"}","timestamp":"2014-08-06T20:32:51.886Z"}
+{"PATH":"/usr/bin:/bin:/usr/sbin:/sbin","SystemDrive":"","TEMP":"","TMP":"","__CF_USER_TEXT_ENCODING":"0x1F7:0:0","level":"info","message":"","timestamp":"2014-08-06T20:32:51.887Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-08-06T20:32:51.891Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-08-06T20:32:51.894Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-06T21:44:26.563Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-08-06T21:44:26.746Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-08-06T21:44:26.746Z"}
+{"level":"info","message":"{\"_\":[],\"user\":\"test\",\"login\":\"test\",\"port\":3000,\"$0\":\"/usr/local/bin/node ./agent.js\"}","timestamp":"2014-08-06T21:44:26.746Z"}
+{"PATH":"/usr/bin:/bin:/usr/sbin:/sbin","SystemDrive":"","TEMP":"","TMP":"","__CF_USER_TEXT_ENCODING":"0x1F7:0:0","level":"info","message":"","timestamp":"2014-08-06T21:44:26.746Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-08-06T21:44:26.750Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-08-06T21:44:26.752Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-08-06T21:44:26.754Z"}
+{"level":"info","message":"register server","timestamp":"2014-08-06T21:44:36.824Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-06T21:49:20.412Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-08-06T21:49:20.598Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-08-06T21:49:20.598Z"}
+{"level":"info","message":"{\"_\":[],\"user\":\"test\",\"login\":\"test\",\"port\":3000,\"$0\":\"/usr/local/bin/node ./agent.js\"}","timestamp":"2014-08-06T21:49:20.598Z"}
+{"PATH":"/usr/bin:/bin:/usr/sbin:/sbin","SystemDrive":"","TEMP":"","TMP":"","__CF_USER_TEXT_ENCODING":"0x1F7:0:0","level":"info","message":"","timestamp":"2014-08-06T21:49:20.599Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-08-06T21:49:20.602Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-08-06T21:49:20.604Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-08-06T21:49:20.606Z"}
+{"level":"info","message":"register server","timestamp":"2014-08-06T21:50:07.685Z"}
+{"level":"info","message":"getting partial: about","timestamp":"2014-08-06T21:50:14.708Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-06T21:52:43.255Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-08-06T21:52:43.438Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-08-06T21:52:43.438Z"}
+{"level":"info","message":"{\"_\":[],\"user\":\"test\",\"login\":\"test\",\"port\":3000,\"$0\":\"/usr/local/bin/node ./agent.js\"}","timestamp":"2014-08-06T21:52:43.439Z"}
+{"PATH":"/usr/bin:/bin:/usr/sbin:/sbin","SystemDrive":"","TEMP":"","TMP":"","__CF_USER_TEXT_ENCODING":"0x1F7:0:0","level":"info","message":"","timestamp":"2014-08-06T21:52:43.439Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-08-06T21:52:43.443Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-08-06T21:52:43.445Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-08-06T21:52:43.447Z"}
+{"level":"info","message":"register server","timestamp":"2014-08-06T21:52:58.430Z"}
+{"level":"info","message":"undefined","timestamp":"2014-08-06T21:52:58.430Z"}
+{"level":"info","message":"undefined","timestamp":"2014-08-06T21:52:58.430Z"}
+{"level":"info","message":"register server","timestamp":"2014-08-06T21:53:45.098Z"}
+{"level":"info","message":"undefined","timestamp":"2014-08-06T21:53:45.099Z"}
+{"level":"info","message":"undefined","timestamp":"2014-08-06T21:53:45.099Z"}
+{"level":"info","message":"register server","timestamp":"2014-08-07T01:22:51.362Z"}
+{"level":"info","message":"undefined","timestamp":"2014-08-07T01:22:51.362Z"}
+{"level":"info","message":"undefined","timestamp":"2014-08-07T01:22:51.362Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-07T01:23:52.210Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-08-07T01:23:52.405Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-08-07T01:23:52.406Z"}
+{"level":"info","message":"{\"_\":[],\"user\":\"test\",\"login\":\"test\",\"port\":3000,\"$0\":\"/usr/local/bin/node ./agent.js\"}","timestamp":"2014-08-07T01:23:52.406Z"}
+{"PATH":"/usr/bin:/bin:/usr/sbin:/sbin","SystemDrive":"","TEMP":"","TMP":"","__CF_USER_TEXT_ENCODING":"0x1F7:0:0","level":"info","message":"","timestamp":"2014-08-07T01:23:52.406Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-08-07T01:23:52.410Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-08-07T01:23:52.412Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-08-07T01:23:52.414Z"}
+{"level":"info","message":"register server","timestamp":"2014-08-07T01:23:59.574Z"}
+{"level":"info","message":"undefined","timestamp":"2014-08-07T01:23:59.574Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-07T01:25:28.952Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-08-07T01:25:29.141Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-08-07T01:25:29.141Z"}
+{"level":"info","message":"{\"_\":[],\"user\":\"test\",\"login\":\"test\",\"port\":3000,\"$0\":\"/usr/local/bin/node ./agent.js\"}","timestamp":"2014-08-07T01:25:29.142Z"}
+{"PATH":"/usr/bin:/bin:/usr/sbin:/sbin","SystemDrive":"","TEMP":"","TMP":"","__CF_USER_TEXT_ENCODING":"0x1F7:0:0","level":"info","message":"","timestamp":"2014-08-07T01:25:29.142Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-08-07T01:25:29.146Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-08-07T01:25:29.148Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-08-07T01:25:29.150Z"}
+{"level":"info","message":"register server","timestamp":"2014-08-07T01:25:43.214Z"}
+{"host":"localhost","port":3001,"level":"info","message":"","timestamp":"2014-08-07T01:25:43.214Z"}
+{"level":"info","message":"undefined","timestamp":"2014-08-07T01:25:43.214Z"}
+{"level":"info","message":"index","timestamp":"2014-08-07T01:26:07.840Z"}
+{"level":"info","message":"getting partial: about","timestamp":"2014-08-07T01:26:08.547Z"}
+{"level":"info","message":"index","timestamp":"2014-08-07T01:26:10.702Z"}
+{"level":"info","message":"getting partial: about","timestamp":"2014-08-07T01:26:11.192Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-07T01:27:47.211Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-08-07T01:27:47.393Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-08-07T01:27:47.393Z"}
+{"level":"info","message":"{\"_\":[],\"user\":\"test\",\"login\":\"test\",\"port\":3000,\"$0\":\"/usr/local/bin/node ./agent.js\"}","timestamp":"2014-08-07T01:27:47.393Z"}
+{"PATH":"/usr/bin:/bin:/usr/sbin:/sbin","SystemDrive":"","TEMP":"","TMP":"","__CF_USER_TEXT_ENCODING":"0x1F7:0:0","level":"info","message":"","timestamp":"2014-08-07T01:27:47.394Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-08-07T01:27:47.398Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-08-07T01:27:47.400Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-08-07T01:27:47.402Z"}
+{"level":"info","message":"register server","timestamp":"2014-08-07T01:27:56.518Z"}
+{"host":"localhost","port":3001,"level":"info","message":"","timestamp":"2014-08-07T01:27:56.518Z"}
+{"level":"info","message":"undefined","timestamp":"2014-08-07T01:27:56.518Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-07T01:28:45.333Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-08-07T01:28:45.517Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-08-07T01:28:45.518Z"}
+{"level":"info","message":"{\"_\":[],\"user\":\"test\",\"login\":\"test\",\"port\":3000,\"$0\":\"/usr/local/bin/node ./agent.js\"}","timestamp":"2014-08-07T01:28:45.518Z"}
+{"PATH":"/usr/bin:/bin:/usr/sbin:/sbin","SystemDrive":"","TEMP":"","TMP":"","__CF_USER_TEXT_ENCODING":"0x1F7:0:0","level":"info","message":"","timestamp":"2014-08-07T01:28:45.518Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-08-07T01:28:45.522Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-08-07T01:28:45.524Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-08-07T01:28:45.526Z"}
+{"level":"info","message":"register server","timestamp":"2014-08-07T01:28:58.625Z"}
+{"host":"localhost","port":3001,"level":"info","message":"","timestamp":"2014-08-07T01:28:58.625Z"}
+{"host":"localhost","port":3001,"level":"info","message":"","timestamp":"2014-08-07T01:28:58.626Z"}
+{"level":"info","message":"index","timestamp":"2014-08-07T01:29:07.290Z"}
+{"level":"info","message":"getting partial: about","timestamp":"2014-08-07T01:29:07.947Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-07T16:43:22.082Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-08-07T16:43:22.259Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-08-07T16:43:22.259Z"}
+{"level":"info","message":"{\"_\":[],\"user\":\"test\",\"login\":\"test\",\"port\":3000,\"$0\":\"/usr/local/bin/node ./agent.js\"}","timestamp":"2014-08-07T16:43:22.260Z"}
+{"PATH":"/usr/bin:/bin:/usr/sbin:/sbin","SystemDrive":"","TEMP":"","TMP":"","__CF_USER_TEXT_ENCODING":"0x1F7:0:0","level":"info","message":"","timestamp":"2014-08-07T16:43:22.260Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-08-07T16:43:22.264Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-08-07T16:43:22.266Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-08-07T16:43:22.268Z"}
+{"level":"info","message":"register server","timestamp":"2014-08-07T16:43:35.730Z"}
+{"host":"localhost","port":3001,"level":"info","message":"","timestamp":"2014-08-07T16:43:35.730Z"}
+{"host":"localhost","port":3001,"level":"info","message":"","timestamp":"2014-08-07T16:43:35.730Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-07T16:44:53.942Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-08-07T16:44:54.123Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-08-07T16:44:54.123Z"}
+{"level":"info","message":"{\"_\":[],\"user\":\"test\",\"login\":\"test\",\"port\":3000,\"$0\":\"/usr/local/bin/node ./agent.js\"}","timestamp":"2014-08-07T16:44:54.123Z"}
+{"PATH":"/usr/bin:/bin:/usr/sbin:/sbin","SystemDrive":"","TEMP":"","TMP":"","__CF_USER_TEXT_ENCODING":"0x1F7:0:0","level":"info","message":"","timestamp":"2014-08-07T16:44:54.123Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-08-07T16:44:54.127Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-08-07T16:44:54.129Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-08-07T16:44:54.131Z"}
+{"level":"info","message":"register server","timestamp":"2014-08-07T16:45:00.492Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-07T16:45:27.185Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-08-07T16:45:27.371Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-08-07T16:45:27.371Z"}
+{"level":"info","message":"{\"_\":[],\"user\":\"test\",\"login\":\"test\",\"port\":3000,\"$0\":\"/usr/local/bin/node ./agent.js\"}","timestamp":"2014-08-07T16:45:27.371Z"}
+{"PATH":"/usr/bin:/bin:/usr/sbin:/sbin","SystemDrive":"","TEMP":"","TMP":"","__CF_USER_TEXT_ENCODING":"0x1F7:0:0","level":"info","message":"","timestamp":"2014-08-07T16:45:27.371Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-08-07T16:45:27.375Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-08-07T16:45:27.377Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-08-07T16:45:27.379Z"}
+{"level":"info","message":"register server","timestamp":"2014-08-07T16:45:34.060Z"}
+{"level":"info","message":"server requesting registration from: 127.0.0.1","timestamp":"2014-08-07T16:45:34.060Z"}
+{"host":"localhost","port":3001,"level":"info","message":"","timestamp":"2014-08-07T16:45:34.060Z"}
+{"host":"localhost","port":3001,"level":"info","message":"","timestamp":"2014-08-07T16:45:34.060Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-07T16:51:32.352Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-08-07T16:51:32.532Z"}
+{"level":"info","message":"Logger initializing.","timestamp":"2014-08-07T16:51:32.532Z"}
+{"level":"info","message":"{\"_\":[],\"user\":\"test\",\"login\":\"test\",\"port\":3000,\"$0\":\"/usr/local/bin/node ./agent.js\"}","timestamp":"2014-08-07T16:51:32.533Z"}
+{"PATH":"/usr/bin:/bin:/usr/sbin:/sbin","SystemDrive":"","TEMP":"","TMP":"","__CF_USER_TEXT_ENCODING":"0x1F7:0:0","level":"info","message":"","timestamp":"2014-08-07T16:51:32.533Z"}
+{"level":"info","message":"initializing agent with ip: 192.168.10.57","timestamp":"2014-08-07T16:51:32.537Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-08-07T16:51:32.539Z"}
+{"level":"info","message":"listening on *:3000","timestamp":"2014-08-07T16:51:32.541Z"}
+{"level":"info","message":"register server","timestamp":"2014-08-07T16:51:41.812Z"}
+{"level":"info","message":"server requesting registration from: 127.0.0.1","timestamp":"2014-08-07T16:51:41.812Z"}
+{"host":"localhost","port":3001,"ip":"127.0.0.1","level":"info","message":"","timestamp":"2014-08-07T16:51:41.812Z"}
+{"host":"localhost","port":3001,"ip":"127.0.0.1","level":"info","message":"","timestamp":"2014-08-07T16:51:41.812Z"}
+{"level":"info","message":"register server","timestamp":"2014-08-07T16:52:48.020Z"}
+{"level":"info","message":"server requesting registration from: 127.0.0.1","timestamp":"2014-08-07T16:52:48.020Z"}
+{"host":"localhost","port":3001,"ip":"127.0.0.1","level":"info","message":"","timestamp":"2014-08-07T16:52:48.020Z"}
+{"host":"localhost","port":3001,"ip":"127.0.0.1","level":"info","message":"","timestamp":"2014-08-07T16:52:48.020Z"}
+{"level":"info","message":"register server","timestamp":"2014-08-07T16:53:06.569Z"}
+{"level":"info","message":"server requesting registration from: 127.0.0.1","timestamp":"2014-08-07T16:53:06.569Z"}
+{"host":"localhost","port":3001,"ip":"127.0.0.1","level":"info","message":"","timestamp":"2014-08-07T16:53:06.569Z"}
+{"host":"localhost","port":3001,"ip":"127.0.0.1","level":"info","message":"","timestamp":"2014-08-07T16:53:06.570Z"}
+{"level":"info","message":"register server","timestamp":"2014-08-07T16:53:41.773Z"}
+{"level":"info","message":"server requesting registration from: 127.0.0.1","timestamp":"2014-08-07T16:53:41.773Z"}
+{"host":"localhost","port":3001,"ip":"127.0.0.1","level":"info","message":"","timestamp":"2014-08-07T16:53:41.773Z"}
+{"host":"localhost","port":3001,"ip":"127.0.0.1","level":"info","message":"","timestamp":"2014-08-07T16:53:41.773Z"}
+{"level":"info","message":"register server","timestamp":"2014-08-07T16:55:12.402Z"}
+{"level":"info","message":"server requesting registration from: 127.0.0.1","timestamp":"2014-08-07T16:55:12.402Z"}
+{"host":"localhost","port":3001,"ip":"127.0.0.1","level":"info","message":"","timestamp":"2014-08-07T16:55:12.402Z"}
+{"host":"localhost","port":3001,"ip":"127.0.0.1","level":"info","message":"","timestamp":"2014-08-07T16:55:12.402Z"}
+{"level":"info","message":"register server","timestamp":"2014-08-07T16:55:25.346Z"}
+{"level":"info","message":"server requesting registration from: 127.0.0.1","timestamp":"2014-08-07T16:55:25.346Z"}
+{"host":"localhost","port":3001,"ip":"127.0.0.1","level":"info","message":"","timestamp":"2014-08-07T16:55:25.346Z"}
+{"host":"localhost","port":3001,"ip":"127.0.0.1","level":"info","message":"","timestamp":"2014-08-07T16:55:25.346Z"}
+{"level":"info","message":"register server","timestamp":"2014-08-07T16:55:43.275Z"}
+{"level":"info","message":"server requesting registration from: 127.0.0.1","timestamp":"2014-08-07T16:55:43.275Z"}
+{"host":"localhost","port":3001,"ip":"127.0.0.1","level":"info","message":"","timestamp":"2014-08-07T16:55:43.275Z"}
+{"host":"localhost","port":3001,"ip":"127.0.0.1","level":"info","message":"","timestamp":"2014-08-07T16:55:43.275Z"}
+{"level":"info","message":"index","timestamp":"2014-08-08T18:25:46.869Z"}

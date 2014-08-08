@@ -6,10 +6,10 @@
 var url = require('./url');
 var eio = require('engine.io-client');
 var Socket = require('./socket');
-var Emitter = require('emitter');
+var Emitter = require('component-emitter');
 var parser = require('socket.io-parser');
 var on = require('./on');
-var bind = require('bind');
+var bind = require('component-bind');
 var object = require('object-component');
 var debug = require('debug')('socket.io-client:manager');
 
@@ -29,7 +29,7 @@ module.exports = Manager;
 
 function Manager(uri, opts){
   if (!(this instanceof Manager)) return new Manager(uri, opts);
-  if ('object' == typeof uri) {
+  if (uri && ('object' == typeof uri)) {
     opts = uri;
     uri = undefined;
   }
@@ -54,6 +54,19 @@ function Manager(uri, opts){
   this.decoder = new parser.Decoder();
   this.open();
 }
+
+/**
+ * Propagate given event to sockets and emit on `this`
+ *
+ * @api private
+ */
+
+Manager.prototype.emitAll = function() {
+  this.emit.apply(this, arguments);
+  for (var nsp in this.nsps) {
+    this.nsps[nsp].emit.apply(this.nsps[nsp], arguments);
+  }
+};
 
 /**
  * Mix in `Emitter`.
@@ -176,7 +189,7 @@ Manager.prototype.connect = function(fn){
     debug('connect_error');
     self.cleanup();
     self.readyState = 'closed';
-    self.emit('connect_error', data);
+    self.emitAll('connect_error', data);
     if (fn) {
       var err = new Error('Connection error');
       err.data = data;
@@ -197,7 +210,7 @@ Manager.prototype.connect = function(fn){
       openSub.destroy();
       socket.close();
       socket.emit('error', 'timeout');
-      self.emit('connect_timeout', timeout);
+      self.emitAll('connect_timeout', timeout);
     }, timeout);
 
     this.subs.push({
@@ -265,7 +278,7 @@ Manager.prototype.ondecoded = function(packet) {
 
 Manager.prototype.onerror = function(err){
   debug('error', err);
-  this.emit('error', err);
+  this.emitAll('error', err);
 };
 
 /**
@@ -396,7 +409,7 @@ Manager.prototype.reconnect = function(){
 
   if (this.attempts > this._reconnectionAttempts) {
     debug('reconnect failed');
-    this.emit('reconnect_failed');
+    this.emitAll('reconnect_failed');
     this.reconnecting = false;
   } else {
     var delay = this.attempts * this.reconnectionDelay();
@@ -406,13 +419,14 @@ Manager.prototype.reconnect = function(){
     this.reconnecting = true;
     var timer = setTimeout(function(){
       debug('attempting reconnect');
-      self.emit('reconnect_attempt');
+      self.emitAll('reconnect_attempt', self.attempts);
+      self.emitAll('reconnecting', self.attempts);
       self.open(function(err){
         if (err) {
           debug('reconnect attempt error');
           self.reconnecting = false;
           self.reconnect();
-          self.emit('reconnect_error', err.data);
+          self.emitAll('reconnect_error', err.data);
         } else {
           debug('reconnect success');
           self.onreconnect();
@@ -438,5 +452,5 @@ Manager.prototype.onreconnect = function(){
   var attempt = this.attempts;
   this.attempts = 0;
   this.reconnecting = false;
-  this.emit('reconnect', attempt);
+  this.emitAll('reconnect', attempt);
 };
