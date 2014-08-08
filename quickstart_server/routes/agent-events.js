@@ -14,7 +14,8 @@ function AgentEventHandler(io) {
 
 	agentControl.eventEmitter.on('agent-error', function(agent) {
 		
-		logger.info('agent error detected.')
+		logger.info('agent error detected.');
+		agent.progress = 0;
 		agentControl.updateAgent(agent);
 		agent.status='ERROR';
 		io.emit('agent-error',agent);

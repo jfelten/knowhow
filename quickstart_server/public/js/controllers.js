@@ -30,27 +30,36 @@ var myModule = angular.module('myApp.controllers', []).
 
     socket.on('agent-update', function(agent){
       console.log('agent update message received');
-      var agent_status_box = document.getElementById(agent._id+'_status');
-      var agent_message_box = document.getElementById(agent._id+'_messages');
-      if (agent_message_box != undefined) {
-    	  agent_message_box.textContent = agent.message;
-      }
-      if (agent_status_box != undefined) {
-    	  agent_status_box.textContent = agent.status;
-      }
+//      var agent_status_box = document.getElementById(agent._id+'_status');
+//      var agent_message_box = document.getElementById(agent._id+'_messages');
+//      if (agent_message_box != undefined) {
+//    	  agent_message_box.textContent = agent.message;
+//      }
+//      if (agent_status_box != undefined) {
+//    	  agent_status_box.textContent = agent.status;
+//      }
+      $http.get('/api/connectedAgents').
+      success(function(data) {
+      	$scope.connectedAgents = data;
+      });
       
     });
     
     socket.on('agent-error', function(agent){
         console.log('agent error message received');
-        var agent_status_box = document.getElementById(agent._id+'_status');
-        var agent_message_box = document.getElementById(agent._id+'_messages');
-        if (agent_message_box != undefined) {
-      	  agent_message_box.textContent = agent.message;
-        }
-        if (agent_status_box != undefined) {
-      	  agent_status_box.textContent = agent.status;
-        }
+//        var agent_status_box = document.getElementById(agent._id+'_status');
+//        var agent_message_box = document.getElementById(agent._id+'_messages');
+//        if (agent_message_box != undefined) {
+//      	  agent_message_box.textContent = agent.message;
+//        }
+//        if (agent_status_box != undefined) {
+//      	  agent_status_box.textContent = agent.status;
+//        }
+		$scope.message = agent.message;
+		$http.get('/api/connectedAgents').
+	      success(function(data) {
+	      	$scope.connectedAgents = data;
+	      });
         
       });
     socket.on('agent-add', function(agent){
@@ -67,6 +76,7 @@ var myModule = angular.module('myApp.controllers', []).
 
     
     $scope.addAgent = function (agent) {
+    	$scope.message = undefined;
     	$scope.master = angular.copy(agent);
     	$http.post('/api/addAgent', agent).
         success(function(data) {
@@ -76,7 +86,7 @@ var myModule = angular.module('myApp.controllers', []).
     };
     
     $scope.deleteAgent = function (agent_id) {
-    	
+    	$scope.message = undefined;
     	$http.post('/api/deleteAgent', agent_id).
         success(function(data) {
         	$scope.connectedAgents = data;

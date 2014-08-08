@@ -1,0 +1,22 @@
+{
+    "id": "weblogic 10.2 install",
+	"script": {
+        "working_dir": "/home/builder",
+        "env": {
+
+            	
+		},
+		"install_commands": [
+		    "echo \"install quickstart server\"",
+		    "git clone builder@10.10.10.10:/repo/git/node.repo",
+		    "sudo yum -y install qs_weblogic_dev-10.3.6",
+		    "echo \"installing from: $QS_INSTALL_DIR\"",
+            "sudo -u weblogic mv $QS_INSTALL_DIR/wl* $MW_HOME",
+            "sudo -u weblogic chmod +x $MW_HOME/configure.sh",
+			"export JAVA_HOME=$JAVA_HOME",	
+			"sudo -E -u weblogic $MW_HOME/configure.sh -silent",
+			"sudo -E -u weblogic $MW_HOME/wlserver/common/bin/wlst.sh $SETUP_HOME/Lib/qs_weblogic/createDomain.py"
+		]
+			
+    }
+}
