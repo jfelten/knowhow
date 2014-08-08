@@ -6,6 +6,10 @@ var defaultPort = 3000;
 if (agentData.port == undefined) {
 	agentData.port = defaultPort;
 }
+if (agentData.mode == undefined) {
+	agentData.mode = "development"
+}
+
 exports.agentData = agentData;
 
 //set up the express app,
