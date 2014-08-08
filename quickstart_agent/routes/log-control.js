@@ -3,7 +3,7 @@ socketio = require('socket.io');
 var logger = require('winston');
 var io;
 var fs = require('fs');
-fileName = './public/log-files/agent.log.json';
+fileName = __dirname+'/../public/log-files/agent.log.json';
 
 logger.setLevels({debug:0,info: 1,silly:2,warn: 3,error:4,});
 logger.addColors({debug: 'green',info:  'cyan',silly: 'magenta',warn:  'yellow',error: 'red'});

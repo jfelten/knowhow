@@ -1,6 +1,10 @@
 var commandShell = require('./commandShell');
 var rimraf = require('rimraf');
 var moment = require('moment');
+var EventEmitter = require('events').EventEmitter;
+var eventEmitter = new EventEmitter();
+exports.eventEmitter = eventEmitter;
+
 
 var status = 'READY';
 var io;
@@ -8,8 +12,12 @@ var io;
 var logger=require('./log-control').logger;
 
 
+
 initAgent = function(agent) {
+
 	var logger=require('./log-control').logger;
+	logger.info(JSON.stringify(agent));
+	logger.info(process.env);
 	var os = require("os");
 	var _ = require('underscore'); 
 	var ip = _.chain(os.networkInterfaces()).flatten().filter(function(val){ return (val.family == 'IPv4' && val.internal == false); }).pluck('address').first().value(); 
@@ -23,19 +31,21 @@ initAgent = function(agent) {
 		password: agent.password,
 		type: os.type(),
 		startTime: moment().format('MMMM Do YYYY, h:mm:ss a'),
-		status: "READY"
+		status: "READY",
+		_id: agent._id
 	};
 
 	return agentData;
 
 };
 
+
 execute = function(data) {
 	var logger=require('./log-control').logger;
 	status='EXECUTING';
     logger.info("execute");
     logger.debug(data);
-    commandShell.executeSync(data);
+    commandShell.executeSync(data, agentInfo, serverInfo, eventEmitter);
     socket.emit('execute-complete', { exec: 'done' });
     status = 'READY';
 };
@@ -93,6 +103,14 @@ AgentControl = function(io) {
 //var io = require('socket.io').listen(server)
 AgentControl.prototype.initAgent = initAgent;
 AgentControl.prototype.execute = execute;
+AgentControl.prototype.eventEmitter = eventEmitter;
+AgentControl.prototype.registerServer = function registerAgent(server) {
+	  logger.info(server);
+	  	this.serverInfo=server;
+	};
+
+AgentControl.prototype.serverInfo = serverInfo;
+
 module.exports = AgentControl;
 
 
