@@ -10,7 +10,7 @@ var myModule = angular.module('myApp.controllers', []).
       url: '/api/serverInfo'
     }).
     success(function (data, status, headers, config) {
-      $scope.serverInfo = data.serverInfo;
+      $scope.serverInfo = data;
     }).
     error(function (data, status, headers, config) {
       $scope.name = 'Error!';
