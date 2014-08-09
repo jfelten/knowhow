@@ -9,25 +9,16 @@ var rimraf = require('rimraf');
 var logger=require('./log-control').logger;
 require('./agent-events');
 var agentEventHandler = new AgentEventHandler(agent.io,agentControl.eventEmitter);
-
+require('shelljs/global');
 
 exports.deleteAgent = function(req,res) {
 	if (agentInfo.mode != "production") {
 		logger.info("deleting agent disabled in dev mode");
-		res.json({error:"deleting agent disabled in dev mode"});
+		res.json({error:"delete agent disabled in development mode"});
 		return;
 	} else {
-	
-		var agent_dir = __dirname+"../";
-		rimraf(agent_dir, function(err) {
-			if (err) {
-				logger.error("problem removing agent dir");
-				res.json(500, {error:"internal server error"}); // status 500 
-			} else {
-				res.json({ok:true});
-				process.exit();
-			}
-		});
+		process.exit();
+
 	}
 };
 

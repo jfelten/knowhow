@@ -1,4 +1,6 @@
 var logger=require('./routes/log-control').logger;
+var path = require('path');
+var os = require('os');
 
 //create a ref to variables like port passed in through the command line
 var agentData = require('yargs').argv;
@@ -88,3 +90,17 @@ socket = http.listen(agentData.port, function(){
 	});
 
 
+process.on('exit', function() {
+	if (agentData.mode == "production") {
+		var agent_dir = path.normalize( __dirname+path.sep+'..'+path.sep+'..'+path.sep+agentData._id);
+		logger.info("deleting agent dir: "+agent_dir);
+		if (os.platform().indexOf('win') <0) {
+			exec('rm -rf '+agent_dir);
+		} else {
+			exec('deltree '+agent_dir);
+		}
+		
+	}
+		
+
+});
