@@ -406,7 +406,7 @@ exports.addAgent = function(agent,serverInfo) {
 			install_commands=['rm -rf '+agent._id+'/quickstart_agent',
 			  	          	'tar xzf '+agent._id+'/'+agent_archive_name+' -C '+agent._id,
 			  	            'tar xzf '+agent._id+'/quickstart_agent/node*.tar.gz -C '+agent._id,
-			  	            'nohup '+agent._id+'/node*/bin/node '+agent._id+'/quickstart_agent/agent.js --port='+agent.port+' --user='+agent.user+' --login='+agent.login+' --_id='+agent._id+' --mode=production > quickstart_agent.log & 2>&1',
+			  	            'nohup '+agent._id+'/node*/bin/node '+agent._id+'/quickstart_agent/agent.js --port='+agent.port+' --user='+agent.user+' --login='+agent.login+' --_id='+agent._id+' --mode=production >/dev/null & 2>&1',
 			  	            'rm '+agent._id+'/'+agent_archive_name
 			  	];
 
@@ -416,8 +416,8 @@ exports.addAgent = function(agent,serverInfo) {
 			  		  	          	'tar xzf /tmp/agent/quickstart_agent/node*.tar.gz -C /tmp/agent',
 			  		  	            'sudo -u '+agent.user+' cp -R /tmp/agent /tmp/'+agent._id,
 			  		  	            'rm -rf /tmp/agent',
-			  		  	            'sudo -u '+agent.user+' nohup /tmp/'+agent._id+'/node*/bin/node /tmp/'+agent._id+'/quickstart_agent/agent.js --port='+agent.port+' --user='+agent.user+' --login='+agent.login+' --_id='+agent._id+' --mode=production > quickstart_agent.log & 2>&1',
-			  		  	            'rm -rf '+agent._id
+			  		  	            'sudo -u '+agent.user+' nohup /tmp/'+agent._id+'/node*/bin/node /tmp/'+agent._id+'/quickstart_agent/agent.js --port='+agent.port+' --user='+agent.user+' --login='+agent.login+' --_id='+agent._id+' --mode=production >/dev/null & 2>&1',
+			  		  	            'rm -rf /home/'+agent.login+'/'+agent._id
 			  		  	            ];
 			  	}
 			  	function_vars = {agent: agent, commands: install_commands, serverInfo: serverInfo};
