@@ -31,6 +31,49 @@ updateAgent = function(agent) {
 
 exports.updateAgent = updateAgent;
 
+heartbeat = function(agent, callback) {
+
+	logger.debug('heartbeat checking status for: '+agent.host);
+	
+	var options = {
+		    host : agent.host,
+		    port : agent.port,
+		    path : '/api/agentInfo',
+		    method : 'GET',
+		    headers: {
+		        'Content-Type': 'application/json'
+		    }
+		};
+	
+	var request = http.request(options, function(res) {
+		//logger.debug("processing status response: ");
+		
+		var output = '';
+        logger.debug(options.host + ' ' + res.statusCode);
+        res.setEncoding('utf8');
+
+        res.on('data', function (chunk) {
+            output += chunk;
+        });
+
+        res.on('end', function() {
+        	logger.info("done.");
+            //obj = JSON.parse(output);
+        	//logger.debug("agent status check: "+obj.status);        
+        	callback();
+            
+        });
+        //res.end();
+	});
+	request.on('error', function(er) {
+		logger.error('heartbeat could not connect to agent: '+agent.host,er);
+		callback(new Error("unable to connect"));
+	});
+	request.end();
+
+};
+
+
 function listAgents(req,res) {
 	db.find({}, function(err, docs) {
 		logger.debug('found '+docs.length+' agents');
@@ -297,7 +340,13 @@ checkAgent = function(callback) {
 			logger.error('agent: '+agent.user+'@'+agent.host+':'+agent.port+' already exists.');
 			callback(new Error("Agent already exists"));
 		} else {
-			callback();
+			heartbeat(agent, function(err) {
+				if (!err) {
+					callback(new Error("Agent already exists"));
+				}
+				callback();
+			});
+			
 		}
 		
 	  });
@@ -324,6 +373,34 @@ packAgent = function(callback) {
 		callback();
 	});
 	
+};
+
+
+
+waitForAgentStartUp = function(callback) {
+	
+	
+	var agent = this.agent;
+    agent.message = 'starting agent';
+    eventEmitter.emit('agent-update', agent);
+    //timeout after 20 secs
+    var timeout = setTimeout(function() {
+    	clearInterval(heartbeatCheck);
+    	agent.message=("agent failed to start");
+    	callback(new Error("agent failed to start"));
+    }, 20000);
+    
+    
+    //wait until a heartbeat is received
+    var heartbeatCheck = setInterval(function() {
+    	heartbeat(agent, function (err) {
+    		if (!err) {
+    			clearTimeout(timeout);
+    			clearInterval(heartbeatCheck);
+    			callback();
+    		}
+    	});
+    }, 1000);
 };
 
 deliverAgent = function(callback) {
@@ -425,6 +502,7 @@ exports.addAgent = function(agent,serverInfo) {
 			            packAgent.bind(function_vars), 
 			            deliverAgent.bind(function_vars), 
 			            install.bind(function_vars),
+			            waitForAgentStartUp.bind(function_vars),
 			            registerServer.bind(function_vars),
 			            getStatus.bind(function_vars)];
 			try {
