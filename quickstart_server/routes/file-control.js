@@ -1,14 +1,16 @@
 var logger=require('./log-control').logger;
 var fs = require('fs');
-path = require('path');
+
 
 dirTree = function (filename) {
-	logger.debug("basename="+path.basename(filename));
+	filepath = require('path');
+	logger.info("retrieving tree for : "+filename);
+	logger.debug("basename="+filepath.basename(filename));
     var stats = fs.lstatSync(filename),
         info = {
             path: filename,
-            label: path.basename(filename),
-            ext:  path.extname(filename)
+            label: filepath.basename(filename),
+            ext:  filepath.extname(filename)
         };
     
 
