@@ -91,6 +91,7 @@ socket = http.listen(agentData.port, function(){
 
 
 process.on('exit', function() {
+	exec = require('child_process').exec
 	if (agentData.mode == "production") {
 		var agent_dir = path.normalize( __dirname+path.sep+'..'+path.sep+'..'+path.sep+agentData._id);
 		logger.info("deleting agent dir: "+agent_dir);
