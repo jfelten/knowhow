@@ -1,0 +1,45 @@
+
+{
+	agents: [
+		{
+			id: "agent 1",
+			host: "emdlatgtest01",
+			user: "weblogic",
+			port: 3000
+		},
+		{
+			id: "agent 2",
+			host: "emdlatgtest02",
+			user: "weblogic",
+			port: 3000
+		},
+		{
+			id: "agent 3",
+			host: "emdlatgtest01",
+			user: "weblogic",
+			port: 3007
+		}
+	],
+	job_sequence: {
+		agent: "agent 1",
+		jobs: [
+		       {
+		    	   reference: "leapfrog://jobs/weblogic/wls1036_install.json"
+		       },
+		       {
+    			  "id": "start admin server",
+    			  "user", "weblogic",
+    			  "working_dir": "/home/weblogic/",
+    			  
+    			  "script": {
+    			    
+    			    "commands": [
+    	              "export admin_running=`ps -u weblogic | grep startWebLogic`",                   
+    			      "if [ -z \"$admin_runnin\" ]; then
+    			      	nohup /opt/weblogic/user_projects/domains/leapfrog/startWebLogic.sh > /dev/null 2>&1 &\"
+    			      fi"
+
+    			  }
+    			}
+	}
+}

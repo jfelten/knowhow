@@ -1,14 +1,14 @@
 async = require("async");
 fs = require("fs");
 url = require("url");
-var http = require("http")
+var http = require("http");
 
 script = {
 	"id" : "atg 10.2 install",
 	"script" : {
 		"working_dir" : "/opt/atg",
 		"download_dir": ".",
-		"downloads" : [ "/repo/node/node-v0.10.28-linux-x64.tar.gz", 
+		"files" : [ "/repo/node/node-v0.10.28-linux-x64.tar.gz", 
 		                "http://localhost:3001/repo/node/node-v0.10.28-linux-x64.tar.gz"
 		              ],
 		"env" : {
@@ -44,7 +44,7 @@ serverInfo = {
 
 download = function(script,serverInfo) {
 	commands = script.script.install_commands;
-	downloads = script.script.downloads;
+	downloads = script.script.files;
 	downloadslength = (downloads!=undefined)?downloads.length:0;
 	var numProgressSteps =  commands.length+((downloads!=undefined)?downloads.length:0) +1;
 	console.log(numProgressSteps+"="+commands.length+"+"+downloadslength+"+1");

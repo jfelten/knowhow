@@ -4,6 +4,8 @@ var moment = require('moment');
 var EventEmitter = require('events').EventEmitter;
 var eventEmitter = new EventEmitter();
 exports.eventEmitter = eventEmitter;
+var dl = require("delivery");
+var jobQueue = []
 
 
 var status = 'READY';
@@ -41,11 +43,11 @@ initAgent = function(agent) {
 };
 
 
-execute = function(data) {
+execute = function(job, agentInfo, serverInfo) {
 	status='EXECUTING';
     logger.info("execute");
-    logger.debug(data);
-    commandShell.executeSync(data, agentInfo, serverInfo, eventEmitter);
+    logger.debug(job);
+    commandShell.executeSync(job, agentInfo, serverInfo, eventEmitter);
     socket.emit('execute-complete', { exec: 'done' });
     status = 'READY';
 };
@@ -54,6 +56,7 @@ AgentControl = function(io) {
 
 	//logger.info('setting event io to:'+io);
 	this.io = io;
+	this.eventEmitter=new EventEmitter();
 	
 	var agentSocket = io.of('/agent');
 	agentSocket.on('connection', function (socket) {
@@ -78,26 +81,8 @@ AgentControl = function(io) {
 		});
 	});
 
-	var up = io.of('/upload');
+	
 
-	up.on('connection', function (socket) {
-		logger.info('upload request');
-		var delivery = dl.listen(socket);
-		delivery = dl.listen(socket);
-		delivery.on('receive.start',function(fileUID){
-		      logger.info('receiving a file!');
-		    });
-		delivery.on('receive.success',function(file){
-
-		    fs.writeFile(file.name,file.buffer, function(err){
-		      if(err){
-		        logger.error('File could not be saved.');
-		      }else{
-		        logger.info('File saved.');
-		      };
-		    });
-		  });
-	});
 };
 
 //var io = require('socket.io').listen(server)

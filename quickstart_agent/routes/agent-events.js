@@ -4,19 +4,20 @@ var eventEmitter;
 var serverInfo;
 
 //My module
-AgentEventHandler = function(io, eventEmitter) {
+AgentEventHandler = function(io, agentControl) {
 	logger.info('setting event io to:'+io);
 	this.io = io;
-	this.eventEmitter = eventEmitter;
+	this.eventEmitter = agentControl.eventEmitter;
+	logger.info("eventEmitter="+this.eventEmitter);
 	
-	eventEmitter.on('agent-update', function(agent) {
+	this.eventEmitter.on('agent-update', function(agent) {
 		agentControl.updateAgent(agent);
 		io.emit('agent-update',agent);
 		emitEventToServer('agent-update',agent);
 		
 	});
 
-	eventEmitter.on('agent-error', function(agent) {
+	this.eventEmitter.on('agent-error', function(agent) {
 		
 		logger.info('agent error detected.');
 		agent.progress = 0;
@@ -27,11 +28,11 @@ AgentEventHandler = function(io, eventEmitter) {
 		
 	});
 
-	eventEmitter.on('agent-delete', function(agent) {
+	this.eventEmitter.on('agent-delete', function(agent) {
 		agent.status='DELETED';
 		io.emit('agent-delete',agent);
 	});
-	eventEmitter.on('agent-add', function(agent) {
+	this.eventEmitter.on('agent-add', function(agent) {
 		agent.status='INSTALLING';
 		io.emit('agent-add',agent);
 	});
@@ -92,5 +93,6 @@ AgentEventHandler.prototype.registerServer = function registerAgent(server) {
 };
 
 AgentEventHandler.prototype.serverInfo = serverInfo;
+AgentEventHandler.prototype.eventEmitter = eventEmitter;
 
 module.exports = AgentEventHandler;

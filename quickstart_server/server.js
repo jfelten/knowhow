@@ -100,6 +100,7 @@ app.post('/api/deleteAgent', api.deleteAgent);
 app.post('/api/logs',api.logs);
 app.post('/api/agentEvent', api.agentEvent);
 app.get('/api/agentEvent', api.agentEvent);
+app.post('/api/execute', api.execute);
 //redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
 

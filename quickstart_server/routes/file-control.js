@@ -1,6 +1,24 @@
 var logger=require('./log-control').logger;
 var fs = require('fs');
+var os = require("os")
+var filepath = require('path');
+var url = require('url') ;
 
+repos = {
+	"quickstart:": filepath.normalize(__dirname+".."+filepath.sep+".."+filepath.sep+"repo"),
+	"lf:": filepath.normalize(__dirname+".."+filepath.sep+".."+filepath.sep+"lf")
+};
+
+exports.repos = repos;
+
+
+exports.getFilePath = function(repofilename) {
+	fileURL =url.parse(repofilename);
+	logger.debug("repo="+fileURL.protocol);
+	logger.debug("file="+fileURL.pathname);
+	repoDir = repos[fileURL.protocol];
+	return repoDir+fileURL.path;
+};
 
 dirTree = function (filename) {
 	filepath = require('path');

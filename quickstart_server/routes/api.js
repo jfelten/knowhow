@@ -104,5 +104,16 @@ exports.logs = function(req,res) {
     console.log("num logs requested="+numLogs);
     require('./log-control').getLastXLogs(numLogs,res);
 
+};
 
+exports.execute = function(req,res) {
+	var agent = req.body.agent;
+	var job =  req.body.job;
+	
+	agentControl.execute(agent, job, function(err){
+		if (err) {
+			res.send(500, err);
+		}
+		res.json({ok:true});
+	});
 };

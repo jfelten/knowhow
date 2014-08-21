@@ -1,0 +1,70 @@
+{
+		  "id": "weblogic 10.3.6 install",
+		  "user", "weblogic",
+		  "working_dir": "/home/weblogic/",
+		  "files": [
+		            {
+		            	"source": "leapfrog://files/weblogic/wls1036_generic.jar",
+		            	"destination": "${working_dir}"
+		            },
+		            {
+		            	"source": "leapfrog://files/weblogic/install/scripts/createDomain.py",
+		            	"destination": "/home/weblogic/scripts"
+		            },
+		            {
+		            	"source": "leapfrog://files/weblogic/wls_silent.xml",
+		            	"destination": "/home/weblogic"
+		            },
+		            {
+		            	"source": "leapfrog://files/weblogic/wls_silent.xml",
+		            	"destination": "/home/weblogic"
+		            },
+		            {
+		            	"source": "leapfrog://files/weblogic/protocol.jar",
+		            	"destination": "/home/weblogic"
+		            },
+		            {
+		            	"source": "leapfrog://files/weblogic/install/TEST/leapfrog.properties",
+		            	"destination": "/home/weblogic"
+		            }         
+		            
+		          ],
+		  "script": {
+		    "env": {
+		      "MW_HOME": "/opt/weblogic",
+		      "WL_HOME": "/opt/weblogic/wlserver",
+		      "NM_HOME": "/opt/weblogic/user_projects/domains/leapfrog",
+		      "JAVA_HOME": "/usr/java/default/",
+		      "WL_ADMIN_USER": "weblogic",
+		      "WL_ADMIN_PASSWORD": "welcome1",
+		      "QS_LIB_DIR": "/home/weblogic/setup/lib",
+		      "QS_CONFIG_DIR": "/home/weblogic/setup/config"
+		    },
+		    "install_commands": [
+              "rm -rf $MW_HOME/*",                   
+		      "java -jar /home/weblogic/wls1036_generic.jar -mode=silent -silent_xml=wls_silent.xml",
+		      "/opt/weblogic/wlserver_10.3/common/bin/wlst.sh ${TEMP_DIR}/scripts/createDomain.py ${TEMP_DIR}/leapfrog.properties ${WL_ADMIN_US} ${TEMP_PASSWORD}",
+		      "TFILE=/tmp/install/out.tmp",
+		      "sed \"s/umask 037/umask 022\\n\\nUSER_MEM_ARGS=\\\"-Xms2056m -Xmx2056m -XX:PermSize=384m\\\"/g\" /opt/weblogic/user_projects/domains/leapfrog/bin/startWebLogic.sh > ${TFILE}",
+		      "mv ${TFILE} /opt/weblogic/user_projects/domains/leapfrog/bin/startWebLogic.sh",
+		      "chmod +x /opt/weblogic/user_projects/domains/leapfrog/bin/startWebLogic.sh",
+		      "sed \"s/umask 027/umask 022/g\" /opt/weblogic/user_projects/domains/leapfrog/startNodeManager.sh > ${TFILE}",
+		      "mv $TFILE /opt/weblogic/user_projects/domains/leapfrog/startNodeManager.sh",
+		      "chmod +x /opt/weblogic/user_projects/domains/leapfrog/startNodeManager.sh",
+		      "sed \"s/NODEMGR_HOME=\\\"\\\${WL_HOME}\\\/common\\\/nodemanager\\\"/NODEMGR_HOME=\\\"\\\/opt\\\/weblogic\\\/user_projects\\\/domains\\\/leapfrog\\\"/g\" /opt/weblogic/user_projects/domains/leapfrog/startNodeManager.sh > ${TFILE}",
+		      "mv $TFILE /opt/weblogic/user_projects/domains/leapfrog/startNodeManager.sh",
+		      "chmod +x /opt/weblogic/user_projects/domains/leapfrog/startNodeManager.sh",
+		      "echo \"export CLASSPATH=\\\"/opt/weblogic/user_projects/domains/leapfrog/lib/protocol.jar:\\\${CLASSPATH}\\\"\" >> /opt/weblogic/user_projects/domains/leapfrog/bin/setDomainEnv.sh",
+		      "BOOT_PROPS=/opt/weblogic/user_projects/domains/leapfrog/servers/AdminServer/security/boot.properties",
+		      "echo username=${WL_ADMIN_US} > /tmp/boot.properties",
+		      "echo password=${TEMP_PASSWORD} >> /tmp/boot.properties",
+		      "cp -r /tmp/boot.properties ${BOOT_PROPS}",
+		      "mkdir -p /opt/weblogic/user_projects/domains/leapfrog/servers/AdminServer/data/nodemanager",
+		      "cp /tmp/boot.properties /opt/weblogic/user_projects/domains/leapfrog/servers/AdminServer/data/nodemanager",
+		      "rm /tmp/boot.properties",
+		      "chmod 400 /home/weblogic/jmxremote.password",
+		      "chmod 400 /home/weblogic/jmxremote.access"
+		      
+		    ]
+		  }
+		}

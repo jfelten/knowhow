@@ -1,6 +1,8 @@
 require('./agent-control');
+require('./job-control');
 var agent = require('../agent');
 var agentControl = new AgentControl(agent.io);
+var jobControl = new JobControl(agent.io);
 var loggerControl = new LoggerControl(agent.io);
 var agentInfo = agentControl.initAgent(agent.agentData);
 var serverInfo;
@@ -8,7 +10,7 @@ var rimraf = require('rimraf');
 
 var logger=require('./log-control').logger;
 require('./agent-events');
-var agentEventHandler = new AgentEventHandler(agent.io,agentControl.eventEmitter);
+var agentEventHandler = new AgentEventHandler(agent.io,agentControl);
 require('shelljs/global');
 
 exports.deleteAgent = function(req,res) {
@@ -32,7 +34,7 @@ exports.registerAgent = function(req,res) {
 };
 
 exports.registerServer = function(req,res) {
-	logger.info("register server");
+	logger.info("register server from: "+req.connection.remoteAddress);
 	
 	serverInfo = req.body;
 	serverInfo.ip = req.connection.remoteAddress;
@@ -46,8 +48,10 @@ exports.registerServer = function(req,res) {
 
 exports.execute = function(req,res) {
 	logger.info("execute");
-	var executable = req.data;
-	agentControl.execute(executable);
+	var job = req.body;
+	jobControl.execute(job,agentInfo,serverInfo);
+	res.json({'ok': true});
+
 };
 
 exports.status =function(req,res) {

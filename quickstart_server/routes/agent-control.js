@@ -493,7 +493,7 @@ exports.addAgent = function(agent,serverInfo) {
 			  		  	          	'tar xzf /tmp/agent/quickstart_agent/node*.tar.gz -C /tmp/agent',
 			  		  	            'sudo -u '+agent.user+' cp -R /tmp/agent /tmp/'+agent._id,
 			  		  	            'rm -rf /tmp/agent',
-			  		  	            'sudo -u '+agent.user+' nohup /tmp/'+agent._id+'/node*/bin/node /tmp/'+agent._id+'/quickstart_agent/agent.js --port='+agent.port+' --user='+agent.user+' --login='+agent.login+' --_id='+agent._id+' --mode=production >/dev/null & 2>&1',
+			  		  	            'sudo -u '+agent.user+' nohup /tmp/'+agent._id+'/node*/bin/node /tmp/'+agent._id+'/quickstart_agent/agent.js --port='+agent.port+' --user='+agent.user+' --login='+agent.login+' --_id='+agent._id+' --mode=development >/dev/null & 2>&1',
 			  		  	            'rm -rf /home/'+agent.login+'/'+agent._id
 			  		  	            ];
 			  	}
@@ -533,11 +533,11 @@ exports.addAgent = function(agent,serverInfo) {
 	
 		
 
-exports.execute = function(agent,instructionSet) {
+exports.execute = function(agent,job, callback) {
 	// prepare the header
 	var headers = {
 	    'Content-Type' : 'application/json',
-	    'Content-Length' : Buffer.byteLength(JSON.stringify(install) , 'utf8'),
+	    'Content-Length' : Buffer.byteLength(JSON.stringify(job) , 'utf8'),
 	    'Content-Disposition' : 'form-data; name="script"'
 	};
 
@@ -545,7 +545,7 @@ exports.execute = function(agent,instructionSet) {
 	var options = {
 	    host : agent.host,
 	    port : agent.port,
-	    path : '/api/quickstart_agents/execute',
+	    path : '/api/execute',
 	    method : 'POST',
 	    headers : headers
 	};
@@ -555,7 +555,7 @@ exports.execute = function(agent,instructionSet) {
 	logger.debug('Do the call');
 
 	// do the POST call
-	var reqPost = https.request(options, function(res) {
+	var reqPost = http.request(options, function(res) {
 		logger.debug("statusCode: ", res.statusCode);
 	    // uncomment it for header details
 		logger.debug("headers: ", res.headers);
@@ -568,7 +568,7 @@ exports.execute = function(agent,instructionSet) {
 	});
 
 
-	reqPost.write(JSON.stringify(install));
+	reqPost.write(JSON.stringify(job));
 	reqPost.end();
 	reqPost.on('error', function(e) {
 	    logger.error(e);
