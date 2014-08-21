@@ -7234,3 +7234,41 @@
 {"level":"info","message":"initialized agent: weblogic@23.92.65.207:8443","timestamp":"2014-08-21T03:56:23.838Z"}
 {"level":"info","message":"packaging agent","timestamp":"2014-08-21T03:56:23.840Z"}
 {"level":"info","message":"agent packaged.","timestamp":"2014-08-21T03:56:27.532Z"}
+{"level":"info","message":"agent error detected.","timestamp":"2014-08-21T04:03:10.175Z"}
+{"code":"EHOSTUNREACH","errno":"EHOSTUNREACH","syscall":"read","level":"error","message":"error delivering agent: ","timestamp":"2014-08-21T04:03:10.176Z"}
+{"level":"error","message":"agent errorError: stop","timestamp":"2014-08-21T04:03:10.176Z"}
+{"level":"info","message":"agent error detected.","timestamp":"2014-08-21T04:03:10.176Z"}
+{"level":"info","message":"delete agent: tdzLN5Xql7QQrOLD","timestamp":"2014-08-21T05:49:57.771Z"}
+{"level":"info","message":"deleting agent: tdzLN5Xql7QQrOLD","timestamp":"2014-08-21T05:49:57.771Z"}
+{"code":"ECONNREFUSED","errno":"ECONNREFUSED","syscall":"connect","level":"error","message":"no agent running on agent: 23.92.65.207","timestamp":"2014-08-21T05:49:57.909Z"}
+{"level":"info","message":"add agent: 23.92.65.207","timestamp":"2014-08-21T05:50:01.171Z"}
+{"level":"info","message":"adding agent: [object Object]","timestamp":"2014-08-21T05:50:01.171Z"}
+{"code":"ECONNREFUSED","errno":"ECONNREFUSED","syscall":"connect","level":"error","message":"heartbeat could not connect to agent: 23.92.65.207","timestamp":"2014-08-21T05:50:01.310Z"}
+{"level":"info","message":"initialized agent: weblogic@23.92.65.207:8443","timestamp":"2014-08-21T05:50:01.311Z"}
+{"level":"info","message":"packaging agent","timestamp":"2014-08-21T05:50:01.313Z"}
+{"level":"info","message":"agent packaged.","timestamp":"2014-08-21T05:50:05.033Z"}
+{"level":"info","message":"transfer complete","timestamp":"2014-08-21T05:53:00.416Z"}
+{"level":"info","message":"starting agent on: 23.92.65.207","timestamp":"2014-08-21T05:53:00.417Z"}
+{"level":"info","message":"queueing 0:rm -rf 10PZimYPTopeQAad/quickstart_agent","timestamp":"2014-08-21T05:53:00.418Z"}
+{"level":"info","message":"queueing 1:tar xzf 10PZimYPTopeQAad/quickstart_agent.tar.gz -C 10PZimYPTopeQAad","timestamp":"2014-08-21T05:53:00.418Z"}
+{"level":"info","message":"queueing 2:tar xzf 10PZimYPTopeQAad/quickstart_agent/node*.tar.gz -C 10PZimYPTopeQAad","timestamp":"2014-08-21T05:53:00.418Z"}
+{"level":"info","message":"queueing 3:nohup 10PZimYPTopeQAad/node*/bin/node 10PZimYPTopeQAad/quickstart_agent/agent.js --port=8443 --user=weblogic --login=weblogic --_id=10PZimYPTopeQAad --mode=production >/dev/null & 2>&1","timestamp":"2014-08-21T05:53:00.418Z"}
+{"level":"info","message":"queueing 4:rm 10PZimYPTopeQAad/quickstart_agent.tar.gz","timestamp":"2014-08-21T05:53:00.418Z"}
+{"level":"info","message":"Stream :: exit :: code: 0, signal: undefined","timestamp":"2014-08-21T05:53:02.372Z"}
+{"level":"info","message":"Stream :: close","timestamp":"2014-08-21T05:53:02.373Z"}
+{"level":"info","message":"Stream :: exit :: code: 0, signal: undefined","timestamp":"2014-08-21T05:53:04.731Z"}
+{"level":"info","message":"Stream :: close","timestamp":"2014-08-21T05:53:04.731Z"}
+{"level":"info","message":"Stream :: exit :: code: 0, signal: undefined","timestamp":"2014-08-21T05:53:06.825Z"}
+{"level":"info","message":"Stream :: close","timestamp":"2014-08-21T05:53:06.826Z"}
+{"level":"info","message":"Stream :: exit :: code: 0, signal: undefined","timestamp":"2014-08-21T05:53:08.723Z"}
+{"level":"info","message":"Stream :: close","timestamp":"2014-08-21T05:53:08.724Z"}
+{"level":"info","message":"Stream :: exit :: code: 0, signal: undefined","timestamp":"2014-08-21T05:53:10.625Z"}
+{"level":"info","message":"Stream :: close","timestamp":"2014-08-21T05:53:10.625Z"}
+{"level":"info","message":"done","timestamp":"2014-08-21T05:53:10.625Z"}
+{"level":"info","message":"done.","timestamp":"2014-08-21T05:53:11.965Z"}
+{"level":"info","message":"registering this server to listen for events on: 23.92.65.207:8443","timestamp":"2014-08-21T05:53:11.965Z"}
+{"level":"info","message":"server registration complete","timestamp":"2014-08-21T05:53:12.274Z"}
+{"level":"info","message":"checking status for: 23.92.65.207","timestamp":"2014-08-21T05:53:12.274Z"}
+{"level":"info","message":"server registration complete","timestamp":"2014-08-21T05:53:12.274Z"}
+{"level":"info","message":"processing status response: ","timestamp":"2014-08-21T05:53:12.595Z"}
+{"level":"info","message":"done.","timestamp":"2014-08-21T05:53:12.595Z"}
