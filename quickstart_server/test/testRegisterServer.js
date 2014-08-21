@@ -6,7 +6,10 @@ var fs = require('fs');
 console.log("starting...");
 
 var serverInfo = {
+<<<<<<< HEAD
 		name: "test",
+=======
+>>>>>>> 75c5a8c97f75efbc50a66bb4b813b4857deacc1b
 		host: 'localhost',
 		port: 3001
 };
@@ -21,7 +24,11 @@ var headers = {
 
 // the post options
 var options = {
+<<<<<<< HEAD
     host : 'tb101',
+=======
+    host : 'localhost',
+>>>>>>> 75c5a8c97f75efbc50a66bb4b813b4857deacc1b
     port : 3000,
     path : '/api/registerServer',
     method : 'POST',

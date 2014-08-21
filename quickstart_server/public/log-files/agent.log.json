@@ -2976,6 +2976,7 @@
 {"level":"info","message":"Logger initialized.","timestamp":"2014-08-08T18:23:10.298Z"}
 {"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-08-08T18:23:10.510Z"}
 {"level":"info","message":"listening on *:3001","timestamp":"2014-08-08T18:23:10.543Z"}
+<<<<<<< HEAD
 {"level":"info","message":"127.0.0.1","timestamp":"2014-08-08T21:35:27.220Z"}
 {"level":"info","message":"127.0.0.1","timestamp":"2014-08-08T21:46:28.372Z"}
 {"level":"info","message":"127.0.0.1","timestamp":"2014-08-08T21:46:35.155Z"}
@@ -7272,3 +7273,5 @@
 {"level":"info","message":"server registration complete","timestamp":"2014-08-21T05:53:12.274Z"}
 {"level":"info","message":"processing status response: ","timestamp":"2014-08-21T05:53:12.595Z"}
 {"level":"info","message":"done.","timestamp":"2014-08-21T05:53:12.595Z"}
+=======
+>>>>>>> 75c5a8c97f75efbc50a66bb4b813b4857deacc1b

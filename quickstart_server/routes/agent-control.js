@@ -493,7 +493,11 @@ exports.addAgent = function(agent,serverInfo) {
 			  		  	          	'tar xzf /tmp/agent/quickstart_agent/node*.tar.gz -C /tmp/agent',
 			  		  	            'sudo -u '+agent.user+' cp -R /tmp/agent /tmp/'+agent._id,
 			  		  	            'rm -rf /tmp/agent',
+<<<<<<< HEAD
 			  		  	            'sudo -u '+agent.user+' nohup /tmp/'+agent._id+'/node*/bin/node /tmp/'+agent._id+'/quickstart_agent/agent.js --port='+agent.port+' --user='+agent.user+' --login='+agent.login+' --_id='+agent._id+' --mode=development >/dev/null & 2>&1',
+=======
+			  		  	            'sudo -u '+agent.user+' nohup /tmp/'+agent._id+'/node*/bin/node /tmp/'+agent._id+'/quickstart_agent/agent.js --port='+agent.port+' --user='+agent.user+' --login='+agent.login+' --_id='+agent._id+' --mode=production >/dev/null & 2>&1',
+>>>>>>> 75c5a8c97f75efbc50a66bb4b813b4857deacc1b
 			  		  	            'rm -rf /home/'+agent.login+'/'+agent._id
 			  		  	            ];
 			  	}
@@ -533,11 +537,19 @@ exports.addAgent = function(agent,serverInfo) {
 	
 		
 
+<<<<<<< HEAD
 exports.execute = function(agent,job, callback) {
 	// prepare the header
 	var headers = {
 	    'Content-Type' : 'application/json',
 	    'Content-Length' : Buffer.byteLength(JSON.stringify(job) , 'utf8'),
+=======
+exports.execute = function(agent,instructionSet) {
+	// prepare the header
+	var headers = {
+	    'Content-Type' : 'application/json',
+	    'Content-Length' : Buffer.byteLength(JSON.stringify(install) , 'utf8'),
+>>>>>>> 75c5a8c97f75efbc50a66bb4b813b4857deacc1b
 	    'Content-Disposition' : 'form-data; name="script"'
 	};
 
@@ -545,7 +557,11 @@ exports.execute = function(agent,job, callback) {
 	var options = {
 	    host : agent.host,
 	    port : agent.port,
+<<<<<<< HEAD
 	    path : '/api/execute',
+=======
+	    path : '/api/quickstart_agents/execute',
+>>>>>>> 75c5a8c97f75efbc50a66bb4b813b4857deacc1b
 	    method : 'POST',
 	    headers : headers
 	};
@@ -555,7 +571,11 @@ exports.execute = function(agent,job, callback) {
 	logger.debug('Do the call');
 
 	// do the POST call
+<<<<<<< HEAD
 	var reqPost = http.request(options, function(res) {
+=======
+	var reqPost = https.request(options, function(res) {
+>>>>>>> 75c5a8c97f75efbc50a66bb4b813b4857deacc1b
 		logger.debug("statusCode: ", res.statusCode);
 	    // uncomment it for header details
 		logger.debug("headers: ", res.headers);
@@ -568,7 +588,11 @@ exports.execute = function(agent,job, callback) {
 	});
 
 
+<<<<<<< HEAD
 	reqPost.write(JSON.stringify(job));
+=======
+	reqPost.write(JSON.stringify(install));
+>>>>>>> 75c5a8c97f75efbc50a66bb4b813b4857deacc1b
 	reqPost.end();
 	reqPost.on('error', function(e) {
 	    logger.error(e);

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 var ss = require('socket.io-stream');
+=======
+var dl = require('delivery')
+>>>>>>> 75c5a8c97f75efbc50a66bb4b813b4857deacc1b
 
 var http = require('http')
   , fs = require('fs');
@@ -6,6 +10,7 @@ var path = require('path');
 
 var io =  require('socket.io-client');
 var socket = io.connect('http://localhost:3000/upload');
+<<<<<<< HEAD
 var fReader;
 
 var uploadFileName = __dirname + '/../repo/rawpackages/weblogic/wls1036_dev.zip';
@@ -82,3 +87,25 @@ files = [{"name": uploadFileName}
          ];
 
 uploadFile(agent,uploadFileName);
+=======
+
+var uploadFileName = __dirname + '/jobs/weblogic/files/basic_domain.jar';
+fileName = path.basename(uploadFileName);
+socket.on('connect', function(){
+	  console.log("connected");
+	  var delivery = dl.listen(socket);
+	  delivery.connect();
+	  delivery.on('delivery.connect',function(delivery) {
+        console.log('uploading: '+fileName+' with path: '+uploadFileName);
+	    delivery.send({
+	      name: fileName,
+	      path : uploadFileName
+	    });
+	  });
+     delivery.on('send.success',function(file){
+       console.log('File successfully sent to agent');
+       socket.disconnect();
+     });
+
+});
+>>>>>>> 75c5a8c97f75efbc50a66bb4b813b4857deacc1b

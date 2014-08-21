@@ -4,6 +4,7 @@ var eventEmitter;
 var serverInfo;
 
 //My module
+<<<<<<< HEAD
 AgentEventHandler = function(io, agentControl) {
 	logger.info('setting event io to:'+io);
 	this.io = io;
@@ -11,13 +12,25 @@ AgentEventHandler = function(io, agentControl) {
 	logger.info("eventEmitter="+this.eventEmitter);
 	
 	this.eventEmitter.on('agent-update', function(agent) {
+=======
+AgentEventHandler = function(io, eventEmitter) {
+	logger.info('setting event io to:'+io);
+	this.io = io;
+	this.eventEmitter = eventEmitter;
+	
+	eventEmitter.on('agent-update', function(agent) {
+>>>>>>> 75c5a8c97f75efbc50a66bb4b813b4857deacc1b
 		agentControl.updateAgent(agent);
 		io.emit('agent-update',agent);
 		emitEventToServer('agent-update',agent);
 		
 	});
 
+<<<<<<< HEAD
 	this.eventEmitter.on('agent-error', function(agent) {
+=======
+	eventEmitter.on('agent-error', function(agent) {
+>>>>>>> 75c5a8c97f75efbc50a66bb4b813b4857deacc1b
 		
 		logger.info('agent error detected.');
 		agent.progress = 0;
@@ -28,11 +41,19 @@ AgentEventHandler = function(io, agentControl) {
 		
 	});
 
+<<<<<<< HEAD
 	this.eventEmitter.on('agent-delete', function(agent) {
 		agent.status='DELETED';
 		io.emit('agent-delete',agent);
 	});
 	this.eventEmitter.on('agent-add', function(agent) {
+=======
+	eventEmitter.on('agent-delete', function(agent) {
+		agent.status='DELETED';
+		io.emit('agent-delete',agent);
+	});
+	eventEmitter.on('agent-add', function(agent) {
+>>>>>>> 75c5a8c97f75efbc50a66bb4b813b4857deacc1b
 		agent.status='INSTALLING';
 		io.emit('agent-add',agent);
 	});
@@ -93,6 +114,9 @@ AgentEventHandler.prototype.registerServer = function registerAgent(server) {
 };
 
 AgentEventHandler.prototype.serverInfo = serverInfo;
+<<<<<<< HEAD
 AgentEventHandler.prototype.eventEmitter = eventEmitter;
+=======
+>>>>>>> 75c5a8c97f75efbc50a66bb4b813b4857deacc1b
 
 module.exports = AgentEventHandler;

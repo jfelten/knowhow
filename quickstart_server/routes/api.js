@@ -104,6 +104,7 @@ exports.logs = function(req,res) {
     console.log("num logs requested="+numLogs);
     require('./log-control').getLastXLogs(numLogs,res);
 
+<<<<<<< HEAD
 };
 
 exports.execute = function(req,res) {
@@ -116,4 +117,7 @@ exports.execute = function(req,res) {
 		}
 		res.json({ok:true});
 	});
+=======
+
+>>>>>>> 75c5a8c97f75efbc50a66bb4b813b4857deacc1b
 };

@@ -1,5 +1,6 @@
 var logger=require('./log-control').logger;
 var fs = require('fs');
+<<<<<<< HEAD
 var os = require("os")
 var filepath = require('path');
 var url = require('url') ;
@@ -19,6 +20,9 @@ exports.getFilePath = function(repofilename) {
 	repoDir = repos[fileURL.protocol];
 	return repoDir+fileURL.path;
 };
+=======
+
+>>>>>>> 75c5a8c97f75efbc50a66bb4b813b4857deacc1b
 
 dirTree = function (filename) {
 	filepath = require('path');
