@@ -1,13 +1,9 @@
 require('./agent-control');
-<<<<<<< HEAD
+
 require('./job-control');
 var agent = require('../agent');
 var agentControl = new AgentControl(agent.io);
 var jobControl = new JobControl(agent.io);
-=======
-var agent = require('../agent');
-var agentControl = new AgentControl(agent.io);
->>>>>>> 75c5a8c97f75efbc50a66bb4b813b4857deacc1b
 var loggerControl = new LoggerControl(agent.io);
 var agentInfo = agentControl.initAgent(agent.agentData);
 var serverInfo;
@@ -15,11 +11,8 @@ var rimraf = require('rimraf');
 
 var logger=require('./log-control').logger;
 require('./agent-events');
-<<<<<<< HEAD
+
 var agentEventHandler = new AgentEventHandler(agent.io,agentControl);
-=======
-var agentEventHandler = new AgentEventHandler(agent.io,agentControl.eventEmitter);
->>>>>>> 75c5a8c97f75efbc50a66bb4b813b4857deacc1b
 require('shelljs/global');
 
 exports.deleteAgent = function(req,res) {
@@ -43,12 +36,8 @@ exports.registerAgent = function(req,res) {
 };
 
 exports.registerServer = function(req,res) {
-<<<<<<< HEAD
-	logger.info("register server from: "+req.connection.remoteAddress);
-=======
-	logger.info("register server");
->>>>>>> 75c5a8c97f75efbc50a66bb4b813b4857deacc1b
-	
+
+	logger.info("register server from: "+req.connection.remoteAddress);	
 	serverInfo = req.body;
 	serverInfo.ip = req.connection.remoteAddress;
 	logger.info("server requesting registration from: "+serverInfo.ip);
@@ -61,15 +50,10 @@ exports.registerServer = function(req,res) {
 
 exports.execute = function(req,res) {
 	logger.info("execute");
-<<<<<<< HEAD
 	var job = req.body;
 	jobControl.execute(job,agentInfo,serverInfo);
 	res.json({'ok': true});
 
-=======
-	var executable = req.data;
-	agentControl.execute(executable);
->>>>>>> 75c5a8c97f75efbc50a66bb4b813b4857deacc1b
 };
 
 exports.status =function(req,res) {

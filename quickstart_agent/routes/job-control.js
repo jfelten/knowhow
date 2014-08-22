@@ -180,127 +180,20 @@ JobControl = function(io) {
 			    }
 		       
 			});
-			
-			
-			
-		   
-		    
-		    
-		    
 		   
 		  });
-//		socket.on('Start', function (data) { //data contains the variables that we passed through in the html file
-//			var name = data['name'];
-//			var jobId = data['jobId'];
-//			var job = jobQueue[jobId];
-//			if (job == undefined) {
-//				socket.emit('Error', {message: 'No active Job with id: '+jobId} );
-//				return;
-//			}
-//			
-//			
-//			
-//			logger.debug("receving file: "+name);
-//			
-//			job.fileProgress[name] = {  //Create a new Entry in The files Variable
-//	            FileSize : data['size'],
-//	            Data     : "",
-//	            Downloaded : 0,
-//	            uploadComplete: false
-//	        };
-//	        
-//	        console.log(job.fileProgress[name]);
-//	        var Place = 0;
-////	        try{
-////	            var Stat = fs.statSync(name);
-////	            if(Stat.isFile())
-////	            {
-////	            	job.fileProgress[name]['Downloaded'] = Stat.size;
-////	                Place = Stat.size / 524288;
-////	            }
-////	        }
-////	        catch(er){} //It's a New File
-//	        var downloadDir = job.script.download_dir;
-//			if (downloadDir == undefined) {
-//				downloadDir = ".";
-//			};
-//		    fs.stat(downloadDir, function (err, stat) {
-//		        if (err) {
-//		          // file does not exist
-//		          if (err.errno == 2) {
-//		            fs.mkdir(downloadDir);
-//		            return
-//		          }
-//		        }
-//		        fs.stat(downloadDir+path.sep+name, function (err, stat) {
-//			        if (err) {
-//			          // file does not exist
-//			          if (err.errno == 2) {
-//			            fs.mkdir(downloadDir);
-//			          }
-//			        } else {
-//			        	fs.unlinkSync(downloadDir+path.sep+name);
-//			        }
-//			    });
-//		    });
-//		    
-//	        fs.open(downloadDir+path.sep+name, "a", 0755, function(err, fd){
-//	            if(err)
-//	            {
-//	                console.log(err);
-//	            }
-//	            else
-//	            {
-//	            	job.fileProgress[name]['Handler'] = fd; //We store the file handler so we can write to it later
-//	                //up.emit('MoreData', { 'Place' : Place, Percent : 0 });
-//	            	updateJob(job);
-//	            }
-//	        });
-//	        
-//		});
-//		
-//		socket.on('Upload', function (data){
-//	        var name = data['name'];
-//	        var jobId = data['jobId'];
-//			var job = jobQueue[jobId];
-//			if (job == undefined) {
-//				socket.emit('Error', {message: 'No active Job with id: '+jobId} );
-//				return;
-//			}
-//			logger.debug("received: "+job.fileProgress[name]['Downloaded']+"/"+job.fileProgress[name]['FileSize']);
-//	        job.fileProgress[name]['Downloaded'] += data['data'].length;
-//	        job.fileProgress[name]['Data'] += data['data'];
-//	        updateJob(job);
-//	        logger.debug("received: "+job.fileProgress[name]['Downloaded']+"/"+job.fileProgress[name]['FileSize']);
-//	        if(job.fileProgress[name]['Downloaded'] == job.fileProgress[name]['FileSize']) //If File is Fully Uploaded
-//	        {
-//	            fs.write(job.fileProgress[name]['Handler'], job.fileProgress[name]['Data'], 0, job.fileProgress[name]['Data'].length, null, 
-//	            		function(err, written, buffer) {
-//	            			job.fileProgress[name].uploadComplete=true;
-//	            			job.fileProgress[name]['Handler']=undefined;
-//	            			updateJob(job);
-//	            		}
-//	            		
-//	            );
-//	        }
-//	        else if(job.fileProgress[name]['Data'].length > 10485760){ //If the Data Buffer reaches 10MB
-//	        	//logger.debug("writing: "+files[name].name);
-//	        	var buff = new Buffer(job.fileProgress[name]['Data'], 'base64');
-//	            fs.write(job.fileProgress[name]['Handler'], buff,0, buff.length, null, function(err, Writen){
-//	            	job.fileProgress[name]['Data'] = ""; //Reset The Buffer
-//	                var Place = job.fileProgress[name]['Downloaded'] / 524288;
-//	                var Percent = (job.fileProgresss[name]['Downloaded'] / job.fileProgress[name]['FileSize']) * 100;
-//	                eventEmitter.emit('job-update', { 'Place' : Place, 'Percent' :  Percent});
-//	            });
-//	        }
-//	        else
-//	        {
-//	            var Place = job.fileProgress[name]['Downloaded'] / 524288;
-//	            var Percent = (job.fileProgress[name]['Downloaded'] / job.fileProgress[name]['FileSize']) * 100;
-//	            eventEmitter.emit('job-update', { 'Place' : Place, 'Percent' :  Percent});
-//	        }
-//	        
-//	    });
+		var eventListener = io.of('/job-events');
+
+		eventListener.on('connection', function (socket) {
+			logger.info('event listen request');
+			
+			socket.on('listen', function(stream, data) {
+				eventEmitter.on('job-update', function(job) {
+					socket.emit('job-update', job);
+				});
+			});
+		});
+
 		
 	});
 	
