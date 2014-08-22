@@ -7275,3 +7275,6 @@
 {"level":"info","message":"done.","timestamp":"2014-08-21T05:53:12.595Z"}
 =======
 >>>>>>> 75c5a8c97f75efbc50a66bb4b813b4857deacc1b
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-22T17:41:42.302Z"}
+{"level":"info","message":"setting event io to:[object Object]","timestamp":"2014-08-22T17:41:42.931Z"}
+{"level":"info","message":"listening on *:3001","timestamp":"2014-08-22T17:41:43.028Z"}
