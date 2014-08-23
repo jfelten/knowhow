@@ -239,7 +239,6 @@ var myModule = angular.module('myApp.controllers', []).
 		    	$scope.message='Invalid JSON - please fix.';
 		        return;
 		    }
-<<<<<<< HEAD
 		    var data = {
 		    	agent: $scope.selectedAgent,
 		    	job: job
@@ -248,12 +247,6 @@ var myModule = angular.module('myApp.controllers', []).
 			      method: 'POST',
 			      url: '/api/execute',
 			      data: data
-=======
-		    $http({
-			      method: 'POST',
-			      url: 'http://'+$scope.selectedAgent.ip+':'+$scope.selectedAgent.port+'/api/execute',
-			      data: job
->>>>>>> 75c5a8c97f75efbc50a66bb4b813b4857deacc1b
 			    }).success(function (data, status, headers, config) {
 			        $scope.agentInfo = data;
 			        $scope.message = job.id+' successfully submitted to agent: '+$scope.selectedAgent.user+'@'+$scope.selectedAgent.host+':'+$scope.selectedAgent.port
