@@ -70,7 +70,9 @@ exports.status =function(req,res) {
 exports.logs = function(req,res) {
     numLogs=req.body.numLogs;
     console.log("num logs requested="+numLogs);
-    require('./log-control').getLastXLogs(numLogs,res);
+    require('./log-control').getLastXLogs(numLogs,function(logs) {
+    	res.json(logs);
+    });
 
 
 };

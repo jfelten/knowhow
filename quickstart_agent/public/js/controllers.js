@@ -42,13 +42,14 @@ var myModule = angular.module('myApp.controllers', []).
     		  }
 	    }).
 	    success(function (data, status, headers, config) {
-	      $scope.logs = data.file;
-	      for(var message in data.file) {
-	    	  addMessage(data.file[message]);
+	      for(var message in data.messages) {
+	    	  addMessage(data.messages[message]);
 	      }
+	      $scope.logs=data;
 	    });
 	  
 	  function addMessage(message) {
+	     // console.log(message);
 		  var newDiv = document.createElement('div');
 		  var logText=document.createTextNode(message.timestamp+':'+message.level+' '+message.message);
 		  newDiv.appendChild(logText);

@@ -44,25 +44,46 @@ LoggerControl = function(io) {
 	
 };
 
-getLastXLogs = function(numLines,res) {
-	var options = {
-		    limit: numLines,
-		    start: 0,
-		    order: 'desc',
-		    fields: ['level','timestamp','message']
-		  };
+getLastXLogs = function(numLines,callback) {
 	
-		  logger.query(options, function (err, results) {
-		    if (err) {
-		      throw err;
-		    }
-		    res.json(results);
-		  });
-};
+	fs.stat(fileName, function(err, stat) {
+		var text = ']}';
+        fs.open(fileName, 'r', function(err, fd) {
+            if(err) throw err;
+            var i = 0;
+            lineNum=0;
+            
+            var readPrevious = function(buf) {
+                fs.read(fd, buf, 0, buf.length, stat.size-buf.length-i, function(err, bytesRead, buffer) {
+                    if(err) throw err;
+                    text = String.fromCharCode(buffer[0]) + text;
+                    logger.debug(text);
+                    if (buffer[0] === 0x0a) { //0x0a == '\n'
+                        logger.debug('line # '+lineNum+' read.');
+                        lineNum++;
+                        if (lineNum >= numLines) {
+                            logger.debug('done retrieving logs');
+                            text='{\"messages\": ['+text;
+                        	callback(JSON.parse(text));
+                        } else {
+                        	if (i>0) {
+                        		text=','+text;
+                        	}
+                        	i++;
+                        	
+                        	readPrevious(new Buffer(1));
+                        }
+                    } else {
+                        logger.debug("char="+String.fromCharCode(buffer[0]));
+                        i++;
+                        readPrevious(new Buffer(1));
+                    }
+                });
+            };
+            readPrevious(new Buffer(1));
+        });
 
-LoggerControl.prototype.getLastXLogs = getLastXLogs;
+	});
+}
+
 exports.getLastXLogs = getLastXLogs;
-exports.LoggerControl = LoggerControl;
-logger.info("Logger initialized.");
-
-
