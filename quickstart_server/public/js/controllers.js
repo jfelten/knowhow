@@ -73,8 +73,8 @@ var myModule = angular.module('myApp.controllers', []).
     success(function(data) {
     	$scope.connectedAgents = data;
     });
-
     
+
     $scope.addAgent = function (agent) {
     	$scope.message = undefined;
     	$scope.master = angular.copy(agent);
@@ -106,6 +106,12 @@ var myModule = angular.module('myApp.controllers', []).
      };
   }).
   controller('JobsController', function ($scope, $http) {
+  
+  	  $http.get('/api/repoList').
+	    success(function(data) {
+	    	$scope.fileRepos = data;
+	    });
+  
 	  var options = {
 	    mode: 'code',
 	    modes: ['code', 'form', 'text', 'tree', 'view'], // allowed modes
@@ -146,6 +152,28 @@ var myModule = angular.module('myApp.controllers', []).
 		  var selectAgent = document.getElementById('selectAgent');
 		  selectAgent.textContent=agent.user+'@'+agent.host+':'+agent.port;
 	  };
+	  
+	  $scope.selectRepo = function(key) {
+		  console.log('selected repo: '+key);
+		  loadRepo(key);
+		  $scope.repoSelect.isopen = !$scope.repoSelect.isopen;
+		  var selectRepo = document.getElementById('selectRepo');
+		  selectRepo.textContent=key;
+	  };
+	  
+	  var loadRepo = function(repoName) {
+	    $scope.selectedRepo = $scope.fileRepos[repoName];
+	  	$http.get('/api/jobList?file='+$scope.selectedRepo).
+	    success(function(data) {
+	    	jobs = data.files.children;
+	    	console.log(jobs);
+	    	$scope.jobs = data.files.children;
+	    	$scope.loading_jobs = false;
+	        return tree.expand_all();    	
+	    }).error(function(data) {
+	    	console.log("error");
+	    });
+	  }
 	  
 	  $scope.toggled = function(open) {
 		    console.log('Dropdown is now: ', open);
