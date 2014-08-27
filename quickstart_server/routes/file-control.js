@@ -6,7 +6,7 @@ var url = require('url') ;
 
 repos = {
 	"quickstart:": filepath.normalize(__dirname+".."+filepath.sep+".."+filepath.sep+"repo"),
-	"lf:": filepath.normalize(__dirname+".."+filepath.sep+".."+filepath.sep+"lf")
+	"leapfrog:": filepath.normalize("/repo/leapfrog")
 };
 
 exports.repos = repos;

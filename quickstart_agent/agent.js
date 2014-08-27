@@ -51,7 +51,6 @@ var io = require('socket.io')(http);
 exports.io = io;
 
 
-var dl = require('delivery');
 fs = require('fs');
 
 var routes = require('./routes'),

@@ -34,6 +34,47 @@ executeSync: function(job, eventEmitter) {
 	
 
 	for (envVar in envVars) {
+	    var envVarValue = envVars[envVar];
+	    //replace env_var references in values
+	    replaceVar = function(regEx,varName) {
+		    var iteration=0;
+			while( res = regEx.exec(env[variable]) ){
+				 for (i=0; i < res.length; i++) {
+			        var replaceVal = res[i];
+			    	var value = env[replaceVal.replace('\${','').replace('}','')];
+			    	env[varName]=env[varName].replace(replaceVal,value);
+			      }
+			      if (regEx.exec(env[variable])) {
+			      	replaceVar(regEx,varName);
+			      }
+			}
+		}
+		
+		var dollarRE = /\$\w+/g
+		var dollarBracketRE = /\${\w*}/g
+		for (variable in env) {
+			replaceVar(dollarRE,variable);
+			replaceVar(dollarBracketRE,variable);
+			console.log(variable+'='+env[variable])
+		}
+//		var workingDirVar="${"+WORKING_DIR_VAR+"}";
+//		if (downloadDir.indexOf(workingDirVar) > -1){
+//			downloadDir=downloadDir.replace( workingDirVar,workingDir);
+//		}
+//		workingDirVar="$"+WORKING_DIR_VAR;
+//		if (downloadDir.indexOf(workingDirVar) > -1){
+//			downloadDir=downloadDir.replace( workingDirVar,workingDir);
+//		}
+//	    fs.stat(downloadDir, function (err, stat) {
+//	        if (err) {
+	          // file does not exist
+//	          if (err.errno == 2) {
+//	            fs.mkdir(downloadDir);
+//	            return
+//	          }
+//	        }
+//	    });
+	
 		logger.info(envVar+'='+envVars[envVar]);
 		env[envVar] = envVars[envVar];
 		
@@ -54,7 +95,10 @@ executeSync: function(job, eventEmitter) {
 		logger.info("queueing "+commands[index]);
 		var command = commands[index];
 	    execCommands[index] = function(callback) {
-
+			if (job.error == true) {
+				callback(new Error("job error"));
+				return;
+			}
 	    	job.progress+=progresStepSize;
 		    job.status=command;
 		    eventEmitter.emit('job-update',job);
