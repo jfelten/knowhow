@@ -2,6 +2,16 @@ p Jobs(not Steve)
 p
 .jobs-page
 	.jobs-nav
+		div(dropdown is-open="repoSelect.isopen").btn-group
+			button.btn.btn-primary.dropdown-toggle
+					span(id="selectRepo") 
+						| Select a repository 
+					span.caret
+			ul.dropdown-menu(role="menu")
+				li(ng-repeat="(key, repo) in fileRepos")
+					a(ng-click="selectRepo(key)") 
+						{{key}}
+				li.divider
 		span(ng-if="loading_jobs") |...loading...
 		abn-tree(tree-data="jobs" tree-control="job_tree" on-select="jobs_tree_handler(branch)" expand-level="2" initial-selection="weblogic" )
 	.jobs-control

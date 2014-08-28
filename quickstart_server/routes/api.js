@@ -117,3 +117,7 @@ exports.execute = function(req,res) {
 		res.json({ok:true});
 	});
 };
+
+exports.repoList = function(req, res) {
+	res.json(fileControl.repos);
+};

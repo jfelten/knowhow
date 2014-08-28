@@ -20,7 +20,7 @@ job = {
 		  "user": "weblogic",
 		  "working_dir": "/tmp/weblogic",
 		  "options": {
-		  	"dontUploadIfFileExists": true,
+		  	"dontUploadIfFileExists": false,
 		  	"timeoutms": 300000
 		  },
 		  "files": [
@@ -67,7 +67,7 @@ job = {
 		      "BOOT_PROPS": "${DOMAIN_DIR}/${DOMAIN_NAME}/servers/AdminServer/security/boot.properties",
 		      "TFILE": "out.tmp"
 		    },
-		    "install_commands": [
+		    "commands": [
               "rm -rf $MW_HOME/*",
               "echo $TFILE",
               "sed \"s~/opt/weblogic~$MW_HOME~g\" ${working_dir}/wls_silent.xml > $TFILE",
@@ -143,18 +143,14 @@ function uploadFiles(agent,jobId,files) {
 		try {	
 		    
 			var stream = ss.createStream();
-			fileProgress[fileName].readStream = fs.createReadStream(filepath);
+			
+			fileProgress[fileName].readStream = fs.createReadStream(filepath,{autoClose: true});
 			ss(socket).emit('agent-upload', stream, {name: fileName, jobId: jobId, fileSize: fileSizeInBytes, destination: file.destination });
 			fileProgress[fileName].readStream.pipe(stream );
 			fileProgress[fileName].readStream.on('data', function (chunk) {
 			  	total+=chunk.length;
 			  	//console.log('uploading: '+total+"/"+fileSizeInBytes);
 		
-		    }).on('end', function () {
-		      //logger.info("done reading: "+fileProgress[fileName].fileName);
-		      //socket.close();
-		      //readStream.close();
-		      
 		    });
 		    
 		} catch(err) {
@@ -180,8 +176,9 @@ function uploadFiles(agent,jobId,files) {
     	logger.error("upload timed out for: "+jobId);
     	for (index in job.fileProgress) {
     		socket.emit('client-upload-error', {name: fileName, jobId: jobId, fileSize: fileSizeInBytes, destination: file.destination } );
-        	socket.close();
+        	fileProgress[index].readStream.close();
         }
+        socket.close();
     }, timeoutms);
     
     var checkInterval = 2000; //2 seconds
@@ -194,17 +191,25 @@ function uploadFiles(agent,jobId,files) {
     		if (uploadFile.uploadComplete == true) {
     		    numFilesUploaded++;
     		    if (numFilesUploaded >= job.files.length) {
-    		    	logger.info(job.id+" all files received...");
-	    			clearTimeout(timeout);
+    		    	logger.info(job.id+" all files sent...");
+	    			for (index in job.fileProgress) {
+			    		fileProgress[index].readStream.close();
+			        }
+			        socket.close();
+			       	clearTimeout(timeout);
 	    			clearInterval(fileCheck);
-	    			socket.close();
 	    		}  		
     		} else if (uploadFile.error == true) {
     			logger.error(job.id+" error aborting upload.");
-    			clearTimeout(timeout);
-    			clearInterval(fileCheck);
     			uploadFile.socket.emit('client-upload-error', {name: fileName, jobId: jobId, fileSize: fileSizeInBytes, destination: file.destination } );
-        		socket.close();
+        		
+        		for (index in job.fileProgress) {
+		    		fileProgress[index].readStream.close();
+		    		socket.emit('client-upload-error', {name: fileName, jobId: jobId, fileSize: fileSizeInBytes, destination: file.destination } );
+		        }
+		        socket.close();
+		        clearTimeout(timeout);
+    			clearInterval(fileCheck);
     		}
     	}
     	logger.debug(numFilesUploaded+ " of "+job.files.length+" files sent.");
@@ -230,9 +235,7 @@ executeJobOnAgent = function( agent, job) {
 	    headers : headers
 	};
 
-	logger.debug('Options prepared:');
-	logger.debug(options);
-	logger.debug('Do the call');
+	logger.info('Starting Job: '+job.id);
 
 	// do the POST call
 	var reqPost = http.request(options, function(res) {
@@ -245,6 +248,38 @@ executeJobOnAgent = function( agent, job) {
 	        process.stdout.write(d);
 	        logger.debug('\n\nPOST completed. uploading files');
 	        uploadFiles(agent,job.id,job.files);
+	        var eventSocket = io.connect('http://'+agent.host+':'+agent.port+'/job-events');
+			eventSocket.on('job-update', function(job){
+				//logger.debug("job update");
+				logger.debug(job.progress+" "+job.status);
+			});
+			eventSocket.on('job-complete', function(job){
+				logger.info('Completed Job: '+job.id);
+				eventSocket.close();
+				clearTimeout(timeout);
+			});
+			eventSocket.on('job-error', function(job){
+				logger.info('Stopping Job: '+job.id+ ' due to error.');
+				eventSocket.close();
+				clearTimeout(timeout);
+			});
+			eventSocket.on('job-cancel', function(job){
+				logger.info('job: '+job.id+ ' cancelled.');
+				eventSocket.close();
+				clearTimeout(timeout);
+			});
+			
+			var timeoutms=600000; //10 minutes default timeout
+			if (job.options.timeoutms != undefined) {
+				timeoutms=job.options.timeoutms;
+				logger.debug('setting timeout to" '+timeoutms);
+			}
+			var timeout = setTimeout(function() {
+		    	job.status=("Job timeout");
+		    	logger.error("time out for: "+job.id+' cancelling');
+		    	eventSocket.emit('job-cancel',job);
+		    	//eventSocket.destroy();
+		    }, timeoutms);
 	    });
 	});
 
@@ -255,7 +290,6 @@ executeJobOnAgent = function( agent, job) {
 	    logger.error(e);
 	});
 };
-
 
 
 

@@ -7,11 +7,21 @@ var logger=require('./log-control').logger;
 var output = '';
 var file_dest = 'files';
 url = require("url");
+var currentlyRunningJob;
 
 
 module.exports = { 
 
+cancelRunningJob: function() {
+	if (currentlyRunningJob != undefined) {
+		currentlyRunningJob.cancelled = true;
+	}
+}, 
+
 executeSync: function(job, eventEmitter) {
+
+
+	currentlyRunningJob = job;
 	logger.info('executeSync executing:');
     logger.debug(job);
 	var workingDir = job.script.working_dir;
@@ -22,12 +32,13 @@ executeSync: function(job, eventEmitter) {
 	
 	//execute the commands syncronously
 
-	var commands = job.script.install_commands;
+	var commands = job.script.commands;
 	logger.debug(commands);
 	var downloads = job.files;
 	
 	var numProgressSteps =  commands.length+1;
 	var progresStepSize = Math.floor(100/numProgressSteps);
+	
 	
 	env["working_dir"]=job.working_dir;
 	env["download_dir"]=job.download_dir;
@@ -80,7 +91,7 @@ executeSync: function(job, eventEmitter) {
 		
 	}
 
-	job.progress+=2;
+	var progress= progresStepSize;
 	job.status="Environment Set";
 	eventEmitter.emit('job-update',job);
 	
@@ -98,10 +109,15 @@ executeSync: function(job, eventEmitter) {
 			if (job.error == true) {
 				callback(new Error("job error"));
 				return;
+			} else if (job.cancelled == true) {
+				callback(new Error("Job cancelled."));
+				return;
 			}
-	    	job.progress+=progresStepSize;
-		    job.status=command;
-		    eventEmitter.emit('job-update',job);
+	    	var stepNum=(this.index);
+	    	progress=Math.floor(stepNum/commands.length*100);
+		    this.job.status=this.command;
+		    
+		    eventEmitter.emit('job-update',{id: job.id, status: this.command, progress: progress});
 
 	    	logger.info(this.index+".) "+this.command);
 			exec(this.command, {silent:false},function(code, output) {
@@ -114,7 +130,7 @@ executeSync: function(job, eventEmitter) {
 				  
 				  callback();
 				});
-		}.bind( {command: command, index: index});
+		}.bind( {command: command, index: index, job: job});
 	}
 	async.series(execCommands,function(err) {
 		if (err) {
@@ -127,7 +143,8 @@ executeSync: function(job, eventEmitter) {
 		}
 		job.progress=0;
 		job.status=job.id+" complete";
-		eventEmitter.emit("job-update", job);
+		eventEmitter.emit("job-complete", job);
+		currentlyRunningJob = undefined;
         logger.info("done");
     });
 	 

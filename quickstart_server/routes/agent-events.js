@@ -30,6 +30,10 @@ function AgentEventHandler(io) {
 		agent.status='INSTALLING';
 		io.emit('agent-add',agent);
 	});
+	agentControl.eventEmitter.on('job-update', function(job) {
+		io.emit('job-update',job);
+	});
+	
 }
 
 AgentEventHandler.prototype.registerAgent = function registerAgent(agent) {

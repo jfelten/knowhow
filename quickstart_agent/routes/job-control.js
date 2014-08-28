@@ -21,6 +21,8 @@ updateJob = function(job) {
 initiateJob = function(job) {
 	job.fileProgress = {};
 	jobQueue[job.id] =job;
+	job.progress=0;
+	job.totalFileSize=0;
 	//check for relative paths and substitute working directory path
 	var downloadDir = job.download_dir;
 	if (downloadDir == undefined) {
@@ -47,12 +49,13 @@ initiateJob = function(job) {
     job.working_dir = path.resolve(workingDir);
 	job.download_dir = path.resolve(downloadDir);
 	job.status="starting..";
+	jobQueue[job.id]=job;
 	logger.debug("job id:"+job.id+" initialized in dir"+job.working_dir);
 	eventEmitter.emit('job-update',job);
 };
 
 cancelJob = function(job) {
-	for (fileUpload in job.files) {
+	for (fileUpload in job.fileProgress) {
 		fileProgress = job.fileProgress[fileUpload];
 		if (fileProgress != undefined) {
 			fileProgress.error = true;
@@ -61,6 +64,8 @@ cancelJob = function(job) {
 	}
 	job.error = true;
 	updateJob(job);
+	commandShell.cancelRunningJob();
+	eventEmitter.emit('job-cancel', job);
 }
 
 execute = function(job) {
@@ -108,7 +113,9 @@ waitForFiles = function(job,callback) {
     var checkInterval = 1000; //1 second
     //wait until all files are receeived
     var fileCheck = setInterval(function() {
-    	if (job.error == true) {
+    
+        var updatedJob = jobQueue[job.id];
+    	if (updatedJob.error == true || updatedJob.cancelled == true) {
     		logger.error(job.id+" has an error. Aborting...");
 			clearTimeout(timeout);
 			clearInterval(fileCheck);
@@ -131,6 +138,8 @@ waitForFiles = function(job,callback) {
     	}
     	logger.debug(numFilesUploaded+ " of "+job.files.length+" files received.");
     }, checkInterval);
+    
+    
 };
 
 JobControl = function(io) {
@@ -147,6 +156,7 @@ JobControl = function(io) {
 		    
 		    var jobId = data['jobId'];
 			var job = jobQueue[jobId];
+			var lastProgress=0;
 				if (job == undefined) {
 				socket.emit('Error', {message: 'No active Job with id: '+jobId, jobId: jobId, name: data.name} );
 				return;
@@ -165,12 +175,16 @@ JobControl = function(io) {
 			
 			logger.debug("saving "+filename);
 			var size = data['fileSize'];
+			job.totalFileSize+=size
+			job.totalReceived=0;
 			job.fileProgress[filename] = {  //Create a new Entry in The files Variable
 	            FileSize : size,
 	            Data     : "",
 	            Uploaded : 0,
 	            uploadComplete: false
 	        };
+	        job.status="receiving files."
+	        updateJob(job);
 			//remove the file if it already exists
 			fs.stat(destination, function (err, stat) {
 		       if (err) {
@@ -196,11 +210,7 @@ JobControl = function(io) {
 		        			socket.emit('End', {message: 'Filename '+filename+' already exists and dontUploadIfFileExists is true for: '+jobId, jobId: jobId,  fileName: data.name} );
 		        			return;
 		        		} else {
-		        			fs.stat(filename, function (err, stat) {
-						        if (!err) {
-						        	fs.unlinkSync(filename);
-						        }
-				        	});
+		        			fs.unlinkSync(filename);
 					    }
 					}
 		        	
@@ -228,7 +238,17 @@ JobControl = function(io) {
 					    		socket.emit('End',{message: filename+' uploaded', fileName: data.name});
 					    	} else {
 					    		job.fileProgress[filename]['Uploaded'] = fileSizeInBytes;
-				                updateJob(job);
+					    		totalUploaded=0;
+					    		for (uploadedFile in job.fileProgress) {
+					    			totalUploaded+=job.fileProgress[uploadedFile]['Uploaded']
+					    		}
+					    		//logger.debug("progress: "+totalUploaded+" of "+job.totalFileSize+"  "+Math.floor((totalUploaded/job.totalFileSize)*100));
+				                job.progress=Math.floor((totalUploaded/job.totalFileSize)*100)
+				                if (job.progress > lastProgress +2) {
+				                	lastProgress=job.progress;
+				                	updateJob(job);
+				                }
+				                
 					    	}
 					    });
 				    	
@@ -255,20 +275,35 @@ JobControl = function(io) {
 			});
 		   
 		  });
-		var eventListener = io.of('/job-events');
+		
+	});
+	var eventListener = io.of('/job-events');
 
 		eventListener.on('connection', function (socket) {
 			logger.info('event listen request');
 			
-			socket.on('listen', function(stream, data) {
-				eventEmitter.on('job-update', function(job) {
-					socket.emit('job-update', job);
-				});
+			eventEmitter.on('job-update', function(job) {
+				socket.emit('job-update', job);
 			});
-		});
+			
+			eventEmitter.on('job-error', function(job) {
+				socket.emit('job-error', job);
+			});
+			
+			eventEmitter.on('job-complete', function(job) {
+				socket.emit('job-complete', job);
+			});
+			
+			eventEmitter.on('job-cancel', function(job) {
+				socket.emit('job-cancel', job);
+			});
+			
+			socket.on('job-cancel', function(job) {
+				logger.info("cancel requested by server.");
+				cancelJob(job);
+			});
 
-		
-	});
+		});
 	
 
 };
