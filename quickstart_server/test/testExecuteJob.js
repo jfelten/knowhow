@@ -3,7 +3,7 @@ var http = require('http');
 var querystring = require('querystring');
 var logger = require('winston');
 var io =  require('socket.io-client');
-var path = require('path');
+var pathlib = require('path');
 var ss = require('socket.io-stream');
 var fileControl = require('../routes/file-control');
 
@@ -16,88 +16,86 @@ agent = {
 };
 
 job = {
-		  "id": "weblogic 10.3.6 install",
-		  "user": "weblogic",
-		  "working_dir": "/tmp/weblogic",
-		  "options": {
-		  	"dontUploadIfFileExists": false,
-		  	"timeoutms": 300000
-		  },
-		  "files": [
-		            {
-		            	"source": "leapfrog:///files/weblogic/wls1036_generic.jar",
-		            	"destination": "${working_dir}"
-		            },
-		            {
-		            	"source": "leapfrog:///files/weblogic/install/scripts/createDomain.py",
-		            	"destination": "${working_dir}/scripts"
-		            },
-		            {
-		            	"source": "leapfrog:///files/weblogic/install/wls_silent.xml",
-		            	"destination": "${working_dir}"
-		            },
-		            {
-		            	"source": "leapfrog:///files/weblogic/install/protocol.jar",
-		            	"destination": "${working_dir}"
-		            },
-		            {
-		            	"source": "leapfrog:///files/weblogic/install/TEST/leapfrog.properties",
-		            	"destination": "${working_dir}"
-		            },
-		            {
-		            	"source": "leapfrog:///files/weblogic/install/TEST/jmxremote.password",
-		            	"destination": "${working_dir}"
-		            },
-		            {
-		            	"source": "leapfrog:///files/weblogic/install/TEST/jmxremote.access",
-		            	"destination": "${working_dir}"
-		            }        
-		            
-		          ],
-		  "script": {
-		    "env": {
-		      "MW_HOME": "/opt/weblogic2",
-		      "WL_HOME": "${MW_HOME}/wlserver_10.3",
-		      "DOMAIN_DIR": "${MW_HOME}/user_projects/domains",
-		      "DOMAIN_NAME": "leapfrog",
-		      "NM_HOME": "${DOMAIN_DIR}/${DOMAIN_NAME}",
-		      "JAVA_HOME": "/usr/java/default/",
-		      "WL_ADMIN_USER": "weblogic",
-		      "WL_ADMIN_PASSWORD": "welcome1",
-		      "BOOT_PROPS": "${DOMAIN_DIR}/${DOMAIN_NAME}/servers/AdminServer/security/boot.properties",
-		      "TFILE": "out.tmp"
-		    },
-		    "commands": [
-              "rm -rf $MW_HOME/*",
-              "echo $TFILE",
-              "sed \"s~/opt/weblogic~$MW_HOME~g\" ${working_dir}/wls_silent.xml > $TFILE",
-              "mv $TFILE ${working_dir}/wls_silent.xml",                 
-		      "java -Xmx1024M -Dspace.detection=false -jar ${working_dir}/wls1036_generic.jar -mode=silent -silent_xml=wls_silent.xml",
-		      "rm -f wls_silent.xml",
-		      "$MW_HOME/wlserver_10.3/common/bin/wlst.sh ${working_dir}/scripts/createDomain.py $MW_HOME ${WL_HOME} ${DOMAIN_NAME} ${JAVA_HOME} ${WL_ADMIN_USER} ${WL_ADMIN_PASSWORD}",
-		      "rm -f scripts/createDomain.py",
-		      "sed \"s/umask 037/umask 022\\n\\nUSER_MEM_ARGS=\\\"-Xms2056m -Xmx2056m -XX:PermSize=384m\\\"/g\" ${DOMAIN_DIR}/${DOMAIN_NAME}/bin/startWebLogic.sh > ${TFILE}",
-		      "mv ${TFILE} ${DOMAIN_DIR}/${DOMAIN_NAME}/bin/startWebLogic.sh",
-		      "chmod +x $MW_HOME/user_projects/domains/leapfrog/bin/startWebLogic.sh",
-		      "sed \"s/umask 027/umask 022/g\" $MW_HOME/user_projects/domains/leapfrog/startNodeManager.sh > ${TFILE}",
-		      "mv $TFILE $MW_HOME/user_projects/domains/leapfrog/startNodeManager.sh",
-		      "chmod +x $MW_HOME/user_projects/domains/leapfrog/startNodeManager.sh",
-		      "sed \"s/NODEMGR_HOME=\\\"\\\${WL_HOME}\\\/common\\\/nodemanager\\\"/NODEMGR_HOME=\\\"\\\/opt\\\/weblogic\\\/user_projects\\\/domains\\\/leapfrog\\\"/g\" $MW_HOME/user_projects/domains/leapfrog/startNodeManager.sh > ${TFILE}",
-		      "mv $TFILE ${DOMAIN_DIR}/${DOMAIN_NAME}/startNodeManager.sh",
-		      "chmod +x ${DOMAIN_DIR}/${DOMAIN_NAME}/startNodeManager.sh",
-		      "echo \"export CLASSPATH=\\\"${DOMAIN_DIR}/${DOMAIN_NAME}/lib/protocol.jar:\\\${CLASSPATH}\\\"\" >> ${DOMAIN_DIR}/${DOMAIN_NAME}/bin/setDomainEnv.sh",
-		      "echo username=${WL_ADMIN_US} > /tmp/boot.properties",
-		      "echo password=${WL_ADMIN_PASSWORD} >> /tmp/boot.properties",
-		      "cp -r /tmp/boot.properties ${BOOT_PROPS}",
-		      "mkdir -p ${DOMAIN_DIR}/${DOMAIN_NAME}/servers/AdminServer/data/nodemanager",
-		      "cp /tmp/boot.properties ${DOMAIN_DIR}/${DOMAIN_NAME}/servers/AdminServer/data/nodemanager",
-		      "rm /tmp/boot.properties",
-		      "chmod 400 ${working_dir}/jmxremote.password",
-		      "chmod 400 ${working_dir}/jmxremote.access"
-		      
-		    ]
-		  }
-		}
+  "id": "weblogic 10.3.6 install",
+  "user": "weblogic",
+  "working_dir": "/tmp/weblogic",
+  "options": {
+    "dontUploadIfFileExists": false,
+    "timeoutms": 3600000
+  },
+  "files": [
+    {
+      "source": "leapfrog:///files/weblogic/wls1036_generic.jar",
+      "destination": "${working_dir}"
+    },
+    {
+      "source": "leapfrog:///files/weblogic/install/scripts/createDomain.py",
+      "destination": "${working_dir}/scripts"
+    },
+    {
+      "source": "leapfrog:///files/weblogic/install/wls_silent.xml",
+      "destination": "${working_dir}"
+    },
+    {
+      "source": "leapfrog:///files/weblogic/install/protocol.jar",
+      "destination": "${working_dir}"
+    },
+    {
+      "source": "leapfrog:///files/weblogic/install/TEST/leapfrog.properties",
+      "destination": "${working_dir}"
+    },
+    {
+      "source": "leapfrog:///files/weblogic/install/TEST/jmxremote.password",
+      "destination": "${working_dir}"
+    },
+    {
+      "source": "leapfrog:///files/weblogic/install/TEST/jmxremote.access",
+      "destination": "${working_dir}"
+    }
+  ],
+  "script": {
+    "env": {
+      "MW_HOME": "/opt/weblogic",
+      "WL_HOME": "${MW_HOME}/wlserver_10.3",
+      "DOMAIN_DIR": "${MW_HOME}/user_projects/domains",
+      "DOMAIN_NAME": "leapfrog",
+      "NM_HOME": "${DOMAIN_DIR}/${DOMAIN_NAME}",
+      "JAVA_HOME": "/usr/java/default/",
+      "WL_ADMIN_USER": "weblogic",
+      "WL_ADMIN_PASSWORD": "welcome1",
+      "BOOT_PROPS": "${DOMAIN_DIR}/${DOMAIN_NAME}/servers/AdminServer/security/boot.properties",
+      "TFILE": "out.tmp"
+    },
+    "commands": [
+      "rm -rf $MW_HOME/*",
+      "echo $TFILE",
+      "sed \"s~MW_HOME~$MW_HOME~g\" ${working_dir}/wls_silent.xml > $TFILE",
+      "mv $TFILE ${working_dir}/wls_silent.xml",
+      "java -Xmx1024M -Dspace.detection=false -jar ${working_dir}/wls1036_generic.jar -mode=silent -silent_xml=wls_silent.xml",
+      "rm ${working_dir}/wls_silent.xml",
+      "$MW_HOME/wlserver_10.3/common/bin/wlst.sh ${working_dir}/scripts/createDomain.py $MW_HOME ${WL_HOME} ${DOMAIN_NAME} ${JAVA_HOME} ${WL_ADMIN_USER} ${WL_ADMIN_PASSWORD}",
+      "rm -f scripts/createDomain.py",
+      "sed \"s/umask 037/umask 022\\n\\nUSER_MEM_ARGS=\\\"-Xms2056m -Xmx2056m -XX:PermSize=384m\\\"/g\" ${DOMAIN_DIR}/${DOMAIN_NAME}/bin/startWebLogic.sh > ${TFILE}",
+      "mv ${TFILE} ${DOMAIN_DIR}/${DOMAIN_NAME}/bin/startWebLogic.sh",
+      "chmod +x $MW_HOME/user_projects/domains/leapfrog/bin/startWebLogic.sh",
+      "sed \"s/umask 027/umask 022/g\" $MW_HOME/user_projects/domains/leapfrog/startNodeManager.sh > ${TFILE}",
+      "mv $TFILE $MW_HOME/user_projects/domains/leapfrog/startNodeManager.sh",
+      "chmod +x $MW_HOME/user_projects/domains/leapfrog/startNodeManager.sh",
+      "sed \"s/NODEMGR_HOME=\\\"\\${WL_HOME}\\/common\\/nodemanager\\\"/NODEMGR_HOME=\\\"\\/opt\\/weblogic\\/user_projects\\/domains\\/leapfrog\\\"/g\" $MW_HOME/user_projects/domains/leapfrog/startNodeManager.sh > ${TFILE}",
+      "mv $TFILE ${DOMAIN_DIR}/${DOMAIN_NAME}/startNodeManager.sh",
+      "chmod +x ${DOMAIN_DIR}/${DOMAIN_NAME}/startNodeManager.sh",
+      "echo \"export CLASSPATH=\\\"${DOMAIN_DIR}/${DOMAIN_NAME}/lib/protocol.jar:\\${CLASSPATH}\\\"\" >> ${DOMAIN_DIR}/${DOMAIN_NAME}/bin/setDomainEnv.sh",
+      "echo username=${WL_ADMIN_USER} > /tmp/boot.properties",
+      "echo password=${WL_ADMIN_PASSWORD} >> /tmp/boot.properties",
+      "cp -r /tmp/boot.properties ${BOOT_PROPS}",
+      "mkdir -p ${DOMAIN_DIR}/${DOMAIN_NAME}/servers/AdminServer/data/nodemanager",
+      "cp /tmp/boot.properties ${DOMAIN_DIR}/${DOMAIN_NAME}/servers/AdminServer/data/nodemanager",
+      "rm /tmp/boot.properties",
+      "chmod 400 ${working_dir}/jmxremote.password",
+      "chmod 400 ${working_dir}/jmxremote.access"
+    ]
+  }
+}
 
 
 var data = {
@@ -130,11 +128,11 @@ function uploadFiles(agent,jobId,files) {
 	    
 		var file = files[uploadIndex];
 		var filepath= fileControl.getFilePath(file.source);
-		var fileName = path.basename(filepath);
+		var fileName = pathlib.basename(filepath);
 		fileProgress[fileName ] = {}
 	    fileProgress[fileName].fileName=fileName;
 		
-		var name = filepath.split(path.sep).pop();
+		var name = filepath.split(pathlib.sep).pop();
 		var stats = fs.statSync(filepath);
 		var fileSizeInBytes = stats["size"];
 		
@@ -144,7 +142,7 @@ function uploadFiles(agent,jobId,files) {
 		    
 			var stream = ss.createStream();
 			
-			fileProgress[fileName].readStream = fs.createReadStream(filepath,{autoClose: true});
+			fileProgress[fileName].readStream = fs.createReadStream(filepath,{autoClose: true, highWaterMark: 32 * 1024});
 			ss(socket).emit('agent-upload', stream, {name: fileName, jobId: jobId, fileSize: fileSizeInBytes, destination: file.destination });
 			fileProgress[fileName].readStream.pipe(stream );
 			fileProgress[fileName].readStream.on('data', function (chunk) {
@@ -166,7 +164,7 @@ function uploadFiles(agent,jobId,files) {
 	//wait and make sure all files get uploaded
 	//close all sockets when done.
 	timeoutms=300000;//default timeout of 5 minutes
-    if (job.options.timeoutms != undefined) {
+    if (job.options != undefined && job.options.timeoutms != undefined) {
     	timeoutms=job.options.timeoutms;
     }
     
@@ -181,7 +179,7 @@ function uploadFiles(agent,jobId,files) {
         socket.close();
     }, timeoutms);
     
-    var checkInterval = 2000; //2 seconds
+    var checkInterval = 10000; //10 seconds
     //wait until all files are receeived
     var fileCheck = setInterval(function() {
     	
@@ -212,7 +210,14 @@ function uploadFiles(agent,jobId,files) {
     			clearInterval(fileCheck);
     		}
     	}
-    	logger.debug(numFilesUploaded+ " of "+job.files.length+" files sent.");
+    	if (job.files != undefined) {
+    		logger.debug(numFilesUploaded+ " of "+job.files.length+" files sent.");
+    	} else {
+    		logger.info("no files defined so none sent.");
+    		socket.close();
+		    clearTimeout(timeout);
+    		clearInterval(fileCheck);
+    	}
     }, checkInterval);
 	
 	
@@ -246,9 +251,18 @@ executeJobOnAgent = function( agent, job) {
 	    res.on('data', function(d) {
 	    	logger.debug('result:\n');
 	        process.stdout.write(d);
-	        logger.debug('\n\nPOST completed. uploading files');
-	        uploadFiles(agent,job.id,job.files);
+	        logger.debug('\n\nJob request sent. Listening for events and uploading files');
 	        var eventSocket = io.connect('http://'+agent.host+':'+agent.port+'/job-events');
+	        var listening = false;
+	        eventSocket.on('connect', function() { 
+	        	 if (listening == false) {
+	        	 	logger.info('listening for events fron job: '+job.id);
+	        	 	eventSocket.emit('job-listen', job.id);
+	        	 	listening=true;
+	        	 }
+	        	 
+	        });
+	       
 			eventSocket.on('job-update', function(job){
 				//logger.debug("job update");
 				logger.debug(job.progress+" "+job.status);
@@ -263,16 +277,16 @@ executeJobOnAgent = function( agent, job) {
 				eventSocket.close();
 				clearTimeout(timeout);
 			});
-			eventSocket.on('job-cancel', function(job){
-				logger.info('job: '+job.id+ ' cancelled.');
+			eventSocket.on('job-cancel', function(jobId){
+				logger.info('job: '+jobId+ ' cancelled.');
 				eventSocket.close();
 				clearTimeout(timeout);
 			});
 			
 			var timeoutms=600000; //10 minutes default timeout
-			if (job.options.timeoutms != undefined) {
+			if (job.options != undefined && job.options.timeoutms != undefined) {
 				timeoutms=job.options.timeoutms;
-				logger.debug('setting timeout to" '+timeoutms);
+				logger.debug('setting timeout to '+timeoutms);
 			}
 			var timeout = setTimeout(function() {
 		    	job.status=("Job timeout");
@@ -280,6 +294,9 @@ executeJobOnAgent = function( agent, job) {
 		    	eventSocket.emit('job-cancel',job);
 		    	//eventSocket.destroy();
 		    }, timeoutms);
+		    
+		    //upload files
+		    uploadFiles(agent,job.id,job.files);
 	    });
 	});
 
@@ -295,7 +312,9 @@ executeJobOnAgent = function( agent, job) {
 
 
 agent ={
-		host: 'localhost',
+		host: '23.92.65.207',
+//		host: 'tb101',
+//		host: 'localhost',
 		port: 3000
 };
 

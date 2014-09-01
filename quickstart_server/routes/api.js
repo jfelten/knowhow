@@ -3,6 +3,7 @@ var agentControl = require('./agent-control');
 var fileControl = require('./file-control');
 var moment = require('moment');
 var server = require('../server');
+var fs = require('fs');
 /*
  * Serve JSON to our AngularJS client
  */
@@ -58,6 +59,22 @@ exports.jobList = function (req,res) {
 	logger.info('request for files in: '+file);
 	var dirTree = fileControl.dirTree(file);
 	 res.json( {files : dirTree});
+};
+
+exports.jobContent = function (req,res) {
+	var filePath = req.query.file;
+	var repo = req.query.repo;
+	 
+	var stat = fs.statSync(filePath);
+
+    res.writeHead(200, {
+        'Content-Type': 'text/json',
+        'Content-Length': stat.size
+    });
+
+    var readStream = fs.createReadStream(filePath);
+    // We replaced all the event handlers with a simple call to readStream.pipe()
+    readStream.pipe(res);
 };
 
 exports.saveFile = function(req,res) {

@@ -2,6 +2,7 @@ p Jobs(not Steve)
 p
 .jobs-page
 	.jobs-nav
+		{{fileRepos}}
 		div(dropdown is-open="repoSelect.isopen").btn-group
 			button.btn.btn-primary.dropdown-toggle
 					span(id="selectRepo") 
@@ -15,6 +16,8 @@ p
 		span(ng-if="loading_jobs") |...loading...
 		abn-tree(tree-data="jobs" tree-control="job_tree" on-select="jobs_tree_handler(branch)" expand-level="2" initial-selection="weblogic" )
 	.jobs-control
+		progressbar(ng-hide="currentRunningJob.progress < 1" animate="currentRunningJob.progress" value="currentRunningJob.progress" type="success")
+						{{currentRunningJob.status}}
 		div(dropdown is-open="status.isopen").btn-group
 			button.btn.btn-primary.dropdown-toggle
 				span(id="selectAgent") 
@@ -28,7 +31,9 @@ p
 				li
 					| All Agents
 		.jobs-buttons.btn-group
-			button.btn.btn-primary(type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="execute()" ) Execute
+			{{currentRunningJob.progress}}
+			button.btn.btn-primary(ng-hide="currentRunningJob.progress > 1" type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="execute()" ) Execute
+			button.btn.btn-primary(ng-hide="currentRunningJob.progress < 1" type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="cancelExecute()" ) Cancel
 			button.btn.btn-primary(type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="saveJob()") Save
 		.job-message-block(ng-show="message")
 			{{message}}

@@ -107,6 +107,17 @@ var myModule = angular.module('myApp.controllers', []).
   }).
   controller('JobsController', function ($scope, $http) {
   
+  	var socket = io();
+
+    socket.on('job-update', function(job){
+      console.log('job update message received');
+      
+	  $scope.currentRunningJob=job
+	  $scope.$apply();
+      
+    });
+    
+  
   	  $http.get('/api/repoList').
 	    success(function(data) {
 	    	$scope.fileRepos = data;
@@ -187,7 +198,8 @@ var myModule = angular.module('myApp.controllers', []).
 	  };
 	  
 	  function loadJob(path) {
-		  $http.get('/'+path,{
+	  console.log('load job');
+		  $http.get('/api/jobContent?repo='+$scope.selectedRepo+'&file='+path,{
               transformResponse: function (data, headers) {
                   //MESS WITH THE DATA
                   //data = {};
@@ -278,6 +290,8 @@ var myModule = angular.module('myApp.controllers', []).
 			    }).success(function (data, status, headers, config) {
 			        $scope.agentInfo = data;
 			        $scope.message = job.id+' successfully submitted to agent: '+$scope.selectedAgent.user+'@'+$scope.selectedAgent.host+':'+$scope.selectedAgent.port
+			        $scope.currentRunningJob=job;
+			        console.log("submitted job request");
 			    }).
 			    error(function (data, status, headers, config) {
 			    	$scope.message = 'Unable to contact Agent http status: '+status;

@@ -5,6 +5,7 @@ var EventEmitter = require('events').EventEmitter;
 var eventEmitter = new EventEmitter();
 exports.eventEmitter = eventEmitter;
 
+
 var jobQueue = []
 
 
@@ -26,7 +27,7 @@ initAgent = function(agent) {
 	var ip = _.chain(os.networkInterfaces()).flatten().filter(function(val){ return (val.family == 'IPv4' && val.internal == false); }).pluck('address').first().value(); 
 	logger.info('initializing agent with ip: '+ip) ;  
 	agentData = {
-		host: os.hostname(),
+		host: agent.host,
 		ip: ip,
 		port: agent.port,
 		login: agent.login,

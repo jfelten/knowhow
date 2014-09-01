@@ -91,7 +91,9 @@ app.get('/partials/:name', routes.partials);
 app.get('/api/serverInfo', api.serverInfo);
 app.get('/api/connectedAgents', api.listAgents);
 app.get('/api/jobList', api.jobList);
+app.get('/api/jobContent', api.jobContent);
 app.get('/api/saveFile', api.saveFile);
+app.get('/api/repoList', api.repoList);
 
 
 //agent routes

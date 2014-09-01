@@ -5,12 +5,14 @@ exports.eventEmitter = eventEmitter;
 var jobQueue = [];
 var agentInfo;
 var logger=require('./log-control').logger;
-var path=require("path");
+var pathlib=require("path");
 var ss = require('socket.io-stream');
 var mkdirp = require('mkdirp');
 
 //constants
 var WORKING_DIR_VAR = "working_dir"
+
+exports.jobQueue=jobQueue;
 
 updateJob = function(job) {
 	eventEmitter.emit('job-update',job);
@@ -18,40 +20,48 @@ updateJob = function(job) {
 	//logger.debug('updated:');
 };
 
-initiateJob = function(job) {
-	job.fileProgress = {};
-	jobQueue[job.id] =job;
-	job.progress=0;
-	job.totalFileSize=0;
-	//check for relative paths and substitute working directory path
-	var downloadDir = job.download_dir;
-	if (downloadDir == undefined) {
-		downloadDir = ".";
-	};
-	var workingDir = job.working_dir;
-	var workingDirVar="${"+WORKING_DIR_VAR+"}";
-	if (downloadDir.indexOf(workingDirVar) > -1){
-		downloadDir=downloadDir.replace( workingDirVar,workingDir);
+initiateJob = function(job, callback) {
+	try {
+		logger.info("initializing: "+job.id);
+		job.fileProgress = {};
+		jobQueue[job.id] =job;
+		job.progress=0;
+		job.totalFileSize=0;
+		//check for relative paths and substitute working directory path
+		var downloadDir = job.download_dir;
+		if (downloadDir == undefined) {
+			downloadDir = ".";
+		};
+		var workingDir = job.working_dir;
+		var workingDirVar="${"+WORKING_DIR_VAR+"}";
+		if (downloadDir.indexOf(workingDirVar) > -1){
+			downloadDir=downloadDir.replace( workingDirVar,workingDir);
+		}
+		workingDirVar="$"+WORKING_DIR_VAR;
+		if (downloadDir.indexOf(workingDirVar) > -1){
+			downloadDir=downloadDir.replace( workingDirVar,workingDir);
+		}
+	    fs.stat(downloadDir, function (err, stat) {
+	        if (err) {
+	          // file does not exist
+	          if (err.errno == 2) {
+	            fs.mkdir(downloadDir);
+	          }
+	        }
+	    });
+	    job.working_dir = pathlib.resolve(workingDir);
+		job.download_dir = pathlib.resolve(downloadDir);
+		job.status="starting..";
+		jobQueue[job.id]=job;
+		logger.debug("job id:"+job.id+" initialized using working directory: "+job.working_dir);
+		eventEmitter.emit('job-update',job);
+		callback(undefined, job);
+	} catch (err) {
+		logger.error("unable to initialize job: "+job.id);
+		logger.error(err);
+		callback(err, job)
+		
 	}
-	workingDirVar="$"+WORKING_DIR_VAR;
-	if (downloadDir.indexOf(workingDirVar) > -1){
-		downloadDir=downloadDir.replace( workingDirVar,workingDir);
-	}
-    fs.stat(downloadDir, function (err, stat) {
-        if (err) {
-          // file does not exist
-          if (err.errno == 2) {
-            fs.mkdir(downloadDir);
-            return
-          }
-        }
-    });
-    job.working_dir = path.resolve(workingDir);
-	job.download_dir = path.resolve(downloadDir);
-	job.status="starting..";
-	jobQueue[job.id]=job;
-	logger.debug("job id:"+job.id+" initialized in dir"+job.working_dir);
-	eventEmitter.emit('job-update',job);
 };
 
 cancelJob = function(job) {
@@ -65,29 +75,41 @@ cancelJob = function(job) {
 	job.error = true;
 	updateJob(job);
 	commandShell.cancelRunningJob();
+	logger.info('canceling job: '+job.id);
 	eventEmitter.emit('job-cancel', job);
+	jobQueue[job.id]=undefined;
+	
 }
 
 execute = function(job) {
-	initiateJob(job);
-	waitForFiles(job, function(err, job) {
+	logger.info("executing: "+job.id);
+	initiateJob(job, function(err,job) {
 		if (err) {
-			job.status="Error receiving required files";
-			eventEmitter.emit('job-update',job);
+		
+			job.status="Error Initializing job";
+			cancelJob(job);			
 			return;
 		}
-		logger.info("all files received - executing job");
-		job.status="All files Received.";
-		eventEmitter.emit('job-update',job);
-		try {
-			commandShell.executeSync(job, eventEmitter);
-		}
-		catch (err) {
-			job.status="Error "+err
-			;
+		waitForFiles(job, function(err, job) {
+			if (err) {
+				job.status="Error receiving required files";
+				cancelJob(job);	
+				return;
+			}
+			logger.info("all files received - executing job");
+			job.status="All files Received.";
 			eventEmitter.emit('job-update',job);
-		}
+			try {
+				commandShell.executeSync(job, eventEmitter);
+			}
+			catch (err) {
+				job.status="Error "+err;
+				cancelJob(job);	
+			}
+		});
+	
 	});
+	
 	
 	
 };
@@ -99,45 +121,81 @@ waitForFiles = function(job,callback) {
     eventEmitter.emit('job-update',job);
     
     //timeout after x seconds
-    timeoutms=300000;//default timeout of 5 minutes
-    if (job.timeout != undefined) {
-    	timeoutms=job.timeout;
+    timeoutms=600000;//default timeout of 10 minutes
+    if (job.options.timeoutms != undefined) {
+    	timeoutms=job.options.timeoutms;
     }
     
-    var timeout = setTimeout(function() {
-    	clearInterval(fileCheck);
-    	job.status=(job.id+" required files not within timeout. Aborting...");
-    	callback(new Error("file upload timed out."),job);
-    }, timeoutms);
-    
-    var checkInterval = 1000; //1 second
-    //wait until all files are receeived
-    var fileCheck = setInterval(function() {
-    
-        var updatedJob = jobQueue[job.id];
-    	if (updatedJob.error == true || updatedJob.cancelled == true) {
-    		logger.error(job.id+" has an error. Aborting...");
-			clearTimeout(timeout);
-			clearInterval(fileCheck);
-			callback(new Error("Aborting job"), job);
-    	}
-    	
-    	numFilesUploaded=0;
-    	for (index in job.fileProgress) {
-    		var uploadFile = job.fileProgress[index];
-    		logger.debug(uploadFile);
-    		if (uploadFile.uploadComplete == true) {
-    		    numFilesUploaded++;
-    		    if (numFilesUploaded >= job.files.length) {
-    		    	logger.info(job.id+" all files received...");
-	    			clearTimeout(timeout);
-	    			clearInterval(fileCheck);
-	    			callback(undefined, job);
-	    		}  		
-    		}
-    	}
-    	logger.debug(numFilesUploaded+ " of "+job.files.length+" files received.");
-    }, checkInterval);
+    if (job.files.length >0 ) {
+	    var timeout = setTimeout(function() {
+	    	logger.info("job: "+job.id+" file upload timed out.");
+	    	clearInterval(fileCheck);
+	    	job.status=(job.id+" required files not within timeout. Aborting...");
+	    	eventEmitter.emit('upload-complete',job);
+	    	callback(new Error("file upload timed out."),job);
+	    }, timeoutms);
+	    
+	    var checkInterval = 5000; //5 second
+	    //wait until all files are received
+	    var lastProgress=0;
+	    var fileCheck = setInterval(function() {
+	    
+	        var updatedJob = jobQueue[job.id];
+	    	if (updatedJob != undefined && (updatedJob.error == true || updatedJob.cancelled == true)) {
+	    		logger.error(job.id+" has an error. Aborting...");
+				clearTimeout(timeout);
+				clearInterval(fileCheck);
+				callback(new Error("Aborting job"), job);
+	    	}
+	    	
+	    	var numFilesUploaded=0;
+	    	
+	    	var totalUploaded=0;
+	    	for (filename in job.fileProgress) {
+	    		if (job.fileProgress[filename].uploadComplete != true) {
+	    		    var stat= fs.statSync(filename); 
+		    		var fileSizeInBytes = stat["size"];
+		    		//logger.debug(filename+' size='+fileSizeInBytes+' correct size='+job.fileProgress[filename]['FileSize']);
+		    		totalUploaded+=fileSizeInBytes;
+		    		job.fileProgress[filename]['Uploaded'] = fileSizeInBytes;
+			    	if(job.fileProgress[filename]['error'] == true) {
+			    		job.fileProgress[filename].uploadComplete=true;
+			    		eventEmitter.emit('upload-complete',job);
+			    		updateJob(job);
+			    	} else if(fileSizeInBytes === job.fileProgress[filename]['FileSize']) {
+			    		job.fileProgress[filename].uploadComplete=true;
+			    		job.fileProgress[filename].fileWriter.close();
+			    		eventEmitter.emit('file-uploaded',job.id, job.fileProgress[filename].name);
+			    		updateJob(job);
+			    	} 
+
+	    		    		
+	    		} else {
+	    			totalUploaded+=job.fileProgress[filename]['FileSize']
+	    			numFilesUploaded++;
+	    		}
+	    		
+	    		
+	    	}
+	    	
+	    	if (numFilesUploaded >= job.files.length) {
+		    	logger.info(job.id+" all files received...");
+    			clearTimeout(timeout);
+    			clearInterval(fileCheck);
+    			eventEmitter.emit('upload-complete',job);
+    			callback(undefined, job);
+    		}  
+	    	
+	    	job.progress=Math.floor((totalUploaded/job.totalFileSize)*100)
+            if (job.progress > lastProgress ) {
+            	lastProgress=job.progress;
+            	updateJob(job);
+            	logger.debug("progress: "+totalUploaded+" of "+job.totalFileSize+"  %done:"+job.progress);
+            	
+            }
+    	//logger.debug(numFilesUploaded+ " of "+job.files.length+" files received.");
+	    }, checkInterval);
+	}
     
     
 };
@@ -152,13 +210,28 @@ JobControl = function(io) {
 
 	up.on('connection', function (socket) {
 		logger.info('upload request');
-		ss(socket).on('agent-upload', function(stream, data) {
+		
+		eventEmitter.on('upload-complete', function(job) {
+			socket.disconnect();
+		});
+		eventEmitter.on('file-uploaded', function(jobId, filename) {
+			socket.emit('End', {message: 'Filename '+filename+' upload complete for: '+jobId, jobId: jobId,  fileName: filename} );
+			
+		});
+		
+		ss(socket).on('agent-upload', {highWaterMark: 32 * 1024}, function(stream, data) {
 		    
 		    var jobId = data['jobId'];
 			var job = jobQueue[jobId];
 			var lastProgress=0;
-				if (job == undefined) {
+			if (job == undefined) {
 				socket.emit('Error', {message: 'No active Job with id: '+jobId, jobId: jobId, name: data.name} );
+				eventEmitter.emit('job-error',job);
+				return;
+			} else if (job.error == true || job.cancelled == true) {
+				socket.emit('Error', {message: 'Invalid Job with id: '+jobId, jobId: jobId, name: data.name} );
+				logger.
+				eventEmitter.emit('job-error',job);
 				return;
 			}
 			var destination = data['destination']
@@ -171,7 +244,7 @@ JobControl = function(io) {
 				destination=destination.replace( workingDirVar,job.working_dir);
 			}
 			
-			var filename = path.resolve(destination+path.sep+data.name);
+			var filename = pathlib.resolve(destination+pathlib.sep+data.name);
 			
 			logger.debug("saving "+filename);
 			var size = data['fileSize'];
@@ -181,7 +254,8 @@ JobControl = function(io) {
 	            FileSize : size,
 	            Data     : "",
 	            Uploaded : 0,
-	            uploadComplete: false
+	            uploadComplete: false,
+	            name: data.name
 	        };
 	        job.status="receiving files."
 	        updateJob(job);
@@ -217,43 +291,9 @@ JobControl = function(io) {
 		       }
 		       try {
 			    	logger.info("saving file: "+filename);
-			    	stream.pipe(fs.createWriteStream(filename));
-			    	fileWatcher = fs.watch(filename);
-				    fileWatcher.on('change', function(){
-				    	fs.stat(filename, function(err, stat) {
-				    		if (err) {
-				    			logger.error(err);
-				    			//job.fileProgress[filename].uploadComplete=true;
-					    		//socket.emit('Error',{message: filename+' error:'+err, name: data.name, jobId: jobId});
-					    		//fileWatcher.close();
-					    		//cancelJob(job);
-					    		return;
-				    		}
-				    		var fileSizeInBytes = stat["size"];
-					    	if(job.fileProgress[filename]['error'] == true) {
-					    		job.fileProgress[filename].uploadComplete=true;
-					    		socket.emit('End',{message: filename+' upload cancelled', fileName: data.name});
-					    	} else if(fileSizeInBytes == job.fileProgress[filename]['FileSize']) {
-					    		job.fileProgress[filename].uploadComplete=true;
-					    		socket.emit('End',{message: filename+' uploaded', fileName: data.name});
-					    	} else {
-					    		job.fileProgress[filename]['Uploaded'] = fileSizeInBytes;
-					    		totalUploaded=0;
-					    		for (uploadedFile in job.fileProgress) {
-					    			totalUploaded+=job.fileProgress[uploadedFile]['Uploaded']
-					    		}
-					    		//logger.debug("progress: "+totalUploaded+" of "+job.totalFileSize+"  "+Math.floor((totalUploaded/job.totalFileSize)*100));
-				                job.progress=Math.floor((totalUploaded/job.totalFileSize)*100)
-				                if (job.progress > lastProgress +2) {
-				                	lastProgress=job.progress;
-				                	updateJob(job);
-				                }
-				                
-					    	}
-					    });
-				    	
-				    	
-				    });
+			    	job.fileProgress[filename].fileWriter = fs.createWriteStream(filename);
+			    	stream.pipe(job.fileProgress[filename].fileWriter);
+
 			    } catch(err) {
 			    	logger.error(err);
 			    	socket.emit('Error', {message: 'Invalid file: '+filename, jobId: jobId, name: data.name} );
@@ -295,12 +335,21 @@ JobControl = function(io) {
 			});
 			
 			eventEmitter.on('job-cancel', function(job) {
-				socket.emit('job-cancel', job);
+				socket.emit('job-cancel', job.id);
 			});
 			
 			socket.on('job-cancel', function(job) {
 				logger.info("cancel requested by server.");
 				cancelJob(job);
+			});
+			
+			socket.on('job-listen', function(jobId) {
+				logger.debug("job event listen request");
+				var job = jobQueue[jobId];
+				if (job == undefined || job.error==true || job.cancelled==true) {
+					logger.debug("invalid job: "+jobId+" stopping listener");
+					socket.emit('job-cancel', jobId);
+				}
 			});
 
 		});

@@ -51,8 +51,13 @@ exports.registerServer = function(req,res) {
 exports.execute = function(req,res) {
 	logger.info("execute");
 	var job = req.body;
-	jobControl.execute(job,agentInfo,serverInfo);
-	res.json({'ok': true});
+	if (jobControl.jobQueue[job.id] != undefined) {
+		res.send(500, 'job id: '+job.id+' already running');
+	} else {
+		jobControl.execute(job);
+		res.json({'ok': true});
+	}
+	
 
 };
 

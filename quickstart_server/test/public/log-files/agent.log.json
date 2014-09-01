@@ -2040,3 +2040,1072 @@
 {"level":"info","message":"/tmp/weblogic/wls1036_generic.jar uploaded","timestamp":"2014-08-28T20:59:17.416Z"}
 {"level":"info","message":"weblogic 10.3.6 install all files sent...","timestamp":"2014-08-28T20:59:17.660Z"}
 {"level":"info","message":"Completed Job: weblogic 10.3.6 install","timestamp":"2014-08-28T20:59:47.358Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-29T04:33:25.767Z"}
+{"level":"info","message":"Starting Job: atg 10.2 install","timestamp":"2014-08-29T04:33:25.769Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-29T04:33:40.894Z"}
+{"level":"info","message":"Starting Job: atg 10.2 install","timestamp":"2014-08-29T04:33:40.896Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-29T04:41:39.634Z"}
+{"level":"info","message":"Starting Job: atg 10.2 install","timestamp":"2014-08-29T04:41:39.636Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-29T04:42:28.740Z"}
+{"level":"info","message":"Starting Job: atg 10.2 install","timestamp":"2014-08-29T04:42:28.742Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-29T04:42:55.215Z"}
+{"level":"info","message":"Starting Job: atg 10.2 install","timestamp":"2014-08-29T04:42:55.217Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-29T04:44:32.759Z"}
+{"level":"info","message":"Starting Job: atg 10.2 install","timestamp":"2014-08-29T04:44:32.760Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T04:44:34.772Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T04:44:36.774Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T04:44:38.775Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T04:44:40.776Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T04:44:42.777Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T04:44:44.778Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T04:44:46.781Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T04:44:48.782Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T04:44:50.783Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T04:44:52.784Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T04:44:54.786Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T04:44:56.787Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T04:44:58.787Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T04:45:00.789Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T04:45:02.789Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T04:45:04.791Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T04:45:06.791Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T04:45:08.793Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T04:45:10.794Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T04:45:12.796Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T04:45:14.797Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T04:45:16.798Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T04:45:18.799Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T04:45:20.801Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T04:45:22.801Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T04:45:24.804Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T04:45:26.805Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T04:45:28.807Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T04:45:30.808Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-29T04:45:36.466Z"}
+{"level":"info","message":"Starting Job: atg 10.2 install","timestamp":"2014-08-29T04:45:36.467Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T04:45:38.479Z"}
+{"level":"error","message":"time out for: atg 10.2 install cancelling","timestamp":"2014-08-29T04:55:36.480Z"}
+{"level":"info","message":"job: atg 10.2 install cancelled.","timestamp":"2014-08-29T04:59:01.077Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-29T04:59:19.312Z"}
+{"level":"info","message":"Starting Job: atg 10.2 install","timestamp":"2014-08-29T04:59:19.314Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T04:59:21.336Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-29T05:01:06.458Z"}
+{"level":"info","message":"Starting Job: atg 10.2 install","timestamp":"2014-08-29T05:01:06.460Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-29T17:09:30.151Z"}
+{"level":"info","message":"Starting Job: atg 10.2 install","timestamp":"2014-08-29T17:09:30.153Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T17:09:32.179Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-29T17:12:54.245Z"}
+{"level":"info","message":"Starting Job: atg 10.2 install","timestamp":"2014-08-29T17:12:54.247Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T17:12:56.272Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-29T17:19:15.266Z"}
+{"level":"info","message":"Starting Job: atg 10.2 install","timestamp":"2014-08-29T17:19:15.268Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T17:19:17.297Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-29T17:20:08.032Z"}
+{"level":"info","message":"Starting Job: atg 10.2 install","timestamp":"2014-08-29T17:20:08.034Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T17:20:10.055Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-29T17:25:46.813Z"}
+{"level":"info","message":"Starting Job: atg 10.2 install","timestamp":"2014-08-29T17:25:46.815Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:25:46.840Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:25:47.853Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T17:25:48.828Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:25:48.869Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:25:49.883Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:25:50.901Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:25:51.914Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:25:52.926Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:25:53.938Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:25:54.955Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:25:55.968Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:25:56.984Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:25:58.000Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:25:59.017Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:26:00.030Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:26:01.046Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:26:02.062Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:26:03.075Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:26:04.094Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:26:05.107Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-29T17:27:49.694Z"}
+{"level":"info","message":"Starting Job: atg 10.2 install","timestamp":"2014-08-29T17:27:49.696Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:27:49.736Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:27:50.751Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T17:27:51.720Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:27:51.766Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:27:52.783Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-29T17:29:01.850Z"}
+{"level":"info","message":"Starting Job: atg 10.2 install","timestamp":"2014-08-29T17:29:01.852Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:01.892Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:02.907Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T17:29:03.876Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:03.922Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:04.940Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:05.954Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:06.966Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:07.980Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:08.993Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:10.009Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:11.024Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:12.042Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:13.054Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:14.069Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:15.087Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:16.102Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:17.116Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:18.132Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:19.152Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:20.163Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:21.178Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:22.193Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:23.206Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:24.223Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:25.233Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:26.244Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:27.256Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:28.269Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:29.284Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:30.296Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:31.308Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:32.320Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:33.334Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:34.349Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:35.364Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:36.374Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:37.388Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:38.401Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:39.415Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:40.430Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:41.450Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:42.460Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:43.469Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:44.480Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:45.491Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:46.511Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:47.523Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:48.534Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:49.544Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:50.554Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:51.566Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:52.581Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:53.593Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:54.604Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:55.617Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:56.629Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:57.639Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:58.652Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:29:59.663Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:00.672Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:01.683Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:02.697Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:03.709Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:04.723Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:05.736Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:06.751Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:07.768Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:08.784Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:09.798Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:10.810Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:11.823Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:12.837Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:13.849Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:14.862Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:15.875Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:16.886Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:17.898Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:18.910Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:19.926Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:20.938Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:21.961Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:22.973Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:23.986Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:24.997Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:26.006Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:27.016Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:28.026Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:29.036Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:30.047Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:31.060Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:32.070Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:33.082Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:34.094Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:35.103Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:36.114Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:37.124Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:38.134Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:39.143Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:40.152Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:41.165Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:42.177Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:43.189Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:44.200Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:45.208Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:46.220Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:47.230Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:48.239Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:49.248Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:50.256Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:51.267Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:30:52.279Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:31:02.317Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:31:03.332Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:31:04.341Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:31:05.355Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:31:06.367Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:31:07.382Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:31:08.392Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:31:09.402Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:31:10.414Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:31:11.429Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-29T17:31:37.424Z"}
+{"level":"info","message":"Starting Job: atg 10.2 install","timestamp":"2014-08-29T17:31:37.426Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:31:37.466Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T17:31:39.450Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-29T17:33:33.026Z"}
+{"level":"info","message":"Starting Job: atg 10.2 install","timestamp":"2014-08-29T17:33:33.028Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T17:33:35.041Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-29T17:35:13.975Z"}
+{"level":"info","message":"Starting Job: atg 10.2 install","timestamp":"2014-08-29T17:35:13.977Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T17:35:15.992Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-29T17:35:47.582Z"}
+{"level":"info","message":"Starting Job: atg 10.2 install","timestamp":"2014-08-29T17:35:47.584Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T17:35:49.597Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-29T17:36:34.751Z"}
+{"level":"info","message":"Starting Job: atg 10.2 install","timestamp":"2014-08-29T17:36:34.753Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:36:34.777Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:36:35.793Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T17:36:36.766Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:39:43.844Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-29T17:40:05.525Z"}
+{"level":"info","message":"Starting Job: atg 10.2 install","timestamp":"2014-08-29T17:40:05.527Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:40:05.560Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T17:40:07.548Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-29T17:42:18.146Z"}
+{"level":"info","message":"Starting Job: atg 10.2 install","timestamp":"2014-08-29T17:42:18.148Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:42:18.190Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T17:42:20.174Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-29T17:43:05.587Z"}
+{"level":"info","message":"Starting Job: atg 10.2 install","timestamp":"2014-08-29T17:43:05.589Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:43:05.630Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T17:43:07.614Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-29T17:45:37.225Z"}
+{"level":"info","message":"Starting Job: atg 10.2 install","timestamp":"2014-08-29T17:45:37.227Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-29T17:45:37.268Z"}
+{"level":"info","message":"job: atg 10.2 install cancelled.","timestamp":"2014-08-29T17:45:37.274Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-29T17:45:39.252Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-30T16:43:51.643Z"}
+{"level":"info","message":"Starting Job: atg 10.2 install","timestamp":"2014-08-30T16:43:51.645Z"}
+{"level":"info","message":"listening for events fron job: atg 10.2 install","timestamp":"2014-08-30T16:43:51.692Z"}
+{"level":"info","message":"job: atg 10.2 install cancelled.","timestamp":"2014-08-30T16:43:51.702Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-08-30T16:43:53.673Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-30T16:44:40.080Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-30T16:44:40.081Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-30T16:45:25.700Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-30T16:45:25.701Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-30T16:45:46.026Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-30T16:45:46.027Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-30T16:46:50.678Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-30T16:46:50.680Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-30T16:47:26.858Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-30T16:47:26.860Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-30T16:47:26.905Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-30T16:48:39.177Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-30T16:48:39.179Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-30T16:48:39.224Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-30T17:02:43.336Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-30T17:02:43.338Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-30T17:02:43.383Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: undefined","timestamp":"2014-08-30T17:02:43.500Z"}
+{"level":"info","message":"/tmp/weblogic/scripts/createDomain.py uploaded","timestamp":"2014-08-30T17:02:43.500Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: undefined","timestamp":"2014-08-30T17:02:43.501Z"}
+{"level":"info","message":"/tmp/weblogic/protocol.jar uploaded","timestamp":"2014-08-30T17:02:43.501Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: undefined","timestamp":"2014-08-30T17:02:43.501Z"}
+{"level":"info","message":"/tmp/weblogic/wls_silent.xml uploaded","timestamp":"2014-08-30T17:02:43.501Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: undefined","timestamp":"2014-08-30T17:02:43.501Z"}
+{"level":"info","message":"/tmp/weblogic/leapfrog.properties uploaded","timestamp":"2014-08-30T17:02:43.501Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: undefined","timestamp":"2014-08-30T17:02:43.501Z"}
+{"level":"info","message":"/tmp/weblogic/jmxremote.password uploaded","timestamp":"2014-08-30T17:02:43.501Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: undefined","timestamp":"2014-08-30T17:02:43.501Z"}
+{"level":"info","message":"/tmp/weblogic/jmxremote.access uploaded","timestamp":"2014-08-30T17:02:43.501Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-30T20:20:09.181Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-30T20:20:09.183Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-30T20:20:09.229Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: undefined","timestamp":"2014-08-30T20:20:09.303Z"}
+{"level":"info","message":"/tmp/weblogic/scripts/createDomain.py uploaded","timestamp":"2014-08-30T20:20:09.303Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: undefined","timestamp":"2014-08-30T20:20:09.303Z"}
+{"level":"info","message":"/tmp/weblogic/wls_silent.xml uploaded","timestamp":"2014-08-30T20:20:09.304Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: undefined","timestamp":"2014-08-30T20:20:09.304Z"}
+{"level":"info","message":"/tmp/weblogic/protocol.jar uploaded","timestamp":"2014-08-30T20:20:09.304Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: undefined","timestamp":"2014-08-30T20:20:09.304Z"}
+{"level":"info","message":"/tmp/weblogic/leapfrog.properties uploaded","timestamp":"2014-08-30T20:20:09.304Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: undefined","timestamp":"2014-08-30T20:20:09.304Z"}
+{"level":"info","message":"/tmp/weblogic/jmxremote.password uploaded","timestamp":"2014-08-30T20:20:09.304Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: undefined","timestamp":"2014-08-30T20:20:09.305Z"}
+{"level":"info","message":"/tmp/weblogic/jmxremote.access uploaded","timestamp":"2014-08-30T20:20:09.305Z"}
+{"level":"info","message":"done uploading: wls1036_generic.jar for job: undefined","timestamp":"2014-08-30T20:22:51.235Z"}
+{"level":"info","message":"/tmp/weblogic/wls1036_generic.jar uploaded","timestamp":"2014-08-30T20:22:51.235Z"}
+{"level":"info","message":"done uploading: wls1036_generic.jar for job: undefined","timestamp":"2014-08-30T20:22:54.720Z"}
+{"level":"info","message":"/tmp/weblogic/wls1036_generic.jar uploaded","timestamp":"2014-08-30T20:22:54.720Z"}
+{"level":"info","message":"done uploading: wls1036_generic.jar for job: undefined","timestamp":"2014-08-30T20:22:54.756Z"}
+{"level":"info","message":"/tmp/weblogic/wls1036_generic.jar uploaded","timestamp":"2014-08-30T20:22:54.756Z"}
+{"level":"info","message":"weblogic 10.3.6 install all files sent...","timestamp":"2014-08-30T20:22:59.222Z"}
+{"level":"info","message":"Completed Job: weblogic 10.3.6 install","timestamp":"2014-08-30T20:23:29.337Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-30T20:36:58.749Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-30T20:36:58.750Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-30T20:36:58.782Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: undefined","timestamp":"2014-08-30T20:36:58.824Z"}
+{"level":"info","message":"/tmp/weblogic/scripts/createDomain.py uploaded","timestamp":"2014-08-30T20:36:58.824Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: undefined","timestamp":"2014-08-30T20:36:58.824Z"}
+{"level":"info","message":"/tmp/weblogic/wls_silent.xml uploaded","timestamp":"2014-08-30T20:36:58.824Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: undefined","timestamp":"2014-08-30T20:36:58.824Z"}
+{"level":"info","message":"/tmp/weblogic/protocol.jar uploaded","timestamp":"2014-08-30T20:36:58.824Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: undefined","timestamp":"2014-08-30T20:36:58.825Z"}
+{"level":"info","message":"/tmp/weblogic/leapfrog.properties uploaded","timestamp":"2014-08-30T20:36:58.825Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: undefined","timestamp":"2014-08-30T20:36:58.825Z"}
+{"level":"info","message":"/tmp/weblogic/jmxremote.password uploaded","timestamp":"2014-08-30T20:36:58.825Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: undefined","timestamp":"2014-08-30T20:36:58.825Z"}
+{"level":"info","message":"/tmp/weblogic/jmxremote.access uploaded","timestamp":"2014-08-30T20:36:58.825Z"}
+{"level":"info","message":"done uploading: wls1036_generic.jar for job: undefined","timestamp":"2014-08-30T20:39:40.002Z"}
+{"level":"info","message":"/tmp/weblogic/wls1036_generic.jar uploaded","timestamp":"2014-08-30T20:39:40.002Z"}
+{"level":"info","message":"done uploading: wls1036_generic.jar for job: undefined","timestamp":"2014-08-30T20:39:44.165Z"}
+{"level":"info","message":"/tmp/weblogic/wls1036_generic.jar uploaded","timestamp":"2014-08-30T20:39:44.165Z"}
+{"level":"info","message":"done uploading: wls1036_generic.jar for job: undefined","timestamp":"2014-08-30T20:39:44.191Z"}
+{"level":"info","message":"/tmp/weblogic/wls1036_generic.jar uploaded","timestamp":"2014-08-30T20:39:44.191Z"}
+{"level":"info","message":"weblogic 10.3.6 install all files sent...","timestamp":"2014-08-30T20:39:48.782Z"}
+{"level":"info","message":"Completed Job: weblogic 10.3.6 install","timestamp":"2014-08-30T20:40:13.865Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-30T20:43:54.254Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-30T20:43:54.255Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-30T20:43:54.300Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-30T20:50:27.090Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-30T20:50:27.092Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-30T20:50:27.140Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T00:10:02.844Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T00:10:02.846Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T00:10:02.891Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T02:00:11.158Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:00:11.160Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:00:11.205Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T02:01:13.304Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:01:13.306Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:01:13.352Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T02:01:55.102Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:01:55.104Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:01:55.149Z"}
+{"level":"info","message":"done uploading: /tmp/weblogic/jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:02:00.135Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T02:06:19.423Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:06:19.425Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:06:19.470Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:06:24.446Z"}
+{"level":"info","message":"Filename jmxremote.access upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:06:24.446Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T02:14:05.765Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:14:05.767Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:14:05.812Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:14:10.788Z"}
+{"level":"info","message":"Filename jmxremote.access upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:14:10.788Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T02:15:37.518Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:15:37.520Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:15:37.565Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T02:16:29.456Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:16:29.458Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:16:29.503Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:16:34.481Z"}
+{"level":"info","message":"Filename jmxremote.access upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:16:34.481Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T02:19:31.604Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:19:31.606Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:19:31.653Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:19:36.630Z"}
+{"level":"info","message":"Filename jmxremote.access upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:19:36.631Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T02:23:00.240Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:23:00.242Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:23:00.287Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:23:05.266Z"}
+{"level":"info","message":"Filename jmxremote.access upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:23:05.266Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T02:25:22.986Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:25:22.988Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:25:23.034Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:25:28.011Z"}
+{"level":"info","message":"Filename createDomain.py upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:25:28.012Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:25:28.013Z"}
+{"level":"info","message":"Filename wls_silent.xml upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:25:28.013Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:25:28.014Z"}
+{"level":"info","message":"Filename protocol.jar upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:25:28.014Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:25:28.014Z"}
+{"level":"info","message":"Filename leapfrog.properties upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:25:28.014Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:25:28.015Z"}
+{"level":"info","message":"Filename jmxremote.password upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:25:28.015Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:25:28.020Z"}
+{"level":"info","message":"Filename jmxremote.access upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:25:28.020Z"}
+{"level":"info","message":"done uploading: wls1036_generic.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:28:08.128Z"}
+{"level":"info","message":"Filename wls1036_generic.jar upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:28:08.128Z"}
+{"level":"info","message":"weblogic 10.3.6 install all files sent...","timestamp":"2014-08-31T02:28:13.034Z"}
+{"level":"info","message":"Completed Job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:28:46.810Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T02:30:35.747Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:30:35.749Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T02:34:14.614Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:34:14.616Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:34:18.684Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:34:25.071Z"}
+{"level":"info","message":"Filename createDomain.py upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:34:25.072Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:34:25.084Z"}
+{"level":"info","message":"Filename wls_silent.xml upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:34:25.084Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:34:25.085Z"}
+{"level":"info","message":"Filename protocol.jar upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:34:25.085Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:34:25.086Z"}
+{"level":"info","message":"Filename leapfrog.properties upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:34:25.086Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:34:25.087Z"}
+{"level":"info","message":"Filename jmxremote.password upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:34:25.088Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:34:25.088Z"}
+{"level":"info","message":"Filename jmxremote.access upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:34:25.088Z"}
+{"level":"info","message":"done uploading: wls1036_generic.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:44:45.998Z"}
+{"level":"info","message":"Filename wls1036_generic.jar upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:44:45.998Z"}
+{"level":"info","message":"weblogic 10.3.6 install all files sent...","timestamp":"2014-08-31T02:44:55.145Z"}
+{"level":"info","message":"Stopping Job: weblogic 10.3.6 install due to error.","timestamp":"2014-08-31T02:45:11.354Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T02:48:41.100Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:48:41.102Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:48:47.636Z"}
+{"level":"info","message":"done uploading: wls1036_generic.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:48:52.691Z"}
+{"level":"info","message":"Filename /tmp/weblogic/wls1036_generic.jar already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:48:52.691Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:48:52.692Z"}
+{"level":"info","message":"Filename /tmp/weblogic/scripts/createDomain.py already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:48:52.692Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:48:52.693Z"}
+{"level":"info","message":"Filename /tmp/weblogic/wls_silent.xml already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:48:52.693Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:48:52.694Z"}
+{"level":"info","message":"Filename /tmp/weblogic/protocol.jar already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:48:52.694Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:48:52.695Z"}
+{"level":"info","message":"Filename /tmp/weblogic/leapfrog.properties already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:48:52.695Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:48:52.696Z"}
+{"level":"info","message":"Filename /tmp/weblogic/jmxremote.password already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:48:52.696Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:48:52.697Z"}
+{"level":"info","message":"Filename /tmp/weblogic/jmxremote.access already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:48:52.697Z"}
+{"level":"info","message":"weblogic 10.3.6 install all files sent...","timestamp":"2014-08-31T02:49:02.036Z"}
+{"level":"info","message":"Stopping Job: weblogic 10.3.6 install due to error.","timestamp":"2014-08-31T02:49:14.301Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T02:54:23.666Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:54:23.668Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:54:27.837Z"}
+{"level":"info","message":"done uploading: wls1036_generic.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:54:32.892Z"}
+{"level":"info","message":"Filename /tmp/weblogic/wls1036_generic.jar already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:54:32.893Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:54:32.893Z"}
+{"level":"info","message":"Filename /tmp/weblogic/scripts/createDomain.py already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:54:32.893Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:54:32.908Z"}
+{"level":"info","message":"Filename /tmp/weblogic/protocol.jar already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:54:32.908Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:54:32.909Z"}
+{"level":"info","message":"Filename /tmp/weblogic/leapfrog.properties already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:54:32.909Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:54:32.909Z"}
+{"level":"info","message":"Filename /tmp/weblogic/jmxremote.password already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:54:32.910Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:54:32.911Z"}
+{"level":"info","message":"Filename /tmp/weblogic/jmxremote.access already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:54:32.911Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:54:34.206Z"}
+{"level":"info","message":"Filename wls_silent.xml upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:54:34.206Z"}
+{"level":"info","message":"weblogic 10.3.6 install all files sent...","timestamp":"2014-08-31T02:54:44.153Z"}
+{"level":"info","message":"Stopping Job: weblogic 10.3.6 install due to error.","timestamp":"2014-08-31T02:54:55.745Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T02:56:46.596Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:56:46.597Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:56:50.656Z"}
+{"level":"info","message":"done uploading: wls1036_generic.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:56:55.714Z"}
+{"level":"info","message":"Filename /tmp/weblogic/wls1036_generic.jar already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:56:55.714Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:56:55.715Z"}
+{"level":"info","message":"Filename /tmp/weblogic/scripts/createDomain.py already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:56:55.715Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:56:55.718Z"}
+{"level":"info","message":"Filename /tmp/weblogic/protocol.jar already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:56:55.718Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:56:55.720Z"}
+{"level":"info","message":"Filename /tmp/weblogic/leapfrog.properties already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:56:55.720Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:56:55.721Z"}
+{"level":"info","message":"Filename /tmp/weblogic/jmxremote.password already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:56:55.721Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:56:55.722Z"}
+{"level":"info","message":"Filename /tmp/weblogic/jmxremote.access already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:56:55.722Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:56:57.162Z"}
+{"level":"info","message":"Filename wls_silent.xml upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:56:57.162Z"}
+{"level":"info","message":"weblogic 10.3.6 install all files sent...","timestamp":"2014-08-31T02:57:07.039Z"}
+{"level":"info","message":"Stopping Job: weblogic 10.3.6 install due to error.","timestamp":"2014-08-31T02:57:14.531Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T02:58:11.747Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:58:11.749Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:58:15.835Z"}
+{"level":"info","message":"done uploading: wls1036_generic.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:58:20.892Z"}
+{"level":"info","message":"Filename /tmp/weblogic/wls1036_generic.jar already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:58:20.892Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:58:20.893Z"}
+{"level":"info","message":"Filename /tmp/weblogic/scripts/createDomain.py already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:58:20.893Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:58:20.895Z"}
+{"level":"info","message":"Filename /tmp/weblogic/protocol.jar already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:58:20.895Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:58:20.896Z"}
+{"level":"info","message":"Filename /tmp/weblogic/leapfrog.properties already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:58:20.896Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:58:20.897Z"}
+{"level":"info","message":"Filename /tmp/weblogic/jmxremote.password already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:58:20.897Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:58:20.899Z"}
+{"level":"info","message":"Filename /tmp/weblogic/jmxremote.access already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:58:20.899Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:58:22.295Z"}
+{"level":"info","message":"Filename wls_silent.xml upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:58:22.295Z"}
+{"level":"info","message":"weblogic 10.3.6 install all files sent...","timestamp":"2014-08-31T02:58:32.203Z"}
+{"level":"info","message":"Stopping Job: weblogic 10.3.6 install due to error.","timestamp":"2014-08-31T02:58:39.647Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T02:59:30.062Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:59:30.064Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:59:34.087Z"}
+{"level":"info","message":"done uploading: wls1036_generic.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:59:39.171Z"}
+{"level":"info","message":"Filename /tmp/weblogic/wls1036_generic.jar already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:59:39.171Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:59:39.173Z"}
+{"level":"info","message":"Filename /tmp/weblogic/scripts/createDomain.py already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:59:39.173Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:59:39.177Z"}
+{"level":"info","message":"Filename /tmp/weblogic/protocol.jar already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:59:39.177Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:59:39.178Z"}
+{"level":"info","message":"Filename /tmp/weblogic/leapfrog.properties already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:59:39.178Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:59:39.179Z"}
+{"level":"info","message":"Filename /tmp/weblogic/jmxremote.password already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:59:39.179Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:59:39.181Z"}
+{"level":"info","message":"Filename /tmp/weblogic/jmxremote.access already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:59:39.181Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-08-31T02:59:40.601Z"}
+{"level":"info","message":"Filename wls_silent.xml upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T02:59:40.601Z"}
+{"level":"info","message":"weblogic 10.3.6 install all files sent...","timestamp":"2014-08-31T02:59:50.479Z"}
+{"level":"info","message":"Stopping Job: weblogic 10.3.6 install due to error.","timestamp":"2014-08-31T02:59:57.601Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T03:34:54.469Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T03:34:54.471Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T03:34:58.206Z"}
+{"level":"info","message":"done uploading: wls1036_generic.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T03:35:03.261Z"}
+{"level":"info","message":"Filename /tmp/weblogic/wls1036_generic.jar already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T03:35:03.261Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-08-31T03:35:03.262Z"}
+{"level":"info","message":"Filename /tmp/weblogic/scripts/createDomain.py already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T03:35:03.262Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T03:35:03.265Z"}
+{"level":"info","message":"Filename /tmp/weblogic/protocol.jar already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T03:35:03.265Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-08-31T03:35:03.267Z"}
+{"level":"info","message":"Filename /tmp/weblogic/leapfrog.properties already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T03:35:03.267Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-08-31T03:35:03.267Z"}
+{"level":"info","message":"Filename /tmp/weblogic/jmxremote.password already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T03:35:03.268Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T03:35:03.268Z"}
+{"level":"info","message":"Filename /tmp/weblogic/jmxremote.access already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T03:35:03.268Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-08-31T03:35:04.669Z"}
+{"level":"info","message":"Filename wls_silent.xml upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T03:35:04.669Z"}
+{"level":"info","message":"weblogic 10.3.6 install all files sent...","timestamp":"2014-08-31T03:35:14.498Z"}
+{"level":"info","message":"Stopping Job: weblogic 10.3.6 install due to error.","timestamp":"2014-08-31T03:35:25.154Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T03:38:47.361Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T03:38:47.362Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T03:38:51.406Z"}
+{"level":"info","message":"done uploading: wls1036_generic.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T03:38:56.462Z"}
+{"level":"info","message":"Filename /tmp/weblogic/wls1036_generic.jar already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T03:38:56.462Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-08-31T03:38:56.463Z"}
+{"level":"info","message":"Filename /tmp/weblogic/scripts/createDomain.py already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T03:38:56.463Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T03:38:56.466Z"}
+{"level":"info","message":"Filename /tmp/weblogic/protocol.jar already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T03:38:56.467Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-08-31T03:38:56.468Z"}
+{"level":"info","message":"Filename /tmp/weblogic/leapfrog.properties already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T03:38:56.468Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-08-31T03:38:56.469Z"}
+{"level":"info","message":"Filename /tmp/weblogic/jmxremote.password already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T03:38:56.469Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T03:38:56.470Z"}
+{"level":"info","message":"Filename /tmp/weblogic/jmxremote.access already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T03:38:56.470Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-08-31T03:38:57.946Z"}
+{"level":"info","message":"Filename wls_silent.xml upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T03:38:57.946Z"}
+{"level":"info","message":"weblogic 10.3.6 install all files sent...","timestamp":"2014-08-31T03:39:07.795Z"}
+{"level":"info","message":"Stopping Job: weblogic 10.3.6 install due to error.","timestamp":"2014-08-31T03:39:27.439Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T03:40:41.196Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T03:40:41.198Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T03:40:45.215Z"}
+{"level":"info","message":"done uploading: wls1036_generic.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T03:40:50.288Z"}
+{"level":"info","message":"Filename /tmp/weblogic/wls1036_generic.jar already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T03:40:50.288Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-08-31T03:40:50.289Z"}
+{"level":"info","message":"Filename /tmp/weblogic/scripts/createDomain.py already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T03:40:50.289Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T03:40:50.293Z"}
+{"level":"info","message":"Filename /tmp/weblogic/protocol.jar already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T03:40:50.294Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-08-31T03:40:50.294Z"}
+{"level":"info","message":"Filename /tmp/weblogic/leapfrog.properties already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T03:40:50.294Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-08-31T03:40:50.297Z"}
+{"level":"info","message":"Filename /tmp/weblogic/jmxremote.password already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T03:40:50.297Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T03:40:50.297Z"}
+{"level":"info","message":"Filename /tmp/weblogic/jmxremote.access already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T03:40:50.297Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-08-31T03:40:51.615Z"}
+{"level":"info","message":"Filename wls_silent.xml upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T03:40:51.615Z"}
+{"level":"info","message":"weblogic 10.3.6 install all files sent...","timestamp":"2014-08-31T03:40:51.616Z"}
+{"level":"info","message":"Completed Job: weblogic 10.3.6 install","timestamp":"2014-08-31T03:48:45.133Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T04:01:44.256Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T04:01:44.258Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T04:01:48.443Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-08-31T04:01:54.729Z"}
+{"level":"info","message":"Filename createDomain.py upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T04:01:54.729Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-08-31T04:01:54.730Z"}
+{"level":"info","message":"Filename wls_silent.xml upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T04:01:54.730Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T04:01:54.731Z"}
+{"level":"info","message":"Filename protocol.jar upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T04:01:54.731Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-08-31T04:01:54.742Z"}
+{"level":"info","message":"Filename leapfrog.properties upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T04:01:54.742Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-08-31T04:01:54.744Z"}
+{"level":"info","message":"Filename jmxremote.password upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T04:01:54.744Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T04:01:54.747Z"}
+{"level":"info","message":"Filename jmxremote.access upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T04:01:54.747Z"}
+{"level":"info","message":"done uploading: wls1036_generic.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T04:12:56.491Z"}
+{"level":"info","message":"Filename wls1036_generic.jar upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T04:12:56.491Z"}
+{"level":"info","message":"weblogic 10.3.6 install all files sent...","timestamp":"2014-08-31T04:13:04.794Z"}
+{"level":"info","message":"Stopping Job: weblogic 10.3.6 install due to error.","timestamp":"2014-08-31T04:13:17.114Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T04:13:41.887Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T04:13:41.889Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T04:13:45.999Z"}
+{"level":"info","message":"done uploading: wls1036_generic.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T04:13:51.058Z"}
+{"level":"info","message":"Filename /tmp/weblogic/wls1036_generic.jar already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T04:13:51.058Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-08-31T04:13:51.059Z"}
+{"level":"info","message":"Filename /tmp/weblogic/scripts/createDomain.py already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T04:13:51.059Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-08-31T04:13:51.060Z"}
+{"level":"info","message":"Filename /tmp/weblogic/wls_silent.xml already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T04:13:51.060Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T04:13:51.061Z"}
+{"level":"info","message":"Filename /tmp/weblogic/protocol.jar already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T04:13:51.061Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-08-31T04:13:51.062Z"}
+{"level":"info","message":"Filename /tmp/weblogic/leapfrog.properties already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T04:13:51.062Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-08-31T04:13:51.063Z"}
+{"level":"info","message":"Filename /tmp/weblogic/jmxremote.password already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T04:13:51.063Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T04:13:51.064Z"}
+{"level":"info","message":"Filename /tmp/weblogic/jmxremote.access already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T04:13:51.065Z"}
+{"level":"info","message":"weblogic 10.3.6 install all files sent...","timestamp":"2014-08-31T04:13:52.346Z"}
+{"level":"info","message":"Stopping Job: weblogic 10.3.6 install due to error.","timestamp":"2014-08-31T04:14:08.289Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T04:15:22.390Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T04:15:22.391Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T04:15:26.346Z"}
+{"level":"info","message":"done uploading: wls1036_generic.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T04:15:31.388Z"}
+{"level":"info","message":"Filename /tmp/weblogic/wls1036_generic.jar already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T04:15:31.388Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-08-31T04:15:31.388Z"}
+{"level":"info","message":"Filename /tmp/weblogic/scripts/createDomain.py already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T04:15:31.388Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T04:15:31.389Z"}
+{"level":"info","message":"Filename /tmp/weblogic/protocol.jar already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T04:15:31.389Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-08-31T04:15:31.389Z"}
+{"level":"info","message":"Filename /tmp/weblogic/leapfrog.properties already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T04:15:31.389Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-08-31T04:15:31.389Z"}
+{"level":"info","message":"Filename /tmp/weblogic/jmxremote.password already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T04:15:31.389Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T04:15:31.389Z"}
+{"level":"info","message":"Filename /tmp/weblogic/jmxremote.access already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T04:15:31.389Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-08-31T04:15:32.874Z"}
+{"level":"info","message":"Filename wls_silent.xml upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T04:15:32.874Z"}
+{"level":"info","message":"weblogic 10.3.6 install all files sent...","timestamp":"2014-08-31T04:15:42.856Z"}
+{"level":"info","message":"Completed Job: weblogic 10.3.6 install","timestamp":"2014-08-31T04:21:45.536Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T05:00:03.951Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T05:00:03.953Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T05:04:02.114Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T05:04:02.116Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T05:04:06.147Z"}
+{"level":"info","message":"done uploading: wls1036_generic.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T05:04:11.191Z"}
+{"level":"info","message":"Filename /tmp/weblogic/wls1036_generic.jar already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T05:04:11.191Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T05:04:11.192Z"}
+{"level":"info","message":"Filename /tmp/weblogic/protocol.jar already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T05:04:11.192Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-08-31T05:04:11.192Z"}
+{"level":"info","message":"Filename /tmp/weblogic/leapfrog.properties already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T05:04:11.192Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-08-31T05:04:11.192Z"}
+{"level":"info","message":"Filename /tmp/weblogic/jmxremote.password already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T05:04:11.192Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T05:04:11.192Z"}
+{"level":"info","message":"Filename /tmp/weblogic/jmxremote.access already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T05:04:11.193Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-08-31T05:04:12.567Z"}
+{"level":"info","message":"Filename createDomain.py upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T05:04:12.567Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-08-31T05:04:12.568Z"}
+{"level":"info","message":"Filename wls_silent.xml upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T05:04:12.568Z"}
+{"level":"info","message":"weblogic 10.3.6 install all files sent...","timestamp":"2014-08-31T05:04:22.569Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T11:38:29.764Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T11:38:29.766Z"}
+{"code":"ECONNREFUSED","errno":"ECONNREFUSED","syscall":"connect","level":"error","message":"","timestamp":"2014-08-31T11:38:29.846Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T11:38:58.772Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T11:38:58.773Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T11:39:44.331Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T11:39:44.332Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T11:39:48.414Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-08-31T11:39:54.759Z"}
+{"level":"info","message":"Filename createDomain.py upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T11:39:54.759Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-08-31T11:39:54.760Z"}
+{"level":"info","message":"Filename createDomain.py upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T11:39:54.760Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-08-31T11:39:54.781Z"}
+{"level":"info","message":"Filename wls_silent.xml upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T11:39:54.781Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-08-31T11:39:54.786Z"}
+{"level":"info","message":"Filename wls_silent.xml upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T11:39:54.786Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T11:39:54.787Z"}
+{"level":"info","message":"Filename protocol.jar upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T11:39:54.787Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-08-31T11:39:54.789Z"}
+{"level":"info","message":"Filename leapfrog.properties upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T11:39:54.789Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T11:39:54.790Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-08-31T11:39:54.791Z"}
+{"level":"info","message":"Filename jmxremote.password upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T11:39:54.791Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T11:39:54.791Z"}
+{"level":"info","message":"Filename protocol.jar upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T11:39:54.790Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-08-31T11:39:54.791Z"}
+{"level":"info","message":"Filename leapfrog.properties upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T11:39:54.791Z"}
+{"level":"info","message":"Filename jmxremote.access upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T11:39:54.791Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-08-31T11:39:54.793Z"}
+{"level":"info","message":"Filename jmxremote.password upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T11:39:54.794Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T11:39:54.813Z"}
+{"level":"info","message":"Filename jmxremote.access upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T11:39:54.813Z"}
+{"level":"error","message":"time out for: weblogic 10.3.6 install cancelling","timestamp":"2014-08-31T11:46:29.353Z"}
+{"level":"info","message":"job: weblogic 10.3.6 install cancelled.","timestamp":"2014-08-31T11:46:29.370Z"}
+{"level":"info","message":"job: weblogic 10.3.6 install cancelled.","timestamp":"2014-08-31T11:46:29.370Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T11:56:08.210Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T11:56:08.211Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T11:56:12.332Z"}
+{"level":"info","message":"done uploading: wls1036_generic.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T11:56:17.374Z"}
+{"level":"info","message":"Filename /tmp/weblogic/wls1036_generic.jar already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T11:56:17.374Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-08-31T11:56:17.374Z"}
+{"level":"info","message":"Filename /tmp/weblogic/scripts/createDomain.py already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T11:56:17.374Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-08-31T11:56:17.374Z"}
+{"level":"info","message":"Filename /tmp/weblogic/wls_silent.xml already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T11:56:17.374Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T11:56:17.374Z"}
+{"level":"info","message":"Filename /tmp/weblogic/protocol.jar already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T11:56:17.374Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-08-31T11:56:17.375Z"}
+{"level":"info","message":"Filename /tmp/weblogic/leapfrog.properties already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T11:56:17.375Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-08-31T11:56:17.375Z"}
+{"level":"info","message":"Filename /tmp/weblogic/jmxremote.password already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T11:56:17.375Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T11:56:17.375Z"}
+{"level":"info","message":"Filename /tmp/weblogic/jmxremote.access already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T11:56:17.375Z"}
+{"level":"info","message":"weblogic 10.3.6 install all files sent...","timestamp":"2014-08-31T11:56:18.644Z"}
+{"level":"info","message":"Stopping Job: weblogic 10.3.6 install due to error.","timestamp":"2014-08-31T11:56:19.188Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T11:57:25.941Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T11:57:25.942Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T11:57:29.995Z"}
+{"level":"info","message":"done uploading: wls1036_generic.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T11:57:35.033Z"}
+{"level":"info","message":"Filename /tmp/weblogic/wls1036_generic.jar already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T11:57:35.033Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-08-31T11:57:35.040Z"}
+{"level":"info","message":"Filename /tmp/weblogic/scripts/createDomain.py already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T11:57:35.040Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-08-31T11:57:35.040Z"}
+{"level":"info","message":"Filename /tmp/weblogic/wls_silent.xml already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T11:57:35.040Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T11:57:35.040Z"}
+{"level":"info","message":"Filename /tmp/weblogic/protocol.jar already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T11:57:35.040Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-08-31T11:57:35.040Z"}
+{"level":"info","message":"Filename /tmp/weblogic/leapfrog.properties already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T11:57:35.040Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-08-31T11:57:35.040Z"}
+{"level":"info","message":"Filename /tmp/weblogic/jmxremote.password already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T11:57:35.040Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T11:57:35.041Z"}
+{"level":"info","message":"Filename /tmp/weblogic/jmxremote.access already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T11:57:35.041Z"}
+{"level":"info","message":"weblogic 10.3.6 install all files sent...","timestamp":"2014-08-31T11:57:36.355Z"}
+{"level":"info","message":"Stopping Job: weblogic 10.3.6 install due to error.","timestamp":"2014-08-31T11:57:36.508Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T12:05:06.100Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:05:06.101Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T12:09:39.538Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:09:39.540Z"}
+{"code":"ECONNREFUSED","errno":"ECONNREFUSED","syscall":"connect","level":"error","message":"","timestamp":"2014-08-31T12:09:39.936Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T12:11:07.244Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:11:07.246Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T12:18:51.533Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:18:51.535Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T12:24:57.998Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:24:58.000Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T12:30:40.070Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:30:40.071Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T12:41:53.032Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:41:53.034Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T12:44:38.075Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:44:38.076Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T12:45:37.984Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:45:37.986Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:45:41.974Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:45:48.419Z"}
+{"level":"info","message":"Filename createDomain.py upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T12:45:48.420Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:45:48.429Z"}
+{"level":"info","message":"Filename wls_silent.xml upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T12:45:48.429Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:45:48.431Z"}
+{"level":"info","message":"Filename protocol.jar upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T12:45:48.431Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:45:48.436Z"}
+{"level":"info","message":"Filename leapfrog.properties upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T12:45:48.436Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:45:48.436Z"}
+{"level":"info","message":"Filename jmxremote.password upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T12:45:48.436Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:45:48.439Z"}
+{"level":"info","message":"Filename jmxremote.access upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T12:45:48.439Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T12:47:50.377Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:47:50.378Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:47:54.458Z"}
+{"level":"info","message":"done uploading: wls1036_generic.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:47:59.500Z"}
+{"level":"info","message":"Filename /tmp/weblogic/wls1036_generic.jar already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T12:47:59.500Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:47:59.501Z"}
+{"level":"info","message":"Filename /tmp/weblogic/scripts/createDomain.py already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T12:47:59.501Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:47:59.501Z"}
+{"level":"info","message":"Filename /tmp/weblogic/wls_silent.xml already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T12:47:59.501Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:47:59.501Z"}
+{"level":"info","message":"Filename /tmp/weblogic/protocol.jar already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T12:47:59.501Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:47:59.501Z"}
+{"level":"info","message":"Filename /tmp/weblogic/leapfrog.properties already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T12:47:59.501Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:47:59.501Z"}
+{"level":"info","message":"Filename /tmp/weblogic/jmxremote.password already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T12:47:59.501Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:47:59.501Z"}
+{"level":"info","message":"Filename /tmp/weblogic/jmxremote.access already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T12:47:59.501Z"}
+{"level":"info","message":"weblogic 10.3.6 install all files sent...","timestamp":"2014-08-31T12:48:00.836Z"}
+{"level":"info","message":"Stopping Job: weblogic 10.3.6 install due to error.","timestamp":"2014-08-31T12:48:00.987Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T12:52:50.188Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:52:50.190Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:52:54.296Z"}
+{"level":"info","message":"done uploading: wls1036_generic.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:52:59.338Z"}
+{"level":"info","message":"Filename /tmp/weblogic/wls1036_generic.jar already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T12:52:59.338Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:52:59.339Z"}
+{"level":"info","message":"Filename /tmp/weblogic/scripts/createDomain.py already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T12:52:59.339Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:52:59.339Z"}
+{"level":"info","message":"Filename /tmp/weblogic/wls_silent.xml already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T12:52:59.339Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:52:59.339Z"}
+{"level":"info","message":"Filename /tmp/weblogic/protocol.jar already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T12:52:59.339Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:52:59.339Z"}
+{"level":"info","message":"Filename /tmp/weblogic/leapfrog.properties already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T12:52:59.339Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:52:59.339Z"}
+{"level":"info","message":"Filename /tmp/weblogic/jmxremote.password already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T12:52:59.339Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:52:59.339Z"}
+{"level":"info","message":"Filename /tmp/weblogic/jmxremote.access already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T12:52:59.339Z"}
+{"level":"info","message":"weblogic 10.3.6 install all files sent...","timestamp":"2014-08-31T12:53:00.617Z"}
+{"level":"info","message":"Stopping Job: weblogic 10.3.6 install due to error.","timestamp":"2014-08-31T12:53:00.806Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T12:53:54.825Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:53:54.827Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:53:58.871Z"}
+{"level":"info","message":"job: weblogic 10.3.6 install cancelled.","timestamp":"2014-08-31T12:54:03.883Z"}
+{"level":"error","message":"socket error: No active Job with id: weblogic 10.3.6 install","timestamp":"2014-08-31T12:54:03.884Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T12:54:58.847Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:54:58.849Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:55:02.862Z"}
+{"level":"info","message":"job: weblogic 10.3.6 install cancelled.","timestamp":"2014-08-31T12:55:07.877Z"}
+{"level":"error","message":"socket error: No active Job with id: weblogic 10.3.6 install","timestamp":"2014-08-31T12:55:07.878Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T12:58:42.970Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:58:42.972Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:58:43.018Z"}
+{"level":"info","message":"done uploading: wls1036_generic.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:58:43.043Z"}
+{"level":"info","message":"Filename /tmp/weblogic/wls1036_generic.jar already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T12:58:43.043Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:58:43.044Z"}
+{"level":"info","message":"Filename /tmp/weblogic/protocol.jar already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T12:58:43.045Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:58:43.045Z"}
+{"level":"info","message":"Filename /tmp/weblogic/leapfrog.properties already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T12:58:43.045Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:58:43.045Z"}
+{"level":"info","message":"Filename /tmp/weblogic/jmxremote.password already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T12:58:43.045Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:58:43.045Z"}
+{"level":"info","message":"Filename /tmp/weblogic/jmxremote.access already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T12:58:43.045Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:58:47.991Z"}
+{"level":"info","message":"Filename createDomain.py upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T12:58:47.991Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-08-31T12:58:47.994Z"}
+{"level":"info","message":"Filename wls_silent.xml upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T12:58:47.994Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T13:00:23.698Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T13:00:23.700Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T13:00:23.744Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-08-31T13:00:28.716Z"}
+{"level":"info","message":"Filename createDomain.py upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T13:00:28.717Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-08-31T13:00:28.719Z"}
+{"level":"info","message":"Filename wls_silent.xml upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T13:00:28.719Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T13:00:28.720Z"}
+{"level":"info","message":"Filename protocol.jar upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T13:00:28.720Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-08-31T13:00:28.721Z"}
+{"level":"info","message":"Filename leapfrog.properties upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T13:00:28.721Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-08-31T13:00:28.721Z"}
+{"level":"info","message":"Filename jmxremote.password upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T13:00:28.721Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T13:00:28.722Z"}
+{"level":"info","message":"Filename jmxremote.access upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T13:00:28.722Z"}
+{"level":"info","message":"done uploading: wls1036_generic.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T13:03:08.848Z"}
+{"level":"info","message":"Filename wls1036_generic.jar upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T13:03:08.849Z"}
+{"level":"info","message":"weblogic 10.3.6 install all files sent...","timestamp":"2014-08-31T13:03:13.736Z"}
+{"level":"info","message":"Completed Job: weblogic 10.3.6 install","timestamp":"2014-08-31T13:03:43.175Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T13:07:14.276Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T13:07:14.277Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T13:07:18.384Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-08-31T13:07:24.729Z"}
+{"level":"info","message":"Filename createDomain.py upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T13:07:24.730Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-08-31T13:07:24.741Z"}
+{"level":"info","message":"Filename wls_silent.xml upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T13:07:24.741Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T13:07:24.743Z"}
+{"level":"info","message":"Filename protocol.jar upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T13:07:24.743Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-08-31T13:07:24.744Z"}
+{"level":"info","message":"Filename leapfrog.properties upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T13:07:24.744Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-08-31T13:07:24.746Z"}
+{"level":"info","message":"Filename jmxremote.password upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T13:07:24.746Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T13:07:24.759Z"}
+{"level":"info","message":"Filename jmxremote.access upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T13:07:24.759Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T13:08:41.256Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T13:08:41.258Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T13:08:45.310Z"}
+{"level":"info","message":"done uploading: wls1036_generic.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T13:08:50.354Z"}
+{"level":"info","message":"Filename /tmp/weblogic/wls1036_generic.jar already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T13:08:50.354Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-08-31T13:08:50.354Z"}
+{"level":"info","message":"Filename /tmp/weblogic/scripts/createDomain.py already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T13:08:50.354Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-08-31T13:08:50.354Z"}
+{"level":"info","message":"Filename /tmp/weblogic/wls_silent.xml already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T13:08:50.354Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T13:08:50.354Z"}
+{"level":"info","message":"Filename /tmp/weblogic/protocol.jar already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T13:08:50.354Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-08-31T13:08:50.355Z"}
+{"level":"info","message":"Filename /tmp/weblogic/leapfrog.properties already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T13:08:50.355Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-08-31T13:08:50.355Z"}
+{"level":"info","message":"Filename /tmp/weblogic/jmxremote.password already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T13:08:50.355Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T13:08:50.355Z"}
+{"level":"info","message":"Filename /tmp/weblogic/jmxremote.access already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T13:08:50.355Z"}
+{"level":"info","message":"weblogic 10.3.6 install all files sent...","timestamp":"2014-08-31T13:08:51.713Z"}
+{"level":"info","message":"Stopping Job: weblogic 10.3.6 install due to error.","timestamp":"2014-08-31T13:08:51.872Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T13:12:33.634Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T13:12:33.636Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T13:12:37.687Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-08-31T13:12:44.081Z"}
+{"level":"info","message":"Filename createDomain.py upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T13:12:44.081Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-08-31T13:12:44.090Z"}
+{"level":"info","message":"Filename wls_silent.xml upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T13:12:44.090Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T13:12:44.092Z"}
+{"level":"info","message":"Filename protocol.jar upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T13:12:44.093Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-08-31T13:12:44.093Z"}
+{"level":"info","message":"Filename leapfrog.properties upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T13:12:44.093Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-08-31T13:12:44.094Z"}
+{"level":"info","message":"Filename jmxremote.password upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T13:12:44.094Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T13:12:44.095Z"}
+{"level":"info","message":"Filename jmxremote.access upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T13:12:44.095Z"}
+{"level":"info","message":"done uploading: wls1036_generic.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T13:22:09.843Z"}
+{"level":"info","message":"Filename wls1036_generic.jar upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T13:22:09.843Z"}
+{"level":"info","message":"weblogic 10.3.6 install all files sent...","timestamp":"2014-08-31T13:22:14.150Z"}
+{"level":"error","message":"time out for: weblogic 10.3.6 install cancelling","timestamp":"2014-08-31T13:27:34.086Z"}
+{"level":"info","message":"job: weblogic 10.3.6 install cancelled.","timestamp":"2014-08-31T13:27:34.103Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T21:00:03.551Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T21:00:03.552Z"}
+{"code":"ECONNREFUSED","errno":"ECONNREFUSED","syscall":"connect","level":"error","message":"","timestamp":"2014-08-31T21:00:04.056Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T21:15:44.394Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T21:15:44.395Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T21:15:48.615Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-08-31T21:15:54.869Z"}
+{"level":"info","message":"Filename createDomain.py upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T21:15:54.869Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-08-31T21:15:54.882Z"}
+{"level":"info","message":"Filename wls_silent.xml upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T21:15:54.882Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T21:15:54.883Z"}
+{"level":"info","message":"Filename protocol.jar upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T21:15:54.883Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-08-31T21:15:54.893Z"}
+{"level":"info","message":"Filename leapfrog.properties upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T21:15:54.894Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-08-31T21:15:54.896Z"}
+{"level":"info","message":"Filename jmxremote.password upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T21:15:54.896Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T21:15:54.898Z"}
+{"level":"info","message":"Filename jmxremote.access upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T21:15:54.898Z"}
+{"level":"info","message":"done uploading: wls1036_generic.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T21:28:35.847Z"}
+{"level":"info","message":"Filename wls1036_generic.jar upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T21:28:35.847Z"}
+{"level":"info","message":"weblogic 10.3.6 install all files sent...","timestamp":"2014-08-31T21:28:44.998Z"}
+{"level":"info","message":"Completed Job: weblogic 10.3.6 install","timestamp":"2014-08-31T21:35:35.689Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T21:43:57.784Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T21:43:57.786Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T21:43:58.265Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-08-31T21:44:02.939Z"}
+{"level":"info","message":"Filename createDomain.py upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T21:44:02.939Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-08-31T21:44:02.950Z"}
+{"level":"info","message":"Filename wls_silent.xml upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T21:44:02.950Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T21:44:03.002Z"}
+{"level":"info","message":"Filename protocol.jar upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T21:44:03.002Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-08-31T21:44:03.019Z"}
+{"level":"info","message":"Filename leapfrog.properties upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T21:44:03.019Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-08-31T21:44:03.021Z"}
+{"level":"info","message":"Filename jmxremote.password upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T21:44:03.021Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T21:44:03.115Z"}
+{"level":"info","message":"Filename jmxremote.access upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T21:44:03.115Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T22:11:19.452Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:11:19.454Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:11:23.583Z"}
+{"level":"info","message":"done uploading: wls1036_generic.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:11:28.636Z"}
+{"level":"info","message":"Filename /tmp/weblogic/wls1036_generic.jar already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:11:28.636Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:11:28.638Z"}
+{"level":"info","message":"Filename /tmp/weblogic/protocol.jar already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:11:28.638Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:11:28.638Z"}
+{"level":"info","message":"Filename /tmp/weblogic/leapfrog.properties already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:11:28.638Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:11:28.639Z"}
+{"level":"info","message":"Filename /tmp/weblogic/jmxremote.password already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:11:28.639Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:11:28.639Z"}
+{"level":"info","message":"Filename /tmp/weblogic/jmxremote.access already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:11:28.639Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:11:29.873Z"}
+{"level":"info","message":"Filename createDomain.py upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:11:29.873Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:11:29.879Z"}
+{"level":"info","message":"Filename wls_silent.xml upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:11:29.879Z"}
+{"level":"info","message":"weblogic 10.3.6 install all files sent...","timestamp":"2014-08-31T22:11:29.882Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T22:12:14.415Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:12:14.417Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:12:18.624Z"}
+{"level":"info","message":"done uploading: wls1036_generic.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:12:23.958Z"}
+{"level":"info","message":"Filename /tmp/weblogic/wls1036_generic.jar already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:12:23.958Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:12:23.959Z"}
+{"level":"info","message":"Filename /tmp/weblogic/scripts/createDomain.py already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:12:23.959Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:12:23.960Z"}
+{"level":"info","message":"Filename /tmp/weblogic/wls_silent.xml already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:12:23.960Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:12:23.962Z"}
+{"level":"info","message":"Filename /tmp/weblogic/protocol.jar already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:12:23.962Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:12:23.963Z"}
+{"level":"info","message":"Filename /tmp/weblogic/leapfrog.properties already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:12:23.963Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:12:23.964Z"}
+{"level":"info","message":"Filename /tmp/weblogic/jmxremote.password already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:12:23.964Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:12:23.965Z"}
+{"level":"info","message":"Filename /tmp/weblogic/jmxremote.access already exists and dontUploadIfFileExists is true for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:12:23.965Z"}
+{"level":"info","message":"weblogic 10.3.6 install all files sent...","timestamp":"2014-08-31T22:12:24.907Z"}
+{"level":"info","message":"Stopping Job: weblogic 10.3.6 install due to error.","timestamp":"2014-08-31T22:12:25.396Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T22:12:38.853Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:12:38.854Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:12:42.926Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:12:54.974Z"}
+{"level":"info","message":"Filename createDomain.py upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:12:54.974Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:12:54.975Z"}
+{"level":"info","message":"Filename wls_silent.xml upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:12:54.975Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:12:54.976Z"}
+{"level":"info","message":"Filename protocol.jar upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:12:54.976Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:12:54.977Z"}
+{"level":"info","message":"Filename leapfrog.properties upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:12:54.977Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:12:54.977Z"}
+{"level":"info","message":"Filename jmxremote.password upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:12:54.978Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:12:54.978Z"}
+{"level":"info","message":"Filename jmxremote.access upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:12:54.978Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T22:25:08.156Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:25:08.158Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:25:12.286Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:25:23.854Z"}
+{"level":"info","message":"Filename createDomain.py upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:25:23.854Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:25:23.856Z"}
+{"level":"info","message":"Filename wls_silent.xml upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:25:23.856Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:25:23.856Z"}
+{"level":"info","message":"Filename protocol.jar upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:25:23.856Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:25:23.857Z"}
+{"level":"info","message":"Filename leapfrog.properties upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:25:23.857Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:25:23.858Z"}
+{"level":"info","message":"Filename jmxremote.password upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:25:23.858Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:25:23.859Z"}
+{"level":"info","message":"Filename jmxremote.access upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:25:23.859Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T22:27:11.962Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:27:11.964Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:27:16.080Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:27:22.392Z"}
+{"level":"info","message":"Filename createDomain.py upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:27:22.392Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:27:22.403Z"}
+{"level":"info","message":"Filename wls_silent.xml upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:27:22.403Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:27:22.404Z"}
+{"level":"info","message":"Filename protocol.jar upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:27:22.404Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:27:22.414Z"}
+{"level":"info","message":"Filename leapfrog.properties upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:27:22.414Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:27:22.417Z"}
+{"level":"info","message":"Filename jmxremote.password upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:27:22.418Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:27:22.418Z"}
+{"level":"info","message":"Filename jmxremote.access upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:27:22.419Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T22:35:36.540Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:35:36.542Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:35:40.617Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:35:47.039Z"}
+{"level":"info","message":"Filename createDomain.py upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:35:47.039Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:35:47.040Z"}
+{"level":"info","message":"Filename wls_silent.xml upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:35:47.040Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:35:47.041Z"}
+{"level":"info","message":"Filename protocol.jar upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:35:47.041Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:35:47.041Z"}
+{"level":"info","message":"Filename leapfrog.properties upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:35:47.042Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:35:47.042Z"}
+{"level":"info","message":"Filename jmxremote.password upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:35:47.042Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:35:47.043Z"}
+{"level":"info","message":"Filename jmxremote.access upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:35:47.043Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T22:38:54.045Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:38:54.047Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:38:58.098Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:39:04.489Z"}
+{"level":"info","message":"Filename createDomain.py upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:39:04.489Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:39:04.507Z"}
+{"level":"info","message":"Filename wls_silent.xml upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:39:04.507Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:39:04.507Z"}
+{"level":"info","message":"Filename protocol.jar upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:39:04.508Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:39:04.517Z"}
+{"level":"info","message":"Filename leapfrog.properties upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:39:04.517Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:39:04.518Z"}
+{"level":"info","message":"Filename jmxremote.password upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:39:04.518Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:39:04.518Z"}
+{"level":"info","message":"Filename jmxremote.access upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:39:04.519Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T22:46:08.742Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:46:08.744Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:46:09.446Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:46:13.926Z"}
+{"level":"info","message":"Filename createDomain.py upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:46:13.927Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:46:13.951Z"}
+{"level":"info","message":"Filename wls_silent.xml upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:46:13.951Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:46:14.026Z"}
+{"level":"info","message":"Filename protocol.jar upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:46:14.026Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:46:14.079Z"}
+{"level":"info","message":"Filename leapfrog.properties upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:46:14.079Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:46:14.086Z"}
+{"level":"info","message":"Filename jmxremote.password upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:46:14.086Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T22:46:14.132Z"}
+{"level":"info","message":"Filename jmxremote.access upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T22:46:14.132Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-08-31T23:06:07.490Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install","timestamp":"2014-08-31T23:06:07.491Z"}
+{"level":"info","message":"listening for events fron job: weblogic 10.3.6 install","timestamp":"2014-08-31T23:06:08.021Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-08-31T23:06:12.650Z"}
+{"level":"info","message":"Filename createDomain.py upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T23:06:12.651Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-08-31T23:06:12.668Z"}
+{"level":"info","message":"Filename wls_silent.xml upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T23:06:12.668Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-08-31T23:06:12.730Z"}
+{"level":"info","message":"Filename protocol.jar upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T23:06:12.730Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-08-31T23:06:12.735Z"}
+{"level":"info","message":"Filename leapfrog.properties upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T23:06:12.736Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-08-31T23:06:12.751Z"}
+{"level":"info","message":"Filename jmxremote.password upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T23:06:12.751Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T23:06:12.796Z"}
+{"level":"info","message":"Filename jmxremote.access upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T23:06:12.796Z"}
