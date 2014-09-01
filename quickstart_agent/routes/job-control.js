@@ -365,3 +365,4 @@ JobControl.prototype.registerServer = function registerAgent(server) {
 	  logger.info(server);
 	  this.serverInfo=server;
 	};
+JobControl.prototype.jobQueue = jobQueue;
