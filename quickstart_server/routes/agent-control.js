@@ -262,8 +262,12 @@ getStatus = function(callback) {
             obj = JSON.parse(output);
         	logger.debug("agent status check: "+obj.status);
         	if (obj.status != undefined) {
-        		obj._id=agent._id;
-        		//updateAgent(obj);
+				
+        		agent.type=obj.type,
+				agent.startTime=obj.startTime
+				agent.status=obj.status;
+				agent.mode=obj.mode;
+        		updateAgent(agent);
         	}            
             callback();
             

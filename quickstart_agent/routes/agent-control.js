@@ -27,7 +27,7 @@ initAgent = function(agent) {
 	var ip = _.chain(os.networkInterfaces()).flatten().filter(function(val){ return (val.family == 'IPv4' && val.internal == false); }).pluck('address').first().value(); 
 	logger.info('initializing agent with ip: '+ip) ;  
 	agentData = {
-		host: agent.host,
+		host: os.hostname(),
 		ip: ip,
 		port: agent.port,
 		login: agent.login,
