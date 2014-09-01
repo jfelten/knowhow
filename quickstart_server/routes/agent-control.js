@@ -683,7 +683,7 @@ function uploadFiles(agent,job) {
 		try {	
 		    logger.info("uploading "+filepath);
 			var stream = ss.createStream();
-			fileProgress[fileName].readStream = fs.createReadStream(filepath,{autoClose: true, , highWaterMark: 32 * 1024});
+			fileProgress[fileName].readStream = fs.createReadStream(filepath,{autoClose: true, highWaterMark: 32 * 1024});
 			ss(socket).emit('agent-upload', stream, {name: fileName, jobId: jobId, fileSize: fileSizeInBytes, destination: file.destination });
 			fileProgress[fileName].readStream.pipe(stream );
 			fileProgress[fileName].readStream.on('data', function (chunk) {
