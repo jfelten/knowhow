@@ -566,6 +566,9 @@ exports.execute = function(agent,job,callback) {
 	    	logger.debug('result:\n');
 	        process.stdout.write(d);
 	        logger.debug('\n\nJob request sent. Listening for events and uploading files');
+	        job.progress=1;
+	        job.status="initializing job"
+	        eventEmitter.emit('job-update',job);
 	        var eventSocket = io.connect('http://'+agent.host+':'+agent.port+'/job-events');
 	        var listening = false;
 	        eventSocket.on('connect', function() { 
@@ -680,7 +683,7 @@ function uploadFiles(agent,job) {
 		try {	
 		    logger.info("uploading "+filepath);
 			var stream = ss.createStream();
-			fileProgress[fileName].readStream = fs.createReadStream(filepath,{autoClose: true});
+			fileProgress[fileName].readStream = fs.createReadStream(filepath,{autoClose: true, , highWaterMark: 32 * 1024});
 			ss(socket).emit('agent-upload', stream, {name: fileName, jobId: jobId, fileSize: fileSizeInBytes, destination: file.destination });
 			fileProgress[fileName].readStream.pipe(stream );
 			fileProgress[fileName].readStream.on('data', function (chunk) {

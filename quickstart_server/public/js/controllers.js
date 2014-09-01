@@ -107,6 +107,9 @@ var myModule = angular.module('myApp.controllers', []).
   }).
   controller('JobsController', function ($scope, $http) {
   
+     $scope.currentRunningJob = {
+     	progress: 0
+     };
   	var socket = io();
 
     socket.on('job-update', function(job){
