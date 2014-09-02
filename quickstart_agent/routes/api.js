@@ -52,10 +52,16 @@ exports.execute = function(req,res) {
 	logger.info("execute");
 	var job = req.body;
 	if (jobControl.jobQueue != undefined && jobControl.jobQueue[job.id] != undefined) {
+		logger.info("execute");
 		res.send(500, 'job id: '+job.id+' already running');
 	} else {
-		jobControl.execute(job);
-		res.json({'ok': true});
+		jobControl.execute(job, function(err, job) {
+			if (err) {
+				res.send(500, err);
+			}
+			res.json({'ok': true});
+		});
+		
 	}
 	
 

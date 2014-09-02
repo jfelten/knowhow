@@ -1,6 +1,7 @@
 var logger=require('./log-control').logger;
 var agentControl = require('./agent-control');
 var fileControl = require('./file-control');
+var executionControl = require('./execution-control');
 var moment = require('moment');
 var server = require('../server');
 var fs = require('fs');
@@ -127,7 +128,7 @@ exports.execute = function(req,res) {
 	var agent = req.body.agent;
 	var job =  req.body.job;
 	
-	agentControl.execute(agent, job, function(err){
+	executionControl.executeJob(agent, job, function(err){
 		if (err) {
 			res.send(500, err);
 		}

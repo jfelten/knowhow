@@ -14,6 +14,15 @@ var WORKING_DIR_VAR = "working_dir"
 
 exports.jobQueue=jobQueue;
 
+
+completeJob = function(job) {
+	if (job != undefined) {
+		logger.info('completed job: '+job.id);
+		delete jobQueue[job.id];
+	}
+
+}
+
 updateJob = function(job) {
 	eventEmitter.emit('job-update',job);
 	jobQueue[job.id] = job;
@@ -21,6 +30,11 @@ updateJob = function(job) {
 };
 
 initiateJob = function(job, callback) {
+
+	if (jobQueue[job.id] != undefined) {
+		callback(new Error(job.id+" already exists"));
+		return;
+	}
 	try {
 		logger.info("initializing: "+job.id);
 		job.fileProgress = {};
@@ -65,31 +79,36 @@ initiateJob = function(job, callback) {
 };
 
 cancelJob = function(job) {
-	for (fileUpload in job.fileProgress) {
-		fileProgress = job.fileProgress[fileUpload];
-		if (fileProgress != undefined) {
-			fileProgress.error = true;
+	if (job != undefined) {
+		if (job.fileProgress != undefined) {
+			for (fileUpload in job.fileProgress) {
+				fileProgress = job.fileProgress[fileUpload];
+				if (fileProgress != undefined) {
+					fileProgress.error = true;
+				}
+			}	
 		}
-		
+		job.error = true;
+		updateJob(job);
+		commandShell.cancelRunningJob();
+		logger.info('cancelling job: '+job.id);
+		eventEmitter.emit('job-cancel', job.id);
+		delete jobQueue[job.id];
 	}
-	job.error = true;
-	updateJob(job);
-	commandShell.cancelRunningJob();
-	logger.info('canceling job: '+job.id);
-	eventEmitter.emit('job-cancel', job);
-	jobQueue[job.id]=undefined;
 	
 }
 
-execute = function(job) {
+execute = function(job,callback) {
 	logger.info("executing: "+job.id);
 	initiateJob(job, function(err,job) {
 		if (err) {
 		
 			job.status="Error Initializing job";
-			cancelJob(job);			
+			cancelJob(job);
+			callback(err,job);			
 			return;
 		}
+		callback(undefined,job);
 		waitForFiles(job, function(err, job) {
 			if (err) {
 				job.status="Error receiving required files";
@@ -193,7 +212,7 @@ waitForFiles = function(job,callback) {
             	logger.debug("progress: "+totalUploaded+" of "+job.totalFileSize+"  %done:"+job.progress);
             	
             }
-    	//logger.debug(numFilesUploaded+ " of "+job.files.length+" files received.");
+    		logger.debug(numFilesUploaded+ " of "+job.files.length+" files received.");
 	    }, checkInterval);
 	}
     
@@ -331,16 +350,19 @@ JobControl = function(io) {
 			});
 			
 			eventEmitter.on('job-complete', function(job) {
+				completeJob(job);
 				socket.emit('job-complete', job);
 			});
 			
-			eventEmitter.on('job-cancel', function(job) {
-				socket.emit('job-cancel', job.id);
+			eventEmitter.on('job-cancel', function(jobId) {
+				logger.info("sending cancel message to server for: "+jobId);
+				socket.emit('job-cancel', jobId);
 			});
 			
-			socket.on('job-cancel', function(job) {
+			socket.on('job-cancel', function(jobId) {
 				logger.info("cancel requested by server.");
-				cancelJob(job);
+				cancelJob(jobQueue[jobId]);
+				socket.emit('job-cancel', jobId);
 			});
 			
 			socket.on('job-listen', function(jobId) {

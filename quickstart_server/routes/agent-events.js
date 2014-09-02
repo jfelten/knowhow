@@ -1,5 +1,6 @@
 var logger=require('./log-control').logger;
 var agentControl = require('./agent-control');
+var executionControl = require('./execution-control');
 var io;
 
 //My module
@@ -30,8 +31,14 @@ function AgentEventHandler(io) {
 		agent.status='INSTALLING';
 		io.emit('agent-add',agent);
 	});
-	agentControl.eventEmitter.on('job-update', function(job) {
+	executionControl.eventEmitter.on('job-update', function(job) {
 		io.emit('job-update',job);
+	});
+	executionControl.eventEmitter.on('job-cancel', function(job) {
+		io.emit('job-cancel',job);
+	});
+	executionControl.eventEmitter.on('job-complete', function(job) {
+		io.emit('job-complete',job);
 	});
 	
 }
