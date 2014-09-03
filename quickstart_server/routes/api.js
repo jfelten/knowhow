@@ -130,8 +130,12 @@ exports.execute = function(req,res) {
 	
 	executionControl.executeJob(agent, job, function(err){
 		if (err) {
+			logger.error(job.id+" failed to start.");
+			logger.error(err);
 			res.send(500, err);
+			return;
 		}
+		logger.info(job.id+" launched.");
 		res.json({ok:true});
 	});
 };

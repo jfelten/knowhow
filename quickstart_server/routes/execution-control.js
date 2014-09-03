@@ -12,7 +12,7 @@ var pathlib = require('path');
 
 var EventEmitter = require('events').EventEmitter;
 var eventEmitter = new EventEmitter();
-
+exports.eventEmitter = eventEmitter;
 var currentJobs = {};
 
 
@@ -100,27 +100,27 @@ exports.executeJob = function(agent,job,callback) {
 	        
 			
 		    //do the work
-		    try {
+//		    try {
 		    	currentJobs[jobId] = job;
-		    	listenForJobEvents(jobId, function() {
+		    	listenForJobEvents(agent, jobId, function() {
 		    		uploadFiles(agent,job,function(err) {
 		    			if (err) {
 		    				callback(new Error("Problem starting upload for job id: "+jobId));
 		    				return;
 		    			}
-		    			setJobTimer(jobId);
+		    			setJobTimer(job);
 		    		});
 		    		
 		    	});
 		    	
-		    } catch (err) {
-		    //  currentJobs[jobId].eventSocket.emit('job-cancel',jobId);
-		    //	logger.error(err);
-		    //	logger.error("problem uploading files");
-		    //	cancelJob(jobId);
-		    	callback(new Error("Unable to start job id: "+jobId));
-		    	return;
-		    }
+//		    } catch (err) {
+//		      currentJobs[jobId].eventSocket.emit('job-cancel',jobId);
+//		    	logger.error(err);
+//		    	logger.error("problem uploading files");
+//		    	cancelJob(jobId);
+//		    	callback(new Error("Unable to start job id: "+jobId));
+//		    	return;
+//		    }
 		    callback(null,jobId+' execution started');
 	    });
 	});
@@ -134,14 +134,14 @@ exports.executeJob = function(agent,job,callback) {
 	});
 }
 
-function listenForJobEvents(jobId, callback) {
+function listenForJobEvents(agent, jobId, callback) {
 	currentJobs[jobId].eventSocket = require('socket.io-client')('http://'+agent.host+':'+agent.port+'/job-events');
     var listening = false;
     currentJobs[jobId].eventSocket.on('connect', function() { 
     
     	currentJobs[jobId].eventSocket.on('job-update', function(job){
-			//logger.debug("job update");
-			logger.debug(job.progress+" "+job.status);
+			logger.debug("job update");
+			//logger.debug(job.progress+" "+job.status);
 			eventEmitter.emit('job-update',job);
 		});
 		currentJobs[jobId].eventSocket.on('job-complete', function(job){
@@ -158,8 +158,8 @@ function listenForJobEvents(jobId, callback) {
 			cancelJob(jobId);
 		});
     	if (listening == false) {
-    	 	logger.info('listening for events from job: '+job.id);
-    	 	currentJobs[jobId].eventSocket.emit('job-listen', job.id);
+    	 	logger.info('listening for events from job: '+jobId);
+    	 	currentJobs[jobId].eventSocket.emit('job-listen', jobId);
     	 	listening=true;
     	 	callback();
     	}
@@ -190,7 +190,7 @@ function uploadFiles(agent,job, callback) {
 		      
 	    });
 		currentJobs[job.id].fileSocket.on ('Error', function(data) {
-	    	logger.error("socket error: "+data.message);
+	    	logger.error("socket error: "+data);
 	        currentJobs[job.id].socket.emit('client-upload-error', {name: data.fileName, jobId: data.jobId} );
 	        currentJobs[jobId].eventSocket.emit('job-cancel',jobId);
 		});
@@ -236,7 +236,8 @@ function uploadFiles(agent,job, callback) {
 	
 }
 
-function setJobTimer(jobId) {
+function setJobTimer(job) {
+	jobId = job.id;
 	//wait and make sure all files get uploaded
 	//close all sockets when done.
 	timeoutms=300000;//default timeout of 5 minutes
@@ -248,11 +249,11 @@ function setJobTimer(jobId) {
     	clearInterval(currentJobs[jobId].fileCheck);
     	currentJobs[jobId].status=("Timeout - job cancelled");
     	logger.error("job timed out for: "+jobId);
-        currentJobs[jobId].eventSocket.emit('job-cancel',jobId);
+        //currentJobs[jobId].eventSocket.emit('job-cancel',jobId);
     }, timeoutms);
     
     var checkInterval = 2000; //2 seconds
-    //wait until all files are receeived
+    //wait until all files are received
     currentJobs[jobId].fileCheck = setInterval(function() {
     	
     	
@@ -263,6 +264,7 @@ function setJobTimer(jobId) {
 	    		if (uploadFile.uploadComplete == true) {
 	    		    numFilesUploaded++;
 	    		    if (numFilesUploaded >= job.files.length) {
+	    		    	logger.info("all files are uploaded.");
 	    		    	logger.info(jobId+" all files sent...");
 		    			for (index in currentJobs[jobId].fileProgress) {
 				    		currentJobs[jobId].fileProgress[index].readStream.close();
@@ -283,7 +285,7 @@ function setJobTimer(jobId) {
 	    		}
 	    	}
 	    	if (currentJobs[jobId].files != undefined) {
-	    		//logger.debug(numFilesUploaded+ " of "+job.files.length+" files sent.");
+	    		logger.debug(numFilesUploaded+ " of "+job.files.length+" files sent.");
 	    	} else {
 	    		logger.info("no files defined so none sent.");
 	    		currentJobs[jobId].fileSocket.close();

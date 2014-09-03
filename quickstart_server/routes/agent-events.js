@@ -32,13 +32,16 @@ function AgentEventHandler(io) {
 		io.emit('agent-add',agent);
 	});
 	executionControl.eventEmitter.on('job-update', function(job) {
+		//logger.info(jobId+' complete.');
 		io.emit('job-update',job);
 	});
-	executionControl.eventEmitter.on('job-cancel', function(job) {
-		io.emit('job-cancel',job);
+	executionControl.eventEmitter.on('job-cancel', function(jobId) {
+		logger.info(jobId+' cancelled.');
+		io.emit('job-cancel',jobId);
 	});
-	executionControl.eventEmitter.on('job-complete', function(job) {
-		io.emit('job-complete',job);
+	executionControl.eventEmitter.on('job-complete', function(jobId) {
+		logger.info(jobId+' complete.');
+		io.emit('job-complete',jobId);
 	});
 	
 }

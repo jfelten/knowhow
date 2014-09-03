@@ -314,6 +314,7 @@ JobControl = function(io) {
 			    	stream.pipe(job.fileProgress[filename].fileWriter);
 
 			    } catch(err) {
+			    	logger.error("cannot save: "+filename );
 			    	logger.error(err);
 			    	socket.emit('Error', {message: 'Invalid file: '+filename, jobId: jobId, name: data.name} );
 			    }
@@ -342,14 +343,17 @@ JobControl = function(io) {
 			logger.info('event listen request');
 			
 			eventEmitter.on('job-update', function(job) {
+				logger.debug("emit job-update");
 				socket.emit('job-update', job);
 			});
 			
 			eventEmitter.on('job-error', function(job) {
+				logger.debug("job error: "+job.id);
 				socket.emit('job-error', job);
 			});
 			
 			eventEmitter.on('job-complete', function(job) {
+				logger.debug("job complete event: "+job.id);
 				completeJob(job);
 				socket.emit('job-complete', job);
 			});

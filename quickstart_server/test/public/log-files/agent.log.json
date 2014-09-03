@@ -3109,3 +3109,731 @@
 {"level":"info","message":"Filename jmxremote.password upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T23:06:12.751Z"}
 {"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-08-31T23:06:12.796Z"}
 {"level":"info","message":"Filename jmxremote.access upload complete for: weblogic 10.3.6 install","timestamp":"2014-08-31T23:06:12.796Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T04:45:50.882Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T04:45:50.888Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T04:45:50.916Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T04:47:14.455Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T04:47:14.460Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T04:47:14.472Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T04:48:39.947Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T04:48:39.953Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T04:48:39.964Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T04:51:54.989Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T04:51:54.995Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T04:51:55.005Z"}
+{"level":"error","message":"problem uploading files","timestamp":"2014-09-02T04:51:55.005Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T04:57:34.041Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T04:57:34.046Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T04:57:34.056Z"}
+{"level":"error","message":"problem uploading files","timestamp":"2014-09-02T04:57:34.056Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T05:12:15.728Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T05:12:15.733Z"}
+{"level":"error","message":"Unable to execute Job. Response code:500","timestamp":"2014-09-02T05:12:15.740Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T05:13:07.911Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T05:13:07.916Z"}
+{"level":"error","message":"Unable to execute Job. Response code:500","timestamp":"2014-09-02T05:13:07.922Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T05:27:36.478Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T05:27:36.483Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T05:27:36.508Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T05:30:28.082Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T05:30:28.087Z"}
+{"level":"error","message":"Unable to execute Job. Response code:500","timestamp":"2014-09-02T05:30:28.096Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T05:32:07.417Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T05:32:07.422Z"}
+{"level":"error","message":"Unable to execute Job. Response code:500","timestamp":"2014-09-02T05:32:07.429Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T05:32:07.429Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T05:33:47.953Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T05:33:47.958Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T05:48:39.819Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T05:48:39.825Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T05:49:22.953Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T05:49:22.959Z"}
+{"level":"error","message":"Unable to execute Job. Response code:500","timestamp":"2014-09-02T05:49:22.966Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T05:49:22.966Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T05:49:41.196Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T05:49:41.202Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T05:50:39.172Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T05:50:39.178Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T05:53:38.029Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T05:53:38.035Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T05:53:38.059Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T05:56:22.174Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T05:56:22.179Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T05:56:22.203Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T05:57:29.662Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T05:57:29.667Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T05:58:34.056Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T05:58:34.061Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T05:58:34.084Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T06:00:17.364Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T06:00:17.369Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T06:00:17.392Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T06:03:21.467Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T06:03:21.473Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T06:03:21.496Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:03:21.497Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:03:21.497Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/scripts/createDomain.py","timestamp":"2014-09-02T06:03:21.497Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:03:21.498Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:03:21.498Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/wls_silent.xml","timestamp":"2014-09-02T06:03:21.498Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:03:21.498Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:03:21.498Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/protocol.jar","timestamp":"2014-09-02T06:03:21.499Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:03:21.499Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:03:21.499Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/leapfrog.properties","timestamp":"2014-09-02T06:03:21.499Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:03:21.499Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:03:21.499Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.password","timestamp":"2014-09-02T06:03:21.500Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:03:21.500Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:03:21.500Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.access","timestamp":"2014-09-02T06:03:21.500Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:03:21.502Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:03:21.502Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T06:03:21.502Z"}
+{"level":"info","message":"listening for events from job: weblogic 10.3.6 install","timestamp":"2014-09-02T06:03:21.520Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-09-02T06:03:23.504Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-09-02T06:03:25.506Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-09-02T06:03:27.507Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-09-02T06:03:29.508Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-09-02T06:03:31.510Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-09-02T06:03:33.511Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-09-02T06:03:35.512Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-09-02T06:03:37.513Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-09-02T06:03:39.514Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T06:13:38.267Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T06:13:38.273Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T06:13:38.297Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:13:38.298Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:13:38.298Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/scripts/createDomain.py","timestamp":"2014-09-02T06:13:38.298Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:13:38.298Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:13:38.299Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/wls_silent.xml","timestamp":"2014-09-02T06:13:38.299Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:13:38.299Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:13:38.299Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/protocol.jar","timestamp":"2014-09-02T06:13:38.299Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:13:38.299Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:13:38.299Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/leapfrog.properties","timestamp":"2014-09-02T06:13:38.299Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:13:38.300Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:13:38.300Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.password","timestamp":"2014-09-02T06:13:38.300Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:13:38.300Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:13:38.300Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.access","timestamp":"2014-09-02T06:13:38.300Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:13:38.302Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:13:38.302Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T06:13:38.303Z"}
+{"level":"info","message":"listening for events from job: weblogic 10.3.6 install","timestamp":"2014-09-02T06:13:38.320Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-09-02T06:13:40.304Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T06:14:39.664Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T06:14:39.669Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T06:14:39.689Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:14:39.690Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:14:39.691Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/scripts/createDomain.py","timestamp":"2014-09-02T06:14:39.691Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:14:39.691Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:14:39.691Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/wls_silent.xml","timestamp":"2014-09-02T06:14:39.691Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:14:39.692Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:14:39.692Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/protocol.jar","timestamp":"2014-09-02T06:14:39.692Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:14:39.692Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:14:39.692Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/leapfrog.properties","timestamp":"2014-09-02T06:14:39.692Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:14:39.692Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:14:39.692Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.password","timestamp":"2014-09-02T06:14:39.692Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:14:39.693Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:14:39.693Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.access","timestamp":"2014-09-02T06:14:39.693Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:14:39.695Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:14:39.695Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T06:14:39.695Z"}
+{"level":"info","message":"listening for events from job: weblogic 10.3.6 install","timestamp":"2014-09-02T06:14:39.711Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-09-02T06:14:41.696Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T06:16:07.938Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T06:16:07.943Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T06:16:07.965Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:16:07.966Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:16:07.966Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/scripts/createDomain.py","timestamp":"2014-09-02T06:16:07.967Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:16:07.967Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:16:07.967Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/wls_silent.xml","timestamp":"2014-09-02T06:16:07.967Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:16:07.967Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:16:07.967Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/protocol.jar","timestamp":"2014-09-02T06:16:07.968Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:16:07.968Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:16:07.968Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/leapfrog.properties","timestamp":"2014-09-02T06:16:07.968Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:16:07.968Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:16:07.968Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.password","timestamp":"2014-09-02T06:16:07.968Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:16:07.968Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:16:07.969Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.access","timestamp":"2014-09-02T06:16:07.969Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:16:07.971Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:16:07.971Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T06:16:07.972Z"}
+{"level":"info","message":"listening for events from job: weblogic 10.3.6 install","timestamp":"2014-09-02T06:16:07.986Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-09-02T06:16:09.972Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T06:18:10.455Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T06:18:10.460Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T06:18:10.482Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:18:10.482Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:18:10.483Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/scripts/createDomain.py","timestamp":"2014-09-02T06:18:10.483Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:18:10.483Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:18:10.483Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/wls_silent.xml","timestamp":"2014-09-02T06:18:10.484Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:18:10.484Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:18:10.484Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/protocol.jar","timestamp":"2014-09-02T06:18:10.484Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:18:10.484Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:18:10.484Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/leapfrog.properties","timestamp":"2014-09-02T06:18:10.484Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:18:10.485Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:18:10.485Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.password","timestamp":"2014-09-02T06:18:10.485Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:18:10.485Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:18:10.485Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.access","timestamp":"2014-09-02T06:18:10.485Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:18:10.487Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:18:10.487Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T06:18:10.487Z"}
+{"level":"info","message":"listening for events from job: weblogic 10.3.6 install","timestamp":"2014-09-02T06:18:10.502Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-09-02T06:18:12.488Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T06:20:59.942Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T06:20:59.947Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T06:22:17.926Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T06:22:17.931Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T06:22:17.953Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:22:17.954Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:22:17.954Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/scripts/createDomain.py","timestamp":"2014-09-02T06:22:17.954Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:22:17.955Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:22:17.955Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/wls_silent.xml","timestamp":"2014-09-02T06:22:17.955Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:22:17.955Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:22:17.955Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/protocol.jar","timestamp":"2014-09-02T06:22:17.955Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:22:17.955Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:22:17.956Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/leapfrog.properties","timestamp":"2014-09-02T06:22:17.956Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:22:17.956Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:22:17.956Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.password","timestamp":"2014-09-02T06:22:17.956Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:22:17.956Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:22:17.956Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.access","timestamp":"2014-09-02T06:22:17.956Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:22:17.958Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:22:17.958Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T06:22:17.959Z"}
+{"level":"info","message":"listening for events from job: weblogic 10.3.6 install","timestamp":"2014-09-02T06:22:17.974Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-09-02T06:22:19.960Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T06:23:20.536Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T06:23:20.541Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T06:23:20.553Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:23:20.554Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:23:20.554Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T06:23:20.554Z"}
+{"level":"info","message":"listening for events from job: weblogic 10.3.6 install","timestamp":"2014-09-02T06:23:20.567Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-09-02T06:23:22.555Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T06:26:51.634Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T06:26:51.639Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T06:27:19.911Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T06:27:19.917Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T06:27:19.936Z"}
+{"level":"info","message":"listening for events from job: weblogic 10.3.6 install","timestamp":"2014-09-02T06:27:19.949Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T06:27:19.950Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:27:19.951Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:27:19.951Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-09-02T06:27:21.953Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T06:35:51.117Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T06:35:51.121Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T06:35:51.145Z"}
+{"level":"info","message":"listening for events from job: weblogic 10.3.6 install","timestamp":"2014-09-02T06:35:51.163Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T06:35:51.165Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:35:51.166Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:35:51.166Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-09-02T06:35:53.167Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T06:37:40.583Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T06:37:40.588Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T06:37:40.610Z"}
+{"level":"info","message":"listening for events from job: weblogic 10.3.6 install","timestamp":"2014-09-02T06:37:40.624Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T06:37:40.625Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:37:40.626Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:37:40.626Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-09-02T06:37:42.627Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T06:43:00.908Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T06:43:00.914Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T06:43:00.927Z"}
+{"level":"info","message":"listening for events from job: weblogic 10.3.6 install","timestamp":"2014-09-02T06:43:00.941Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T06:43:00.942Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:43:00.943Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:43:00.943Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-09-02T06:43:02.944Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T06:46:31.953Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T06:46:31.958Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T06:46:31.982Z"}
+{"level":"info","message":"listening for events from job: weblogic 10.3.6 install","timestamp":"2014-09-02T06:46:32.000Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T06:46:32.002Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:46:32.003Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:46:32.003Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-09-02T06:46:34.004Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T06:50:36.126Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T06:50:36.132Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T06:50:36.157Z"}
+{"level":"info","message":"listening for events from job: weblogic 10.3.6 install","timestamp":"2014-09-02T06:50:36.175Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T06:50:36.176Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:50:36.177Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T06:50:36.178Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-09-02T06:50:38.179Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T06:56:27.553Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T06:56:27.558Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T06:56:27.578Z"}
+{"level":"info","message":"listening for events from job: weblogic 10.3.6 install","timestamp":"2014-09-02T06:56:27.592Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T06:56:27.593Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T06:56:27.594Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-09-02T06:56:29.596Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T07:04:25.553Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T07:04:25.558Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T07:04:25.570Z"}
+{"level":"info","message":"listening for events from job: weblogic 10.3.6 install","timestamp":"2014-09-02T07:04:25.583Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T07:04:25.584Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T07:04:25.585Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-09-02T07:04:27.587Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T07:08:35.678Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T07:08:35.684Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T07:08:35.695Z"}
+{"level":"info","message":"listening for events from job: weblogic 10.3.6 install","timestamp":"2014-09-02T07:08:35.709Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T07:08:35.711Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T07:08:35.712Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T07:08:35.712Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-09-02T07:08:37.713Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T07:13:32.770Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T07:13:32.775Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T07:13:32.786Z"}
+{"level":"info","message":"listening for events from job: weblogic 10.3.6 install","timestamp":"2014-09-02T07:13:32.800Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T07:13:32.801Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T07:13:32.802Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T07:13:32.802Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-09-02T07:13:34.803Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T07:14:36.439Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T07:14:36.444Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T07:14:36.466Z"}
+{"level":"info","message":"listening for events from job: weblogic 10.3.6 install","timestamp":"2014-09-02T07:14:36.483Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T07:14:36.485Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T07:14:36.486Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T07:14:36.486Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-09-02T07:14:38.491Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T07:17:52.557Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T07:17:52.562Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T07:17:52.583Z"}
+{"level":"info","message":"listening for events from job: weblogic 10.3.6 install","timestamp":"2014-09-02T07:17:52.598Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T07:17:52.599Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T07:17:52.600Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T07:17:52.600Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-09-02T07:17:54.602Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T07:20:32.464Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T07:20:32.470Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T07:20:32.482Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T07:22:10.895Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T07:22:10.900Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T07:22:10.920Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T07:22:37.587Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T07:22:37.592Z"}
+{"level":"error","message":"Unable to execute Job. Response code:500","timestamp":"2014-09-02T07:22:37.600Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T07:22:37.600Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T07:23:24.096Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T07:23:24.101Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T07:23:24.124Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T07:23:24.125Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T07:23:24.125Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T07:23:24.125Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-09-02T07:23:26.127Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T07:24:30.806Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T07:24:30.810Z"}
+{"level":"error","message":"Unable to execute Job. Response code:500","timestamp":"2014-09-02T07:24:30.818Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T07:24:30.818Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T07:25:01.113Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T07:25:01.117Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T07:25:01.141Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T07:26:29.884Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T07:26:29.889Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T07:26:29.912Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T07:30:32.410Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T07:30:32.415Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T07:30:32.439Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T07:31:10.867Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T07:31:10.873Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T07:31:10.896Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T07:33:04.380Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T07:33:04.385Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T07:33:04.408Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T07:36:12.442Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T07:36:12.448Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T07:36:12.471Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T07:36:12.472Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T07:36:12.472Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T07:38:32.448Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T07:38:32.453Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T07:38:32.476Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T07:38:32.477Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T07:38:32.477Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T07:42:35.634Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T07:42:35.639Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T07:42:35.663Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T07:43:31.556Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T07:43:31.561Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T07:43:31.585Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T07:44:16.779Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T07:44:16.784Z"}
+{"level":"error","message":"Unable to execute Job. Response code:500","timestamp":"2014-09-02T07:44:16.794Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T07:44:16.794Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T07:44:53.464Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T07:44:53.469Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T07:44:53.492Z"}
+{"level":"info","message":"listening for events from job: weblogic 10.3.6 install","timestamp":"2014-09-02T07:44:53.509Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T07:44:53.511Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T07:44:53.512Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T07:44:53.512Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T07:44:53.514Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T07:45:45.403Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T07:45:45.408Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T07:45:45.419Z"}
+{"level":"info","message":"listening for events from job: weblogic 10.3.6 install","timestamp":"2014-09-02T07:45:45.432Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T07:45:45.433Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T07:45:45.434Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T07:45:45.434Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T07:45:45.434Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T07:46:35.828Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T07:46:35.833Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T07:46:50.891Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T07:46:50.896Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T07:47:29.143Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T07:47:29.148Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T07:47:29.171Z"}
+{"level":"info","message":"listening for events from job: weblogic 10.3.6 install","timestamp":"2014-09-02T07:47:29.188Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T07:47:29.189Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T07:47:29.190Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T07:49:21.591Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T07:49:21.596Z"}
+{"level":"error","message":"Unable to execute Job. Response code:500","timestamp":"2014-09-02T07:49:21.603Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T07:49:21.603Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T07:49:49.320Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T07:49:49.326Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T07:49:49.348Z"}
+{"level":"info","message":"listening for events from job: weblogic 10.3.6 install","timestamp":"2014-09-02T07:49:49.366Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T07:49:49.368Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T07:49:49.369Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T07:49:49.369Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T07:49:49.373Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T07:51:24.664Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T07:51:24.670Z"}
+{"level":"error","message":"Unable to execute Job. Response code:500","timestamp":"2014-09-02T07:51:24.677Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T07:51:24.677Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T07:52:04.836Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T07:52:04.842Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T07:52:04.865Z"}
+{"level":"info","message":"listening for events from job: weblogic 10.3.6 install","timestamp":"2014-09-02T07:52:04.883Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T07:52:04.884Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T07:52:04.885Z"}
+{"level":"error","message":"requesting cancel of: weblogic 10.3.6 install","timestamp":"2014-09-02T07:52:04.885Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T07:52:04.888Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T07:53:29.286Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T07:53:29.292Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T07:53:29.320Z"}
+{"level":"info","message":"listening for events from job: weblogic 10.3.6 install","timestamp":"2014-09-02T07:53:29.340Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T07:54:56.515Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T07:54:56.520Z"}
+{"level":"error","message":"Unable to execute Job. Response code:500","timestamp":"2014-09-02T07:54:56.532Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T07:54:56.532Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T07:55:17.933Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T07:55:17.939Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T07:55:17.961Z"}
+{"level":"info","message":"listening for events from job: weblogic 10.3.6 install","timestamp":"2014-09-02T07:55:17.978Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T07:55:17.980Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/scripts/createDomain.py","timestamp":"2014-09-02T07:55:17.984Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/wls_silent.xml","timestamp":"2014-09-02T07:55:17.985Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/protocol.jar","timestamp":"2014-09-02T07:55:17.986Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/leapfrog.properties","timestamp":"2014-09-02T07:55:17.986Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.password","timestamp":"2014-09-02T07:55:17.987Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.access","timestamp":"2014-09-02T07:55:17.988Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T07:59:29.701Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T07:59:29.706Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T07:59:29.718Z"}
+{"level":"info","message":"listening for events from job: weblogic 10.3.6 install","timestamp":"2014-09-02T07:59:29.732Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T07:59:29.733Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/scripts/createDomain.py","timestamp":"2014-09-02T07:59:29.735Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/wls_silent.xml","timestamp":"2014-09-02T07:59:29.738Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/protocol.jar","timestamp":"2014-09-02T07:59:29.738Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T08:02:53.245Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T08:02:53.250Z"}
+{"level":"error","message":"Unable to execute Job. Response code:500","timestamp":"2014-09-02T08:02:53.257Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T08:02:53.257Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T08:03:17.563Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T08:03:17.569Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T08:03:17.591Z"}
+{"level":"info","message":"listening for events from job: weblogic 10.3.6 install","timestamp":"2014-09-02T08:03:17.609Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T08:03:17.611Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/scripts/createDomain.py","timestamp":"2014-09-02T08:03:17.615Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/wls_silent.xml","timestamp":"2014-09-02T08:03:17.616Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/protocol.jar","timestamp":"2014-09-02T08:03:17.616Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/leapfrog.properties","timestamp":"2014-09-02T08:03:17.617Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.password","timestamp":"2014-09-02T08:03:17.618Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.access","timestamp":"2014-09-02T08:03:17.618Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T08:05:18.293Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T08:05:18.298Z"}
+{"level":"error","message":"Unable to execute Job. Response code:500","timestamp":"2014-09-02T08:05:18.306Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T08:05:18.306Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T08:05:57.266Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T08:05:57.272Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T08:05:57.295Z"}
+{"level":"info","message":"listening for events from job: weblogic 10.3.6 install","timestamp":"2014-09-02T08:05:57.312Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T08:05:57.314Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/scripts/createDomain.py","timestamp":"2014-09-02T08:05:57.318Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/wls_silent.xml","timestamp":"2014-09-02T08:05:57.318Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/protocol.jar","timestamp":"2014-09-02T08:05:57.319Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/leapfrog.properties","timestamp":"2014-09-02T08:05:57.319Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.password","timestamp":"2014-09-02T08:05:57.320Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.access","timestamp":"2014-09-02T08:05:57.320Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T08:11:06.906Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T08:11:06.911Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T08:11:06.934Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/scripts/createDomain.py","timestamp":"2014-09-02T08:11:06.936Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/wls_silent.xml","timestamp":"2014-09-02T08:11:06.937Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/protocol.jar","timestamp":"2014-09-02T08:11:06.937Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/leapfrog.properties","timestamp":"2014-09-02T08:11:06.937Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.password","timestamp":"2014-09-02T08:11:06.938Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.access","timestamp":"2014-09-02T08:11:06.938Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T08:11:06.939Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-09-02T08:11:08.939Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T08:13:36.761Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T08:13:36.766Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T08:13:36.789Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/scripts/createDomain.py","timestamp":"2014-09-02T08:13:36.791Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/wls_silent.xml","timestamp":"2014-09-02T08:13:36.792Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/protocol.jar","timestamp":"2014-09-02T08:13:36.792Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/leapfrog.properties","timestamp":"2014-09-02T08:13:36.793Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.password","timestamp":"2014-09-02T08:13:36.793Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.access","timestamp":"2014-09-02T08:13:36.794Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T08:13:36.794Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-09-02T08:13:38.795Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T08:16:23.913Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T08:16:23.918Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T08:16:23.942Z"}
+{"level":"info","message":"listening for events from job: weblogic 10.3.6 install","timestamp":"2014-09-02T08:16:23.960Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T08:16:23.962Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/scripts/createDomain.py","timestamp":"2014-09-02T08:16:23.965Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/wls_silent.xml","timestamp":"2014-09-02T08:16:23.966Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/protocol.jar","timestamp":"2014-09-02T08:16:23.966Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/leapfrog.properties","timestamp":"2014-09-02T08:16:23.967Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.password","timestamp":"2014-09-02T08:16:23.968Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.access","timestamp":"2014-09-02T08:16:23.968Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T08:18:01.358Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T08:18:01.364Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T08:18:01.386Z"}
+{"level":"info","message":"listening for events from job: weblogic 10.3.6 install","timestamp":"2014-09-02T08:18:01.406Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T08:18:01.407Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/scripts/createDomain.py","timestamp":"2014-09-02T08:18:01.411Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/wls_silent.xml","timestamp":"2014-09-02T08:18:01.412Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/protocol.jar","timestamp":"2014-09-02T08:18:01.412Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/leapfrog.properties","timestamp":"2014-09-02T08:18:01.413Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.password","timestamp":"2014-09-02T08:18:01.414Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.access","timestamp":"2014-09-02T08:18:01.414Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-09-02T08:18:03.414Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T08:21:21.108Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T08:21:21.114Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T08:21:21.134Z"}
+{"level":"info","message":"listening for events from job: weblogic 10.3.6 install","timestamp":"2014-09-02T08:21:21.147Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T08:21:21.148Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/scripts/createDomain.py","timestamp":"2014-09-02T08:21:21.150Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/wls_silent.xml","timestamp":"2014-09-02T08:21:21.153Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/protocol.jar","timestamp":"2014-09-02T08:21:21.153Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/leapfrog.properties","timestamp":"2014-09-02T08:21:21.154Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.password","timestamp":"2014-09-02T08:21:21.154Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.access","timestamp":"2014-09-02T08:21:21.155Z"}
+{"level":"info","message":"no files defined so none sent.","timestamp":"2014-09-02T08:21:23.156Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T17:11:07.061Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T17:11:07.066Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T17:11:07.089Z"}
+{"level":"info","message":"listening for events from job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:11:07.107Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T17:11:07.108Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/scripts/createDomain.py","timestamp":"2014-09-02T17:11:07.112Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/wls_silent.xml","timestamp":"2014-09-02T17:11:07.113Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/protocol.jar","timestamp":"2014-09-02T17:11:07.113Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/leapfrog.properties","timestamp":"2014-09-02T17:11:07.114Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.password","timestamp":"2014-09-02T17:11:07.115Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.access","timestamp":"2014-09-02T17:11:07.115Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:11:12.087Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T17:14:27.615Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T17:14:27.620Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T17:14:27.643Z"}
+{"level":"info","message":"listening for events from job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:14:27.660Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T17:14:27.662Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/scripts/createDomain.py","timestamp":"2014-09-02T17:14:27.666Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/wls_silent.xml","timestamp":"2014-09-02T17:14:27.667Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/protocol.jar","timestamp":"2014-09-02T17:14:27.667Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/leapfrog.properties","timestamp":"2014-09-02T17:14:27.668Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.password","timestamp":"2014-09-02T17:14:27.669Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.access","timestamp":"2014-09-02T17:14:27.669Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:14:32.642Z"}
+{"level":"info","message":"Filename createDomain.py upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:14:32.643Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:14:32.644Z"}
+{"level":"info","message":"Filename wls_silent.xml upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:14:32.644Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:14:32.645Z"}
+{"level":"info","message":"Filename protocol.jar upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:14:32.645Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:14:32.645Z"}
+{"level":"info","message":"Filename leapfrog.properties upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:14:32.646Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:14:32.646Z"}
+{"level":"info","message":"Filename jmxremote.password upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:14:32.646Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:14:32.647Z"}
+{"level":"info","message":"Filename jmxremote.access upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:14:32.647Z"}
+{"level":"info","message":"done uploading: wls1036_generic.jar for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:16:57.706Z"}
+{"level":"info","message":"Filename wls1036_generic.jar upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:16:57.706Z"}
+{"level":"info","message":"weblogic 10.3.6 install all files sent...","timestamp":"2014-09-02T17:16:57.709Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T17:22:29.253Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T17:22:29.259Z"}
+{"level":"error","message":"Unable to execute Job. Response code:500","timestamp":"2014-09-02T17:22:29.267Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T17:22:29.267Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T17:23:05.034Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T17:23:05.040Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T17:23:05.067Z"}
+{"level":"info","message":"listening for events from job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:23:05.085Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T17:23:05.094Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/scripts/createDomain.py","timestamp":"2014-09-02T17:23:05.096Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/wls_silent.xml","timestamp":"2014-09-02T17:23:05.097Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/protocol.jar","timestamp":"2014-09-02T17:23:05.098Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/leapfrog.properties","timestamp":"2014-09-02T17:23:05.098Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.password","timestamp":"2014-09-02T17:23:05.099Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.access","timestamp":"2014-09-02T17:23:05.099Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:23:10.064Z"}
+{"level":"info","message":"Filename createDomain.py upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:23:10.065Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:23:10.066Z"}
+{"level":"info","message":"Filename wls_silent.xml upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:23:10.066Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:23:10.067Z"}
+{"level":"info","message":"Filename protocol.jar upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:23:10.067Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:23:10.067Z"}
+{"level":"info","message":"Filename leapfrog.properties upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:23:10.067Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:23:10.068Z"}
+{"level":"info","message":"Filename jmxremote.password upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:23:10.068Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:23:10.069Z"}
+{"level":"info","message":"Filename jmxremote.access upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:23:10.069Z"}
+{"level":"info","message":"done uploading: wls1036_generic.jar for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:25:35.121Z"}
+{"level":"info","message":"Filename wls1036_generic.jar upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:25:35.121Z"}
+{"level":"info","message":"weblogic 10.3.6 install all files sent...","timestamp":"2014-09-02T17:25:35.124Z"}
+{"level":"info","message":"Completed Job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:26:09.777Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T17:33:08.467Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T17:33:08.472Z"}
+{"level":"error","message":"Unable to execute Job. Response code:500","timestamp":"2014-09-02T17:33:08.480Z"}
+{"level":"error","message":"","timestamp":"2014-09-02T17:33:08.480Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T17:33:52.740Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T17:33:52.745Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T17:33:52.769Z"}
+{"level":"info","message":"listening for events from job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:33:52.786Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T17:33:52.795Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/scripts/createDomain.py","timestamp":"2014-09-02T17:33:52.797Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/wls_silent.xml","timestamp":"2014-09-02T17:33:52.798Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/protocol.jar","timestamp":"2014-09-02T17:33:52.798Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/leapfrog.properties","timestamp":"2014-09-02T17:33:52.798Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.password","timestamp":"2014-09-02T17:33:52.799Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.access","timestamp":"2014-09-02T17:33:52.800Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:33:57.764Z"}
+{"level":"info","message":"Filename createDomain.py upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:33:57.764Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:33:57.767Z"}
+{"level":"info","message":"Filename wls_silent.xml upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:33:57.767Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:33:57.768Z"}
+{"level":"info","message":"Filename protocol.jar upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:33:57.768Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:33:57.768Z"}
+{"level":"info","message":"Filename leapfrog.properties upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:33:57.768Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:33:57.769Z"}
+{"level":"info","message":"Filename jmxremote.password upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:33:57.769Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:33:57.770Z"}
+{"level":"info","message":"Filename jmxremote.access upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:33:57.770Z"}
+{"level":"info","message":"done uploading: wls1036_generic.jar for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:36:22.828Z"}
+{"level":"info","message":"Filename wls1036_generic.jar upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:36:22.828Z"}
+{"level":"info","message":"weblogic 10.3.6 install all files sent...","timestamp":"2014-09-02T17:36:22.832Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T17:38:43.800Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T17:38:43.805Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T17:38:43.828Z"}
+{"level":"info","message":"listening for events from job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:38:43.845Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T17:38:43.853Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/scripts/createDomain.py","timestamp":"2014-09-02T17:38:43.856Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/wls_silent.xml","timestamp":"2014-09-02T17:38:43.856Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/protocol.jar","timestamp":"2014-09-02T17:38:43.857Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/leapfrog.properties","timestamp":"2014-09-02T17:38:43.857Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.password","timestamp":"2014-09-02T17:38:43.858Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.access","timestamp":"2014-09-02T17:38:43.858Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:38:48.824Z"}
+{"level":"info","message":"Filename createDomain.py upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:38:48.824Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:38:48.827Z"}
+{"level":"info","message":"Filename wls_silent.xml upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:38:48.827Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:38:48.828Z"}
+{"level":"info","message":"Filename protocol.jar upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:38:48.828Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:38:48.828Z"}
+{"level":"info","message":"Filename leapfrog.properties upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:38:48.828Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:38:48.829Z"}
+{"level":"info","message":"Filename jmxremote.password upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:38:48.829Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:38:48.830Z"}
+{"level":"info","message":"Filename jmxremote.access upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:38:48.830Z"}
+{"level":"info","message":"done uploading: wls1036_generic.jar for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:41:13.891Z"}
+{"level":"info","message":"Filename wls1036_generic.jar upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:41:13.891Z"}
+{"level":"info","message":"weblogic 10.3.6 install all files sent...","timestamp":"2014-09-02T17:41:15.891Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T17:47:21.714Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T17:47:21.720Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T17:47:21.741Z"}
+{"level":"info","message":"listening for events from job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:47:21.753Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T17:47:21.761Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/scripts/createDomain.py","timestamp":"2014-09-02T17:47:21.764Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/wls_silent.xml","timestamp":"2014-09-02T17:47:21.765Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/protocol.jar","timestamp":"2014-09-02T17:47:21.765Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/leapfrog.properties","timestamp":"2014-09-02T17:47:21.766Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.password","timestamp":"2014-09-02T17:47:21.766Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.access","timestamp":"2014-09-02T17:47:21.767Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:47:26.735Z"}
+{"level":"info","message":"Filename createDomain.py upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:47:26.736Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:47:26.739Z"}
+{"level":"info","message":"Filename wls_silent.xml upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:47:26.739Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:47:26.740Z"}
+{"level":"info","message":"Filename protocol.jar upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:47:26.740Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:47:26.741Z"}
+{"level":"info","message":"Filename leapfrog.properties upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:47:26.741Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:47:26.742Z"}
+{"level":"info","message":"Filename jmxremote.password upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:47:26.742Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:47:26.742Z"}
+{"level":"info","message":"Filename jmxremote.access upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:47:26.742Z"}
+{"level":"info","message":"done uploading: wls1036_generic.jar for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:49:56.798Z"}
+{"level":"info","message":"Filename wls1036_generic.jar upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:49:56.798Z"}
+{"level":"info","message":"weblogic 10.3.6 install all files sent...","timestamp":"2014-09-02T17:49:57.807Z"}
+{"level":"info","message":"Completed Job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:50:31.588Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2014-09-02T17:50:51.520Z"}
+{"level":"info","message":"Starting Job: weblogic 10.3.6 install on undefined@localhost:3000","timestamp":"2014-09-02T17:50:51.525Z"}
+{"level":"info","message":"weblogic 10.3.6 install execution started","timestamp":"2014-09-02T17:50:51.538Z"}
+{"level":"info","message":"listening for events from job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:50:51.552Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/wls1036_generic.jar","timestamp":"2014-09-02T17:50:51.556Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/scripts/createDomain.py","timestamp":"2014-09-02T17:50:51.560Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/wls_silent.xml","timestamp":"2014-09-02T17:50:51.561Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/protocol.jar","timestamp":"2014-09-02T17:50:51.561Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/leapfrog.properties","timestamp":"2014-09-02T17:50:51.562Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.password","timestamp":"2014-09-02T17:50:51.562Z"}
+{"level":"info","message":"uploading /repo/leapfrog/files/weblogic/install/TEST/jmxremote.access","timestamp":"2014-09-02T17:50:51.563Z"}
+{"level":"info","message":"done uploading: createDomain.py for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:50:56.535Z"}
+{"level":"info","message":"Filename createDomain.py upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:50:56.535Z"}
+{"level":"info","message":"done uploading: wls_silent.xml for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:50:56.537Z"}
+{"level":"info","message":"Filename wls_silent.xml upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:50:56.537Z"}
+{"level":"info","message":"done uploading: protocol.jar for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:50:56.538Z"}
+{"level":"info","message":"Filename protocol.jar upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:50:56.538Z"}
+{"level":"info","message":"done uploading: leapfrog.properties for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:50:56.538Z"}
+{"level":"info","message":"Filename leapfrog.properties upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:50:56.538Z"}
+{"level":"info","message":"done uploading: jmxremote.password for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:50:56.539Z"}
+{"level":"info","message":"Filename jmxremote.password upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:50:56.539Z"}
+{"level":"info","message":"done uploading: jmxremote.access for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:50:56.540Z"}
+{"level":"info","message":"Filename jmxremote.access upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:50:56.540Z"}
+{"level":"info","message":"done uploading: wls1036_generic.jar for job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:53:26.655Z"}
+{"level":"info","message":"Filename wls1036_generic.jar upload complete for: weblogic 10.3.6 install","timestamp":"2014-09-02T17:53:26.655Z"}
+{"level":"info","message":"weblogic 10.3.6 install all files sent...","timestamp":"2014-09-02T17:53:27.612Z"}
+{"level":"info","message":"Completed Job: weblogic 10.3.6 install","timestamp":"2014-09-02T17:54:01.437Z"}
