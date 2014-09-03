@@ -55,10 +55,10 @@ completeJob = function(jobId) {
 exports.executeJob = function(agent,job,callback) {
 
 	var jobId = job.id;
-	if (currentJobs[job.id] != undefined && currentJobs[job.id].progress >0)  {
-		logger.error(job.id+" is already running");
-		return;
-	}
+	//if (currentJobs[job.id] != undefined && currentJobs[job.id].progress >0)  {
+	//	logger.error(job.id+" is already running");
+	//	return;
+	//}
 
 	var headers = {
 		    'Content-Type' : 'application/json',
@@ -81,7 +81,7 @@ exports.executeJob = function(agent,job,callback) {
 	var reqPost = http.request(options, function(res) {
 		logger.debug("statusCode: ", res.statusCode);
 	    // uncomment it for header details
-		logger.debug("headers: ", res.headers);
+		//logger.debug("headers: ", res.headers);
 
 		 
 
