@@ -119,6 +119,28 @@ var myModule = angular.module('myApp.controllers', []).
 	  $scope.$apply();
       
     });
+    socket.on('job-complete', function(job){
+      console.log('job update message received');
+      $scope.message=job.id+' complete.';
+	  $scope.currentRunningJob={};
+	  $scope.$apply();
+      
+    });
+    socket.on('job-cancel', function(job){
+      console.log('job update message received');
+      
+	  $scope.currentRunningJob={};
+	  $scope.message=job.id+' cancelled.';
+	  $scope.$apply();
+      
+    });
+    socket.on('job-error', function(job){
+      console.log('job update message received');
+      $scope.message=job.id+' failed due to error.';
+	  $scope.currentRunningJob={};
+	  $scope.$apply();
+      
+    });
     
   
   	  $http.get('/api/repoList').
