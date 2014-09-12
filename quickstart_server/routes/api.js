@@ -71,6 +71,7 @@ exports.addFile = function(req,res) {
 	fileControl.addFile(path,fileName,isDirectory,function(err,newFile) {
 		if (err) {
 			res.send(500, err);
+			return;
 		}
 		res.json({path: newFile});
 		
