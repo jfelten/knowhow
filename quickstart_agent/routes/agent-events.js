@@ -1,9 +1,60 @@
 var logger=require('./log-control').logger;
+var jobControl=require('./job-control');
+
 var io;
 var eventEmitter;
 var serverInfo;
 
-//My module
+var connectedSockets = [];
+
+var broadcastEvents = function(agentControl, io) {
+	var eventListener = io.of('/agent-events');
+	var nextIndex = connectedSockets.length;
+	
+	eventListener.on('connection', function (socket) {
+		logger.info('new listener connected');
+		connectedSockets.push(socket);
+		
+		var closeListener = function() {
+			logger.info("removing listener");
+		}
+		
+		socket.on('disconnect',function(err) {
+			console.log("removing listeners");
+			delete connectedSockets[nextIndex];
+		});
+		
+
+		socket.on('job-cancel', function(jobId) {
+			logger.info("cancel requested by server.");
+			jobControl.cancelJob(jobQueue[jobId]);
+			socket.emit('job-cancel', jobId);
+		});
+		
+
+		
+
+	});
+	};
+	
+function sendJobEventToServer(eventType, payload) {
+	for (var i=0; i<connectedSockets.length; i++) {
+		var socket = connectedSockets[i];
+		if (socket) {
+			socket.emit(eventType, payload);
+		}
+	}
+}	
+
+function sendAgentEventToServer(eventType, agent) {
+	for (var i=0; i<connectedSockets.length; i++) {
+		var socket = connectedSockets[i];
+		if (socket) {
+			socket.emit(eventType, agent);
+		}
+	}
+}
+	
 
 AgentEventHandler = function(io, agentControl) {
 	logger.info('setting event io to:'+io);
@@ -11,84 +62,79 @@ AgentEventHandler = function(io, agentControl) {
 	this.eventEmitter = agentControl.eventEmitter;
 	logger.info("eventEmitter="+this.eventEmitter);
 	
-	this.eventEmitter.on('agent-update', function(agent) {
-
-		agentControl.updateAgent(agent);
-		io.emit('agent-update',agent);
-		emitEventToServer('agent-update',agent);
+		jobControl.eventEmitter.on('job-update', function(job) {
+			if (job) {
+				logger.debug("emit job-update");
+				//socket.emit('job-update', job);
+				sendJobEventToServer('job-update',  job);
+			}
+		});
 		
-	});
-
-	this.eventEmitter.on('agent-error', function(agent) {
-
+		jobControl.eventEmitter.on('job-error', function(job) {
+			if (job) {
+				logger.debug("job error: "+job.id);
+				//socket.emit('job-error', job);
+				sendJobEventToServer('job-error', job);
+			}
+		});
 		
-		logger.info('agent error detected.');
-		agent.progress = 0;
-		agentControl.updateAgent(agent);
-		agent.status='ERROR';
-		io.emit('agent-error',agent);
-		emitEventToServer('agent-error',agent);
+		jobControl.eventEmitter.on('job-complete', function(job) {
+			if (job) {
+				logger.debug("job complete event: "+job.id);
+				completeJob(job);
+				//socket.emit('job-complete', job);
+				sendJobEventToServer('job-complete', job);
+			}
+		});
 		
-	});
+		jobControl.eventEmitter.on('job-cancel', function(jobId) {
+			logger.info("sending cancel message to server for: "+jobId);
+			//socket.emit('job-cancel', jobId);
+			sendJobEventToServer('job-cancel', jobId);
+		});
+		
+		agentControl.eventEmitter.on('agent-update', function(agent) {
+			if (agent) {
+				agentControl.updateAgent(agent);
+				//socket.emit('agent-update',agent);
+				sendAgentEventToServer('agent-update', agent);
+			}
+			
+		});
 
-	this.eventEmitter.on('agent-delete', function(agent) {
-		agent.status='DELETED';
-		io.emit('agent-delete',agent);
-	});
-	this.eventEmitter.on('agent-add', function(agent) {
+		agentControl.eventEmitter.on('agent-error', function(agent) {
 
-		agent.status='INSTALLING';
-		io.emit('agent-add',agent);
-	});
+			if (agent) {
+				logger.info('agent error detected.');
+				agent.progress = 0;
+				agentControl.updateAgent(agent);
+				agent.status='ERROR';
+				//socket.emit('agent-error',agent);
+				sendAgentEventToServer('agent-error', agent);
+			}
+			
+		});
+
+	   	agentControl.eventEmitter.on('agent-delete', function(agent) {
+	   		if (agent) {
+				agent.status='DELETED';
+				//socket.emit('agent-delete',agent);
+				sendAgentEventToServer('agent-delete', agent);
+			
+			}
+		});
+		agentControl.eventEmitter.on('agent-add', function(agent) {
+			if (agent) {
+				agent.status='INSTALLING';
+				//socket.emit('agent-add',agent);
+				sendAgentEventToServer('agent-add', agent);
+			}
+		});
+	
+	broadcastEvents(agentControl, io);
+	
 }
 
-emitEventToServer = function(message, agent) {
-	if (serverInfo != undefined) {
-		logger.info('publishing agent event to: '+serverInfo.ip);
-		// prepare the header
-		var headers = {
-		    'Content-Type' : 'application/json',
-		    'Content-Length' : Buffer.byteLength(JSON.stringify(agent) , 'utf8'),
-		    'Content-Disposition' : 'form-data; name="script"'
-		};
-
-		// the post options
-		var options = {
-		    host : serverInfo.ip,
-		    port : serverInfo.port,
-		    path : '/api/agentEvent',
-		    method : 'POST',
-		    headers : headers
-		};
-
-		var request = http.request(options, function(res) {
-			logger.debug("processing status response: ");
-			
-			var output = '';
-	        logger.debug(options.host + ' ' + res.statusCode);
-	        res.setEncoding('utf8');
-
-	        res.on('data', function (chunk) {
-	            output += chunk;
-	        });
-
-	        res.on('end', function() {
-	        	logger.info("done.");
-	            obj = JSON.parse(output);
-	        	logger.debug(obj);
-	            
-	        });
-	        //res.end();
-		});
-		request.on('error', function(er) {
-			logger.error('no agent running on agent: '+agent.host,er);
-			
-			callback();
-		});
-		request.end();
-	}
-	
-};
 
 
 AgentEventHandler.prototype.registerServer = function registerAgent(server) {

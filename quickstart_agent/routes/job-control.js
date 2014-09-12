@@ -13,12 +13,13 @@ var mkdirp = require('mkdirp');
 var WORKING_DIR_VAR = "working_dir"
 
 exports.jobQueue=jobQueue;
-
+var jobInProgress = undefined;
 
 completeJob = function(job) {
 	if (job != undefined) {
 		logger.info('completed job: '+job.id);
 		delete jobQueue[job.id];
+		jobInProgress = undefined;
 	}
 
 }
@@ -30,13 +31,16 @@ updateJob = function(job) {
 };
 
 initiateJob = function(job, callback) {
+		
 
-	if (jobQueue[job.id] != undefined) {
-		callback(new Error(job.id+" already exists"));
+	if (jobInProgress) {
+		logger.debug("job already in progress");
+		callback(new Error("job already exists"));
 		return;
 	}
 	try {
 		logger.info("initializing: "+job.id);
+		jobInProgress = job.id;
 		job.fileProgress = {};
 		jobQueue[job.id] =job;
 		job.progress=0;
@@ -79,6 +83,11 @@ initiateJob = function(job, callback) {
 };
 
 cancelJob = function(job) {
+	if (jobInProgress) {
+		delete jobQueue[jobInProgress];
+	}
+	jobInProgress = undefined;
+	logger.debug("starting cancel for: ");
 	if (job != undefined) {
 		if (job.fileProgress != undefined) {
 			for (fileUpload in job.fileProgress) {
@@ -89,11 +98,13 @@ cancelJob = function(job) {
 			}	
 		}
 		job.error = true;
+		job.progress=0;
 		updateJob(job);
 		commandShell.cancelRunningJob();
-		logger.info('cancelling job: '+job.id);
+		logger.info('canceling job: '+job.id);
 		eventEmitter.emit('job-cancel', job.id);
-		delete jobQueue[job.id];
+		jobQueue[job.id] = undefined;
+		jobInProgress = undefined;
 	}
 	
 }
@@ -102,10 +113,15 @@ execute = function(job,callback) {
 	logger.info("executing: "+job.id);
 	initiateJob(job, function(err,job) {
 		if (err) {
-		
-			job.status="Error Initializing job";
-			cancelJob(job);
-			callback(err,job);			
+			logger.error(err);
+		    if (job) {
+				job.status="Error Initializing job";
+				cancelJob(job);
+				callback(err,job);
+			} else {
+				callback(err,{});
+			}
+						
 			return;
 		}
 		callback(undefined,job);
@@ -143,6 +159,7 @@ waitForFiles = function(job,callback) {
     timeoutms=600000;//default timeout of 10 minutes
     if (job.options.timeoutms != undefined) {
     	timeoutms=job.options.timeoutms;
+    	logger.info("setting job timeout to: "+timeoutms);
     }
     
     if (job.files.length >0 ) {
@@ -203,7 +220,13 @@ waitForFiles = function(job,callback) {
     			clearInterval(fileCheck);
     			eventEmitter.emit('upload-complete',job);
     			callback(undefined, job);
-    		}  
+    		}  else if (jobQueue[job.id].disconnected == true || !jobInProgress) {
+    			logger.info(job.id+" did not receive all files. - Aborting...");
+    			clearTimeout(timeout);
+    			clearInterval(fileCheck);
+    			//eventEmitter.emit('upload-complete',job);
+    			callback(new Error("server disconnected before upload complete"), job);
+    		}
 	    	
 	    	job.progress=Math.floor((totalUploaded/job.totalFileSize)*100)
             if (job.progress > lastProgress ) {
@@ -229,7 +252,7 @@ JobControl = function(io) {
 
 	up.on('connection', function (socket) {
 		logger.info('upload request');
-		
+		var jobId = '';
 		eventEmitter.on('upload-complete', function(job) {
 			socket.disconnect();
 		});
@@ -240,7 +263,7 @@ JobControl = function(io) {
 		
 		ss(socket).on('agent-upload', {highWaterMark: 32 * 1024}, function(stream, data) {
 		    
-		    var jobId = data['jobId'];
+		    jobId = data['jobId'];
 			var job = jobQueue[jobId];
 			var lastProgress=0;
 			if (job == undefined) {
@@ -277,6 +300,7 @@ JobControl = function(io) {
 	            name: data.name
 	        };
 	        job.status="receiving files."
+	        job.progress=(job.progress)+1;
 	        updateJob(job);
 			//remove the file if it already exists
 			fs.stat(destination, function (err, stat) {
@@ -335,50 +359,16 @@ JobControl = function(io) {
 			});
 		   
 		  });
+		socket.on('disconnect', function(err) {
+			logger.debug("upload connection ended.");
+			if (jobInProgress) {
+				jobQueue[jobInProgress].disconnected = true;
+			}
+				
+		});
 		
 	});
-	var eventListener = io.of('/job-events');
-
-		eventListener.on('connection', function (socket) {
-			logger.info('event listen request');
-			
-			eventEmitter.on('job-update', function(job) {
-				logger.debug("emit job-update");
-				socket.emit('job-update', job);
-			});
-			
-			eventEmitter.on('job-error', function(job) {
-				logger.debug("job error: "+job.id);
-				socket.emit('job-error', job);
-			});
-			
-			eventEmitter.on('job-complete', function(job) {
-				logger.debug("job complete event: "+job.id);
-				completeJob(job);
-				socket.emit('job-complete', job);
-			});
-			
-			eventEmitter.on('job-cancel', function(jobId) {
-				logger.info("sending cancel message to server for: "+jobId);
-				socket.emit('job-cancel', jobId);
-			});
-			
-			socket.on('job-cancel', function(jobId) {
-				logger.info("cancel requested by server.");
-				cancelJob(jobQueue[jobId]);
-				socket.emit('job-cancel', jobId);
-			});
-			
-			socket.on('job-listen', function(jobId) {
-				logger.debug("job event listen request");
-				var job = jobQueue[jobId];
-				if (job == undefined || job.error==true || job.cancelled==true) {
-					logger.debug("invalid job: "+jobId+" stopping listener");
-					socket.emit('job-cancel', jobId);
-				}
-			});
-
-		});
+	
 	
 
 };

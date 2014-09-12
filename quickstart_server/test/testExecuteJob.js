@@ -7,14 +7,16 @@ var pathlib = require('path');
 var ss = require('socket.io-stream');
 var fileControl = require('../routes/file-control');
 var executionControl = require('../routes/execution-control');
-
+var agentControl = require('../routes/agent-control');
+var AgentEventHandler = require('../routes/agent-events');
+var express = require('express');
+var app = express();
+var http = require('http').Server(app);
+var ioServer = require('socket.io')(http);
+http.listen(3333);
+var agentEventHandler = new AgentEventHandler(ioServer);
 console.log("starting...");
 
-
-agent = {
-		"host": "tb101",
-		"port": 3000
-};
 
 job = {
   "id": "weblogic 10.3.6 install",
@@ -102,15 +104,42 @@ job = {
 
 
 agent ={
+		_id:"Ah4WQBMiGtS5pA7b",
 //		host: '23.92.65.207',
 //		host: 'tb101',
 		host: 'localhost',
 		port: 3000
 };
 
+
+
+agentControl.heartbeat(agent, function (err) {
+	if (err) {
+		logger.error("unable to contact agent: "+agent.user+"@"+agent.host+":"+agent.port);
+		return;
+	}
+	console.log("contacted");
+	agentEventHandler.listenForAgentEvents(agent, function(err) {
+		if(err) {
+			logger.error("unable to receive events for: "+agent.user+"@"+agent.host+":"+agent.port);
+			return;
+		}
+		logger.info("receiving events from: "+agent.user+"@"+agent.host+":"+agent.port);
+	});
+});
+
+ioServer.on('job-cancel', function(agent,job) {
+	logger.error("job cancelled");
+});
+	
+
 //var job_file = fileControl.getFilePath('leapfrog:///jobs/weblogic/wls1036_install.json');
 //job = JSON.parse(fs.readFileSync(job_file), 'utf8');
 executionControl.executeJob(agent,job, function(err, message) {
+
+	executionControl.updateJob(agent, job, function() {
+				//executionControl.eventEmitter.emit('job-update',agent, job);
+			});
 	if (err) {
 		logger.error(err);
 	} else {

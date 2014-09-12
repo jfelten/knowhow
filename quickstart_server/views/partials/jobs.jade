@@ -1,9 +1,10 @@
 p Jobs(not Steve)
 p
 .jobs-page
+
 	.jobs-nav
 		div(dropdown is-open="repoSelect.isopen").btn-group
-			button.btn.btn-primary.dropdown-toggle
+			button.btn.btn-secondary.dropdown-toggle
 					span(id="selectRepo") 
 						| Select a repository 
 					span.caret
@@ -12,11 +13,19 @@ p
 					a(ng-click="selectRepo(key)") 
 						{{key}}
 				li.divider
-		span(ng-if="loading_jobs") |...loading...
+		.jobs-buttons.btn-group
+			button.btn.btn-secondary(type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="deleteFile()" )|delete
+			button.btn.btn-secondary(type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="addFile()" )|add
+
+		
+		span(ng-if="loading_jobs") ...loading...
 		abn-tree(tree-data="jobs" tree-control="job_tree" on-select="jobs_tree_handler(branch)" expand-level="2" initial-selection="weblogic" )
 	.jobs-control
-		progressbar(ng-hide="currentRunningJob.progress < 1" animate="currentRunningJob.progress" value="currentRunningJob.progress" type="success")
-						{{currentRunningJob.status}}
+		.agent-progress(ng-hide="runningJobs.length == 0")
+			i.icon-remove(ng-click="cancel(job)" ng-repeat="job in runningJobs")
+				{{job.agent.user}}@{{job.agent.host}}
+				progressbar(animate="job.progress" value="job.progress" type="success")
+					{{job.status}}
 		div(dropdown is-open="status.isopen").btn-group
 			button.btn.btn-primary.dropdown-toggle
 				span(id="selectAgent") 
@@ -30,12 +39,35 @@ p
 				li
 					| All Agents
 		.jobs-buttons.btn-group
-			{{currentRunningJob.progress}}
-			button.btn.btn-primary(ng-hide="currentRunningJob.progress > 1" type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="execute()" ) Execute
-			button.btn.btn-primary(ng-hide="currentRunningJob.progress < 1" type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="cancelExecute()" ) Cancel
-			button.btn.btn-primary(type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="saveJob()") Save
+			button.btn.btn-primary(ng-hide="currentRunningJob.progress > 0" type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="execute()" ) Execute
+			button.btn.btn-primary(ng-hide="currentRunningJob.progress > 0" type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="saveJob()") Save
 		.job-message-block(ng-show="message")
 			{{message}}
 		div.jobs-textarea(id="jsoneditor")
  
+div
+	script(type="text/ng-template" id="directoryWarning")
+		.modal-header
+			h3.modal-title Directory delete requested
+		.modal-body
+			ul
+				| Are you sure?
+		.modal-footer
+			button.btn.btn-primary(ng-click="ok()") OK
+			button.btn.btn-warning(ng-click="cancel()") Cancel
+			
+div
+	script(type="text/ng-template" id="addFile")
+		.modal-header
+			h3.modal-title Add a file
+		.modal-body
+			ul
+				Add New File to : {{selectedNode.path}}
+				input(type="text" name="newFileName" ng-model='newFileName')
+				
+		.modal-footer
+			button.btn.btn-primary(ng-click="addFile(newFileName)") Add File
+			button.btn.btn-warning(ng-hide="selectedNode.type != 'folder'" ng-click="addDirectory(newFileName)") Add Directory
+			button.btn.btn-warning(ng-click="cancel()") Cancel
+
 

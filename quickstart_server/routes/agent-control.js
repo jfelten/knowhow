@@ -77,15 +77,22 @@ heartbeat = function(agent, callback) {
 
 };
 
+exports.heartbeat = heartbeat;
 
-function listAgents(req,res) {
+function listAgents(callback) {
 	db.find({}, function(err, docs) {
+		if (err) {
+			callback(err);
+			return;
+		}
 		logger.debug('found '+docs.length+' agents');
 		logger.debug(docs);
 //		docs.forEach(function(agent) {
 //			console.log(agent);
 //		});
-		res.json(docs);
+		if (callback) {
+			callback(undefined, docs);
+		}
 	  });
 };
 
@@ -118,7 +125,7 @@ initAgent = function(agent) {
 	return agent;
 };
 
-exports.deleteAgent = function(req,res, agent) {
+exports.deleteAgent = function( agent, callback) {
 	logger.info("deleting agent: "+agent._id);
 	var options = {
 		    host : agent.host,
@@ -145,15 +152,15 @@ exports.deleteAgent = function(req,res, agent) {
             //var obj = JSON.parse(output);
         	//logger.info(obj.status);
         	db.remove({ _id: agent._id }, {}, function (err, numRemoved) {
-        		listAgents(req,res);
+        		callback(err, numRemoved);
           	});
         	eventEmitter.emit('agent-delete',agent);
         });
 	});
 	request.on('error', function(er) {
-		logger.error('no agent running on agent: '+agent.host,er);
+		logger.error('no agent running on: '+agent.host,er);
 		db.remove({ _id: agent._id }, {}, function (err, numRemoved) {
-    		listAgents(req,res);
+    		callback(err, numRemoved);
       	});
 	});
 	request.end();

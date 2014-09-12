@@ -13,9 +13,11 @@ stylus = require('stylus'),
 nib = require('nib'),
 routes = require('./routes'),
 api = require('./routes/api'),
+fileControl = require('./routes/file-control'),
 AgentEventHandler = require('./routes/agent-events'),
 //http = require('http'),
 path = require('path');
+var agentControl = require('./routes/agent-control');
 
 //for stylus style sheets
 function compile(str, path) {
@@ -86,6 +88,7 @@ app.get('/agent-updates',function(req,res) {
 //serve index and view partials
 app.get('/', routes.index);
 app.get('/partials/:name', routes.partials);
+app.get('/modals/:name', routes.modals);
 
 //JSON API
 app.get('/api/serverInfo', api.serverInfo);
@@ -94,6 +97,8 @@ app.get('/api/jobList', api.jobList);
 app.get('/api/jobContent', api.jobContent);
 app.get('/api/saveFile', api.saveFile);
 app.get('/api/repoList', api.repoList);
+app.get('/api/addFile', api.addFile);
+app.get('/api/deleteFile', api.deleteFile);
 
 
 //agent routes
@@ -103,9 +108,34 @@ app.post('/api/logs',api.logs);
 app.post('/api/agentEvent', api.agentEvent);
 app.get('/api/agentEvent', api.agentEvent);
 app.post('/api/execute', api.execute);
+app.post('/api/cancel', api.cancel);
+app.get('/api/runningJobsList', api.runningJobList);
 
 //redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
+
+//start listening for events on active agents
+agentControl.listAgents(function (err, agents) {
+	for (agentIndex in agents) {
+		var agent = agents[agentIndex]; 
+		agentControl.heartbeat(agent, function (err) {
+			if (err) {
+				logger.error("unable to contact agent: "+agent.user+"@"+agent.host+":"+agent.port);
+				return;
+			}
+			console.log("contacted");
+			agentEventHandler.listenForAgentEvents(agent, function(err) {
+				if(err) {
+					logger.error("unable to receive events for: "+agent.user+"@"+agent.host+":"+agent.port);
+					return;
+				}
+				logger.info("receiving events from: "+agent.user+"@"+agent.host+":"+agent.port);
+			});
+		});
+	
+	}
+});
+
 
 /**
 * Start Server

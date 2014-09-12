@@ -51,7 +51,8 @@ exports.registerServer = function(req,res) {
 exports.execute = function(req,res) {
 	logger.info("execute");
 	var job = req.body;
-	if (jobControl.jobQueue != undefined && jobControl.jobQueue[job.id] != undefined) {
+	if (require('./job-control').jobInprogress != undefined) {
+		logger.debug(require('./job-control').jobQueue[job.id]);
 		logger.info("execute");
 		res.send(500, 'job id: '+job.id+' already running');
 	} else {
@@ -66,6 +67,7 @@ exports.execute = function(req,res) {
 	
 
 };
+
 
 exports.status =function(req,res) {
 	var os = require("os");
@@ -95,4 +97,6 @@ exports.serverInfo = exports.agentInfo = function(req,res) {
 exports.agentInfo = function(req,res) {
 	res.json(agentInfo);
 };
+
+
 

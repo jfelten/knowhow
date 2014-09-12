@@ -115,7 +115,7 @@ executeSync: function(job, eventEmitter) {
 			}
 	    	var stepNum=(this.index);
 	    	progress=Math.floor(stepNum/commands.length*100);
-		    this.job.status=this.command;
+		    this.job.status="executing";
 		    
 		    eventEmitter.emit('job-update',{id: job.id, status: this.command, progress: progress});
 
@@ -144,7 +144,7 @@ executeSync: function(job, eventEmitter) {
 		job.progress=0;
 		job.status=job.id+" complete";
 		eventEmitter.emit("job-complete", job);
-		currentlyRunningJob = undefined;
+		delete currentlyRunningJob;
         logger.info("done");
     });
 	 

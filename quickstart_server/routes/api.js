@@ -13,29 +13,14 @@ exports.agentControl = agentControl;
 var startTime = moment().format('MMMM Do YYYY, h:mm:ss a');
 
 
-var connectedAgents = [
-                       {
-                    	id: "0",   
-               			host: "test",
-               			port: "3000",
-               			user: "test",
-               			password: "test",
-               			status: "running",
-               			type: "linux"
-               		},
-               	 {
-                    	id: "99",   
-               			host: "test2",
-               			port: "3000",
-               			user: "test",
-               			password: "test",
-               			status: "installing",
-               			type: "linux"
-               		}
-];
-
 exports.listAgents = function(req, res) {
-	agentControl.listAgents(req, res);
+	agentControl.listAgents(function (err, agents) {
+		if (err) {
+			res.send(500, err);
+		} else {
+			res.json(agents);
+		}
+	});
 };
 
 
@@ -78,6 +63,34 @@ exports.jobContent = function (req,res) {
     readStream.pipe(res);
 };
 
+
+exports.addFile = function(req,res) {
+	var fileName = req.query.fileName;
+	var path = req.query.path;
+	var isDirectory = req.query.isDirectory;
+	fileControl.addFile(path,fileName,isDirectory,function(err,newFile) {
+		if (err) {
+			res.send(500, err);
+		}
+		res.json({path: newFile});
+		
+	});
+};
+
+exports.deleteFile = function(req,res) {
+	var fileName = req.query.fileName;
+	var repo = req.query.baseDir;
+	fileControl.deleteFile(repo, fileName,function(err) {
+		if (err) {
+			res.send(500, err);
+			return;
+		}
+		
+		res.json({ok:true});
+	});
+};
+
+
 exports.saveFile = function(req,res) {
 	var fileName = req.query.fileName;
 	var data = req.query.data;
@@ -91,7 +104,13 @@ exports.addAgent = function (req, res) {
   }
   var agent = req.body;
   agentControl.addAgent(agent, getServerInfo());
-  agentControl.listAgents(req,res);
+  agentControl.listAgents(function (err, agents) {
+		if (err) {
+			res.send(500, err);
+		} else {
+			res.json(agents);
+		}
+	});
 
 };
 
@@ -111,7 +130,19 @@ exports.deleteAgent = function (req, res) {
 	  logger.info('delete agent: '+req.body._id);
 
 	  var agent = req.body;
-	  agentControl.deleteAgent(req,res,agent);
+	  agentControl.deleteAgent(agent, function(err, numdeleted) {
+	  	if (err) {
+	  		res.send(500, err);
+	  	} else {
+		  	agentControl.listAgents(function (err, agents) {
+				if (err) {
+					res.send(500, err);
+				} else {
+					res.json(agents);
+				}
+			});
+		}
+	  });
 	  
 	  //agentControl.listAgents(req,res);
 
@@ -140,6 +171,29 @@ exports.execute = function(req,res) {
 	});
 };
 
+exports.cancel = function(req,res) {
+	var agent = req.body.agent;
+	var job =  req.body.job;
+	
+	executionControl.cancelJobOnAgent(agent, job, function(err){
+		if (err) {
+			logger.error(job.id+" could not be cancelled.");
+			logger.error(err);
+			res.send(500, err);
+			return;
+		}
+		logger.info(job.id+" cancelled.");
+		res.json({ok:true});
+	});
+};
+
 exports.repoList = function(req, res) {
 	res.json(fileControl.repos);
+};
+
+exports.runningJobList = function(req, res) {
+	executionControl.getRunningJobsList(function(runningJobList) {
+		res.json(runningJobList);
+	});
+	
 };
