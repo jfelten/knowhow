@@ -531,6 +531,7 @@ exports.addAgent = function(agent,serverInfo) {
 					db.find({_id: agent._id}, function(err, docs) {
 						if (docs.length > 0) {
 							agent = docs[0];
+							agent.status=undefined;
 							agent.progress =0;
 							eventEmitter.emit('agent-update',agent);
 						}

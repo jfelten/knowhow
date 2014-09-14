@@ -102,7 +102,7 @@ cancelJob = function(job) {
 		updateJob(job);
 		commandShell.cancelRunningJob();
 		logger.info('canceling job: '+job.id);
-		eventEmitter.emit('job-cancel', job.id);
+		eventEmitter.emit('job-cancel', job);
 		jobQueue[job.id] = undefined;
 		jobInProgress = undefined;
 	}
@@ -174,6 +174,7 @@ waitForFiles = function(job,callback) {
 	    var checkInterval = 5000; //5 second
 	    //wait until all files are received
 	    var lastProgress=0;
+	    var numChecks = 0;
 	    var fileCheck = setInterval(function() {
 	    
 	        var updatedJob = jobQueue[job.id];
@@ -182,6 +183,14 @@ waitForFiles = function(job,callback) {
 				clearTimeout(timeout);
 				clearInterval(fileCheck);
 				callback(new Error("Aborting job"), job);
+	    	}
+	    	numChecks++;
+	    	if (job.fileProgress == undefined  && numChecks > 6) {
+	    		logger.error(job.id+" upload failed to start. Aborting...");
+	    		clearTimeout(timeout);
+				clearInterval(fileCheck);
+				callback(new Error("Aborting job"), job);
+	    		
 	    	}
 	    	
 	    	var numFilesUploaded=0;

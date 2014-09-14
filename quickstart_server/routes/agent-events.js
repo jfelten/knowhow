@@ -2,6 +2,8 @@ var logger=require('./log-control').logger;
 var agentControl = require('./agent-control');
 var executionControl = require('./execution-control');
 
+var io;
+
 function listenForAgentEvents(agent, callback) {
 
 	agent.eventSocket = require('socket.io-client')('http://'+agent.host+':'+agent.port+'/agent-events');
@@ -48,9 +50,9 @@ function AgentEventHandler(io) {
 	agentControl.eventEmitter.on('agent-update', function(agent) {
 		agentControl.updateAgent(agent);
 		try {
-			this.io.emit('agent-update',agent);
+			io.emit('agent-update',agent);
 		} catch(err) {
-		
+			logger.debug("no clients to broad cast event");
 		}
 	});
 
@@ -88,7 +90,7 @@ function AgentEventHandler(io) {
 		logger.info('broadcasting job update.');
 		//logger.debug(io);
 		try {
-			//io.emit('job-update',agent, job);
+			io.emit('job-update',agent, job);
 		} catch(err) {
 			
 		}

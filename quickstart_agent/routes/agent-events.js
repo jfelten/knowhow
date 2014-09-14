@@ -25,9 +25,9 @@ var broadcastEvents = function(agentControl, io) {
 		});
 		
 
-		socket.on('job-cancel', function(jobId) {
+		socket.on('job-cancel', function(job) {
 			logger.info("cancel requested by server.");
-			jobControl.cancelJob(jobQueue[jobId]);
+			jobControl.cancelJob(job);
 			socket.emit('job-cancel', jobId);
 		});
 		
