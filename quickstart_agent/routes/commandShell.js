@@ -101,6 +101,7 @@ executeSync: function(job, eventEmitter) {
 
 	
 	//execute the commands in series
+	var currentProgress =0;
 	var execCommands = new Array(commands.length);
 	for (index in commands) {
 		logger.info("queueing "+commands[index]);
@@ -115,9 +116,12 @@ executeSync: function(job, eventEmitter) {
 			}
 	    	var stepNum=(this.index);
 	    	progress=Math.floor(stepNum/commands.length*100);
-		    this.job.status="executing";
+	    	if (progress > currentProgress) {
+		    	this.job.status="executing";
 		    
-		    eventEmitter.emit('job-update',{id: job.id, status: this.command, progress: progress});
+		    	eventEmitter.emit('job-update',{id: job.id, status: this.command, progress: progress});
+		    	currentProgress=progress;
+		    }
 
 	    	logger.info(this.index+".) "+this.command);
 			exec(this.command, {silent:false},function(code, output) {
@@ -132,6 +136,15 @@ executeSync: function(job, eventEmitter) {
 				});
 		}.bind( {command: command, index: index, job: job});
 	}
+	
+	var progressCheck = setInterval(function() {
+		if (job.progress <= currentProgress) {
+			this.job.status="executing";
+		    job.progress=job.progress+1
+		    eventEmitter.emit('job-update',{id: job.id, status: job.status, progress: progress});
+		    currentProgress = job.progress;
+		}
+	},5000);
 	async.series(execCommands,function(err) {
 		if (err) {
 
@@ -145,6 +158,7 @@ executeSync: function(job, eventEmitter) {
 		job.status=job.id+" complete";
 		eventEmitter.emit("job-complete", job);
 		delete currentlyRunningJob;
+		clearInterval(progressCheck)
         logger.info("done");
     });
 	 

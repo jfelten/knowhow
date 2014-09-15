@@ -194,6 +194,7 @@ exports.repoList = function(req, res) {
 
 exports.runningJobList = function(req, res) {
 	executionControl.getRunningJobsList(function(runningJobList) {
+		logger.debug(runningJobList);
 		res.json(runningJobList);
 	});
 	

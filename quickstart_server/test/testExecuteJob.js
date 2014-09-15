@@ -23,7 +23,7 @@ job = {
   "user": "weblogic",
   "working_dir": "/tmp/weblogic",
   "options": {
-    "dontUploadIfFileExists": false,
+    "dontUploadIfFileExists": true,
     "timeoutms": 3600000
   },
   "files": [

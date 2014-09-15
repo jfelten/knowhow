@@ -69,7 +69,7 @@ initiateJob = function(job, callback) {
 	    });
 	    job.working_dir = pathlib.resolve(workingDir);
 		job.download_dir = pathlib.resolve(downloadDir);
-		job.status="starting..";
+		job.status="initialized";
 		jobQueue[job.id]=job;
 		logger.debug("job id:"+job.id+" initialized using working directory: "+job.working_dir);
 		eventEmitter.emit('job-update',job);
@@ -108,6 +108,8 @@ cancelJob = function(job) {
 	}
 	
 }
+
+exports.cancelJob=cancelJob;
 
 execute = function(job,callback) {
 	logger.info("executing: "+job.id);
@@ -185,7 +187,7 @@ waitForFiles = function(job,callback) {
 				callback(new Error("Aborting job"), job);
 	    	}
 	    	numChecks++;
-	    	if (job.fileProgress == undefined  && numChecks > 6) {
+	    	if (job.status == "initialized"  && numChecks > 6) {
 	    		logger.error(job.id+" upload failed to start. Aborting...");
 	    		clearTimeout(timeout);
 				clearInterval(fileCheck);

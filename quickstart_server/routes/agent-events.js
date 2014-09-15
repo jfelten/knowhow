@@ -20,8 +20,8 @@ function listenForAgentEvents(agent, callback) {
 		});
 		agent.eventSocket.on('job-complete', function(job){
 			logger.info('Completed Job: '+job.id);
-			executionControl.completeJob(agent._id, job.id);
-			executionControl.eventEmitter.emit('job-complete',agent, job);
+			executionControl.completeJob(agent, job);
+			//executionControl.eventEmitter.emit('job-complete',agent, job);
 		});
 		agent.eventSocket.on('job-error', function(job){
 			logger.info('Stopping Job: '+job.id+ ' due to error.');
@@ -88,25 +88,27 @@ function AgentEventHandler(io) {
 	});
 	executionControl.eventEmitter.on('job-update', function(agent, job) {
 		logger.info('broadcasting job update.');
+		executionControl.updateJob(job);
 		//logger.debug(io);
 		try {
+			executionControl.updateJob(job);
 			io.emit('job-update',agent, job);
 		} catch(err) {
 			
 		}
 	});
-	executionControl.eventEmitter.on('job-cancel', function(agent, jobId) {
-		logger.info(jobId+' cancelled.');
+	executionControl.eventEmitter.on('job-cancel', function(agent, job) {
+		logger.info(job.id+' cancelled.');
 		try {
-			io.emit('job-cancel',agent, jobId);
+			io.emit('job-cancel',agent, {id: job.id, status: job.status, progress: job.progress});
 		} catch(err) {
 		
 		}
 	});
-	executionControl.eventEmitter.on('job-complete', function(agent, jobId) {
-		logger.info(jobId+' complete.');
+	executionControl.eventEmitter.on('job-complete', function(agent, job) {
+		logger.info("broadcasting "+job.id+' complete.');
 		try {
-			io.emit('job-complete',agent, jobId);
+			io.emit('job-complete',agent, job);
 		} catch(err) {
 		
 		}

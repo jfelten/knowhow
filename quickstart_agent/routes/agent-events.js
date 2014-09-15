@@ -37,11 +37,11 @@ var broadcastEvents = function(agentControl, io) {
 	});
 	};
 	
-function sendJobEventToServer(eventType, payload) {
+function sendJobEventToServer(eventType, job) {
 	for (var i=0; i<connectedSockets.length; i++) {
 		var socket = connectedSockets[i];
 		if (socket) {
-			socket.emit(eventType, payload);
+			socket.emit(eventType, {id: job.id, progress: job.progress, status: job.status});
 		}
 	}
 }	

@@ -31,7 +31,9 @@ updateJob = function(agent, job, callback ) {
 			currentJobs[agentId][job.id].status=currentJobs[agentId][job.id].status;
 		}
 	}
-	callback();
+	if (callback) {
+		callback();
+	}
 		
 	
 };
@@ -53,26 +55,47 @@ cancelJob = function(agentId, jobId, callback ) {
 	    }
 		clearTimeout(currentJobs[agentId][jobId].timeout);
 	    clearInterval(currentJobs[agentId][jobId].fileCheck);
-	    eventEmitter.emit('job-cancel',currentJobs[agentId].agent, jobId);
+	    eventEmitter.emit('job-cancel',currentJobs[agentId].agent, currentJobs[agentId][jobId]);
 	    delete currentJobs[agentId][jobId];
 	}
 	 
-    
-    callback();
+    if (callback) {
+    	callback();
+    }
 }
 
 exports.cancelJob = cancelJob;
 
-completeJob = function(agentId,jobId) {
-	currentJobs[agentId][jobId].fileSocket.close();
-	currentJobs[agentId][jobId].eventSocket.close();
-	for (uploadFile in currentJobs[agentId][jobId].fileProgress) {
-		currentJobs[agentId][jobId].fileProgress[uploadFile].readStream.close();
-    }
-	clearTimeout(currentJobs[agentId][jobId].timeout);
-    clearInterval(currentJobs[agentId][jobId].fileCheck);
-    delete currentJobs[agentId][jobId];
-    eventEmitter.emit('job-complete',job);
+completeJob = function(agent,job) {
+	if (agent && job) {
+		
+		var jobId = job.id;
+		var agentId = agent._id;
+		logger.info("completing "+jobId);
+		if (currentJobs[agentId][jobId].fileSocket) {
+			logger.debug("closing file socket.");
+			currentJobs[agentId][jobId].fileSocket.close();
+		}
+		if (currentJobs[agentId][jobId].eventSocket) {
+			logger.debug("closing event socket.");
+			currentJobs[agentId][jobId].eventSocket.close();
+		}
+		if (uploadFile in currentJobs[agentId][jobId].fileProgress) {
+			logger.debug("closing files.");
+			for (uploadFile in currentJobs[agentId][jobId].fileProgress) {
+				if (currentJobs[agentId][jobId].fileProgress[uploadFile] && 
+				currentJobs[agentId][jobId].fileProgress[uploadFile].readStream) {
+				
+					currentJobs[agentId][jobId].fileProgress[uploadFile].readStream.close();
+				}
+		    }
+		}
+		clearTimeout(currentJobs[agentId][jobId].timeout);
+	    clearInterval(currentJobs[agentId][jobId].fileCheck);
+	    delete currentJobs[agentId][jobId];
+	    logger.info("completed.");
+	    eventEmitter.emit('job-complete',agent, job);
+	 }
 }
 exports.completeJob = completeJob;
 
@@ -193,7 +216,7 @@ function listenForJobEvents(agent, jobId, callback) {
 		});
 		currentJobs[agentId][jobId].eventSocket.on('job-complete', function(job){
 			logger.info('Completed Job: '+job.id);
-			completeJob(agentId, jobId);
+			completeJob(agent, job);
 			eventEmitter.emit('job-complete',agent, job);
 		});
 		currentJobs[agentId][jobId].eventSocket.on('job-error', function(job){
@@ -326,7 +349,7 @@ function setJobTimer(agent, job) {
 			        currentJobs[agentId][jobId].error=true;
 			       	clearTimeout(currentJobs[agentId][jobId].timeout);
 	    			clearInterval(currentJobs[agentId][jobId].fileCheck);
-	    			emit("job-error",job);
+	    			eventEmitter.emit("job-error",job);
 	    			cancelJob(agentId, jobId);
 	    		}
 	    		return;
@@ -382,7 +405,7 @@ exports.getRunningJobsList = function(callback) {
 				runningJobs[agentId][jobId] = {};
 				runningJobs[agentId][jobId].progress = currentJobs[agentId][jobId].progress;
 				runningJobs[agentId][jobId].status = currentJobs[agentId][jobId].status;
-				runningJobs[agentId].agent = currentJobs[agentId]
+				runningJobs[agentId].agent = currentJobs[agentId].agent;
 			}
 		}
 	}
