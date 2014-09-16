@@ -20,15 +20,15 @@ var broadcastEvents = function(agentControl, io) {
 		}
 		
 		socket.on('disconnect',function(err) {
-			console.log("removing listeners");
+			logger.info("removing listeners");
 			delete connectedSockets[nextIndex];
 		});
 		
 
 		socket.on('job-cancel', function(job) {
-			logger.info("cancel requested by server.");
+			logger.info("cancel requested by server for: "+job.id);
 			jobControl.cancelJob(job);
-			socket.emit('job-cancel', jobId);
+			//socket.emit('job-cancel', job);
 		});
 		
 
@@ -38,19 +38,23 @@ var broadcastEvents = function(agentControl, io) {
 	};
 	
 function sendJobEventToServer(eventType, job) {
-	for (var i=0; i<connectedSockets.length; i++) {
-		var socket = connectedSockets[i];
-		if (socket) {
-			socket.emit(eventType, {id: job.id, progress: job.progress, status: job.status});
+	if (job) {
+		for (var i=0; i<connectedSockets.length; i++) {
+			var socket = connectedSockets[i];
+			if (socket) {
+				socket.emit(eventType, {id: job.id, progress: job.progress, status: job.status});
+			}
 		}
 	}
 }	
 
 function sendAgentEventToServer(eventType, agent) {
-	for (var i=0; i<connectedSockets.length; i++) {
-		var socket = connectedSockets[i];
-		if (socket) {
-			socket.emit(eventType, agent);
+	if (agent) {
+		for (var i=0; i<connectedSockets.length; i++) {
+			var socket = connectedSockets[i];
+			if (socket) {
+				socket.emit(eventType, agent);
+			}
 		}
 	}
 }
@@ -74,6 +78,7 @@ AgentEventHandler = function(io, agentControl) {
 			if (job) {
 				logger.debug("job error: "+job.id);
 				//socket.emit('job-error', job);
+				jobControl.cancelJob(job);
 				sendJobEventToServer('job-error', job);
 			}
 		});

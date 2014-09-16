@@ -139,9 +139,10 @@ executeSync: function(job, eventEmitter) {
 	
 	var progressCheck = setInterval(function() {
 		if (job.progress <= currentProgress) {
-			this.job.status="executing";
-		    job.progress=job.progress+1
-		    eventEmitter.emit('job-update',{id: job.id, status: job.status, progress: progress});
+			job.status="executing";
+		    job.progress++;
+		    update
+		    eventEmitter.emit('job-update',{id: job.id, status: job.status, progress: job.progress});
 		    currentProgress = job.progress;
 		}
 	},5000);
@@ -152,13 +153,14 @@ executeSync: function(job, eventEmitter) {
 			job.progress=0;
 			job.status=err.syscall+" "+err.code;
 			eventEmitter.emit('job-error',job,err.syscall+" "+err.code);
+			clearInterval(progressCheck);
 			return;
 		}
 		job.progress=0;
 		job.status=job.id+" complete";
 		eventEmitter.emit("job-complete", job);
 		delete currentlyRunningJob;
-		clearInterval(progressCheck)
+		clearInterval(progressCheck);
         logger.info("done");
     });
 	 

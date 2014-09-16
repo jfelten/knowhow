@@ -21,11 +21,11 @@ p
 		span(ng-if="loading_jobs") ...loading...
 		abn-tree(tree-data="jobs" tree-control="job_tree" on-select="jobs_tree_handler(branch)" expand-level="2" initial-selection="weblogic" )
 	.jobs-control
-		.agent-progress(ng-hide="runningJobs.length == 0")
-			i.icon-remove(ng-click="cancel(job)" ng-repeat="job in runningJobs")
-				{{job.agent.user}}@{{job.agent.host}}
-				progressbar(animate="job.progress" value="job.progress" type="success")
-					{{job.status}}
+		.agent-progress(ng-hide="runningJobs.length == 0" ng-repeat="agentJobs in runningJobs")
+				.progressBar(ng-repeat="job in agentJobs" ng-hide="job.progress == 0")
+					i.glyphicon.glyphicon-calendar {{agentJobs.agent.user}}@{{agentJobs.agent.host}} 
+					progressbar(ng-hide="job.progress == 0" animate="job.progress" value="job.progress" type="success")
+						{{job.status}}
 		div(dropdown is-open="status.isopen").btn-group
 			button.btn.btn-primary.dropdown-toggle
 				span(id="selectAgent") 

@@ -121,24 +121,34 @@ var myModule = angular.module('myApp.controllers', []).
 
     socket.on('job-update', function(agent,job){
       console.log('job update message received');
-      loadJobs();
-	  $scope.$apply();
+      //loadJobs();
+      if (agent && job) {
+        if (!$scope.runningJobs[agent._id]) {
+        	$scope.runningJobs[agent._id] = {};
+        	$scope.runningJobs[agent._id][job.id] = {}
+        } else if (!$scope.runningJobs[agent._id][job.id]) {
+        	$scope.runningJobs[agent._id][job.id] = {}
+        }
+      	$scope.runningJobs[agent._id][job.id].progress=job.progress;
+      	$scope.runningJobs[agent._id][job.id].status=job.status;
+	  	$scope.$apply();
+	  }
       
     });
     socket.on('job-complete', function(agent,job){
-      console.log('job update message received');
+      console.log('job complete message received');
       loadJobs();
 	  $scope.$apply();
       
     });
     socket.on('job-cancel', function(agent,job){
-      console.log('job update message received');
+      console.log('job cancel message received');
       loadJobs();
 	  $scope.$apply();
       
     });
     socket.on('job-error', function(agent,job){
-      console.log('job update message received');
+      console.log('job error message received');
       loadJobs();
 	  $scope.$apply();
       

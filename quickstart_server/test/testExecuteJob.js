@@ -106,8 +106,8 @@ job = {
 agent ={
 		_id:"Ah4WQBMiGtS5pA7b",
 //		host: '23.92.65.207',
-//		host: 'tb101',
-		host: 'localhost',
+		host: 'tb101',
+//		host: 'localhost',
 		port: 3000
 };
 

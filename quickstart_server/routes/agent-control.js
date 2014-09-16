@@ -64,14 +64,14 @@ heartbeat = function(agent, callback) {
         	logger.info("done.");
             //obj = JSON.parse(output);
         	//logger.debug("agent status check: "+obj.status);        
-        	callback();
+        	callback(undefined, agent);
             
         });
         //res.end();
 	});
 	request.on('error', function(er) {
 		logger.error('heartbeat could not connect to agent: '+agent.host,er);
-		callback(new Error("unable to connect"));
+		callback(new Error("unable to connect"),agent);
 	});
 	request.end();
 

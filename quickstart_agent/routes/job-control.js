@@ -20,6 +20,7 @@ completeJob = function(job) {
 		logger.info('completed job: '+job.id);
 		delete jobQueue[job.id];
 		jobInProgress = undefined;
+		eventEmitter.emit('upload-complete',job);
 	}
 
 }
@@ -87,7 +88,7 @@ cancelJob = function(job) {
 		delete jobQueue[jobInProgress];
 	}
 	jobInProgress = undefined;
-	logger.debug("starting cancel for: ");
+	logger.debug("starting cancel for: "+job.id);
 	if (job != undefined) {
 		if (job.fileProgress != undefined) {
 			for (fileUpload in job.fileProgress) {
@@ -103,6 +104,7 @@ cancelJob = function(job) {
 		commandShell.cancelRunningJob();
 		logger.info('canceling job: '+job.id);
 		eventEmitter.emit('job-cancel', job);
+		eventEmitter.emit('upload-complete',job);
 		jobQueue[job.id] = undefined;
 		jobInProgress = undefined;
 	}
@@ -265,11 +267,12 @@ JobControl = function(io) {
 		logger.info('upload request');
 		var jobId = '';
 		eventEmitter.on('upload-complete', function(job) {
-			socket.disconnect();
+			logger.debug("sending upload complete to server");
+			socket.emit('End', job );
+			
 		});
 		eventEmitter.on('file-uploaded', function(jobId, filename) {
-			socket.emit('End', {message: 'Filename '+filename+' upload complete for: '+jobId, jobId: jobId,  fileName: filename} );
-			
+						
 		});
 		
 		ss(socket).on('agent-upload', {highWaterMark: 32 * 1024}, function(stream, data) {
