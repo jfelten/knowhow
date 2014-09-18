@@ -40,14 +40,23 @@ exports.serverInfo = function (req, res) {
   res.json(getServerInfo());
 };
 
-exports.jobList = function (req,res) {
-	var file = req.query.file;
-	logger.info('request for files in: '+file);
-	var dirTree = fileControl.dirTree(file);
-	 res.json( {files : dirTree});
+exports.fileListForRepo = function (req,res) {
+	var repo = req.query.repo;
+	var dir = req.query.dir;
+	logger.info('request for files in: '+repo+' in dir: '+dir);
+	var dirTree = fileControl.getDirTreeForRepo(repo, dir,function(err, tree) {
+		if (err) {
+			res.send(500, err);
+		} else {
+			logger.debug(tree);
+			res.json( {children : [tree]});
+		}
+		
+	});
+	
 };
 
-exports.jobContent = function (req,res) {
+exports.fileContent = function (req,res) {
 	var filePath = req.query.file;
 	var repo = req.query.repo;
 	 

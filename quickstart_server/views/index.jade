@@ -14,7 +14,7 @@ block content
 						ul.serverName
 							| {{serverInfo.name}}:{{serverInfo.port}}
 						ul.nav.navbar-nav
-							- var obj = { '/agents':'Agents', '/jobs':'Jobs', '/environments':'Environments',  '/logs':'Logs',  '/about':'About'  }
+							- var obj = { '/agents':'Agents', '/jobs':'Jobs', '/workflows':'Workflows',  '/logs':'Logs',  '/about':'About'  }
 								- each val, key in obj
 									- if (id == key)
 										li.active

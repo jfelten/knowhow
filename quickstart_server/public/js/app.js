@@ -22,9 +22,9 @@ config(function ($routeProvider, $locationProvider) {
       templateUrl: 'partials/jobs',
       controller: 'JobsController'
     }).
-    when('/environments', {
-        templateUrl: 'partials/environments',
-        controller: 'EnvironmentsController'
+    when('/workflows', {
+        templateUrl: 'partials/workflows',
+        controller: 'WorkflowsController'
       }).
       when('/logs', {
           templateUrl: 'partials/logs',

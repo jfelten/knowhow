@@ -22,29 +22,47 @@ exports.getFilePath = function(repofilename) {
 	return repoDir+fileURL.path;
 };
 
-dirTree = function (filename) {
+getDirTreeForRepo = function(repo, dir, callback) {
+	var filename = repos[repo];
 	
-	logger.info("retrieving tree for : "+filename);
-	logger.debug("basename="+filepath.basename(filename));
+	if (!dir) {
+		logger.info("retrieving tree for : "+filename);
+	} else {
+		logger.info("retrieving tree for : "+filename+filepath.sep+dir);
+		filename = filename+filepath.sep+dir;
+	}
+	logger.info("repo file loc="+filename);
+	
+	var tree=  dirTree(filename);
+	callback(undefined, tree);
+	
+	
+};
+
+exports.getDirTreeForRepo = getDirTreeForRepo;
+
+dirTree = function (filename) {
+
+	logger.debug("basename="+filepath.basename(filename)+" filename="+filename);
     var stats = fs.lstatSync(filename),
-        info = {
-            path: filename,
-            label: filepath.basename(filename),
-            ext:  filepath.extname(filename)
-        };
+    info = {
+        path: filename,
+        label: filepath.basename(filename),
+        ext:  filepath.extname(filename)
+    };
     
 
     if (stats.isDirectory()) {
         info.type = "folder";
         info.children = fs.readdirSync(filename).map(function(child) {
-            return dirTree(filename + '/' + child);
+        	return dirTree(filename + '/' + child);
         });
-        return info;
+        
     } else {
         // Assuming it's a file. In real life it could be a symlink or
         // something else!
         info.type = "file";
- //   	return path.basename(filename);
+    	//return path.basename(filename);
     }
 
     return info;
