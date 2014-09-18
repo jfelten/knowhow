@@ -3,6 +3,7 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var async = require('async');
 
 //var express = require('express'),
 bodyParser = require('body-parser'),
@@ -93,8 +94,8 @@ app.get('/modals/:name', routes.modals);
 //JSON API
 app.get('/api/serverInfo', api.serverInfo);
 app.get('/api/connectedAgents', api.listAgents);
-app.get('/api/jobList', api.jobList);
-app.get('/api/jobContent', api.jobContent);
+app.get('/api/fileListForRepo', api.fileListForRepo);
+app.get('/api/fileContent', api.fileContent);
 app.get('/api/saveFile', api.saveFile);
 app.get('/api/repoList', api.repoList);
 app.get('/api/addFile', api.addFile);
@@ -116,24 +117,46 @@ app.get('*', routes.index);
 
 //start listening for events on active agents
 agentControl.listAgents(function (err, agents) {
+	logger.debug(agents);
+	var agentConnects = new Array(agents.length);
 	for (agentIndex in agents) {
 		var agent = agents[agentIndex]; 
-		agentControl.heartbeat(agent, function (err) {
-			if (err) {
-				logger.error("unable to contact agent: "+agent.user+"@"+agent.host+":"+agent.port);
-				return;
-			}
-			console.log("contacted");
-			agentEventHandler.listenForAgentEvents(agent, function(err) {
-				if(err) {
-					logger.error("unable to receive events for: "+agent.user+"@"+agent.host+":"+agent.port);
+		agentConnects[agentIndex] = function(callback) { 
+			logger.info("contacting: "+this.agent.user+"@"+this.agent.host+":"+this.agent.port);
+			agentControl.heartbeat(this.agent, function (err, connectedAgent) {
+				if (err) {
+					logger.error("unable to contact agent: "+connectedAgent.user+"@"+connectedAgent.host+":"+connectedAgent.port);
+					callback(new Error("unable to contact agent: "+connectedAgent.user+"@"+connectedAgent.host+":"+connectedAgent.port));
 					return;
-				}
-				logger.info("receiving events from: "+agent.user+"@"+agent.host+":"+agent.port);
+				};
+				logger.info("contacted "+connectedAgent);
+				agentEventHandler.listenForAgentEvents(connectedAgent, function(err, registeredAgent) {
+					if(err) {
+						logger.error("unable to receive events for: "+registeredAgent.user+"@"+registeredAgent.host+":"+registeredAgent.port);
+						callback(new Error("unable to receive events for: "+registeredAgent.user+"@"+registeredAgent.host+":"+registeredAgent.port));
+						return;
+					}
+					logger.info("receiving events from: "+registeredAgent.user+"@"+registeredAgent.host+":"+registeredAgent.port);
+					agentEventHandler.openFileSocket(registeredAgent, function(err, registeredAgent) {
+						if(err) {
+							logger.error("unable to upload files to: "+registeredAgent.user+"@"+registeredAgent.host+":"+registeredAgent.port);
+							callback(new Error("unable to upload files to: "+registeredAgent.user+"@"+registeredAgent.host+":"+registeredAgent.port));
+							return;
+						}
+						logger.info("can now upload files to: "+registeredAgent.user+"@"+registeredAgent.host+":"+registeredAgent.port);
+						callback();
+					});
+				});
+				
 			});
-		});
+		}.bind({agent: agent});
 	
 	}
+	async.parallel(agentConnects,function() {
+	
+		logger.info("agent connections finished.");
+
+	});
 });
 
 
