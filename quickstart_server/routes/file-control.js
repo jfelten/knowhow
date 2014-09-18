@@ -9,7 +9,7 @@ repos = {
 	"quickstart:": filepath.normalize(__dirname+".."+filepath.sep+".."+filepath.sep+"repo"),
 	"leapfrog:": filepath.normalize("/repo/leapfrog"),
 	"rawpackages:": filepath.normalize("/repo/rawpackages")
-    "atgcrs:": filepath.normalize("/repo/atgcrs")
+    "atgcrs:": filepath.normalize("/repo/atgcrs") 
 };
 
 exports.repos = repos;
