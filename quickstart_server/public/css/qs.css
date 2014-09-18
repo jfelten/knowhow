@@ -173,8 +173,12 @@ p {
   float: top;
 }
 .jobs-nav {
+  padding: 0px 10px 0px 0px;
   float: left;
   width: 350px;
+}
+.jobs-nav .jobs-buttons {
+  float: right;
 }
 .jobs-control {
   float: bottom;
@@ -190,7 +194,7 @@ p {
   float: right;
 }
 .jobs-control .jobs-textarea {
-  width: 600px;
+  width: 900px;
   height: 650px;
 }
 .agent-form h2 {
