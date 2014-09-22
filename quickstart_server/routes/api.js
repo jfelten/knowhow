@@ -82,7 +82,8 @@ exports.addFile = function(req,res) {
 			res.send(500, err);
 			return;
 		}
-		res.json({path: newFile});
+		logger.debug(newFile);
+		res.json(newFile);
 		
 	});
 };
