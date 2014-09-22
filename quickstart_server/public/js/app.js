@@ -10,7 +10,8 @@ angular.module('myApp', [
   'myApp.directives',
   'ui.bootstrap',
   'ngRoute',
-  'angularBootstrapNavTree'
+  'angularBootstrapNavTree',
+  'qs_repository'
 ]).
 config(function ($routeProvider, $locationProvider) {
   $routeProvider.
