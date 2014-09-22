@@ -48,7 +48,7 @@ var loadFile = function(repo, path, callback) {
  };
 
 	  
-var addFile = function(selectedNode, repo, newFile, isDirectory) {
+var addFile = function(selectedNode, repo, newFile, tree, isDirectory) {
   
 	  if (selectedNode.type != "folder") {
 	  	console.log("selecting parent folder for type: "+selectedNode.type );
@@ -58,18 +58,11 @@ var addFile = function(selectedNode, repo, newFile, isDirectory) {
 	  
 	  //submit the add request
 
-	  this.$http.get('/api/addFile?path='+selectedNode.path+'&fileName='+newFile+'&isDirectory='+isDirectory,{
-          transformResponse: function (data, headers) {
-              //MESS WITH THE DATA
-              //data = {};
-              selectedNode.children.push(JSON.parse(data));
-              selectedNode.expand_all();
-              
-              
-        	  
-          }
-      }).success(function(data) {
-    	  
+	  this.$http.get('/api/addFile?path='+selectedNode.path+'&fileName='+newFile+'&isDirectory='+isDirectory
+      ).success(function(data) {
+    	  selectedNode.children.push(data);
+          tree.expand_all(selectedNode);
+          //tree.select_branch(selectedNode);
       });
       
 };
@@ -148,7 +141,7 @@ var saveFile =  function(fileName,fileContent,callback) {
 };
 
 
-var openNewFileModal = function (selectedNode, repo, templateURL) {
+var openNewFileModal = function (selectedNode, repo, tree, templateURL) {
 			console.log("getting file form");
 			var modalInstance ={};
 			
@@ -160,11 +153,11 @@ var openNewFileModal = function (selectedNode, repo, templateURL) {
 				  console.log(selectedNode);
 				  $scope.addFile = function (fileName) {
 				  	console.log("creating: "+fileName);
-				    qs_repo.addFile(selectedNode,repo,fileName,false)
+				    qs_repo.addFile(selectedNode,repo,fileName,tree,false)
 				   	modalInstance.close('ok');
 				  };
 				  $scope.addDirectory = function (fileName) {
-				    qs_repo.addFile(selectedNode,repo,fileName,true)
+				    qs_repo.addFile(selectedNode,repo,fileName,tree,true)
 				    modalInstance.close('ok');
 				  };
 				
@@ -182,7 +175,7 @@ var openNewFileModal = function (selectedNode, repo, templateURL) {
 		    modalInstance.result.then(function (selectedItem) {
 
 		    }, function () {
-		      $log.info('Modal dismissed at: ' + new Date());
+		      console.log('Modal dismissed at: ' + new Date());
 		    });
 
 		   

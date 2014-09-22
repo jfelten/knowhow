@@ -238,7 +238,7 @@ var myModule = angular.module('myApp.controllers', []).
 	  
 	
 	$scope.addFile = function() {
-		qs_repo.openNewFileModal($scope.selectedFile, $scope.selectedRepoName, 'addFile');
+		qs_repo.openNewFileModal($scope.selectedFile, $scope.selectedRepoName, tree,'addFile');
 		
 	}
 	  $http.get('/api/connectedAgents').
