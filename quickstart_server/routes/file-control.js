@@ -133,7 +133,8 @@ exports.addFile = function(addPath, fileName, isDirectory, callback) {
 	var fileInfo = {
         path: absolutePath,
         label: filepath.basename(absolutePath),
-        ext:  filepath.extname(absolutePath)
+        ext:  filepath.extname(absolutePath),
+        type: fileType
     };
 	//logger.debug('isNewDirectory='+isNewDirectory+' path='+newPath);
 	fs.stat(newPath, function (err, stat) {
