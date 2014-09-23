@@ -151,6 +151,7 @@ var myModule = angular.module('myApp.controllers', []).
     socket.on('job-error', function(agent,job){
       console.log('job error message received');
       loadJobs();
+      $scope.message=job.message;
 	  $scope.$apply();
       
     });
