@@ -189,7 +189,7 @@ waitForFiles = function(job,callback) {
 				callback(new Error("Aborting job"), job);
 	    	}
 	    	numChecks++;
-	    	if (job.status == "initialized"  && numChecks > 6) {
+	    	if ( (job.status == "initialized" || job.status =="initializing")  && numChecks > 6) {
 	    		logger.error(job.id+" upload failed to start. Aborting...");
 	    		clearTimeout(timeout);
 				clearInterval(fileCheck);
