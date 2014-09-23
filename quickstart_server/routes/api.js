@@ -60,16 +60,19 @@ exports.fileContent = function (req,res) {
 	var filePath = req.query.file;
 	var repo = req.query.repo;
 	 
-	var stat = fs.statSync(filePath);
+	fileControl.fileContent(filePath,repo, function(err, headers, fileToRead) {
+   		if(err) {
+   			res.send(500, err);
+   			return;
+   		} else  {
+   			logger.debug(headers);
+   			res.writeHead(200, headers);
 
-    res.writeHead(200, {
-        'Content-Type': 'text/json',
-        'Content-Length': stat.size
-    });
-
-    var readStream = fs.createReadStream(filePath);
-    // We replaced all the event handlers with a simple call to readStream.pipe()
-    readStream.pipe(res);
+   			var fileStream = fs.createReadStream(fileToRead);
+   			fileStream.pipe(res);
+   		}
+   	});
+    
 };
 
 

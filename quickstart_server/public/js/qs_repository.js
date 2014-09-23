@@ -22,7 +22,9 @@ var loadFile = function(repo, path, callback) {
   	  console.log('load file');
 	  this.$http.get('/api/fileContent?repo='+repo+'&file='+path,{
           transformResponse: function (data, headers) {
-              if (data.length >0) {
+              console.log(headers['content-type']);
+              console.log(data);
+              if (headers['Content-Type'] == 'text/json' && data.length >0) {
                   try {
                 	  var jsonObject = JSON.parse(data);
                 	  if (jsonObject == undefined) {
@@ -32,13 +34,14 @@ var loadFile = function(repo, path, callback) {
                   } 
                   catch (e) {
                 	  alert(e);
-                	  editor.setText(data, function(err) {
-        		    		console.log(err);
-                	  });
+                	  //editor.setText(data, function(err) {
+        		    	//	console.log(err);
+                	  //});
                 	  callback(err,data);
-                	  return data;//.replace(/\n/g, '\\n');
+                	 // return data;//.replace(/\n/g, '\\n');
                   }
               }
+              return data;
         	  
           }
       }).success(function(data) {

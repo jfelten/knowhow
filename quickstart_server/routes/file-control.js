@@ -4,6 +4,7 @@ var os = require("os")
 var filepath = require('path');
 var url = require('url') ;
 var mkdirp = require('mkdirp');
+var mime = require('mime');
 
 repos = {
 	"quickstart:": filepath.normalize(__dirname+".."+filepath.sep+".."+filepath.sep+"repo"),
@@ -186,6 +187,29 @@ exports.addFile = function(addPath, fileName, isDirectory, callback) {
 	callback(undefined, fileInfo);	
 	});
 
+};
+
+exports.fileContent = function (filePath,repo, callback) {
+	require('istextorbinary').isText(filePath, new Buffer(8), function(err, result){
+		if (err) {
+			callback(err,undefined);
+			return;
+		}
+		logger.debug(result);
+		var stat = fs.statSync(filePath);
+		if (!stat.isDirectory()) {
+			var headers = {
+	        	'Content-Type': mime.lookup(filePath),
+	        	'Content-Length': stat.size
+	    	}
+    		callback(undefined, headers, filePath);
+    	} else{ 
+    		callback(new Error("file is a directory" ,undefined));
+    	}
+		return;
+	});
+
+	//callback(new Error("unable to retrieve file content"),undefined,undefined);
 };
 
 exports.dirTree = dirTree;
