@@ -18,7 +18,9 @@ function listenForAgentEvents(agent, callback) {
     	agentSockets[agent._id].eventSocket.on('job-update', function(job){
     		if (job) {
 				logger.debug("job update");
-				logger.debug(job.progress+" "+job.status);
+				if (job.progress && job.status) {
+					logger.debug(job.progress+" "+job.status);
+				}
 				executionControl.updateJob(agent, job, function() {
 					executionControl.eventEmitter.emit('job-update',agent, job);
 				});
