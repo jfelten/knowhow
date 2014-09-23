@@ -268,7 +268,8 @@ function uploadFiles(agent,job, callback) {
 			currentJobs[agentId][jobId].fileProgress[fileName].readStream.pipe(stream );
 		    
 		} catch(err) {
-		//	logger.error(err);
+			logger.error("unable to start upload for: "+uploadFile)
+			logger.error(err);
 			currentJobs[agentId].fileSocket.emit('client-upload-error', {name: fileName, jobId: jobId, fileSize: fileSizeInBytes, destination: file.destination } );
         //    currentJobs[agentId][jobId].fileProgress.error=true;
         //    logger.error('requesting cancel of: '+jobId);
