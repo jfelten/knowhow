@@ -272,7 +272,7 @@ function uploadFiles(agent,job, callback) {
 			currentJobs[agentId].fileSocket.emit('client-upload-error', {name: fileName, jobId: jobId, fileSize: fileSizeInBytes, destination: file.destination } );
         //    currentJobs[agentId][jobId].fileProgress.error=true;
         //    logger.error('requesting cancel of: '+jobId);
-			currentJobs[agentId].eventSocket.emit('job-cancel',jobId);
+		//	currentJobs[agentId].eventSocket.emit('job-cancel',jobId);
 		//	cancelJob(agent, job);
 		//	callback(new Error("Problem starting file upload"));
 			return;
