@@ -270,7 +270,9 @@ function uploadFiles(agent,job, callback) {
 		} catch(err) {
 			logger.error("unable to start upload for: "+uploadFile)
 			logger.error(err);
-			currentJobs[agentId].fileSocket.emit('client-upload-error', {name: fileName, jobId: jobId, fileSize: fileSizeInBytes, destination: file.destination } );
+			if (currentJobs[agentId].fileSocket) {
+				currentJobs[agentId].fileSocket.emit('client-upload-error', {name: fileName, jobId: jobId, fileSize: fileSizeInBytes, destination: file.destination } );
+			}
         //    currentJobs[agentId][jobId].fileProgress.error=true;
         //    logger.error('requesting cancel of: '+jobId);
 		//	currentJobs[agentId].eventSocket.emit('job-cancel',jobId);
