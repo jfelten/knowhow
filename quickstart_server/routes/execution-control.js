@@ -60,11 +60,11 @@ initiateJob = function(agentId, jobId, callback ) {
 		//if (currentJobs[agentId][jobId].eventSocket != undefined) {
 		//	currentJobs[agentId][jobId].eventSocket.close();
 		//}
-		for (uploadFile in currentJobs[agentId][jobId].fileProgress) {
-			if (currentJobs[agentId][jobId].fileProgress[uploadFile].readStream != null) {
-				currentJobs[agentId][jobId].fileProgress[uploadFile].readStream.close();
-			}
-	    }
+		//for (uploadFile in currentJobs[agentId][jobId].fileProgress) {
+		//	if (currentJobs[agentId][jobId].fileProgress[uploadFile].readStream != null) {
+		//		currentJobs[agentId][jobId].fileProgress[uploadFile].readStream.close();
+		//	}
+	    //}
 		clearTimeout(currentJobs[agentId][jobId].timeout);
 	    clearInterval(currentJobs[agentId][jobId].fileCheck);
 	    delete currentJobs[agentId][jobId];
@@ -268,16 +268,20 @@ function uploadFiles(agent,job, callback) {
 			currentJobs[agentId][jobId].fileProgress[fileName].readStream.pipe(stream );
 		    
 		} catch(err) {
-			logger.error("unable to start upload for: "+uploadFile)
+			logger.error("unable to start upload for: "+files[uploadFile])
 			logger.error(err);
 			if (currentJobs[agentId].fileSocket) {
 				currentJobs[agentId].fileSocket.emit('client-upload-error', {name: fileName, jobId: jobId, fileSize: fileSizeInBytes, destination: file.destination } );
+			} else {
+				logger.error("unable to notify server of upload failure");
 			}
+			
         //    currentJobs[agentId][jobId].fileProgress.error=true;
         //    logger.error('requesting cancel of: '+jobId);
 		//	currentJobs[agentId].eventSocket.emit('job-cancel',jobId);
 		//	cancelJob(agent, job);
 		//	callback(new Error("Problem starting file upload"));
+			callback(new Error("unable to start upload for: "+files[uploadFile]));
 			return;
 			break;
 		}
@@ -291,14 +295,14 @@ function uploadFiles(agent,job, callback) {
 function uploadComplete(agent, job) {
 	var agentId = agent._id;
 	var jobId = job.id;
-	logger.debug("closing all file uploads for: "+jobId+" on agent: "+agentId);
-	if (currentJobs[agentId] && currentJobs[agentId][jobId]) {
-	 	currentJobs[agentId][jobId].uploadComplete=true;
-	 	logger.debug("clearing file check.");
-	 	clearTimeout(currentJobs[agentId][jobId].timeout);
-		clearInterval(currentJobs[agentId][jobId].fileCheck);
-	}
-	logger.info("upload completed for: "+jobId+" on agent: "+agentId);
+//	logger.debug("closing all file uploads for: "+jobId+" on agent: "+agentId);
+//	if (currentJobs[agentId] && currentJobs[agentId][jobId]) {
+//	 	currentJobs[agentId][jobId].uploadComplete=true;
+//	 	logger.debug("clearing file check.");
+//	 	clearTimeout(currentJobs[agentId][jobId].timeout);
+//		clearInterval(currentJobs[agentId][jobId].fileCheck);
+//	}
+	logger.info("upload completed for: "+job.id+" on agent: "+agentId);
 }
 
 exports.uploadComplete = uploadComplete;
