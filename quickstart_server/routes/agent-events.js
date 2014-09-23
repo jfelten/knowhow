@@ -77,7 +77,7 @@ function openFileSocket(agent, callback) {
 	    });
 		agentSockets[agent._id].fileSocket.on ('Error', function(data) {
 	    	logger.error("socket error: "+data);
-	        agentSockets[agent._id].fileSocket.emit('client-upload-error', {name: data.fileName, jobId: data.jobId} );
+	        //agentSockets[agent._id].fileSocket.emit('client-upload-error', {name: data.fileName, jobId: data.jobId} );
 
 		});
 		//callback(undefined,agent);
