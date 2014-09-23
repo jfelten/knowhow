@@ -28,17 +28,23 @@ function listenForAgentEvents(agent, callback) {
 			
 		});
 		agentSockets[agent._id].eventSocket.on('job-complete', function(job){
-			logger.info('Completed Job: '+job.id);
-			executionControl.completeJob(agent, job);
+			if (job) {
+				logger.info('Completed Job: '+job.id);
+				executionControl.completeJob(agent, job);
+			}
 			//executionControl.eventEmitter.emit('job-complete',agent, job);
 		});
 		agentSockets[agent._id].eventSocket.on('job-error', function(job){
-			logger.info('Stopping Job: '+job.id+ ' due to error.');
-			agentSockets[agent._id].eventSocket.emit('job-cancel',job);
+			if (job) {
+				logger.info('Stopping Job: '+job.id+ ' due to error.');
+				agentSockets[agent._id].eventSocket.emit('job-cancel',job);
+			}
 		});
 		agentSockets[agent._id].eventSocket.on('job-cancel', function(job){
-			logger.info('job: '+job.id+ ' cancelled.');
-			executionControl.cancelJob(agent._id, job);
+			if (job) {
+				logger.info('job: '+job.id+ ' cancelled.');
+				executionControl.cancelJob(agent._id, job);
+			}
 		});
 		
 		
