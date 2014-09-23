@@ -258,7 +258,7 @@ function uploadFiles(agent,job, callback) {
 		
 		
 		var total = 0;
-		//try {
+		try {
 			var stats = fs.statSync(filepath);
 			var fileSizeInBytes = stats["size"];	
 		    logger.info("uploading "+filepath);
@@ -267,17 +267,17 @@ function uploadFiles(agent,job, callback) {
 			ss(currentJobs[agentId].fileSocket).emit('agent-upload', stream, {name: fileName, jobId: jobId, fileSize: fileSizeInBytes, destination: file.destination });
 			currentJobs[agentId][jobId].fileProgress[fileName].readStream.pipe(stream );
 		    
-		//} catch(err) {
+		} catch(err) {
 		//	logger.error(err);
-		//	currentJobs[agentId].fileSocket.emit('client-upload-error', {name: fileName, jobId: jobId, fileSize: fileSizeInBytes, destination: file.destination } );
+			currentJobs[agentId].fileSocket.emit('client-upload-error', {name: fileName, jobId: jobId, fileSize: fileSizeInBytes, destination: file.destination } );
         //    currentJobs[agentId][jobId].fileProgress.error=true;
         //    logger.error('requesting cancel of: '+jobId);
-		//	agent.eventSocket.emit('job-cancel',jobId);
+			currentJobs[agentId].eventSocket.emit('job-cancel',jobId);
 		//	cancelJob(agent, job);
 		//	callback(new Error("Problem starting file upload"));
-		//	return;
-		//	break;
-		//}
+			return;
+			break;
+		}
 		
 	}
 	callback();
