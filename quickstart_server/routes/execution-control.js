@@ -233,7 +233,7 @@ exports.executeJob = function(agent,job,callback) {
 	reqPost.end();
 	reqPost.on('error', function(e) {
 	    logger.error(e);
-	    
+	    callback(e);
 	});
 }
 
