@@ -186,13 +186,22 @@ var myModule = angular.module('myApp.controllers', []).
 	      console.log('selection='+branch.label+ ' navigating='+navigating+' ext='+branch.ext+' type='+branch.type);
 	      $scope.selectedFile = branch; 
 	      $scope.message = undefined;
-	      if (navigating == false && '.json' == branch.ext) {
+	      if (branch.type = 'file') {
 	    	  qs_repo.loadFile($scope.selectedRepo, branch.path, function(err,data) {
-	    	  	editor.set(data, function(err) {
-	      		    		console.log(err);
-	      		    	});
-	    	  }); 
-	      }
+	    	    console.log("data="+data);
+	    	  	if (branch.ext=='.json') {
+  		    		editor.setMode('code');
+  		    		editor.set(JSON.parse(data));
+  		      	} else {
+  		    		editor.setMode('text');
+  		    		editor.setText(data);
+  		    	}
+  		      });
+	      		    		
+	      }		    	
+	    	  
+
+	     
 	    	  
     	};
 	  //tree controls
