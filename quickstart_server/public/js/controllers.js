@@ -183,10 +183,11 @@ var myModule = angular.module('myApp.controllers', []).
 	  var container = document.getElementById('jsoneditor');
 	  var editor = new JSONEditor(container,options);
 	  var tree_handler = function(branch) {
+	  	  //console.log(branch);
 	      console.log('selection='+branch.label+ ' navigating='+navigating+' ext='+branch.ext+' type='+branch.type);
 	      $scope.selectedFile = branch; 
 	      $scope.message = undefined;
-	      if (branch.type = 'file') {
+	      if (branch.type == 'file') {
 	    	  qs_repo.loadFile($scope.selectedRepo, branch.path, function(err,data) {
 	    	    console.log("data="+data);
 	    	  	if (branch.ext=='.json') {
@@ -234,7 +235,7 @@ var myModule = angular.module('myApp.controllers', []).
 	  $scope.jobs_tree_handler = tree_handler;
 	  $scope.saveJob = function() {
 	  	if($scope.selectedFile) {
-			  qs_repo.saveFile($scope.selectedFile.path, editor.get(), function(err, message) {
+			  qs_repo.saveFile($scope.selectedFile.path, editor.getText(), function(err, message) {
 			  	$scope.message = message;
 			  });
 		}
