@@ -173,8 +173,12 @@ p {
   float: top;
 }
 .jobs-nav {
+  padding: 0px 10px 0px 0px;
   float: left;
   width: 350px;
+}
+.jobs-nav .jobs-buttons {
+  float: right;
 }
 .jobs-control {
   float: bottom;
@@ -190,6 +194,34 @@ p {
   float: right;
 }
 .jobs-control .jobs-textarea {
+  width: 600px;
+  height: 650px;
+}
+.workflows-page {
+  float: top;
+}
+.workflows-nav {
+  padding: 0px 10px 0px 0px;
+  float: left;
+  width: 350px;
+}
+.workflows-nav .jobs-buttons {
+  float: right;
+}
+.workflows-control {
+  float: bottom;
+  width: 600px;
+  height: 750px;
+  float: left;
+}
+.workflows-control .workflows-message-block {
+  float: right;
+  color: #f00;
+}
+.workflows-control .workflows-buttons {
+  float: right;
+}
+.workflows-control .workflows-textarea {
   width: 600px;
   height: 650px;
 }
