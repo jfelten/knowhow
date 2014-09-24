@@ -347,7 +347,7 @@ var myModule = angular.module('myApp.controllers', []).
 			        console.log("submitted job request");
 			    }).
 			    error(function (data, status, headers, config) {
-			    	$scope.message = 'Unable to contact Agent http status: '+status;
+			    	$scope.message = data+' : '+status;
 			    });
 	  };
 	  
