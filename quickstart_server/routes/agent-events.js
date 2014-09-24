@@ -82,7 +82,7 @@ function openFileSocket(agent, callback) {
 		agentSockets[agent._id].fileSocket.on('End' ,function (job) {
 		  logger.info(job);
 	      if (job) {
-		      ogger.info("done uploading for job: "+job.id);
+		      logger.info("done uploading for job: "+job.id);
 		      executionControl.uploadComplete(agent, job);
 		   }
 		      
@@ -91,7 +91,7 @@ function openFileSocket(agent, callback) {
 			if (data) {
 	    		logger.error("socket error: "+data);
 	        	//agentSockets[agent._id].fileSocket.emit('client-upload-error', {name: data.fileName, jobId: data.jobId} );
-	        	executionControl.cancelJob(agent._id, job);
+	        	executionControl.cancelJob(agent._id, data.jobId);
 	        }
 
 		});
@@ -116,7 +116,7 @@ function openFileSocket(agent, callback) {
 		agentSockets[agent._id].fileSocket.on('End' ,function (job) {
 		  logger.info(job);
 	      if (job) {
-		      ogger.info("done uploading for job: "+job.id);
+		      logger.info("done uploading for job: "+job.id);
 		      executionControl.uploadComplete(agent, job);
 		   }
 		      
