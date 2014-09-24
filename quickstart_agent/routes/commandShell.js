@@ -152,7 +152,7 @@ executeSync: function(job, eventEmitter) {
 			logger.error('job error' + err);
 			job.progress=0;
 			job.status=err.syscall+" "+err.code;
-			eventEmitter.emit('job-error',job,err.syscall+" "+err.code);
+			eventEmitter.emit('job-error',job);
 			clearInterval(progressCheck);
 			return;
 		}

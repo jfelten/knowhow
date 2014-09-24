@@ -132,6 +132,8 @@ execute = function(job,callback) {
 		waitForFiles(job, function(err, job) {
 			if (err) {
 				job.status="Error receiving required files";
+				job.progress=0;
+				job.error=true;
 				cancelJob(job);	
 				return;
 			}
