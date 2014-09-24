@@ -233,7 +233,7 @@ waitForFiles = function(job,callback) {
     			clearInterval(fileCheck);
     			eventEmitter.emit('upload-complete',job);
     			callback(undefined, job);
-    		}  else if (jobQueue[job.id].disconnected == true || !jobInProgress) {
+    		}  else if ((jobQueue[job.id] && jobQueue[job.id].disconnected == true )|| !jobInProgress) {
     			logger.info(job.id+" did not receive all files. - Aborting...");
     			clearTimeout(timeout);
     			clearInterval(fileCheck);
