@@ -408,7 +408,7 @@ exports.getRunningJobsList = function(callback) {
 				runningJobs[agentId][jobId] = {};
 				runningJobs[agentId][jobId].progress = currentJobs[agentId][jobId].progress;
 				runningJobs[agentId][jobId].status = currentJobs[agentId][jobId].status;
-				runningJobs[agentId].agent = currentJobs[agentId].agent;
+				runningJobs[agentId].agent = {user: agent.user, host: agent.host, port: agent.port};
 			}
 		}
 	}
