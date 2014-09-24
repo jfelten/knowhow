@@ -189,6 +189,7 @@ waitForFiles = function(job,callback) {
 				clearTimeout(timeout);
 				clearInterval(fileCheck);
 				callback(new Error("Aborting job"), job);
+				return;
 	    	}
 	    	numChecks++;
 	    	if ( (job.status == "initialized" || job.status =="initializing")  && numChecks > 6) {
@@ -196,7 +197,7 @@ waitForFiles = function(job,callback) {
 	    		clearTimeout(timeout);
 				clearInterval(fileCheck);
 				callback(new Error("Aborting job"), job);
-	    		
+	    		return;
 	    	}
 	    	
 	    	var numFilesUploaded=0;
