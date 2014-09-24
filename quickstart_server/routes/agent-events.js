@@ -82,7 +82,7 @@ function openFileSocket(agent, callback) {
 		agentSockets[agent._id].fileSocket.on('End' ,function (job) {
 		  logger.info(job);
 	      if (job) {
-		      ogger.info("done uploading for job: "+job.id);
+		      logger.info("done uploading for job: "+job.id);
 		      executionControl.uploadComplete(agent, job);
 		   }
 		      
@@ -116,7 +116,7 @@ function openFileSocket(agent, callback) {
 		agentSockets[agent._id].fileSocket.on('End' ,function (job) {
 		  logger.info(job);
 	      if (job) {
-		      ogger.info("done uploading for job: "+job.id);
+		      logger.info("done uploading for job: "+job.id);
 		      executionControl.uploadComplete(agent, job);
 		   }
 		      
