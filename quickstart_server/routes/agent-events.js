@@ -37,7 +37,10 @@ function listenForAgentEvents(agent, callback) {
 		agentSockets[agent._id].eventSocket.on('job-error', function(job){
 			if (job) {
 				logger.info('Stopping Job: '+job.id+ ' due to error.');
-				agentSockets[agent._id].eventSocket.emit('job-cancel',job);
+				//agentSockets[agent._id].eventSocket.emit('job-cancel',job);
+				executionControl.cancelJob(agent._id, job);
+			} else {
+				logger.error("empty job error message received.");
 			}
 		});
 		agentSockets[agent._id].eventSocket.on('job-cancel', function(job){
