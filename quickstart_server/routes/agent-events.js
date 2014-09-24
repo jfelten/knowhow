@@ -79,13 +79,22 @@ function openFileSocket(agent, callback) {
 	
 	agentSockets[agent._id].fileSocket.on('reconnect' ,function () {
 		logger.info("file socket reconnected");
-		agentSockets[agent._id].fileSocket.on('End' ,function (data) {
-		
-	      logger.info("done uploading: "+data.fileName+" for job: "+data.jobId);
-	      logger.info(data.message);
-	      executionControl.completeUpload(agent, jobId);
+		agentSockets[agent._id].fileSocket.on('End' ,function (job) {
+		  logger.info(job);
+	      if (job) {
+		      ogger.info("done uploading for job: "+job.id);
+		      executionControl.uploadComplete(agent, job);
+		   }
 		      
 	    });
+		agentSockets[agent._id].fileSocket.on ('Error', function(data) {
+			if (data) {
+	    		logger.error("socket error: "+data);
+	        	//agentSockets[agent._id].fileSocket.emit('client-upload-error', {name: data.fileName, jobId: data.jobId} );
+	        	executionControl.cancelJob(agent._id, job);
+	        }
+
+		});
 		agentSockets[agent._id].fileSocket.on ('Error', function(data) {
 	    	logger.error("socket error: "+data);
 	        //agentSockets[agent._id].fileSocket.emit('client-upload-error', {name: data.fileName, jobId: data.jobId} );
@@ -103,13 +112,18 @@ function openFileSocket(agent, callback) {
 		logger.info("connected to "+agent.host+':'+agent.port+" now accepting uploads.");
 		agentSockets[agent._id].fileSocket.on('End' ,function (job) {
 		  logger.info(job);
-	      logger.info("done uploading for job: "+job.id);
-	      executionControl.uploadComplete(agent, job);
+	      if (job) {
+		      ogger.info("done uploading for job: "+job.id);
+		      executionControl.uploadComplete(agent, job);
+		   }
 		      
 	    });
 		agentSockets[agent._id].fileSocket.on ('Error', function(data) {
-	    	logger.error("socket error: "+data);
-	        agentSockets[agent._id].fileSocket.emit('client-upload-error', {name: data.fileName, jobId: data.jobId} );
+			if (data) {
+	    		logger.error("socket error: "+data);
+	        	//agentSockets[agent._id].fileSocket.emit('client-upload-error', {name: data.fileName, jobId: data.jobId} );
+	        	executionControl.cancelJob(agent._id, job);
+	        }
 
 		});
 		
