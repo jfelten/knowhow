@@ -47,7 +47,7 @@ function listenForAgentEvents(agent, callback) {
 		agentSockets[agent._id].eventSocket.on('job-cancel', function(job){
 			if (job) {
 				logger.info('job: '+job.id+ ' cancelled.');
-				executionControl.cancelJob(agent._id, job);
+				executionControl.cancelJob(agent._id, job.id);
 			}
 		});
 		
