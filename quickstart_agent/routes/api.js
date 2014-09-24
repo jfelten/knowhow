@@ -51,7 +51,7 @@ exports.registerServer = function(req,res) {
 exports.execute = function(req,res) {
 	logger.info("execute");
 	var job = req.body;
-	if (job && job.id)
+	if (job && job.id) {
 		if (require('./job-control').jobInprogress != undefined) {
 			logger.debug(require('./job-control').jobQueue[job.id]);
 			logger.info("execute");
