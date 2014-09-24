@@ -342,12 +342,16 @@ var myModule = angular.module('myApp.controllers', []).
 			      url: '/api/execute',
 			      data: data
 			    }).success(function (data, status, headers, config) {
+			    
 			        $scope.agentInfo = data;
+			        $scope.message="submitted "+job.id+" to "+$scope.selectedAgent.host+":"+$scope.selectedAgent.port;
 			        loadJobs();
 			        console.log("submitted job request");
+			        
+			        
 			    }).
 			    error(function (data, status, headers, config) {
-			    	$scope.message = data+' : '+status;
+			    	$scope.message = data.message+' : '+status;
 			    });
 	  };
 	  
