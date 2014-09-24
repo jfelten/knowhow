@@ -96,8 +96,11 @@ function openFileSocket(agent, callback) {
 
 		});
 		agentSockets[agent._id].fileSocket.on ('Error', function(data) {
-	    	logger.error("socket error: "+data);
-	        //agentSockets[agent._id].fileSocket.emit('client-upload-error', {name: data.fileName, jobId: data.jobId} );
+			if (data) {
+	    		logger.error("file transfer error: "+data.message);
+	        	//agentSockets[agent._id].fileSocket.emit('client-upload-error', {name: data.fileName, jobId: data.jobId} );
+	        	executionControl.cancelJob(agent._id, data.jobId);
+	        }
 
 		});
 		//callback(undefined,agent);
@@ -120,9 +123,9 @@ function openFileSocket(agent, callback) {
 	    });
 		agentSockets[agent._id].fileSocket.on ('Error', function(data) {
 			if (data) {
-	    		logger.error("socket error: "+data);
+	    		logger.error("file transfer error: "+data.message);
 	        	//agentSockets[agent._id].fileSocket.emit('client-upload-error', {name: data.fileName, jobId: data.jobId} );
-	        	executionControl.cancelJob(agent._id, job);
+	        	executionControl.cancelJob(agent._id, data.jobId);
 	        }
 
 		});
