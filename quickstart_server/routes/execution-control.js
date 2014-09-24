@@ -283,7 +283,7 @@ function uploadFiles(agent,job, callback) {
 		//	currentJobs[agentId].eventSocket.emit('job-cancel',jobId);
 		//	cancelJob(agent, job);
 		//	callback(new Error("Problem starting file upload"));
-			callback(new Error("unable to start upload for: "+files[uploadFile].source));
+			callback(new Error("unable to start upload for: "+fileControl.getFilePath(files[uploadFile].source));
 			return;
 			break;
 		}
