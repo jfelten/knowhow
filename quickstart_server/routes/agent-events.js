@@ -39,6 +39,7 @@ function listenForAgentEvents(agent, callback) {
 				logger.info('Stopping Job: '+job.id+ ' due to error.');
 				//agentSockets[agent._id].eventSocket.emit('job-cancel',job);
 				executionControl.cancelJob(agent._id, job);
+				executionControl.eventEmitter.emit('job-error',agent, job);
 			} else {
 				logger.error("empty job error message received.");
 			}
@@ -200,18 +201,28 @@ function AgentEventHandler(io) {
 	executionControl.eventEmitter.on('job-cancel', function(agent, job) {
 		logger.info(job.id+' cancelled.');
 		try {
-			io.emit('job-cancel', {_id: agent._id, host: agent. host, port: agent.port, user: agent.user} 
+			io.emit('job-cancel', {_id: agent._id, host: agent.host, port: agent.port, user: agent.user} 
 								, {id: job.id, status: job.status, progress: job.progress});
 		} catch(err) {
-		
+			logger.error("unable to broadcast cancel event");
 		}
 	});
 	executionControl.eventEmitter.on('job-complete', function(agent, job) {
 		logger.info("broadcasting "+job.id+' complete.');
 		try {
-			io.emit('job-complete',agent, job);
+			io.emit('job-complete', {_id: agent._id, host: agent.host, port: agent.port, user: agent.user} 
+								, {id: job.id, status: job.status, progress: job.progress});
 		} catch(err) {
-		
+			logger.error("unable to broadcast job complete event");
+		}
+	});
+	executionControl.eventEmitter.on('job-error', function(agent, job) {
+		logger.info("broadcasting "+job.id+' error.');
+		try {
+			io.emit('job-error', {_id: agent._id, host: agent.host, port: agent.port, user: agent.user} 
+								, {id: job.id, status: job.status, progress: job.progress});
+		} catch(err) {
+			logger.error("unable to broadcast job error event");
 		}
 	});
 	
