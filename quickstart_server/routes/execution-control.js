@@ -284,7 +284,7 @@ function uploadFiles(agent,job, callback) {
 		//	cancelJob(agent, job);
 		//	callback(new Error("Problem starting file upload"));
 		    var badFile = fileControl.getFilePath(files[uploadFile].source);
-			callback(new Error("unable to start upload for: "+badFile);
+			callback(new Error("unable to start upload for: "+badFile));
 			return;
 			break;
 		}
