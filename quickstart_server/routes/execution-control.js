@@ -207,10 +207,12 @@ exports.executeJob = function(agent,job,callback) {
 		    		currentJobs[agentId].agent=agent;
 			    		uploadFiles(agent,job,function(err) {
 			    			if (err) {
-			    				callback(new Error("Problem starting upload for job id: "+jobId));
+			    				callback(err);
 			    				return;
+			    			} else {
+			    				setJobTimer(agent, job);
+			    				callback(null,jobId+' execution started');
 			    			}
-			    			setJobTimer(agent, job);
 			    		});
 
 		    	});
@@ -224,7 +226,7 @@ exports.executeJob = function(agent,job,callback) {
 //		    	callback(new Error("Unable to start job id: "+jobId));
 //		    	return;
 //		    }
-		    callback(null,jobId+' execution started');
+		    
 	    });
 	});
 
@@ -281,7 +283,7 @@ function uploadFiles(agent,job, callback) {
 		//	currentJobs[agentId].eventSocket.emit('job-cancel',jobId);
 		//	cancelJob(agent, job);
 		//	callback(new Error("Problem starting file upload"));
-			callback(new Error("unable to start upload for: "+files[uploadFile]));
+			callback(new Error("unable to start upload for: "+files[uploadFile].source));
 			return;
 			break;
 		}
