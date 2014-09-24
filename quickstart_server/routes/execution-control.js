@@ -184,7 +184,7 @@ exports.executeJob = function(agent,job,callback) {
 	        process.stdout.write(d+'\n');
 	        if (res.statusCode != 200) {
 			 	logger.error("Unable to execute Job. Response code:"+res.statusCode);
-			 	callback(new Error(d));
+			 	callback(new Error(d.message));
 			 	return;
 			 }
 	        logger.debug('\n\nJob request sent. Listening for events and uploading files');

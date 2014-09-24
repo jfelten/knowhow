@@ -54,11 +54,11 @@ exports.execute = function(req,res) {
 	if (require('./job-control').jobInprogress != undefined) {
 		logger.debug(require('./job-control').jobQueue[job.id]);
 		logger.info("execute");
-		res.send(500, 'job id: '+job.id+' already running');
+		res.json(500, {"message": "job id: '+job.id+' already running"} );
 	} else {
 		jobControl.execute(job, function(err, job) {
 			if (err) {
-				res.send(500, err);
+				res.send(500, {"message": err.message});
 			}
 			res.json({'ok': true});
 		});
