@@ -179,9 +179,10 @@ exports.execute = function(req,res) {
 			logger.error(err);
 			res.send(500, err);
 			return;
+		} else {
+			logger.info(job.id+" launched.");
+			res.json({ok:true});
 		}
-		logger.info(job.id+" launched.");
-		res.json({ok:true});
 	});
 };
 
