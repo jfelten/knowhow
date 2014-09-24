@@ -344,14 +344,16 @@ var myModule = angular.module('myApp.controllers', []).
 			    }).success(function (data, status, headers, config) {
 			    
 			        $scope.agentInfo = data;
-			        $scope.message="submitted "+job.id+" to "+$scope.selectedAgent.host+":"+$scope.selectedAgent.port;
+			        
 			        loadJobs();
 			        console.log("submitted job request");
-			        
+			        $scope.message="submitted "+job.id+" to "+$scope.selectedAgent.host+":"+$scope.selectedAgent.port;
+			        $scope.apply();
 			        
 			    }).
 			    error(function (data, status, headers, config) {
 			    	$scope.message = data.message+' : '+status;
+			    	//$scope.apply();
 			    });
 	  };
 	  

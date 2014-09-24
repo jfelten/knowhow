@@ -51,18 +51,22 @@ exports.registerServer = function(req,res) {
 exports.execute = function(req,res) {
 	logger.info("execute");
 	var job = req.body;
-	if (require('./job-control').jobInprogress != undefined) {
-		logger.debug(require('./job-control').jobQueue[job.id]);
-		logger.info("execute");
-		res.send(500, 'job id: '+job.id+' already running');
+	if (job && job.id) {
+		if (require('./job-control').jobInprogress != undefined) {
+			logger.debug(require('./job-control').jobQueue[job.id]);
+			logger.info("execute");
+			res.json(500, {"message": "job id: '+job.id+' already running"} );
+		} else {
+			jobControl.execute(job, function(err, job) {
+				if (err) {
+					res.send(500, {"message": err.message});
+				}
+				res.json({'ok': true});
+			});
+			
+		}
 	} else {
-		jobControl.execute(job, function(err, job) {
-			if (err) {
-				res.send(500, err);
-			}
-			res.json({'ok': true});
-		});
-		
+		res.send(500, {"message": "invalid job."});
 	}
 	
 
