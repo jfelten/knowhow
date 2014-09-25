@@ -205,7 +205,7 @@ var myModule = angular.module('myApp.controllers', []).
 	    	    console.log("data="+data);
 	    	  	if (branch.ext=='.json') {
   		    		editor.setMode('code');
-  		    		editor.set(JSON.parse(data));
+  		    		editor.setText(data);
   		      	} else {
   		    		editor.setMode('text');
   		    		editor.setText(data);
