@@ -128,7 +128,7 @@ executeSync: function(job, eventEmitter) {
 				  logger.info('Exit code:', code);
 				  logger.info('Program output:', output);
 				  if (code > 0) {
-					  callback(new Error(this.command+: output));
+					  callback(new Error(this.command+": "+output));
 					  return;
 				  }
 				  
