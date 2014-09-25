@@ -128,7 +128,7 @@ executeSync: function(job, eventEmitter) {
 				  logger.info('Exit code:', code);
 				  logger.info('Program output:', output);
 				  if (code > 0) {
-					  callback(new Error(output));
+					  callback(new Error(this.command+: output));
 					  return;
 				  }
 				  
@@ -151,7 +151,7 @@ executeSync: function(job, eventEmitter) {
 
 			logger.error('job error' + err);
 			job.progress=0;
-			job.status=err.syscall+" "+err.code;
+			job.status=err.message;
 			eventEmitter.emit('job-error',job);
 			clearInterval(progressCheck);
 			return;
