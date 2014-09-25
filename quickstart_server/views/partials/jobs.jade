@@ -21,29 +21,40 @@ p
 		span(ng-if="loading_jobs") ...loading...
 		abn-tree(tree-data="jobs" tree-control="job_tree" on-select="jobs_tree_handler(branch)" expand-level="2" initial-selection="weblogic" )
 	.jobs-control
-		.agent-progress(ng-hide="runningJobs.length == 0" ng-repeat="agentJobs in runningJobs")
-				.progressBar(ng-repeat="job in agentJobs" ng-hide="job.progress == 0")
-					i.glyphicon.glyphicon-calendar {{agentJobs.agent.user}}@{{agentJobs.agent.host}} 
-					progressbar(ng-hide="job.progress == 0" animate="job.progress" value="job.progress" type="success")
-						{{job.status}}
-		div(dropdown is-open="status.isopen").btn-group
-			button.btn.btn-primary.dropdown-toggle
-				span(id="selectAgent") 
-					| Select An Agent 
-				span.caret
-			ul.dropdown-menu(role="menu")
-				li(ng-repeat="agent in connectedAgents")
-					a(ng-click="selectAgent(agent)") 
-						{{agent.user}}@{{agent.host}}:{{agent.port}}
-				li.divider
-				li
-					| All Agents
-		.jobs-buttons.btn-group
-			button.btn.btn-primary(ng-hide="currentRunningJob.progress > 0" type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="execute()" ) Execute
-			button.btn.btn-primary(ng-hide="currentRunningJob.progress > 0" type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="saveJob()") Save
-		.job-message-block(ng-show="message")
-			{{message}}
-		div.jobs-textarea(id="jsoneditor")
+			.row(ng-hide="runningJobs.length == 0" ng-repeat="agentJobs in runningJobs")
+				.col-md-9.col-lg-12(ng-repeat="job in agentJobs" ng-hide="job.progress == 0 || !job.progress")
+					.row
+						.col-md-5
+							i.glyphicon.glyphicon-remove(ng-click="cancel(agentJobs.agent,job)" ) &nbsp;{{agentJobs.agent.user}}@{{agentJobs.agent.host}} {{job.id}}
+						.col-md-7
+							progressbar(animate="job.progress" value="job.progress" type="success")
+								{{job.status}}
+			.row
+				.col-md-12
+					.job-message-block(ng-show="message")
+						{{message}}
+			.row
+				.col-md-3
+					span.pull-left
+						div(dropdown is-open="status.isopen").btn-group
+							button.btn.btn-primary.dropdown-toggle
+								span(id="selectAgent") 
+									| Select An Agent 
+								span.caret
+							ul.dropdown-menu(role="menu")
+								li(ng-repeat="agent in connectedAgents")
+									a(ng-click="selectAgent(agent)") 
+										{{agent.user}}@{{agent.host}}:{{agent.port}}
+								li.divider
+								li
+									| All Agents
+				.col-md-6.col-lg-9.btn-group
+					span.pull-right
+						button.btn.btn-primary(ng-hide="currentRunningJob.progress > 0" type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="execute()" ) Execute
+						button.btn.btn-primary(ng-hide="currentRunningJob.progress > 0" type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="saveJob()") Save
+			
+			.row
+				.col-md-9.col-lg-12.jobs-textarea(id="jsoneditor")
  
 div
 	script(type="text/ng-template" id="directoryWarning")

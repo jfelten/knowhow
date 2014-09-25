@@ -121,70 +121,53 @@ var myModule = angular.module('myApp.controllers', []).
   	var socket = io();
 
     socket.on('job-update', function(agent,job){
-      console.log('job update message received');
+      
       //loadJobs();
-      if (agent && job) {
-        if (!$scope.runningJobs[agent._id]) {
-        	$scope.runningJobs[agent._id] = {};
-        	$scope.runningJobs[agent._id][job.id] = {}
-        } else if (!$scope.runningJobs[agent._id][job.id]) {
-        	$scope.runningJobs[agent._id][job.id] = {}
-        }
-      	$scope.runningJobs[agent._id][job.id].progress=job.progress;
-      	$scope.runningJobs[agent._id][job.id].status=job.status;
-	  	$scope.$apply();
-	  }
+      updateRunningJobs(agent,job);
+      $scope.$apply();
+	 
       
     });
     socket.on('job-complete', function(agent,job){
       console.log('job complete message received');
-      if (agent && job) {
-        if (!$scope.runningJobs[agent._id]) {
-        	$scope.runningJobs[agent._id] = {};
-        	$scope.runningJobs[agent._id][job.id] = {}
-        } else if (!$scope.runningJobs[agent._id][job.id]) {
-        	$scope.runningJobs[agent._id][job.id] = {}
-        }
-      	$scope.runningJobs[agent._id][job.id].progress=job.progress;
-      	$scope.runningJobs[agent._id][job.id].status=job.status;
-	  }
+      updateRunningJobs(agent,job);
       $scope.message=job.id+" completed";
-	  $scope.$apply();;
+	  $scope.$apply();
       
     });
     socket.on('job-cancel', function(agent,job){
       console.log('job cancel message received');
-      if (agent && job) {
-        if (!$scope.runningJobs[agent._id]) {
-        	$scope.runningJobs[agent._id] = {};
-        	$scope.runningJobs[agent._id][job.id] = {}
-        } else if (!$scope.runningJobs[agent._id][job.id]) {
-        	$scope.runningJobs[agent._id][job.id] = {}
-        }
-      	$scope.runningJobs[agent._id][job.id].progress=job.progress;
-      	$scope.runningJobs[agent._id][job.id].status=job.status;
-	  }
+      updateRunningJobs(agent,job);
       $scope.message=job.id+" "+cancelled;
 	  $scope.$apply();
       
     });
     socket.on('job-error', function(agent,job){
       console.log('job error message received');
-      if (agent && job) {
-        if (!$scope.runningJobs[agent._id]) {
-        	$scope.runningJobs[agent._id] = {};
-        	$scope.runningJobs[agent._id][job.id] = {}
-        } else if (!$scope.runningJobs[agent._id][job.id]) {
-        	$scope.runningJobs[agent._id][job.id] = {}
-        }
-      	$scope.runningJobs[agent._id][job.id].progress=job.progress;
-      	$scope.runningJobs[agent._id][job.id].status=job.status;
-	  }
-      $scope.message=job.id+" "+job.status;
+      updateRunningJobs(agent,job);
+	  if (job.status) {
+      	$scope.message=job.id+" "+job.status;
+      }
 	  $scope.$apply();
       
     });
-	 $scope.toggled = function(open) {
+    var updateRunningJobs = function(agent,job) {
+    	if (agent && job) {
+	        if (!$scope.runningJobs[agent._id]) {
+	        	$scope.runningJobs[agent._id] = {};
+	        	$scope.runningJobs[agent._id][job.id] = {}
+	        } else if (!$scope.runningJobs[agent._id][job.id]) {
+	        	$scope.runningJobs[agent._id][job.id] = {}
+	        }
+	      	$scope.runningJobs[agent._id][job.id].progress=job.progress;
+	      	$scope.runningJobs[agent._id][job.id].status=job.status;
+	      	$scope.runningJobs[agent._id][job.id].id=job.id;
+	      	$scope.runningJobs[agent._id].agent={user: agent.user, host: agent.host, port: agent.port};
+	    }
+	  
+    };
+    
+	$scope.toggled = function(open) {
 		    console.log('Dropdown is now: ', open);
 		  };
 	
