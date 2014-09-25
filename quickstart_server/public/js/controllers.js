@@ -146,7 +146,7 @@ var myModule = angular.module('myApp.controllers', []).
       console.log('job error message received');
       updateRunningJobs(agent,job);
 	  if (job.status) {
-      	$scope.message=job.id+" "+job.status;
+      	$scope.message="error "+job.id+": "+job.status;
       }
 	  $scope.$apply();
       
