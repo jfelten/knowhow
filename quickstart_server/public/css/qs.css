@@ -182,19 +182,23 @@ p {
 }
 .jobs-control {
   float: bottom;
-  width: 600px;
+  width: 800px;
   height: 750px;
   float: left;
 }
-.jobs-control .job-message-block {
+.job-message-block {
   float: right;
   color: #f00;
 }
-.jobs-control .jobs-buttons {
-  float: right;
+.jobs-agent-select {
+  float: left;
 }
-.jobs-control .jobs-textarea {
-  width: 900px;
+.job-control-buttons {
+  float: right;
+  align: right;
+  border: 1;
+}
+.jobs-textarea {
   height: 650px;
 }
 .workflows-page {
