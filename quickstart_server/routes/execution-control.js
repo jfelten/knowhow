@@ -7,6 +7,9 @@ var http = require('http');
 var io =  require('socket.io-client');
 var fileControl = require('../routes/file-control');
 var ss = require('socket.io-stream');
+var zlib = require('zlib');
+var fstream = require('fstream');
+var tar = require('tar');
 //deliver the agent files
 
 var pathlib = require('path');
@@ -262,16 +265,24 @@ function uploadFiles(agent,job, callback) {
 		var total = 0;
 		try {
 			var stats = fs.statSync(filepath);
-			var fileSizeInBytes = stats["size"];	
+			var fileSizeInBytes = stats["size"];
+			var isDirectory = stats.isDirectory();	
 		    logger.info("uploading "+filepath);
 			var stream = ss.createStream();
-			currentJobs[agentId][jobId].fileProgress[fileName].readStream = fs.createReadStream(filepath,{autoClose: true, highWaterMark: 32 * 1024});
-			ss(currentJobs[agentId].fileSocket).emit('agent-upload', stream, {name: fileName, jobId: jobId, fileSize: fileSizeInBytes, destination: file.destination });
+			
+			if(isDirectory) {
+				currentJobs[agentId][jobId].fileProgress[fileName].readStream = fstream.Reader({ 'path': filepath, 'type': 'Directory' }).pipe(tar.Pack()) /* Convert the directory to a .tar file */
+				.pipe(zlib.Gzip());
+			} else {
+				currentJobs[agentId][jobId].fileProgress[fileName].readStream = fs.createReadStream(filepath,{autoClose: true, highWaterMark: 32 * 1024});
+			}
+			ss(currentJobs[agentId].fileSocket).emit('agent-upload', stream, {name: fileName, jobId: jobId, fileSize: fileSizeInBytes, destination: file.destination, isDirectory: isDirectory });
 			currentJobs[agentId][jobId].fileProgress[fileName].readStream.pipe(stream );
 		    
 		} catch(err) {
-			logger.error("unable to start upload for: "+files[uploadFile])
-			logger.error(err);
+		    var badFile = fileControl.getFilePath(files[uploadFile].source);
+			logger.error("unable to start upload for: "+ badFile)
+			logger.error(err.message+" "+err.call+" "+err.sys);
 			if (currentJobs[agentId].fileSocket) {
 				currentJobs[agentId].fileSocket.emit('client-upload-error', {name: fileName, jobId: jobId, fileSize: fileSizeInBytes, destination: file.destination } );
 			} else {
@@ -283,7 +294,7 @@ function uploadFiles(agent,job, callback) {
 		//	currentJobs[agentId].eventSocket.emit('job-cancel',jobId);
 		//	cancelJob(agent, job);
 		//	callback(new Error("Problem starting file upload"));
-		    var badFile = fileControl.getFilePath(files[uploadFile].source);
+		    
 			callback(new Error("unable to start upload for: "+badFile));
 			return;
 			break;
@@ -416,3 +427,15 @@ exports.getRunningJobsList = function(callback) {
 		callback(runningJobs);
 	}
 }
+
+var getDirectoryCompressionStream = function(fstream, callback) {
+	
+	var agent = this.agent;
+	//create agent archive
+	logger.info('compressing directory to stream');
+	return fstream.Reader({ 'path': file, 'type': 'Directory' }) /* Read the source directory */
+	.pipe(tar.Pack()) /* Convert the directory to a .tar file */
+	.pipe(zlib.Gzip());
+	callback();
+	
+};

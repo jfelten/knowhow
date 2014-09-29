@@ -8,6 +8,8 @@ var logger=require('./log-control').logger;
 var pathlib=require("path");
 var ss = require('socket.io-stream');
 var mkdirp = require('mkdirp');
+var zlib = require('zlib');
+var tar = require('tar');
 
 //constants
 var WORKING_DIR_VAR = "working_dir"
@@ -216,7 +218,9 @@ waitForFiles = function(job,callback) {
 			    		updateJob(job);
 			    	} else if(fileSizeInBytes === job.fileProgress[filename]['FileSize']) {
 			    		job.fileProgress[filename].uploadComplete=true;
-			    		job.fileProgress[filename].fileWriter.close();
+			    		if (job.fileProgress[filename].fileWriter) {
+			    			job.fileProgress[filename].fileWriter.close();
+			    		}
 			    		eventEmitter.emit('file-uploaded',job.id, job.fileProgress[filename].name);
 			    		updateJob(job);
 			    	} 
@@ -293,6 +297,7 @@ JobControl = function(io) {
 				eventEmitter.emit('job-error',job);
 				return;
 			}
+			
 			var destination = data['destination']
 			var workingDirVar="${"+WORKING_DIR_VAR+"}";
 			if (destination.indexOf(workingDirVar) > -1){
@@ -320,43 +325,52 @@ JobControl = function(io) {
 	        job.progress=(job.progress)+1;
 	        updateJob(job);
 			//remove the file if it already exists
-			fs.stat(destination, function (err, stat) {
-		       if (err) {
-		         logger.error(err);
-		          // file does not exist
-		          if (err.errno == 2 || err.errno == 34) {
-		        		logger.info("download dir does not exist - creating dir: "+destination);
-			        	mkdirp.sync(destination, function (err) {
-		            	  if (err) {
-		        		    logger.error(err);
-		        		  } else {
-		        		    logger.info('Directory ' + directory + ' created.');
-		        		  }
+			if (!fs.existsSync(destination)) {
+				logger.info("download dir does not exist - creating dir: "+destination);
+	        	mkdirp.sync(destination, function (err) {
+            	  if (err) {
+        		    logger.error(err);
+        		    socket.emit('End', {message: err.message,  fileName: data.name} );
+        		  } else {
+        		    logger.info('Directory ' + directory + ' created.');
+        		  }
+	            
+	            });
+			}
+			if (fs.existsSync(filename)) {
+				logger.debug(filename+' already exists dontUpload='+job.options.dontUploadIfFileExist);
+        		if (job.options.dontUploadIfFileExists == true) {
+        			job.fileProgress[filename].uploadComplete=true;
+        			socket.emit('End', {message: 'Filename '+filename+' already exists and dontUploadIfFileExists is true for: '+jobId, jobId: jobId,  fileName: data.name} );
+        			return;
+        		} else {
+        			fs.unlinkSync(filename);
+			    }
+			}
+			
+	       try {
+		    	logger.info("saving file: "+filename);
+		    	
+		    	var isDirectory = data['isDirectory'];
+		    	logger.debug("isDirectory="+isDirectory);
+		    	if (isDirectory && isDirectory==true) {
+		    	 	logger.info("creating directory: "+filename);
+		    		options ={
+					  path: destination,
+					  strip: 0, // how many path segments to strip from the root when extracting
+						}
+			    		
+				    	stream.pipe(zlib.createGunzip()).pipe(tar.Extract(options));
 			            
-			            });
-		          } 
-		        } else {
-		            logger.info('path exists');
-		        	if (fs.existsSync(filename)) {
-		        	    logger.debug(filename+' already exists dontUpload='+job.options.dontUploadIfFileExist);
-		        		if (job.options.dontUploadIfFileExists == true) {
-		        			job.fileProgress[filename].uploadComplete=true;
-		        			socket.emit('End', {message: 'Filename '+filename+' already exists and dontUploadIfFileExists is true for: '+jobId, jobId: jobId,  fileName: data.name} );
-		        			return;
-		        		} else {
-		        			fs.unlinkSync(filename);
-					    }
-					}
-		        	
-		       }
-		       try {
-			    	logger.info("saving file: "+filename);
-			    	job.fileProgress[filename].fileWriter = fs.createWriteStream(filename);
-			    	stream.pipe(job.fileProgress[filename].fileWriter);
-
+			      } else  {
+			        job.fileProgress[filename].fileWriter = fs.createWriteStream(filename);
+		    		stream.pipe(job.fileProgress[filename].fileWriter);
+		    	  }
+			    	
+	
 			    } catch(err) {
 			    	logger.error("cannot save: "+filename );
-			    	logger.error(err);
+			    	logger.error(err.message);
 			    	socket.emit('Error', {message: 'Invalid file: '+filename, jobId: jobId, name: data.name} );
 			    }
 		       
@@ -374,8 +388,6 @@ JobControl = function(io) {
 				cancelJob(job);
 				socket.emit('End',{message: 'job cancelled: ',jobId: jobId, fileName: data.name});
 			});
-		   
-		  });
 		socket.on('disconnect', function(err) {
 			logger.debug("upload connection ended.");
 			if (jobInProgress) {

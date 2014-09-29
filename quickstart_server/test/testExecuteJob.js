@@ -44,15 +44,7 @@ job = {
       "destination": "${working_dir}"
     },
     {
-      "source": "leapfrog:///files/weblogic/install/TEST/leapfrog.properties",
-      "destination": "${working_dir}"
-    },
-    {
-      "source": "leapfrog:///files/weblogic/install/TEST/jmxremote.password",
-      "destination": "${working_dir}"
-    },
-    {
-      "source": "leapfrog:///files/weblogic/install/TEST/jmxremote.access",
+      "source": "leapfrog:///environments",
       "destination": "${working_dir}"
     }
   ],
@@ -106,8 +98,8 @@ job = {
 agent ={
 		_id:"Ah4WQBMiGtS5pA7b",
 //		host: '23.92.65.207',
-		host: 'tb101',
-//		host: 'localhost',
+//		host: 'tb101',
+		host: 'localhost',
 		port: 3000
 };
 
@@ -125,6 +117,27 @@ agentControl.heartbeat(agent, function (err) {
 			return;
 		}
 		logger.info("receiving events from: "+agent.user+"@"+agent.host+":"+agent.port);
+		agentEventHandler.openFileSocket(agent, function(err, registeredAgent) {
+			if(err) {
+				logger.error("unable to upload files to: "+agent.user+"@"+agent.host+":"+agent.port);
+				callback(new Error("unable to upload files to: "+agent.user+"@"+agent.host+":"+agent.port));
+				return;
+			}
+			logger.info("can now upload files to: "+agent.user+"@"+agent.host+":"+agent.port);
+			//var job_file = fileControl.getFilePath('leapfrog:///jobs/weblogic/wls1036_install.json');
+			//job = JSON.parse(fs.readFileSync(job_file), 'utf8');
+			executionControl.executeJob(agent,job, function(err, message) {
+			
+				executionControl.updateJob(agent, job, function() {
+							//executionControl.eventEmitter.emit('job-update',agent, job);
+						});
+				if (err) {
+					logger.error(err);
+				} else {
+					logger.info(message);
+				}
+			});
+		});
 	});
 });
 
@@ -133,16 +146,4 @@ ioServer.on('job-cancel', function(agent,job) {
 });
 	
 
-//var job_file = fileControl.getFilePath('leapfrog:///jobs/weblogic/wls1036_install.json');
-//job = JSON.parse(fs.readFileSync(job_file), 'utf8');
-executionControl.executeJob(agent,job, function(err, message) {
 
-	executionControl.updateJob(agent, job, function() {
-				//executionControl.eventEmitter.emit('job-update',agent, job);
-			});
-	if (err) {
-		logger.error(err);
-	} else {
-		logger.info(message);
-	}
-});
