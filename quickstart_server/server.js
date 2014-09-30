@@ -169,10 +169,10 @@ var agentCheck = function() {
 							callback();
 						});
 					}
-					agent.status='READY'
-					agent.message='';
-					agentControl.updateAgent(agent, function() {
-						agentControl.eventEmitter.emit('agent-update',agent);
+					connectedAgent.status='READY'
+					connectedAgent.message='';
+					agentControl.updateAgent(connectedAgent, function() {
+						agentControl.eventEmitter.emit('agent-update',connectedAgent);
 					});
 					
 				});
