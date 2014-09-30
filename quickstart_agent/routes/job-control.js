@@ -402,6 +402,7 @@ JobControl = function(io) {
 			if (jobInProgress) {
 				jobQueue[jobInProgress].disconnected = true;
 			}
+			this.socket=undefined;
 				
 		});
 		
