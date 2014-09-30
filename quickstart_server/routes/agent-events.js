@@ -7,7 +7,7 @@ var io;
 
 exports.agentSockets=agentSockets;
 
-function listenForEvents(socket) {
+function listenForEvents(agent, socket) {
 	socket.on('job-update', function(job){
     		if (job) {
 				logger.debug("job update");
@@ -52,13 +52,13 @@ function listenForAgentEvents(agent, callback) {
 	agentSockets[agent._id].eventSocket = require('socket.io-client')('http://'+agent.host+':'+agent.port+'/agent-events');
 	logger.info("connecting to: "+agent.host+":"+agent.port+'/agent-events' ); 
     agentSockets[agent._id].eventSocket.on('connect', function() { 
-    	 listenForEvents(agentSockets[agent._id].eventSocket);
+    	 listenForEvents(agent, agentSockets[agent._id].eventSocket);
     	 
     }).on('error', function(err) {
     	//callback(err, agent);
     }).on('reconnect', function() {
     	logger.info("reconnected to : "+agent.host+":"+agent.port);
-    	listenForEvents(agentSockets[agent._id].eventSocket);
+    	listenForEvents(agent, agentSockets[agent._id].eventSocket);
     });
     callback(undefined, agent);
 	
