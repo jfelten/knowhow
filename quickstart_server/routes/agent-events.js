@@ -227,7 +227,7 @@ function AgentEventHandler(io) {
 			} catch(err) {
 				logger.error("unable to broadcast job error event");
 			}
-		 else {
+		 } else {
 		 	logger.error("invalid job error event");
 		 }
 	});
