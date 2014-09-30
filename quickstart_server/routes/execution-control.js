@@ -123,15 +123,17 @@ completeJob = function(agent,job) {
 			//	logger.debug("closing event socket.");
 			//	currentJobs[agentId][jobId].eventSocket.close();
 			//}
-			if (uploadFile in currentJobs[agentId][jobId].fileProgress) {
-				logger.debug("closing files.");
-				for (uploadFile in currentJobs[agentId][jobId].fileProgress) {
-					if (currentJobs[agentId][jobId].fileProgress[uploadFile] && 
-					currentJobs[agentId][jobId].fileProgress[uploadFile].readStream) {
-					
-						currentJobs[agentId][jobId].fileProgress[uploadFile].readStream.close();
-					}
-			    }
+			if (currentJobs[agentId][jobId].fileProgress) {
+				if (uploadFile in currentJobs[agentId][jobId].fileProgress) {
+					logger.debug("closing files.");
+					for (uploadFile in currentJobs[agentId][jobId].fileProgress) {
+						if (currentJobs[agentId][jobId].fileProgress[uploadFile] && 
+						currentJobs[agentId][jobId].fileProgress[uploadFile].readStream) {
+						
+							currentJobs[agentId][jobId].fileProgress[uploadFile].readStream.close();
+						}
+				    }
+				}
 			}
 			if (currentJobs[agentId][jobId].timeout) {
 				logger.debug("removing timeout for: "+jobId);
@@ -142,9 +144,11 @@ completeJob = function(agent,job) {
 		    	clearInterval(currentJobs[agentId][jobId].fileCheck);
 		    }
 		    delete currentJobs[agentId][jobId];
-		    logger.info("completed.");
-		    eventEmitter.emit('job-complete',agent, job);
+		   
+		   
 		 }
+		 logger.info("completed.");
+		 eventEmitter.emit('job-complete',agent, job);
 	 }
 }
 exports.completeJob = completeJob;
