@@ -123,6 +123,7 @@ completeJob = function(agent,job) {
 			//	logger.debug("closing event socket.");
 			//	currentJobs[agentId][jobId].eventSocket.close();
 			//}
+			logger.debug("closing read streams.");
 			if (currentJobs[agentId][jobId].fileProgress) {
 				if (uploadFile in currentJobs[agentId][jobId].fileProgress) {
 					logger.debug("closing files.");
@@ -140,6 +141,7 @@ completeJob = function(agent,job) {
 				logger.debug("removing timeout for: "+jobId);
 				clearTimeout(currentJobs[agentId][jobId].timeout);
 			}
+			logger.debug("removed timeout.");
 			if (currentJobs[agentId][jobId].fileCheck) {
 				logger.debug("removing file check for: "+jobId);
 		    	clearInterval(currentJobs[agentId][jobId].fileCheck);
