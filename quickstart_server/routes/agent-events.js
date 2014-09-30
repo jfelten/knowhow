@@ -185,22 +185,23 @@ function AgentEventHandler(io) {
 	});
 	executionControl.eventEmitter.on('job-update', function(agent, job) {
 		logger.info('broadcasting job update.');
-		executionControl.updateJob(job);
+		
 		//logger.debug(agent);
 		//logger.debug(job);
 		//try {
-			if(job) {
-				executionControl.updateJob(job);
-				io.emit('job-update',{_id: agent._id, host: agent. host, port: agent.port, user: agent.user} 
-									,{id: job.id, status: job.status, progress: job.progress});
-			}
+		if(job) {
+			executionControl.updateJob(job);
+			io.emit('job-update',{_id: agent._id, host: agent. host, port: agent.port, user: agent.user} 
+								,{id: job.id, status: job.status, progress: job.progress});
+		}
 		//} catch(err) {
 			
 		//}
 	});
 	executionControl.eventEmitter.on('job-cancel', function(agent, job) {
-		logger.info(job.id+' cancelled.');
+		
 		try {
+			logger.info(job.id+' cancelled.');
 			io.emit('job-cancel', {_id: agent._id, host: agent.host, port: agent.port, user: agent.user} 
 								, {id: job.id, status: job.status, progress: job.progress});
 		} catch(err) {
@@ -208,8 +209,9 @@ function AgentEventHandler(io) {
 		}
 	});
 	executionControl.eventEmitter.on('job-complete', function(agent, job) {
-		logger.info("broadcasting "+job.id+' complete.');
+		
 		try {
+			logger.info("broadcasting "+job.id+' complete.');
 			io.emit('job-complete', {_id: agent._id, host: agent.host, port: agent.port, user: agent.user} 
 								, {id: job.id, status: job.status, progress: job.progress});
 		} catch(err) {
@@ -217,13 +219,17 @@ function AgentEventHandler(io) {
 		}
 	});
 	executionControl.eventEmitter.on('job-error', function(agent, job) {
-		logger.info("broadcasting "+job.id+' error.');
-		try {
-			io.emit('job-error', {_id: agent._id, host: agent.host, port: agent.port, user: agent.user} 
-								, {id: job.id, status: job.status, progress: job.progress});
-		} catch(err) {
-			logger.error("unable to broadcast job error event");
-		}
+		if (job) {
+			logger.info("broadcasting "+job.id+' error.');
+			try {
+				io.emit('job-error', {_id: agent._id, host: agent.host, port: agent.port, user: agent.user} 
+									, {id: job.id, status: job.status, progress: job.progress});
+			} catch(err) {
+				logger.error("unable to broadcast job error event");
+			}
+		 else {
+		 	logger.error("invalid job error event");
+		 }
 	});
 	
 }
