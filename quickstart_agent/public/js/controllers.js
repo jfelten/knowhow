@@ -24,14 +24,16 @@ var myModule = angular.module('myApp.controllers', []).
 	
 	
   }).
-  controller('LogsController', function ($scope, $http) {
+  controller('LogsController', function ($scope, $http, $sce) {
 	  var socket = io.connect();
 	  var container = document.getElementById('log-container');
 	  
 	  socket.on('new-data', function(data) {
-		  var message = JSON.parse(data.value);
-		  addMessage(message);//message.timestamp+':'+message.level+' '+message.message);
-
+	  	  console.log(data);
+		  $scope.logs=$sce.trustAsHtml($scope.logs+data.value+"<br/>")
+		  var logContainer = document.getElementById('log-container');
+   		  logContainer.scrollTop = logContainer.scrollHeight;
+		  $scope.$apply();
 
 	  });
 	  $http({
@@ -42,19 +44,9 @@ var myModule = angular.module('myApp.controllers', []).
     		  }
 	    }).
 	    success(function (data, status, headers, config) {
-	      for(var message in data.messages) {
-	    	  addMessage(data.messages[message]);
-	      }
-	      $scope.logs=data;
+	      $scope.logs= $sce.trustAsHtml(data.replace(/\\n/g,"<br/>").replace(/\"/g,""));
 	    });
 	  
-	  function addMessage(message) {
-	     // console.log(message);
-		  var newDiv = document.createElement('div');
-		  var logText=document.createTextNode(message.timestamp+':'+message.level+' '+message.message);
-		  newDiv.appendChild(logText);
-		  container.appendChild(newDiv);  
-	  }
   }).
   controller('ExecuteController', function ($scope, $http) {
 	  var options = {
