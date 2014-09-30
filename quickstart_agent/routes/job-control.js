@@ -257,6 +257,8 @@ waitForFiles = function(job,callback) {
             }
     		logger.debug(numFilesUploaded+ " of "+job.files.length+" files received.");
 	    }, checkInterval);
+	} else {
+		callback(undefined, job);
 	}
     
     
