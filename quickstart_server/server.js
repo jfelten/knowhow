@@ -154,7 +154,7 @@ var agentCheck = function() {
 						});
 					} 
 					if (!agentEventHandler.agentSockets || !agentEventHandler.agentSockets[agent._id] || !agentEventHandler.agentSockets[agent._id].filetSocket) {
-						agentEventHandler.openFileSocket(agent, function(err, registeredAgent) {
+						agentEventHandler.openFileSocket(connectedAgent, function(err, registeredAgent) {
 							if(err) {
 								registeredAgent.status='ERROR'
 								registeredAgent.message='file socket error';
