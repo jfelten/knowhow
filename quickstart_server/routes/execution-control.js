@@ -114,33 +114,37 @@ completeJob = function(agent,job) {
 		var jobId = job.id;
 		var agentId = agent._id;
 		logger.info("completing "+jobId);
-		//if (currentJobs[agentId].fileSocket) {
-		//	logger.debug("closing file socket.");
-		//	currentJobs[agentId].fileSocket.disconnect();
-		//}
-		//if (currentJobs[agentId][jobId].eventSocket) {
-		//	logger.debug("closing event socket.");
-		//	currentJobs[agentId][jobId].eventSocket.close();
-		//}
-		if (uploadFile in currentJobs[agentId][jobId].fileProgress) {
-			logger.debug("closing files.");
-			for (uploadFile in currentJobs[agentId][jobId].fileProgress) {
-				if (currentJobs[agentId][jobId].fileProgress[uploadFile] && 
-				currentJobs[agentId][jobId].fileProgress[uploadFile].readStream) {
-				
-					currentJobs[agentId][jobId].fileProgress[uploadFile].readStream.close();
-				}
+		if (currentJobs[agentId][jobId]) {
+			//if (currentJobs[agentId].fileSocket) {
+			//	logger.debug("closing file socket.");
+			//	currentJobs[agentId].fileSocket.disconnect();
+			//}
+			//if (currentJobs[agentId][jobId].eventSocket) {
+			//	logger.debug("closing event socket.");
+			//	currentJobs[agentId][jobId].eventSocket.close();
+			//}
+			if (uploadFile in currentJobs[agentId][jobId].fileProgress) {
+				logger.debug("closing files.");
+				for (uploadFile in currentJobs[agentId][jobId].fileProgress) {
+					if (currentJobs[agentId][jobId].fileProgress[uploadFile] && 
+					currentJobs[agentId][jobId].fileProgress[uploadFile].readStream) {
+					
+						currentJobs[agentId][jobId].fileProgress[uploadFile].readStream.close();
+					}
+			    }
+			}
+			if (currentJobs[agentId][jobId].timeout) {
+				logger.debug("removing timeout for: "+jobId);
+				clearTimeout(currentJobs[agentId][jobId].timeout);
+			}
+			if (currentJobs[agentId][jobId].fileCheck) {
+				logger.debug("removing file check for: "+jobId);
+		    	clearInterval(currentJobs[agentId][jobId].fileCheck);
 		    }
-		}
-		if (currentJobs[agentId][jobId].timeout) {
-			clearTimeout(currentJobs[agentId][jobId].timeout);
-		}
-		if (currentJobs[agentId][jobId].fileCheck) {
-	    	clearInterval(currentJobs[agentId][jobId].fileCheck);
-	    }
-	    delete currentJobs[agentId][jobId];
-	    logger.info("completed.");
-	    eventEmitter.emit('job-complete',agent, job);
+		    delete currentJobs[agentId][jobId];
+		    logger.info("completed.");
+		    eventEmitter.emit('job-complete',agent, job);
+		 }
 	 }
 }
 exports.completeJob = completeJob;
