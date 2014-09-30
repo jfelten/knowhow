@@ -245,4 +245,5 @@ AgentEventHandler.prototype.registerAgent = function registerAgent(agent) {
 };
 AgentEventHandler.prototype.listenForAgentEvents = listenForAgentEvents;
 AgentEventHandler.prototype.openFileSocket = openFileSocket;
+AgentEventHandler.prototype.agentSockets = agentSockets;
 module.exports = AgentEventHandler;

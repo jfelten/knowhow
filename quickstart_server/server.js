@@ -135,8 +135,8 @@ var agentCheck = function() {
 						callback(new Error("unable to contact agent: "+connectedAgent.user+"@"+connectedAgent.host+":"+connectedAgent.port));
 						return;
 					};
-					logger.info("contacted "+connectedAgent);
-					if (!agentEventHandler.agentSockets || !agentEventHandler.agentSockets[agent._id].eventSocket) {
+					logger.info("received heartbeat from: "+connectedAgent.user+"@"+connectedAgent.host+":"+connectedAgent.port);
+					if (!agentEventHandler.agentSockets || !agentEventHandler.agentSockets[agent._id] || !agentEventHandler.agentSockets[agent._id].eventSocket) {
 						agentEventHandler.listenForAgentEvents(connectedAgent, function(err, registeredAgent) {
 							if(err) {
 								registeredAgent.status='ERROR'
@@ -153,7 +153,7 @@ var agentCheck = function() {
 							
 						});
 					} 
-					if (!agentEventHandler.agentSockets || !agentEventHandler.agentSockets[agent._id].filetSocket) {
+					if (!agentEventHandler.agentSockets || !agentEventHandler.agentSockets[agent._id] || !agentEventHandler.agentSockets[agent._id].filetSocket) {
 						agentEventHandler.openFileSocket(agent, function(err, registeredAgent) {
 							if(err) {
 								registeredAgent.status='ERROR'

@@ -27,9 +27,11 @@ eventEmitter.on('package-complete',function(agent){
 
 exports.eventEmitter = eventEmitter;
 
-updateAgent = function(agent) {
+updateAgent = function(agent, callback) {
 	db.update({ '_id': agent._id}, agent, function(err,docs) {
-		
+		if (callback) {
+			callback(err,docs[0]);
+		}
 	});
 };
 
