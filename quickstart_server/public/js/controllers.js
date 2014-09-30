@@ -360,7 +360,7 @@ var myModule = angular.module('myApp.controllers', []).
 			        loadJobs();
 			        console.log("submitted job request");
 			        $scope.message="submitted "+job.id+" to "+$scope.selectedAgent.host+":"+$scope.selectedAgent.port;
-			        $scope.apply();
+			        $scope.$apply();
 			        
 			    }).
 			    error(function (data, status, headers, config) {
