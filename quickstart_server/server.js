@@ -136,7 +136,7 @@ var agentCheck = function() {
 						return;
 					};
 					logger.info("received heartbeat from: "+connectedAgent.user+"@"+connectedAgent.host+":"+connectedAgent.port);
-					if (!agentEventHandler.agentSockets || !agentEventHandler.agentSockets[agent._id] || !agentEventHandler.agentSockets[agent._id].eventSocket) {
+					if (!agentEventHandler.agentSockets || !agentEventHandler.agentSockets[connectedAgent._id] || !agentEventHandler.agentSockets[connectedAgent._id].eventSocket) {
 						agentEventHandler.listenForAgentEvents(connectedAgent, function(err, registeredAgent) {
 							if(err) {
 								registeredAgent.status='ERROR'
@@ -153,7 +153,7 @@ var agentCheck = function() {
 							
 						});
 					} 
-					if (!agentEventHandler.agentSockets || !agentEventHandler.agentSockets[agent._id] || !agentEventHandler.agentSockets[agent._id].filetSocket) {
+					if (!agentEventHandler.agentSockets || !agentEventHandler.agentSockets[connectedAgent._id] || !agentEventHandler.agentSockets[connectedAgent._id].filetSocket) {
 						agentEventHandler.openFileSocket(connectedAgent, function(err, registeredAgent) {
 							if(err) {
 								registeredAgent.status='ERROR'
