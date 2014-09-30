@@ -6,16 +6,9 @@ var agentSockets = {};
 var io;
 
 exports.agentSockets=agentSockets;
-function listenForAgentEvents(agent, callback) {
-	if (!agentSockets[agent._id]) {
-		agentSockets[agent._id] = {};
-	}
 
-	agentSockets[agent._id].eventSocket = require('socket.io-client')('http://'+agent.host+':'+agent.port+'/agent-events');
-	logger.info("connecting to: "+agent.host+":"+agent.port ); 
-    agentSockets[agent._id].eventSocket.on('connect', function() { 
-    	
-    	agentSockets[agent._id].eventSocket.on('job-update', function(job){
+function listenForEvents(socket) {
+	socket.on('job-update', function(job){
     		if (job) {
 				logger.debug("job update");
 				if (job.progress && job.status) {
@@ -27,14 +20,14 @@ function listenForAgentEvents(agent, callback) {
 			}
 			
 		});
-		agentSockets[agent._id].eventSocket.on('job-complete', function(job){
+		socket.on('job-complete', function(job){
 			if (job) {
 				logger.info('Completed Job: '+job.id);
 				executionControl.completeJob(agent, job);
 			}
 			//executionControl.eventEmitter.emit('job-complete',agent, job);
 		});
-		agentSockets[agent._id].eventSocket.on('job-error', function(job){
+		socket.on('job-error', function(job){
 			if (job) {
 				logger.info('Stopping Job: '+job.id+ ' due to error.');
 				//agentSockets[agent._id].eventSocket.emit('job-cancel',job);
@@ -44,17 +37,30 @@ function listenForAgentEvents(agent, callback) {
 				logger.error("empty job error message received.");
 			}
 		});
-		agentSockets[agent._id].eventSocket.on('job-cancel', function(job){
+		socket.on('job-cancel', function(job){
 			if (job) {
 				logger.info('job: '+job.id+ ' cancelled.');
 				executionControl.cancelJob(agent._id, job.id);
 			}
 		});
-		
-		
+
+}
+
+function listenForAgentEvents(agent, callback) {
+	if (!agentSockets[agent._id]) {
+		agentSockets[agent._id] = {};
+	}
+
+	agentSockets[agent._id].eventSocket = require('socket.io-client')('http://'+agent.host+':'+agent.port+'/agent-events');
+	logger.info("connecting to: "+agent.host+":"+agent.port ); 
+    agentSockets[agent._id].eventSocket.on('connect', function() { 
+    	 listenForEvents(agentSockets[agent._id].eventSocket);
     	 
     }).on('error', function(err) {
     	//callback(err, agent);
+    }).on('reconnect', function() {
+    	logger.info("reconnected to : "+agent.host+":"+agent.port);
+    	listenForEvents(agentSockets[agent._id].eventSocket);
     });
     callback(undefined, agent);
 	
