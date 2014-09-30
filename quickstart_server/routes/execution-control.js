@@ -33,18 +33,20 @@ exports.setFileSocket = setFileSocket;
 
 updateJob = function(agent, job, callback ) {
 	if (agent && agent._id && job && job.id) {
+		logger.debug("updating: "+job.id);
 		agentId=agent._id;
 		if(!currentJobs[agentId]) {
 			currentJobs[agentId] = {};
 			currentJobs[agentId].agent=agent;
 			currentJobs[agentId][job.id] = job;
 		} 
-		if (!currentJobs[agentId][job.id]) {
+		else if (!currentJobs[agentId][job.id]) {
 			currentJobs[agentId][job.id] = job;
 		} else {
 			currentJobs[agentId][job.id].progress=job.progress;
 			currentJobs[agentId][job.id].status=currentJobs[agentId][job.id].status;
 		}
+		logger.debug("updated: "+job.id);
 	}
 	if (callback) {
 		callback();
