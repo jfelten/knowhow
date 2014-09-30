@@ -32,7 +32,7 @@ setFileSocket = function(agent, socket) {
 exports.setFileSocket = setFileSocket;
 
 updateJob = function(agent, job, callback ) {
-	if (agent && agent._id) {
+	if (agent && agent._id && job && job.id) {
 		agentId=agent._id;
 		if(!currentJobs[agentId]) {
 			currentJobs[agentId] = {};
