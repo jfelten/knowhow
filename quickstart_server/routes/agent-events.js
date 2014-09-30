@@ -11,9 +11,7 @@ function listenForEvents(socket) {
 	socket.on('job-update', function(job){
     		if (job) {
 				logger.debug("job update");
-				if (job.progress && job.status) {
-					logger.debug(job.progress+" "+job.status);
-				}
+				logger.debug(job.id+" progress="+job.progress+" status="+job.status);
 				executionControl.updateJob(agent, job, function() {
 					executionControl.eventEmitter.emit('job-update',agent, job);
 				});
