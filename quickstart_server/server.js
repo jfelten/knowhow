@@ -126,6 +126,11 @@ var agentCheck = function() {
 				logger.info("contacting: "+this.agent.user+"@"+this.agent.host+":"+this.agent.port);
 				agentControl.heartbeat(this.agent, function (err, connectedAgent) {
 					if (err) {
+						connectedAgent.status='ERROR'
+						connectedAgent.message='no heartbeat';
+						agentControl.updateAgent(connectedAgent, function() {
+							agentControl.eventEmitter.emit('agent-update',connectedAgent);
+						});
 						logger.error("unable to contact agent: "+connectedAgent.user+"@"+connectedAgent.host+":"+connectedAgent.port);
 						callback(new Error("unable to contact agent: "+connectedAgent.user+"@"+connectedAgent.host+":"+connectedAgent.port));
 						return;
@@ -134,6 +139,12 @@ var agentCheck = function() {
 					if (!agentEventHandler.agentSockets || !agentEventHandler.agentSockets[agent._id].eventSocket) {
 						agentEventHandler.listenForAgentEvents(connectedAgent, function(err, registeredAgent) {
 							if(err) {
+								registeredAgent.status='ERROR'
+								registeredAgent.message='event socket error';
+								agentControl.updateAgent(registeredAgent, function() {
+									agentControl.eventEmitter.emit('agent-update',registeredAgent);
+								});
+								
 								logger.error("unable to receive events for: "+registeredAgent.user+"@"+registeredAgent.host+":"+registeredAgent.port);
 								callback(new Error("unable to receive events for: "+registeredAgent.user+"@"+registeredAgent.host+":"+registeredAgent.port));
 								return;
@@ -145,6 +156,11 @@ var agentCheck = function() {
 					if (!agentEventHandler.agentSockets || !agentEventHandler.agentSockets[agent._id].filetSocket) {
 						agentEventHandler.openFileSocket(agent, function(err, registeredAgent) {
 							if(err) {
+								registeredAgent.status='ERROR'
+								registeredAgent.message='file socket error';
+								agentControl.updateAgent(registeredAgent, function() {
+									agentControl.eventEmitter.emit('agent-update',registeredAgent);
+								});
 								logger.error("unable to upload files to: "+registeredAgent.user+"@"+registeredAgent.host+":"+registeredAgent.port);
 								callback(new Error("unable to upload files to: "+registeredAgent.user+"@"+registeredAgent.host+":"+registeredAgent.port));
 								return;
@@ -153,6 +169,11 @@ var agentCheck = function() {
 							callback();
 						});
 					}
+					agent.status='READY'
+					agent.message='';
+					agentControl.updateAgent(agent, function() {
+						agentControl.eventEmitter.emit('agent-update',agent);
+					});
 					
 				});
 			}.bind({agent: agent});
