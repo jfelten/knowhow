@@ -330,83 +330,84 @@ function setJobTimer(agent, job) {
     if (job.options != undefined && job.options.timeoutms != undefined) {
     	timeoutms=job.options.timeoutms;
     }
-    
-   currentJobs[agentId][jobId].timeout = setTimeout(function() {
-    	clearInterval(currentJobs[agentId][jobId].fileCheck);
-    	currentJobs[agentId][jobId].status=("Timeout - job cancelled");
-    	logger.error("job timed out for: "+jobId);
-        //currentJobs[agentId][jobId].eventSocket.emit('job-cancel',jobId);
-    }, timeoutms);
-    
-    var checkInterval = 10000; //10 seconds
-    //wait until all files are received
-    
-    var missedHeartbeats =0;
-    currentJobs[agentId][jobId].fileCheck = setInterval(function() {
-    	
-    	if (!currentJobs[agentId][jobId]) {
-    		logger.info(jobId+ " not found.");
-    		return;
-    	}
-    	
-    	maxMissedHeartbeats =10;
-    	agentControl.heartbeat(agent, function(err) {
-	    	if (err) {
-	    		missedHeartbeats++;
-	    		if (missedHeartbeats>= maxMissedHeartbeats) {
-			    	logger.info(jobId+" lost contact with agent.");
-	    			for (index in currentJobs[agentId][jobId].fileProgress) {
-			    		currentJobs[agentId][jobId].fileProgress[index].readStream.close();
-			        }
-			        //agentEvents.agentSockets[agentId].fileSocket.close();
-			        currentJobs[agentId][jobId].error=true;
-			       	clearTimeout(currentJobs[agentId][jobId].timeout);
-	    			clearInterval(currentJobs[agentId][jobId].fileCheck);
-	    			eventEmitter.emit("job-error",job);
-	    			cancelJob(agentId, jobId);
-	    		}
+    if (job && job.files && job.files.length >0 ) {
+	   currentJobs[agentId][jobId].timeout = setTimeout(function() {
+	    	clearInterval(currentJobs[agentId][jobId].fileCheck);
+	    	currentJobs[agentId][jobId].status=("Timeout - job cancelled");
+	    	logger.error("job timed out for: "+jobId);
+	        //currentJobs[agentId][jobId].eventSocket.emit('job-cancel',jobId);
+	    }, timeoutms);
+	    
+	    var checkInterval = 10000; //10 seconds
+	    //wait until all files are received
+	    
+	    var missedHeartbeats =0;
+	    currentJobs[agentId][jobId].fileCheck = setInterval(function() {
+	    	
+	    	if (!currentJobs[agentId][jobId]) {
+	    		logger.info(jobId+ " not found.");
 	    		return;
 	    	}
-	    	missedHeartbeats=0;
 	    	
-	    	if (currentJobs[agentId][jobId] && (
-	    	!currentJobs[agentId][jobId].uploadComplete || currentJobs[agentId][jobId].uploadComplete != true)) {
-	    		numFilesUploaded=0;
-		    	for (index in currentJobs[agentId][jobId].fileProgress) {
-		    		var uploadFile = currentJobs[agentId][jobId].fileProgress[index];
-		    		if (uploadFile.uploadComplete == true) {
-		    		    numFilesUploaded++;
-		    		    if (numFilesUploaded >= job.files.length) {
-		    		    	logger.info("all files are uploaded.");
-		    		    	logger.info(jobId+" all files sent...");
-			    			for (index in currentJobs[agentId][jobId].fileProgress) {
-					    		currentJobs[agentId][jobId].fileProgress[index].readStream.close();
-					        }
-					        //currentJobs[agentId].fileSocket.close();
-					        currentJobs[agentId][jobId].uploadComplete=true;
-					       	clearTimeout(currentJobs[agentId][jobId].timeout);
-			    			clearInterval(currentJobs[agentId][jobId].fileCheck);
-			    		}  		
-		    		} else if (uploadFile.error == true) {
-		    			logger.error(jobId+" error aborting upload.");
-		    			uploadFile.socket.emit('client-upload-error', {name: fileName, jobId: jobId, fileSize: fileSizeInBytes, destination: file.destination } );	
-		        		for (index in currentJobs[agentId][jobId].fileProgress) {
-				    		fileProgress[index].readStream.close();
-				    		socket.emit('client-upload-error', {name: fileName, jobId: jobId, fileSize: fileSizeInBytes, destination: file.destination } );
+	    	maxMissedHeartbeats =10;
+	    	agentControl.heartbeat(agent, function(err) {
+		    	if (err) {
+		    		missedHeartbeats++;
+		    		if (missedHeartbeats>= maxMissedHeartbeats) {
+				    	logger.info(jobId+" lost contact with agent.");
+		    			for (index in currentJobs[agentId][jobId].fileProgress) {
+				    		currentJobs[agentId][jobId].fileProgress[index].readStream.close();
 				        }
-				        //currentJobs[agentId][jobId].eventSocket.emit('job-cancel',jobId);
+				        //agentEvents.agentSockets[agentId].fileSocket.close();
+				        currentJobs[agentId][jobId].error=true;
+				       	clearTimeout(currentJobs[agentId][jobId].timeout);
+		    			clearInterval(currentJobs[agentId][jobId].fileCheck);
+		    			eventEmitter.emit("job-error",job);
+		    			cancelJob(agentId, jobId);
 		    		}
+		    		return;
 		    	}
-		    	if (currentJobs[agentId][jobId].files != undefined) {
-		    		logger.debug(numFilesUploaded+ " of "+job.files.length+" files sent.");
-		    	} else {
-		    		logger.info("no files defined so none sent.");
-		    		//currentJobs[agentId].fileSocket.close();
-					currentJobs[agentId][jobId].uploadComplete=true;
-	    		}
-		    }
-    	});
-    }, checkInterval);
+		    	missedHeartbeats=0;
+		    	
+		    	if (currentJobs[agentId][jobId] && (
+		    	!currentJobs[agentId][jobId].uploadComplete || currentJobs[agentId][jobId].uploadComplete != true)) {
+		    		numFilesUploaded=0;
+			    	for (index in currentJobs[agentId][jobId].fileProgress) {
+			    		var uploadFile = currentJobs[agentId][jobId].fileProgress[index];
+			    		if (uploadFile.uploadComplete == true) {
+			    		    numFilesUploaded++;
+			    		    if (numFilesUploaded >= job.files.length) {
+			    		    	logger.info("all files are uploaded.");
+			    		    	logger.info(jobId+" all files sent...");
+				    			for (index in currentJobs[agentId][jobId].fileProgress) {
+						    		currentJobs[agentId][jobId].fileProgress[index].readStream.close();
+						        }
+						        //currentJobs[agentId].fileSocket.close();
+						        currentJobs[agentId][jobId].uploadComplete=true;
+						       	clearTimeout(currentJobs[agentId][jobId].timeout);
+				    			clearInterval(currentJobs[agentId][jobId].fileCheck);
+				    		}  		
+			    		} else if (uploadFile.error == true) {
+			    			logger.error(jobId+" error aborting upload.");
+			    			uploadFile.socket.emit('client-upload-error', {name: fileName, jobId: jobId, fileSize: fileSizeInBytes, destination: file.destination } );	
+			        		for (index in currentJobs[agentId][jobId].fileProgress) {
+					    		fileProgress[index].readStream.close();
+					    		socket.emit('client-upload-error', {name: fileName, jobId: jobId, fileSize: fileSizeInBytes, destination: file.destination } );
+					        }
+					        //currentJobs[agentId][jobId].eventSocket.emit('job-cancel',jobId);
+			    		}
+			    	}
+			    	if (currentJobs[agentId][jobId].files != undefined) {
+			    		logger.debug(numFilesUploaded+ " of "+job.files.length+" files sent.");
+			    	} else {
+			    		logger.info("no files defined so none sent.");
+			    		//currentJobs[agentId].fileSocket.close();
+						currentJobs[agentId][jobId].uploadComplete=true;
+		    		}
+			    }
+	    	});
+	    }, checkInterval);
+	}
 	
 }
 
