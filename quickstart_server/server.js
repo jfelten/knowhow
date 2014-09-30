@@ -153,7 +153,7 @@ var agentCheck = function() {
 							
 						});
 					} 
-					if (!agentEventHandler.agentSockets || !agentEventHandler.agentSockets[connectedAgent._id] || !agentEventHandler.agentSockets[connectedAgent._id].filetSocket) {
+					if (!agentEventHandler.agentSockets || !agentEventHandler.agentSockets[connectedAgent._id] || !agentEventHandler.agentSockets[connectedAgent._id].fileSocket) {
 						agentEventHandler.openFileSocket(connectedAgent, function(err, registeredAgent) {
 							if(err) {
 								registeredAgent.status='ERROR'

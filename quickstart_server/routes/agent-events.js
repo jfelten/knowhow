@@ -52,7 +52,7 @@ function listenForAgentEvents(agent, callback) {
 	}
 
 	agentSockets[agent._id].eventSocket = require('socket.io-client')('http://'+agent.host+':'+agent.port+'/agent-events');
-	logger.info("connecting to: "+agent.host+":"+agent.port ); 
+	logger.info("connecting to: "+agent.host+":"+agent.port+'/agent-events' ); 
     agentSockets[agent._id].eventSocket.on('connect', function() { 
     	 listenForEvents(agentSockets[agent._id].eventSocket);
     	 
@@ -71,14 +71,10 @@ function openFileSocket(agent, callback) {
 		agentSockets[agent._id] = {};
 	}
 	logger.info('connecting to: http://'+agent.host+':'+agent.port+'/upload');
-	//try {
 		agentSockets[agent._id].fileSocket = require('socket.io-client')('http://'+agent.host+':'+agent.port+'/upload');
 		agentSockets[agent._id].fileSocket.open();
 		executionControl.setFileSocket(agent, agentSockets[agent._id].fileSocket);
-	//} catch(err) {
-	//	callback(err);
-	//	return;
-	//} 
+
 	
 	agentSockets[agent._id].fileSocket.on('disconnect' ,function () {
 		logger.info("file socket disconnected");
