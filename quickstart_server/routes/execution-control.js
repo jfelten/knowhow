@@ -124,17 +124,15 @@ completeJob = function(agent,job) {
 			//	currentJobs[agentId][jobId].eventSocket.close();
 			//}
 			logger.debug("closing read streams.");
-			if (currentJobs[agentId][jobId].fileProgress) {
-				if (uploadFile in currentJobs[agentId][jobId].fileProgress) {
-					logger.debug("closing files.");
-					for (uploadFile in currentJobs[agentId][jobId].fileProgress) {
-						if (currentJobs[agentId][jobId].fileProgress[uploadFile] && 
-						currentJobs[agentId][jobId].fileProgress[uploadFile].readStream) {
-						
-							currentJobs[agentId][jobId].fileProgress[uploadFile].readStream.close();
-						}
-				    }
-				}
+			if (currentJobs[agentId][jobId].fileProgress && currentJobs[agentId][jobId].fileProgress.length >0 ) {
+				logger.debug("closing files.");
+				for (uploadFile in currentJobs[agentId][jobId].fileProgress) {
+					if (currentJobs[agentId][jobId].fileProgress[uploadFile] && 
+					currentJobs[agentId][jobId].fileProgress[uploadFile].readStream) {
+					
+						currentJobs[agentId][jobId].fileProgress[uploadFile].readStream.close();
+					}
+			    }
 			}
 			logger.debug("removed read streams.");
 			if (currentJobs[agentId][jobId].timeout) {
