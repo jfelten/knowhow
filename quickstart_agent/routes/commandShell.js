@@ -141,7 +141,6 @@ executeSync: function(job, eventEmitter) {
 		if (job.progress <= currentProgress) {
 			job.status="executing";
 		    job.progress++;
-		    update
 		    eventEmitter.emit('job-update',{id: job.id, status: job.status, progress: job.progress});
 		    currentProgress = job.progress;
 		}
