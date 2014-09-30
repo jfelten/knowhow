@@ -20,7 +20,7 @@ function listenForEvents(agent, socket) {
 		});
 		socket.on('job-complete', function(job){
 			if (job) {
-				logger.info('Completed Job: '+job.id);
+				logger.info('Completed Job: '+job.id+" on "+agent.host+":"+agent.port);
 				executionControl.completeJob(agent, job);
 			}
 			//executionControl.eventEmitter.emit('job-complete',agent, job);

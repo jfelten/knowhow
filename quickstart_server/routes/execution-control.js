@@ -113,7 +113,7 @@ completeJob = function(agent,job) {
 		
 		var jobId = job.id;
 		var agentId = agent._id;
-		logger.info("completing "+jobId);
+		logger.info("completing "+jobId+" on "+agentId);
 		if (currentJobs[agentId][jobId]) {
 			//if (currentJobs[agentId].fileSocket) {
 			//	logger.debug("closing file socket.");
