@@ -115,49 +115,58 @@ app.get('/api/runningJobsList', api.runningJobList);
 //redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
 
-//start listening for events on active agents
-agentControl.listAgents(function (err, agents) {
-	logger.debug(agents);
-	var agentConnects = new Array(agents.length);
-	for (agentIndex in agents) {
-		var agent = agents[agentIndex]; 
-		agentConnects[agentIndex] = function(callback) { 
-			logger.info("contacting: "+this.agent.user+"@"+this.agent.host+":"+this.agent.port);
-			agentControl.heartbeat(this.agent, function (err, connectedAgent) {
-				if (err) {
-					logger.error("unable to contact agent: "+connectedAgent.user+"@"+connectedAgent.host+":"+connectedAgent.port);
-					callback(new Error("unable to contact agent: "+connectedAgent.user+"@"+connectedAgent.host+":"+connectedAgent.port));
-					return;
-				};
-				logger.info("contacted "+connectedAgent);
-				agentEventHandler.listenForAgentEvents(connectedAgent, function(err, registeredAgent) {
-					if(err) {
-						logger.error("unable to receive events for: "+registeredAgent.user+"@"+registeredAgent.host+":"+registeredAgent.port);
-						callback(new Error("unable to receive events for: "+registeredAgent.user+"@"+registeredAgent.host+":"+registeredAgent.port));
+//do a heartbeat check each minute and make sure socket connections are made
+var agentCheck = function() {
+	agentControl.listAgents(function (err, agents) {
+		logger.debug(agents);
+		var agentConnects = new Array(agents.length);
+		for (agentIndex in agents) {
+			var agent = agents[agentIndex]; 
+			agentConnects[agentIndex] = function(callback) { 
+				logger.info("contacting: "+this.agent.user+"@"+this.agent.host+":"+this.agent.port);
+				agentControl.heartbeat(this.agent, function (err, connectedAgent) {
+					if (err) {
+						logger.error("unable to contact agent: "+connectedAgent.user+"@"+connectedAgent.host+":"+connectedAgent.port);
+						callback(new Error("unable to contact agent: "+connectedAgent.user+"@"+connectedAgent.host+":"+connectedAgent.port));
 						return;
+					};
+					logger.info("contacted "+connectedAgent);
+					if (!agentEventHandler.agentSockets || !agentEventHandler.agentSockets[agent._id].eventSocket) {
+						agentEventHandler.listenForAgentEvents(connectedAgent, function(err, registeredAgent) {
+							if(err) {
+								logger.error("unable to receive events for: "+registeredAgent.user+"@"+registeredAgent.host+":"+registeredAgent.port);
+								callback(new Error("unable to receive events for: "+registeredAgent.user+"@"+registeredAgent.host+":"+registeredAgent.port));
+								return;
+							}
+							logger.info("receiving events from: "+registeredAgent.user+"@"+registeredAgent.host+":"+registeredAgent.port);
+							
+						});
+					} 
+					if (!agentEventHandler.agentSockets || !agentEventHandler.agentSockets[agent._id].filetSocket) {
+						agentEventHandler.openFileSocket(agent, function(err, registeredAgent) {
+							if(err) {
+								logger.error("unable to upload files to: "+registeredAgent.user+"@"+registeredAgent.host+":"+registeredAgent.port);
+								callback(new Error("unable to upload files to: "+registeredAgent.user+"@"+registeredAgent.host+":"+registeredAgent.port));
+								return;
+							}
+							logger.info("can now upload files to: "+registeredAgent.user+"@"+registeredAgent.host+":"+registeredAgent.port);
+							callback();
+						});
 					}
-					logger.info("receiving events from: "+registeredAgent.user+"@"+registeredAgent.host+":"+registeredAgent.port);
-					agentEventHandler.openFileSocket(registeredAgent, function(err, registeredAgent) {
-						if(err) {
-							logger.error("unable to upload files to: "+registeredAgent.user+"@"+registeredAgent.host+":"+registeredAgent.port);
-							callback(new Error("unable to upload files to: "+registeredAgent.user+"@"+registeredAgent.host+":"+registeredAgent.port));
-							return;
-						}
-						logger.info("can now upload files to: "+registeredAgent.user+"@"+registeredAgent.host+":"+registeredAgent.port);
-						callback();
-					});
+					
 				});
-				
-			});
-		}.bind({agent: agent});
+			}.bind({agent: agent});
+		
+		}
+		async.parallel(agentConnects,function() {
+		
+			logger.info("agent connections finished.");
 	
-	}
-	async.parallel(agentConnects,function() {
-	
-		logger.info("agent connections finished.");
-
+		});
 	});
-});
+};
+agentCheck();
+setInterval(agentCheck,60000);
 
 
 /**
