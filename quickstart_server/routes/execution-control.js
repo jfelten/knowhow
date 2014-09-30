@@ -135,6 +135,7 @@ completeJob = function(agent,job) {
 				    }
 				}
 			}
+			logger.debug("removed read streams.");
 			if (currentJobs[agentId][jobId].timeout) {
 				logger.debug("removing timeout for: "+jobId);
 				clearTimeout(currentJobs[agentId][jobId].timeout);
@@ -143,7 +144,8 @@ completeJob = function(agent,job) {
 				logger.debug("removing file check for: "+jobId);
 		    	clearInterval(currentJobs[agentId][jobId].fileCheck);
 		    }
-		    delete currentJobs[agentId][jobId];
+		    logger.debug("removed file checks");
+		    currentJobs[agentId][jobId] = undefined;
 		   
 		   
 		 }
