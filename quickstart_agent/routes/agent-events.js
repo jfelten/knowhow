@@ -12,7 +12,7 @@ var broadcastEvents = function(agentControl, io) {
 	var nextIndex = connectedSockets.length;
 	
 	eventListener.on('connection', function (socket) {
-		logger.info('new listener connected');
+		logger.info('new event listener connected');
 		connectedSockets.push(socket);
 		
 		var closeListener = function() {

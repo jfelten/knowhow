@@ -269,20 +269,27 @@ JobControl = function(io) {
 	//logger.info('setting event io to:'+io);
 	this.io = io;
 	this.eventEmitter=new EventEmitter();
+	this.socket = undefined;
+	
+	eventEmitter.on('upload-complete', function(job) {
+			logger.debug("sending upload complete to server");
+			if (this.socket) {
+				this.socket.emit('End', job );
+			}
+			
+		});
+	eventEmitter.on('file-uploaded', function(jobId, filename) {
+					
+	});
+	
 	
 	var up = io.of('/upload');
 
 	up.on('connection', function (socket) {
+		this.socket=socket;
 		logger.info('upload request');
 		var jobId = '';
-		eventEmitter.on('upload-complete', function(job) {
-			logger.debug("sending upload complete to server");
-			socket.emit('End', job );
-			
-		});
-		eventEmitter.on('file-uploaded', function(jobId, filename) {
-						
-		});
+		
 		
 		ss(socket).on('agent-upload', {highWaterMark: 32 * 1024}, function(stream, data) {
 		    
@@ -396,6 +403,11 @@ JobControl = function(io) {
 				jobQueue[jobInProgress].disconnected = true;
 			}
 				
+		});
+		
+		socket.on('error', function(err) {
+			logger.error("socket error");
+			logger.error(err);
 		});
 		
 	});
