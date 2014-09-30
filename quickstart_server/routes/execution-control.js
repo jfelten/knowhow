@@ -132,8 +132,12 @@ completeJob = function(agent,job) {
 				}
 		    }
 		}
-		clearTimeout(currentJobs[agentId][jobId].timeout);
-	    clearInterval(currentJobs[agentId][jobId].fileCheck);
+		if (currentJobs[agentId][jobId].timeout) {
+			clearTimeout(currentJobs[agentId][jobId].timeout);
+		}
+		if (currentJobs[agentId][jobId].fileCheck) {
+	    	clearInterval(currentJobs[agentId][jobId].fileCheck);
+	    }
 	    delete currentJobs[agentId][jobId];
 	    logger.info("completed.");
 	    eventEmitter.emit('job-complete',agent, job);
