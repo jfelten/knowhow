@@ -10,6 +10,7 @@ var ss = require('socket.io-stream');
 var mkdirp = require('mkdirp');
 var zlib = require('zlib');
 var tar = require('tar');
+var fileControl = require('./file-control');
 
 //constants
 var WORKING_DIR_VAR = "working_dir"
@@ -206,10 +207,10 @@ waitForFiles = function(job,callback) {
 	    	
 	    	var totalUploaded=0;
 	    	for (filename in job.fileProgress) {
-	    		if (job.fileProgress[filename].uploadComplete != true) {
+	    		if (job.fileProgress[filename].uploadComplete != true && fs.existsSync(filename) ) {
 	    		    var stat= fs.statSync(filename); 
 		    		var fileSizeInBytes = stat["size"];
-		    		//logger.debug(filename+' size='+fileSizeInBytes+' correct size='+job.fileProgress[filename]['FileSize']);
+		    		logger.debug(filename+' size='+fileSizeInBytes+' correct size='+job.fileProgress[filename]['FileSize']);
 		    		totalUploaded+=fileSizeInBytes;
 		    		job.fileProgress[filename]['Uploaded'] = fileSizeInBytes;
 			    	if(job.fileProgress[filename]['error'] == true) {
@@ -226,16 +227,14 @@ waitForFiles = function(job,callback) {
 			    	} 
 
 	    		    		
-	    		} else {
+	    		} else if (job.fileProgress[filename].uploadComplete == true) {
 	    			totalUploaded+=job.fileProgress[filename]['FileSize']
 	    			numFilesUploaded++;
 	    		}
 	    		
 	    		
 	    	}
-	    	
-	    	if (numFilesUploaded >= job.files.length) {
-		    	logger.info(job.id+" all files received...");
+	    	if (numFilesUploaded >= Object.keys(job.fileProgress).length) {
     			clearTimeout(timeout);
     			clearInterval(fileCheck);
     			eventEmitter.emit('upload-complete',job);
@@ -255,7 +254,7 @@ waitForFiles = function(job,callback) {
             	logger.debug("progress: "+totalUploaded+" of "+job.totalFileSize+"  %done:"+job.progress);
             	
             }
-    		logger.debug(numFilesUploaded+ " of "+job.files.length+" files received.");
+    		logger.debug(numFilesUploaded+ " of "+Object.keys(job.fileProgress).length+" files received.");
 	    }, checkInterval);
 	} else {
 		callback(undefined, job);
@@ -307,96 +306,39 @@ JobControl = function(io) {
 				return;
 			}
 			
-			var destination = data['destination']
-			var workingDirVar="${"+WORKING_DIR_VAR+"}";
-			if (destination.indexOf(workingDirVar) > -1){
-				destination=destination.replace( workingDirVar,job.working_dir);
-			}
-			workingDirVar="$"+WORKING_DIR_VAR;
-			if (destination.indexOf(workingDirVar) > -1){
-				destination=destination.replace( workingDirVar,job.working_dir);
-			}
-			
-			var filename = pathlib.resolve(destination+pathlib.sep+data.name);
-			
-			logger.debug("saving "+filename);
-			var size = data['fileSize'];
-			job.totalFileSize+=size
-			job.totalReceived=0;
-			job.fileProgress[filename] = {  //Create a new Entry in The files Variable
-	            FileSize : size,
-	            Data     : "",
-	            Uploaded : 0,
-	            uploadComplete: false,
-	            name: data.name
-	        };
 	        job.status="receiving files."
 	        job.progress=(job.progress)+1;
 	        updateJob(job);
-			//remove the file if it already exists
-			if (!fs.existsSync(destination)) {
-				logger.info("download dir does not exist - creating dir: "+destination);
-	        	mkdirp.sync(destination, function (err) {
-            	  if (err) {
-        		    logger.error(err);
-        		    socket.emit('End', {message: err.message,  fileName: data.name} );
-        		  } else {
-        		    logger.info('Directory ' + directory + ' created.');
-        		  }
-	            
-	            });
-			}
-			if (fs.existsSync(filename)) {
-				logger.debug(filename+' already exists dontUpload='+job.options.dontUploadIfFileExist);
-        		if (job.options.dontUploadIfFileExists == true) {
-        			job.fileProgress[filename].uploadComplete=true;
-        			socket.emit('End', {message: 'Filename '+filename+' already exists and dontUploadIfFileExists is true for: '+jobId, jobId: jobId,  fileName: data.name} );
-        			return;
-        		} else {
-        			fs.unlinkSync(filename);
-			    }
-			}
 			
-	       try {
-		    	logger.info("saving file: "+filename);
-		    	
-		    	var isDirectory = data['isDirectory'];
-		    	logger.debug("isDirectory="+isDirectory);
-		    	if (isDirectory && isDirectory==true) {
-		    	 	logger.info("creating directory: "+filename);
-		    		options ={
-					  path: destination,
-					  strip: 0, // how many path segments to strip from the root when extracting
-						}
-			    		
-				    	stream.pipe(zlib.createGunzip()).pipe(tar.Extract(options));
-			            
-			      } else  {
-			        job.fileProgress[filename].fileWriter = fs.createWriteStream(filename);
-		    		stream.pipe(job.fileProgress[filename].fileWriter);
-		    	  }
-			    	
-	
-			    } catch(err) {
-			    	logger.error("cannot save: "+filename );
-			    	logger.error(err.message);
-			    	socket.emit('Error', {message: 'Invalid file: '+filename, jobId: jobId, name: data.name} );
-			    }
-		       
-			});
-			
-			socket.on('client-upload-error', function(data) {
-			    var jobId = data['jobId'];
-				logger.error('Problem uploading: '+data.name+' for job: '+jobId);
-				logger.error('Cancelling job: '+jobId);
-				var job = jobQueue[jobId];
-				if (job == undefined) {
-					socket.emit('Error', {message: 'No active Job with id: '+jobId} );
-					return;
+			fileControl.forkStream (stream, data.destination, function(err, streams) {
+				logger.debug("forked: "+  data.name+" into "+streams.length+" streams.");
+				for (fileStream in streams) {
+					var dest = streams[fileStream].destination;
+					if (job.script && job.script.env) {
+						job.script.env.working_dir= job.working_dir;
+						dest = fileControl.replaceVars(streams[fileStream].destination, job.script.env);
+					}
+					logger.debug("saving: "+ data.name+" to "+dest);
+					var overwrite = (job.options && !job.options.dontUploadIfFileExists==true);
+					var isDirectory = data['isDirectory']
+					fileControl.saveFile(streams[fileStream].stream, data.name, data.fileSize, dest, socket, overwrite, isDirectory, job);
 				}
-				cancelJob(job);
-				socket.emit('End',{message: 'job cancelled: ',jobId: jobId, fileName: data.name});
 			});
+		       
+		});
+			
+		socket.on('client-upload-error', function(data) {
+		    var jobId = data['jobId'];
+			logger.error('Problem uploading: '+data.name+' for job: '+jobId);
+			logger.error('Cancelling job: '+jobId);
+			var job = jobQueue[jobId];
+			if (job == undefined) {
+				socket.emit('Error', {message: 'No active Job with id: '+jobId} );
+				return;
+			}
+			cancelJob(job);
+			socket.emit('End',{message: 'job cancelled: ',jobId: jobId, fileName: data.name});
+		});
 		socket.on('disconnect', function(err) {
 			logger.debug("upload connection ended.");
 			if (jobInProgress) {

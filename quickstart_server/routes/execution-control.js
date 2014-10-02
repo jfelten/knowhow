@@ -290,7 +290,8 @@ function uploadFiles(agent,job, callback) {
 				currentJobs[agentId][jobId].fileProgress[fileName].readStream = fstream.Reader({ 'path': filepath, 'type': 'Directory' }).pipe(tar.Pack()) /* Convert the directory to a .tar file */
 				.pipe(zlib.Gzip());
 			} else {
-				currentJobs[agentId][jobId].fileProgress[fileName].readStream = fs.createReadStream(filepath,{autoClose: true, highWaterMark: 32 * 1024});
+				//currentJobs[agentId][jobId].fileProgress[fileName].readStream = fs.createReadStream(filepath,{autoClose: true, highWaterMark: 32 * 1024});
+				currentJobs[agentId][jobId].fileProgress[fileName].readStream = fstream.Reader(filepath).pipe(zlib.Gzip());
 			}
 			ss(currentJobs[agentId].fileSocket).emit('agent-upload', stream, {name: fileName, jobId: jobId, fileSize: fileSizeInBytes, destination: file.destination, isDirectory: isDirectory });
 			currentJobs[agentId][jobId].fileProgress[fileName].readStream.pipe(stream );

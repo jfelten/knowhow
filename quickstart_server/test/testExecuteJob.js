@@ -45,7 +45,7 @@ job = {
     },
     {
       "source": "leapfrog:///environments",
-      "destination": "${working_dir}"
+      "destination": ["${working_dir}", "${working_dir}/env2"]
     }
   ],
   "script": {
