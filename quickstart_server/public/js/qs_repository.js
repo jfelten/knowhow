@@ -1,8 +1,8 @@
 var repo_module = angular.module('qs_repository', []);
 
-var loadRepo = function(repoName, callback) {
+var loadRepo = function(repoName, subDir, callback) {
 
-	    this.$http.get('/api/fileListForRepo?repo='+repoName+'&dir=jobs').
+	    this.$http.get('/api/fileListForRepo?repo='+repoName+'&dir='+subDir).
 	    success(function(data) {
 	    	var files = data.children;
 	    	if (callback){
@@ -22,8 +22,8 @@ var loadFile = function(repo, path, callback) {
   	  console.log('load file');
 	  this.$http.get('/api/fileContent?repo='+repo+'&file='+path,{
           transformResponse: function (data, headers) {
-              console.log(headers['content-type']);
-              console.log(data);
+              //console.log(headers['content-type']);
+              //console.log(data);
               if (headers['Content-Type'] == 'text/json' && data.length >0) {
                   try {
                 	  var jsonObject = JSON.parse(data);

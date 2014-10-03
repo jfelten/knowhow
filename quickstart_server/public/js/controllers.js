@@ -281,7 +281,7 @@ var myModule = angular.module('myApp.controllers', []).
 		  console.log('selected repo: '+key);
 		  $scope.selectedRepoName = key;
 	      $scope.selectedRepo = $scope.fileRepos[key];
-	  	  qs_repo.loadRepo(key,function(err, data) {
+	  	  qs_repo.loadRepo(key,'jobs',function(err, data) {
 	  		if(err) {
 	  			alert("unable to load repository");
 	  			
@@ -473,22 +473,30 @@ var myModule = angular.module('myApp.controllers', []).
 	  $scope.workflows = workflows;
 	  $scope.loading_jworkflows = false;
 	  
-	  $http.get('/api/connectedAgents').
-	    success(function(data) {
-	    	$scope.connectedAgents = data;
-	    });
 	  
-	  $scope.selectAgent = function(agent) {
-		  $scope.selectedAgent = agent;
-		  console.log('selected agent: '+agent);
-		  $scope.status.isopen = !$scope.status.isopen;
-		  var selectAgent = document.getElementById('selectAgent');
-		  selectAgent.textContent=agent.user+'@'+agent.host+':'+agent.port;
-	  };
+	  
+	  $scope.workflow = {};
+	  var loadAgentsForWorkflow = function(workflow) {
+	  		console.log("loading agents...");
+	  		var data = {
+		    	workflow: workflow
+		    };
+		    
+	  		$http({
+			      method: 'POST',
+			      url: '/api/loadAgentsForWorkflow',
+			      data: data
+			    }).
+			    success(function(data) {
+			    	$scope.workflow = data;
+		    });
+	  
+	  }
+	  
 	  
 	  $scope.selectRepo = function(key) {
 		  console.log('selected repo: '+key);
-		  qs_repo.loadRepo(key,function(err, data) {
+		  qs_repo.loadRepo(key,'workflows',function(err, data) {
 	  		if(err) {
 	  			alert("unable to load repository");
 	  			
@@ -512,7 +520,7 @@ var myModule = angular.module('myApp.controllers', []).
 	  };
 	  
 	$scope.addFile = function() {
-		qs_repo.openNewFileModal($scope.selectedFile, $scope.selectedRepoName, 'addFile');
+		qs_repo.openNewFileModal($scope.selectedFile, $scope.selectedRepoName, tree, 'addFile');
 		
 	}
 		  $scope.deleteFile = function () {
@@ -541,18 +549,57 @@ var myModule = angular.module('myApp.controllers', []).
 	  };
 	  var navigating = false;
 	  $scope.tree_handler = function(branch) {
-	      console.log('selection='+branch.label);
+	  	  //console.log(branch);
+	      console.log('selection='+branch.label+ ' navigating='+navigating+' ext='+branch.ext+' type='+branch.type);
 	      $scope.selectedFile = branch; 
 	      $scope.message = undefined;
-	      if (navigating == false && '.json' == branch.ext) {
+	      if (branch.type == 'file') {
 	    	  qs_repo.loadFile($scope.selectedRepo, branch.path, function(err,data) {
-	    	  	editor.set(data, function(err) {
-	      		    		console.log(err);
-	      		    	});
-	    	  }); 
-	      }
+	    	    //console.log("data="+data);
+	    	  	if (branch.ext=='.json') {
+  		    		editor.setMode('code');
+  		    		editor.setText(data);
+  		    		loadAgentsForWorkflow(JSON.parse(data));
+  		      	} else {
+  		    		editor.setMode('text');
+  		    		editor.setText(data);
+  		    	}
+  		      });
+	      		    		
+	      }		    	
 	    	  
-	    };
+
+	     
+	    	  
+    	};
+	  //tree controls
+	
+	  //$scope.addFile = addFile;
+	  $scope.deleteFile = function () {
+	  	qs_repo.deleteFile($scope.selectedFile, $scope.selectedRepoName, false, function(err,data) {
+	  		var deleted_branch = $scope.selectedFile;
+	  		if (tree.get_parent_branch(deleted_branch)) {
+	  			var parent_branch = tree.get_parent_branch(deleted_branch);
+	  			tree.select_branch(parent_branch);
+	  			var newChildren = [];
+	  			var oldChildren = tree.get_children(parent_branch);
+	  			for (var child in oldChildren) {
+	  				console.log(child.path+" "+deleted_branch.path);
+	  				if (oldChildren[child].path != deleted_branch.path) {
+	  					newChildren.push(oldChildren[child]);
+	  				} else {
+	  					console.log("removing deleted branch from tree");
+	  				}
+	  			}
+	  			console.log(parent_branch);
+	  			console.log(newChildren);
+	  			parent_branch.children =  newChildren;
+	  		} else {
+	  			$scope.selectRepo($scope.selectedRepoName);
+	  		}
+	  	});
+	  };
+
 	    
 	  $scope.saveWorkflow = function() {
 	  	if($scope.selectedFile) {

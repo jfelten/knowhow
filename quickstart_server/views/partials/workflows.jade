@@ -63,8 +63,8 @@ p
 				.workflows-buttons.btn-group
 					button.btn.btn-primary(ng-hide="currentRunningJob.progress > 0" type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="executeWorkflow()" ) Execute
 					button.btn.btn-primary(ng-hide="currentRunningJob.progress > 0" type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="saveWorkflow()") Save
-
-		div.workflows-textarea(id="jsoneditor")
+		.row
+			div.workflows-textarea(id="jsoneditor")
  
 div
 	script(type="text/ng-template" id="directoryWarning")

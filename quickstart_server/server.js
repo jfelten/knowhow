@@ -19,6 +19,7 @@ AgentEventHandler = require('./routes/agent-events'),
 //http = require('http'),
 path = require('path');
 var agentControl = require('./routes/agent-control');
+var workflowControl = require('./routes/workflow-control');
 
 //for stylus style sheets
 function compile(str, path) {
@@ -111,6 +112,9 @@ app.get('/api/agentEvent', api.agentEvent);
 app.post('/api/execute', api.execute);
 app.post('/api/cancel', api.cancel);
 app.get('/api/runningJobsList', api.runningJobList);
+
+//workflow api
+app.post('/api/loadAgentsForWorkflow', workflowControl.loadAgentsForWorkflow);
 
 //redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
