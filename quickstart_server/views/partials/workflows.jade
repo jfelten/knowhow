@@ -21,28 +21,49 @@ p
 		span(ng-if="loading_workflows") ...loading...
 		abn-tree(tree-data="workflows" tree-control="workflow_tree" on-select="tree_handler(branch)" expand-level="2" initial-selection="weblogic" )
 	.workflows-control
-		.agent-progress(ng-hide="runningWorkflows.length == 0" ng-repeat="agentJobs in runningWorkflows")
-				.progressBar(ng-repeat="job in agentJobs" ng-hide="job.progress == 0")
-					i.glyphicon.glyphicon-calendar {{agentJobs.agent.user}}@{{agentJobs.agent.host}} 
-					progressbar(ng-hide="job.progress == 0" animate="job.progress" value="job.progress" type="success")
-						{{job.status}}
-		div(dropdown is-open="status.isopen").btn-group
-			button.btn.btn-primary.dropdown-toggle
-				span(id="selectAgent") 
-					| Select An Agent 
-				span.caret
-			ul.dropdown-menu(role="menu")
-				li(ng-repeat="agent in connectedAgents")
-					a(ng-click="selectAgent(agent)") 
-						{{agent.user}}@{{agent.host}}:{{agent.port}}
-				li.divider
-				li
-					| All Agents
-		.workflows-buttons.btn-group
-			button.btn.btn-primary(ng-hide="currentRunningJob.progress > 0" type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="executeWorkflow()" ) Execute
-			button.btn.btn-primary(ng-hide="currentRunningJob.progress > 0" type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="saveWorkflow()") Save
-		.workflows-message-block(ng-show="message")
-			{{message}}
+		.row.agent-table-header
+			.col-md-2.col-lg-2
+				h4
+					| {{workflow.id}} Agents
+			.col-md-10.col-lg-10
+				form.form-inline(role="form")
+					form-group
+						label.sr-only(for="login")
+							| Login
+						input(type="text" id="login" name="login" ng-model='agent.login' placeholder="Enter login*")
+					.form-group
+						.input-group-addon /
+					.form-group
+						label.sr-only(for="password")
+						input(type="password" id="password" name="password" ng-model='agent.password' placeholder="Enter Password*")
+					.form-group
+						&nbsp;
+						button.btn.btn-primary(ng-click='initializeAgent(agent)' ) Init Agents
+				
+		.row(ng-repeat="agent in workflow.agents")
+			.col-md-4.col-lg-4
+				i.glyphicon.glyphicon-hdd.agent-ready( ng-show="agent.status=='READY'")
+				i.glyphicon.glyphicon-hdd.agent-error( ng-show="agent.status!='READY'")
+				&nbsp;
+				a(href="http://{{agent.host}}:{{agent.port}}" target="__blank")
+							{{agent.user}}@{{agent.host}}:{{agent.port}}
+					.col-md-4.col-lg-5(ng-repeat="job in agentJobs" ng-hide="job.progress == 0 || !job.progress")
+						a(href="http://{{agent.host}}:{{agent.port}}" target="__blank")
+							{{agent.user}}@{{agent.host}}:{{agent.port}}
+			.col-md-8.col-lg-8
+				span.pull-left
+					{{agent.message}}
+				span.pull-left
+					progressbar(ng-hide="agent.progress < 1" animate="agent.progress" value="agent.progress" type="success")
+							{{agent.status}}
+	
+		.row
+			.col-md-6.col-lg-9.btn-group
+
+				.workflows-buttons.btn-group
+					button.btn.btn-primary(ng-hide="currentRunningJob.progress > 0" type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="executeWorkflow()" ) Execute
+					button.btn.btn-primary(ng-hide="currentRunningJob.progress > 0" type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="saveWorkflow()") Save
+
 		div.workflows-textarea(id="jsoneditor")
  
 div

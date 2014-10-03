@@ -20,7 +20,6 @@ var nodejs_dir = __dirname+"/../repo/rawpackages/node/node*";
 var agent_archive_name = 'quickstart_agent.tar.gz';
 var pathlib = require('path');
 
-
 eventEmitter.on('package-complete',function(agent){
 	logger.info("agent contol packaged agent: "+agent);
 });
@@ -99,6 +98,27 @@ function listAgents(callback) {
 };
 
 exports.listAgents = listAgents;
+
+function loadAgent(agent, callback) {
+	if (!agent) {
+		callback(new Error("no agent provided"));
+		return;
+	}
+	db.findOne({user: agent.user, host: agent.host, port: agent.port}, function(err, doc) {
+		if (err) {
+			callback(err);
+			return;
+		}
+//		docs.forEach(function(agent) {
+//			console.log(agent);
+//		});
+		if (callback) {
+			callback(undefined, doc);
+		}
+	  });
+};
+
+exports.loadAgent = loadAgent;
 
 initAgent = function(agent) {
 	agent_prototype = {
@@ -550,5 +570,6 @@ exports.addAgent = function(agent,serverInfo) {
 };
 	
 	
+
 
 
