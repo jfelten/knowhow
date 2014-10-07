@@ -4,32 +4,106 @@ var EventEmitter = require('events').EventEmitter;
 var eventEmitter = new EventEmitter();
 var agentControl=require('./agent-control');
 var executionControl = require('./execution-control')
+var api = require('./api')
 
 var runningTasks = {};
 
-exports.loadAgentsForWorkflow = function(req, res) {
-	var workflow = req.body.workflow;
-	loadAgentsForWorkflow(workflow, function (err, workflow) {
+exports.initAgents = function(req, res) {
+	var credentials = req.body.credentials;
+	var agents = req.body.agents;
+	if (agents && credentials) {
+		initAgents(credentials, agents, function(err, agents) {
+			if (err) {
+				logger.error(err.message);
+				res.send(500, err);
+			} else {
+				res.json(agents);
+			}
+		});
+	} else {
+		if (!agents) {
+			logger.error("agents is not defined.")
+		}
+		if (!credentials) {
+			logger.error("credentials is not defined.")
+		}
+		if (credentials && !credentials.login) {
+			logger.error("no login passed")
+		}
+		if (credentials && !credentials.password) {
+			logger.error("no password")
+		}
+		res.send(500, new Error("agents and credentials are required"));
+	}
+}
+
+initAgents = function(credentials, agents, callback) {
+	var agentInits = new Array(agents.length);
+	logger.info("workflow-control init agents");
+	for (index in agents) {
+		var agent = agents[index];
+		agentInits[index] = function(callback) {
+			var initAgent = this.agent;
+			logger.debug("initAgent status="+initAgent.status);
+			if (initAgent.status != 'READY') {
+				logger.debug(initAgent);
+				agentControl.deleteAgent(initAgent, function(err, numRemoved) {
+					if (err) {
+						logger.error("unable to delete agent: "+initAgent.login+"@"+initAgent.host+":"+initAgent.port);
+						callback(err, agents);
+						return;
+					}
+					initAgent.login = credentials.login;
+					initAgent.password = credentials.password;
+					logger.info("initializing agent: "+initAgent.login+"@"+initAgent.host+":"+initAgent.port);
+					agentControl.addAgent(initAgent, api.getServerInfo());
+					callback();
+				});
+			}
+		}.bind({agent: agents[index]}) ;
+			
+	}
+	async.parallel(agentInits,function(err) {
+			if (err) {
+				if (callback) {
+					callback(err);
+				}
+			}
+			else {
+				if (callback) {
+					callback(undefined, agents);
+				}
+			}
+			return;
+		});
+	
+}
+
+exports.loadAgentsForEnvironment = function(req, res) {
+	var environment = req.body.environment;
+	loadAgentsForEnvironment(environment, function (err, environment) {
 		if (err) {
 			res.send(500, err);
 			return;
 		} else {
-			res.json(workflow);
+			res.json(environment);
 		}
 	});
 };
 
-loadAgentsForWorkflow = function(workflow, callback) {
+loadAgentsForEnvironment = function(environment, callback) {
 
-	if (workflow.agents) {
-		var queries = new Array(workflow.agents.length);
-		for (var i =0; i< workflow.agents.length; i++) {
+	if (environment.agents) {
+		this.environment = environment;
+		var queries = new Array(environment.agents.length);
+		for (var i =0; i< environment.agents.length; i++) {
 			queries[i] = function(callback) {
 				logger.debug("index="+this.index);
-				logger.debug(workflow.agents[this.index]);
-				agentControl.loadAgent(workflow.agents[this.index], function(err, loadedAgent) {
+				logger.debug(environment.agents[this.index]);
+				agentControl.loadAgent(environment.agents[this.index], function(err, loadedAgent) {
 					if (loadedAgent) {
-						workflow.agents[this.index] = loadedAgent;
+						environment.agents.splice(this.index, 1);
+						environment.agents.push(loadedAgent);
 					}
 					callback();
 				});
@@ -43,17 +117,18 @@ loadAgentsForWorkflow = function(workflow, callback) {
 			}
 			else {
 				if (callback) {
-					callback(undefined, workflow);
+					logger.debug(environment);
+					callback(undefined, environment);
 				}
 			}
 			return;
 		});
 	} else if (callback) {
-		callback(undefined,workflow);
+		callback(undefined,environment);
 	}
 }
 
-execute = function(workflow,callback) {
+execute = function(environment,workflow,callback) {
 
 	var agents = workflow.agents;
 	
@@ -62,15 +137,25 @@ execute = function(workflow,callback) {
 			logger.error("no all agents available");
 		}
 		
-		performTask(workflow.task, function(err,task){
-			if(err) {
-				callback(err, task)
-				return;
-			}
-			callback(undefined,task);
-			
-		});
-		
+		var completedTasks = new Array( workflow.taskList.length);
+		for (task in workflow.taskList) {
+			performTask(task, function(err,task){
+				if(err) {
+					completedTasks[task.id] = {
+						status : "ERROR",
+						message: err.message
+					};
+					callback(err, completedTasks)
+					return;
+				}
+				completedTasks[task.id] = {
+						status : "COMPLETE",
+						message: "success"
+					};
+				
+			});
+		}
+		callback(undefined, completedTasks);
 	
 	});
 
@@ -83,10 +168,14 @@ seriesTask = function(task, callback) {
 	var agent = task.agent
 	var executeTasks = new Array[jobs.length];
 	runningTasks[task.id] = task;
-	for (var index=0; index< subtasks.length; index++) {
-		executeTasks[index] = function(callback,agent, task) {
-			performTask(this.task);
-		}.bind({task: subtasks[index], agent: agent});
+	for (var agentIndex=0; agentIndex< task.agents.length; agentIndex++) {
+		var agent = task.agents[agentIndex];
+		for (var index=0; index< task.jobs.length; index++) {
+			var job = task.jobs[index];
+			executeTasks[index] = function(callback) {
+				jobTask(this.agent, this.job, callback);
+			}.bind({agent: agent, job: job});
+		}
 	}
 	
 	async.series(executeTasks,function(err,job) {
@@ -115,10 +204,14 @@ paralellTask = function(task, callback) {
 	var agent = task.agent
 	var executeTasks = new Array[jobs.length];
 	runningTasks[task.id] = task;
-	for (var index=0; index< subtasks.length; index++) {
-		executeTasks[index] = function(callback,agent, task) {
-			performTask(this.task);
-		}.bind({task: subtasks[index], agent: agent});
+	for (var agentIndex=0; agentIndex< task.agents.length; agentIndex++) {
+		var agent = task.agents[agentIndex];
+		for (var index=0; index< task.jobs.length; index++) {
+			var job = task.jobs[index];
+			executeTasks[index] = function(callback) {
+				jobTask(this.agent, this.job, callback);
+			}.bind({agent: agent, job: job});
+		}
 	}
 	
 	async.paralell(executeTasks,function(err,task) {
@@ -142,9 +235,9 @@ paralellTask = function(task, callback) {
     });
 };
 
-jobTask = function(job, callback) {
+jobTask = function(agent, job, callback) {
 
-	executeControl.executeJob(this. agent, this.job, function(err) {
+	executeControl.executeJob(agent, job, function(err) {
 		if (err) {
 			callback(err,agent, job);
 		}
@@ -160,8 +253,91 @@ var taskTypes = {
 	jobTask: jobTask
 };
 
-performTask = function(task) {
+performTask = function(task,callback) {
 	
-	taskTypes[task.type](task);
+	taskTypes[task.type](task, callback);
 };
+
+var eventHandler = function() {
+
+
+	agentControl.eventEmitter.on('agent-error', function(agent) {
+		
+		if (agent) {
+			//see if the agent is part of a running task
+			for (task in runningJobs) {
+				var index = task.agentJobs.map(function(e) { return e.agentId; }).indexOf(agent._id);
+				if (index > -1) {
+					completeTask(task.id,new Error("Agent: "+agent.designation+"("+agent.user+"@"+agent.host+":"+agent.host+") errored out before task"));
+				
+				}
+			}
+		}
+		
+	});
+
+	agentControl.eventEmitter.on('agent-delete', function(agent) {
+		if (agent) {
+			//see if the agent is part of a running task
+			for (task in runningJobs) {
+				var index = task.agentJobs.map(function(e) { return e.agentId; }).indexOf(agent._id);
+				if (index > -1) {
+					completeTask(task.id,new Error("Agent: "+agent.designation+"("+agent.user+"@"+agent.host+":"+agent.host+") was deleted before task completion"));
+				
+				}
+			}
+		}
+	});
+
+	executionControl.eventEmitter.on('job-update', function(agent, job) {
+		logger.info('broadcasting job update.');
+		
+		if (agent && job) {
+			 var taskId = job.taskId;
+			
+			runningJobs[taskId].agentJobs[job.id] = job;
+		}
+
+	});
+	executionControl.eventEmitter.on('job-cancel', function(agent, job) {
+		
+		if (agent && job) {
+			 var taskId = job.taskId;
+			 completeTaskJob(taskId, agent, job, new Error(job.id+" cancelled."));
+		}
+	});
+	executionControl.eventEmitter.on('job-complete', function(agent, job) {
+		
+		if (agent && job) {
+			 var taskId = job.taskId;
+			 completeTaskJob(taskId, agent, job);
+		}
+
+	});
+	executionControl.eventEmitter.on('job-error', function(agent, job) {
+		if (agent && job) {
+			 var taskId = job.taskId;
+			 completeTaskJob(taskId, agent, job, new Error(job.status));
+		}
+	});
+
+}
+
+var completeTaskJob = function(taskId, agent, job, err) {
+
+	if (err) {
+		runningJobs[taskId].agentJobs[job.id].callback(err);
+		return;
+	}
+	runningJobs[taskId].agentJobs[job.id].callback();
+		
+}
+
+var completeTask = function(taskId,err) {
+	if (err) {
+		runningJobs[taskId].status = "ERROR";
+	} else {
+		runningJobs[taskId].status = "COMPLETE";
+	}
+}
 

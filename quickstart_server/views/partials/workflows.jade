@@ -1,70 +1,101 @@
-p Workflows
-p
 .workflows-page
 
+	
 	.workflows-nav
-		div(dropdown is-open="repoSelect.isopen").btn-group
-			button.btn.btn-secondary.dropdown-toggle
-					span(id="selectRepo") 
-						| Select a repository 
-					span.caret
-			ul.dropdown-menu(role="menu")
-				li(ng-repeat="(key, repo) in fileRepos")
-					a(ng-click="selectRepo(key)") 
-						{{key}}
-				li.divider
-		.workflows-buttons.btn-group
-			button.btn.btn-secondary(type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="deleteFile()" )|delete
-			button.btn.btn-secondary(type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="addFile()" )|add
+		span.pull-left
+			p Workflows
+		span.pull-right
+			div(dropdown is-open="repoSelect.isopen").btn-group
+				button.btn.btn-secondary.dropdown-toggle
+						span(id="selectRepo") 
+							| Select a repository 
+						span.caret
+				ul.dropdown-menu(role="menu")
+					li(ng-repeat="(key, repo) in fileRepos")
+						a(ng-click="selectRepo(key)") 
+							{{key}}
+					li.divider
+		.workflows-nav-buttons(ng-hide="environments.length == 0")
+			button.btn.btn-secondary(type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="deleteEnv()" )|delete env
+			span.pull-right
+				button.btn.btn-secondary(type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="addEnv()" )|add env		
+	
+		span(ng-if="loading_environments") ...loading...
+		.workflows-tree
+			abn-tree(tree-data="environments" tree-control="environments_tree" on-select="env_tree_handler(branch)" expand-level="1" initial-selection="environments" )
+		
+		.workflows-nav-buttons(ng-hide="workflows.length == 0")
+			button.btn.btn-secondary(type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="deleteFile()" )|delete workflow
+			span.pull-right
+				button.btn.btn-secondary(type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="addFile()" )|add workflow
 
 		
 		span(ng-if="loading_workflows") ...loading...
-		abn-tree(tree-data="workflows" tree-control="workflow_tree" on-select="tree_handler(branch)" expand-level="2" initial-selection="weblogic" )
+		.workflows-tree
+			abn-tree(tree-data="workflows" tree-control="workflow_tree" on-select="tree_handler(branch)" expand-level="2" initial-selection="weblogic" )
 	.workflows-control
-		.row.agent-table-header
-			.col-md-2.col-lg-2
-				h4
-					| {{workflow.id}} Agents
-			.col-md-10.col-lg-10
-				form.form-inline(role="form")
-					form-group
-						label.sr-only(for="login")
-							| Login
-						input(type="text" id="login" name="login" ng-model='agent.login' placeholder="Enter login*")
-					.form-group
-						.input-group-addon /
-					.form-group
-						label.sr-only(for="password")
-						input(type="password" id="password" name="password" ng-model='agent.password' placeholder="Enter Password*")
-					.form-group
-						&nbsp;
-						button.btn.btn-primary(ng-click='initializeAgent(agent)' ) Init Agents
-				
-		.row(ng-repeat="agent in workflow.agents")
-			.col-md-4.col-lg-4
-				i.glyphicon.glyphicon-hdd.agent-ready( ng-show="agent.status=='READY'")
-				i.glyphicon.glyphicon-hdd.agent-error( ng-show="agent.status!='READY'")
-				&nbsp;
-				a(href="http://{{agent.host}}:{{agent.port}}" target="__blank")
-							{{agent.user}}@{{agent.host}}:{{agent.port}}
-					.col-md-4.col-lg-5(ng-repeat="job in agentJobs" ng-hide="job.progress == 0 || !job.progress")
-						a(href="http://{{agent.host}}:{{agent.port}}" target="__blank")
-							{{agent.user}}@{{agent.host}}:{{agent.port}}
-			.col-md-8.col-lg-8
-				span.pull-left
-					{{agent.message}}
-				span.pull-left
-					progressbar(ng-hide="agent.progress < 1" animate="agent.progress" value="agent.progress" type="success")
-							{{agent.status}}
+		.row(ng-show="selectedEnv")
+			.col-md-12.col-lg-12
+				tabset
+					tab(heading="Connect {{environment.id}}")
+							.row.agent-table-header
+								.col-md-2.col-lg-2
+									h4
+										| {{workflow.id}} Agents
+								.col-md-10.col-lg-10
+									form.form-inline(role="form")
+										form-group
+											label.sr-only(for="login")
+												| Login
+											input(type="text" id="login" name="login" ng-model='credentials.login' placeholder="Enter login*")
+										.form-group
+											.input-group-addon /
+										.form-group
+											label.sr-only(for="password")
+											input(type="password" id="password" name="password" ng-model='credentials.password' placeholder="Enter Password*")
+										.form-group
+											&nbsp;
+											button.btn.btn-primary(ng-click='initAgents(credentials)' ) Init Agents
+							.workflow-env-container
+								.row(ng-repeat="agent in environment.agents")
+									.col-md-4.col-lg-4
+										i.glyphicon.glyphicon-hdd.agent-ready( ng-show="agent.status=='READY'")
+										i.glyphicon.glyphicon-hdd.agent-error( ng-show="agent.status!='READY'")
+										&nbsp;
+										a(href="http://{{agent.host}}:{{agent.port}}" target="__blank")
+													{{agent.designation}}({{agent.user}}@{{agent.host}}:{{agent.port}})
+									.col-md-4.col-lg-4(ng-show="agent.progress >0")
+										progressbar(animate="agent.progress" value="agent.progress" type="success")
+											{{agent.status}}
+									.col-md-4.col-lg-4(ng-show="agent.job.progress >0")
+										progressbar(animate="agent.job.progress" value="agent.job.progress" type="success")
+											{{agent.job.status}}
+										
 	
+					tab(heading="Edit {{environment.id}}")
+						.row
+							.col-md-6.col-lg-6.btn-group
+								.pull-left
+									.job-message-block(ng-show="env_message")
+										{{env_message}}
+							.col-md-6.col-lg-6.btn-group
+								.pull-right
+									button.btn.btn-primary(ng-hide="currentRunningJob.progress > 0" type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="saveEnv()") Save Environment
+						.row
+							.col-md-12.col-lg-12		
+								.env-textarea#env_editor
+		
 		.row
-			.col-md-6.col-lg-9.btn-group
-
-				.workflows-buttons.btn-group
-					button.btn.btn-primary(ng-hide="currentRunningJob.progress > 0" type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="executeWorkflow()" ) Execute
-					button.btn.btn-primary(ng-hide="currentRunningJob.progress > 0" type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="saveWorkflow()") Save
+			.col-md-6.col-lg-6.btn-group
+				.pull-left
+					.job-message-block(ng-show="message")
+						{{message}}
+			.col-md-6.col-lg-6.btn-group
+				.pull-right
+					button.btn.btn-primary(ng-hide="currentRunningJob.progress > 0" type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="executeWorkflow()" ) Execute Workflow
+					button.btn.btn-primary(ng-hide="currentRunningJob.progress > 0" type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="saveWorkflow()") Save Workflow
 		.row
-			div.workflows-textarea(id="jsoneditor")
+			.col-md-9.col-lg-12.workflow-textarea(id="jsoneditor")
  
 div
 	script(type="text/ng-template" id="directoryWarning")

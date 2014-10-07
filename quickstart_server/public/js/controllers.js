@@ -399,8 +399,9 @@ var myModule = angular.module('myApp.controllers', []).
 		  newDiv.appendChild(logText);
 		  container.appendChild(newDiv);  
 	  }
-  }).controller('WorkflowsController', function ($scope, $modal, $http, $log, qs_repo) {
+  }).controller('WorkflowsController', function ($scope, $modal, $http, $log, qs_repo, qs_workflow) {
   
+  	
     $scope.runningWorkflows = {};
     var loadWorkflows = function() {
     	$http.get('/api/runningWorkflowsList').
@@ -411,42 +412,7 @@ var myModule = angular.module('myApp.controllers', []).
     loadWorkflows();
     
 	    
-  	var socket = io();
-
-    socket.on('task-update', function(task, agent,job){
-      console.log('task update message received');
-      //loadJobs();
-      if (agent && job) {
-        if (!$scope.runningWorkflows[agent._id]) {
-        	$scope.runningWorkflows[agent._id] = {};
-        	$scope.runningWorkflows[agent._id][job.id] = {}
-        } else if (!$scope.runningWorkflows[agent._id][job.id]) {
-        	$scope.runningWorkflows[agent._id][job.id] = {}
-        }
-      	$scope.runningWorkflow[agent._id][job.id].progress=job.progress;
-      	$scope.runningWorkflow[agent._id][job.id].status=job.status;
-	  	$scope.$apply();
-	  }
-      
-    });
-    socket.on('task-complete', function(task,agent,job){
-      console.log('task complete message received');
-      loadWorkflows();
-	  $scope.$apply();
-      
-    });
-    socket.on('task-cancel', function(task,agent,job){
-      console.log('task cancel message received');
-      loadWorkflows();
-	  $scope.$apply();
-      
-    });
-    socket.on('task-error', function(task,agent,job){
-      console.log('task error message received');
-      loadJobs();
-	  $scope.$apply();
-      
-    });
+  	
     
   
   	  $http.get('/api/repoList').
@@ -465,44 +431,86 @@ var myModule = angular.module('myApp.controllers', []).
 	  
 	  var container = document.getElementById('jsoneditor');
 	  var editor = new JSONEditor(container,options);
+	  var env_container;
+	  var env_editor;
 	  
 	  
 	  var workflows = [] ;
 	  var tree;
 	  $scope.workflow_tree = tree = {};
 	  $scope.workflows = workflows;
-	  $scope.loading_jworkflows = false;
+	  $scope.loading_workflows = false;
 	  
-	  
+	  var environments = [] ;
+	  $scope.environments_tree = {};
+	  $scope.environments = environments;
+	  $scope.loading_environments = false;
 	  
 	  $scope.workflow = {};
-	  var loadAgentsForWorkflow = function(workflow) {
+	  $scope.environment = {};
+	  var loadAgentsForEnvironment = function(environment) {
 	  		console.log("loading agents...");
 	  		var data = {
-		    	workflow: workflow
+		    	environment: environment
 		    };
 		    
 	  		$http({
 			      method: 'POST',
-			      url: '/api/loadAgentsForWorkflow',
+			      url: '/api/loadAgentsForEnvironment',
 			      data: data
 			    }).
 			    success(function(data) {
-			    	$scope.workflow = data;
+			    	
+			    	qs_workflow.watchEnvironment(data);
+			    	var socket = io();
+				  	qs_workflow.listenForAgentEvents($scope, socket);
+				  	qs_workflow.listenForJobEvents($scope, socket);
+				  	qs_workflow.listenForWorkflowEvents($scope, socket);
+				  	$scope.environment = qs_workflow.watchedEnvironment;
 		    });
 	  
 	  }
 	  
+	 $scope.initAgents = function(credentials) {
+	  		console.log("init agents...");
+	  		console.log(credentials);
+	  		$scope.master = angular.copy(credentials);
+	  		var data = {
+	  			credentials: credentials,
+		    	agents: $scope.workflow.agents
+		    };
+		    
+	  		$http({
+			      method: 'POST',
+			      url: '/api/initAgents',
+			      data: data
+			    }).
+			    success(function(data) {
+			    	$scope.workflow.agents = data;
+		    });
+	  
+	  };
 	  
 	  $scope.selectRepo = function(key) {
 		  console.log('selected repo: '+key);
-		  qs_repo.loadRepo(key,'workflows',function(err, data) {
+		  $scope.selectedRepo=key
+		  qs_repo.loadRepo(key,'environments',function(err, data) {
 	  		if(err) {
 	  			alert("unable to load repository");
 	  			
 	  		}
-	  		$scope.workflows=data;
-	  	  });
+	  		env_container = document.getElementById('env_editor');
+	  		console.log('env_container='+env_container);
+	  		env_editor = new JSONEditor(env_container,options);
+	  		$scope.environments=data;
+			  qs_repo.loadRepo(key,'workflows',function(err, data) {
+		  		if(err) {
+		  			alert("unable to load repository");
+		  			
+		  		}
+		  		$scope.workflows=data;
+		  	  });
+		  });
 		  $scope.repoSelect.isopen = !$scope.repoSelect.isopen;
 		  var selectRepo = document.getElementById('selectRepo');
 		  selectRepo.textContent=key;
@@ -518,12 +526,40 @@ var myModule = angular.module('myApp.controllers', []).
 	    $scope.status.isopen = !$scope.status.isopen;
 	    
 	  };
+	$scope.addEnv = function() {
+		qs_repo.openNewFileModal($scope.selectedFile, $scope.selectedRepoName, $scope.environments_tree, 'addFile');
+		
+	}
+	$scope.deleteEnv = function () {
+	  	qs_repo.deleteFile($scope.selectedFile, $scope.selectedRepoName, false, function(err,data) {
+	  		var deleted_branch = $scope.selectedFile;
+	  		if ( $scope.environments_tree.get_parent_branch(deleted_branch)) {
+	  			var parent_branch =  $scope.environments_tree.get_parent_branch(deleted_branch);
+	  			 $scope.environments_tree.select_branch(parent_branch);
+	  			var newChildren = [];
+	  			var oldChildren =  $scope.environments_tree.get_children(parent_branch);
+	  			for (var child in oldChildren) {
+	  				console.log(child.path+" "+deleted_branch.path);
+	  				if (oldChildren[child].path != deleted_branch.path) {
+	  					newChildren.push(oldChildren[child]);
+	  				} else {
+	  					console.log("removing deleted branch from tree");
+	  				}
+	  			}
+	  			console.log(parent_branch);
+	  			console.log(newChildren);
+	  			parent_branch.children =  newChildren;
+	  		} else {
+	  			$scope.selectRepo($scope.selectedRepoName);
+	  		}
+	  	});
+	  };
 	  
 	$scope.addFile = function() {
 		qs_repo.openNewFileModal($scope.selectedFile, $scope.selectedRepoName, tree, 'addFile');
 		
 	}
-		  $scope.deleteFile = function () {
+	$scope.deleteFile = function () {
 	  	qs_repo.deleteFile($scope.selectedFile, $scope.selectedRepoName, false, function(err,data) {
 	  		var deleted_branch = $scope.selectedFile;
 	  		if (tree.get_parent_branch(deleted_branch)) {
@@ -557,12 +593,36 @@ var myModule = angular.module('myApp.controllers', []).
 	    	  qs_repo.loadFile($scope.selectedRepo, branch.path, function(err,data) {
 	    	    //console.log("data="+data);
 	    	  	if (branch.ext=='.json') {
+	    	  		editor.setText(data);
   		    		editor.setMode('code');
-  		    		editor.setText(data);
-  		    		loadAgentsForWorkflow(JSON.parse(data));
   		      	} else {
   		    		editor.setMode('text');
   		    		editor.setText(data);
+  		    	}
+  		      });
+	      		    		
+	      }		    	
+	    	  
+
+	     
+	    	  
+    	};
+      	$scope.env_tree_handler = function(branch) {
+	  	  //console.log(branch);
+	      console.log('selection='+branch.label+ ' navigating='+navigating+' ext='+branch.ext+' type='+branch.type);
+	     
+	      $scope.env_message = undefined;
+	      if (branch.type == 'file') {
+	    	  qs_repo.loadFile($scope.selectedRepo, branch.path, function(err,data) {
+	    	    //console.log("data="+data);
+	    	  	if (branch.ext=='.json') {
+	    	  		$scope.selectedEnv = branch; 
+	    	  		env_editor.setText(data);
+  		    		env_editor.setMode('code');
+  		    		loadAgentsForEnvironment(JSON.parse(data));
+  		      	} else {
+  		    		env_editor.setMode('text');
+  		    		env_editor.setText(data);
   		    	}
   		      });
 	      		    		
@@ -609,25 +669,42 @@ var myModule = angular.module('myApp.controllers', []).
 		}
 	  };
 	  
-	  $scope.execute = function() {
-		  if (!$scope.selectedAgent) {
-			  $scope.message='Please select an agent to execute';
+	  $scope.saveEnv = function() {
+	  	if($scope.selectedEnv) {
+	  		  try {
+	  		  	JSON.parse(env_editor.getText());
+	  		  	qs_repo.saveFile($scope.selectedEnv.path, env_editor.get(), function(err, message) {
+			  		$scope.env_message = message;
+			  	});
+	  		  
+	  		  } catch(err) {
+	  		  	console.log(err);
+	  		  	console.log(env_editor.get());
+	  		  	$scope.env_message = "JSON must be valid before saving: "+err.message;
+	  		  }
+			  
+		}
+	  };
+	  
+	  $scope.executeWorkflow = function() {
+		  if (!qs_workflow.checkAgents()) {
+			  $scope.message='Please connect all agents before attempting a workflow';
 			  return;
 		  }
 		  
 		  //get the content from the json editor
-		  var job;
+		  var workflow;
 		  try {
-			  job = editor.get();
+			  workflow = editor.get();
 		      //JSON.parse(jjob);
 		    } catch (e) {
-		    	console.log('error getting job data.')
+		    	console.log('error loading workflow.')
 		    	$scope.message='Invalid JSON - please fix.';
 		        return;
 		    }
 		    var data = {
-		    	agent: $scope.selectedAgent,
-		    	job: job
+		    	environment: $scope.environment,
+		    	workflow: workflow
 		    };
 		    $http({
 			      method: 'POST',

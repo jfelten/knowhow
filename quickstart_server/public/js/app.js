@@ -11,7 +11,8 @@ angular.module('myApp', [
   'ui.bootstrap',
   'ngRoute',
   'angularBootstrapNavTree',
-  'qs_repository'
+  'qs_repository',
+  'qs_workflow'
 ]).
 config(function ($routeProvider, $locationProvider) {
   $routeProvider.
@@ -26,6 +27,10 @@ config(function ($routeProvider, $locationProvider) {
     when('/workflows', {
         templateUrl: 'partials/workflows',
         controller: 'WorkflowsController'
+      }).
+    when('/repositories', {
+        templateUrl: 'partials/repositories',
+        controller: 'RepositoriesController'
       }).
       when('/logs', {
           templateUrl: 'partials/logs',

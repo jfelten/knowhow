@@ -24,7 +24,7 @@ exports.listAgents = function(req, res) {
 };
 
 
-function getServerInfo() {
+getServerInfo = function() {
     var os = require("os");
 	serverInfo = {
 			name: os.hostname(),
@@ -33,6 +33,8 @@ function getServerInfo() {
 	};
 	return serverInfo;
 };
+exports.getServerInfo = getServerInfo;
+
 
 exports.serverInfo = function (req, res) {
   var os = require("os");

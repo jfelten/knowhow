@@ -8,20 +8,23 @@
 		.col-md-12.col-lg-12			
 			form.form-inline(role="form")
 				.form-group
-					label.sr-only(for="login")
+					label.sr-only.control-label(for="login")
 						| Login
 					input(type="text" id="login" name="login" ng-model='agent.login' placeholder="Enter login*")
 				.form-group
 					.input-group-addon /
 				.form-group
+					label.sr-only.control-label(for="password")
 					input(type="password" id="password" name="password" ng-model='agent.password' placeholder="Enter Password*")
 				.form-group
 					.input-group-addon @
 				.form-group
+					label.sr-only(for="host")
 					input(type="text" id="host" name="host" ng-model='agent.host' placeholder="Enter host name*")
 				.form-group
 					.input-group-addon :
 				.form-group
+					label.sr-only(for="port")
 					input(type="text" id="port" name="port" ng-model='agent.port' size="5" placeholder="port ")
 				.form-group
 					input(type="text" name="user" ng-model='agent.user' placeholder="Enter sudo user")
@@ -38,12 +41,8 @@
 			&nbsp;
 			a(href="http://{{agent.host}}:{{agent.port}}" target="__blank")
 						{{agent.user}}@{{agent.host}}:{{agent.port}}
-				.col-md-4.col-lg-5(ng-repeat="job in agentJobs" ng-hide="job.progress == 0 || !job.progress")
-					a(href="http://{{agent.host}}:{{agent.port}}" target="__blank")
-						{{agent.user}}@{{agent.host}}:{{agent.port}}
+			&nbsp; {{agent.message}}
 		.col-md-6.col-lg-6
-			span.pull-left
-				{{agent.message}}
 			span.pull-left
 				progressbar(ng-hide="agent.progress < 1" animate="agent.progress" value="agent.progress" type="success")
 						{{agent.status}}

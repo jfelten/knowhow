@@ -114,7 +114,8 @@ app.post('/api/cancel', api.cancel);
 app.get('/api/runningJobsList', api.runningJobList);
 
 //workflow api
-app.post('/api/loadAgentsForWorkflow', workflowControl.loadAgentsForWorkflow);
+app.post('/api/loadAgentsForEnvironment', workflowControl.loadAgentsForEnvironment);
+app.post('/api/initAgents', workflowControl.initAgents);
 
 //redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
@@ -193,12 +194,19 @@ var agentCheck = function() {
 agentCheck();
 setInterval(agentCheck,60000);
 
+agentControl.packAgent();
 
 /**
 * Start Server
 */
-
-http.listen(port, function(){
+agentControl.packAgent( function (err) {
+	if (err) {
+		process.exit();
+	}
+	http.listen(port, function(){
 	  logger.info('listening on *:'+port);
 	  
 	});
+
+});
+

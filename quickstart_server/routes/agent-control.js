@@ -104,7 +104,18 @@ function loadAgent(agent, callback) {
 		callback(new Error("no agent provided"));
 		return;
 	}
-	db.findOne({user: agent.user, host: agent.host, port: agent.port}, function(err, doc) {
+	var queryParmams = {}
+	if (agent.user) {
+		queryParmams.user=agent.user
+	}
+	if (agent.host) {
+		queryParmams.host=agent.host
+	}
+	if (agent.port) {
+		queryParmams.port=agent.port;
+	}
+	
+	db.findOne(queryParmams, function(err, doc) {
 		if (err) {
 			callback(err);
 			return;
@@ -148,7 +159,7 @@ initAgent = function(agent) {
 };
 
 exports.deleteAgent = function( agent, callback) {
-	logger.info("deleting agent: "+agent._id);
+	logger.info("deleting agent: "+agent.host+":"+agent.port);
 	var options = {
 		    host : agent.host,
 		    port : agent.port,
@@ -398,19 +409,29 @@ packAgent = function(callback) {
 	.pipe(tar.Pack()) /* Convert the directory to a .tar file */
 	.pipe(zlib.Gzip()) /* Compress the .tar file */
 	.pipe(fstream.Writer({ 'path': agent_archive_name }).on("close", function () {
-		agent.message = 'package-complete';
-		agent.progress+=10;
-		eventEmitter.emit('agent-update', agent);
+		if (this.agent) {
+			agent.message = 'package-complete';
+			agent.progress+=10;
+			eventEmitter.emit('agent-update', agent);
+		}
 		logger.info('agent packaged.');
 	}).on("error",function(){
-		eventEmitter.emit('agent-error', agent);
+		if (this.agent) {
+			eventEmitter.emit('agent-error', agent);
+		}
 		logger.error('error packing agent: ', err);
-		callback(new Error("Unable to pack agent"));
+		if (callback) {
+			callback(new Error("Unable to pack agent"));
+		}
 	})).on("close", function () {
-		callback();
+		if (callback) {
+			callback();
+		}
 	});
 	
 };
+
+exports.packAgent = packAgent;
 
 
 
@@ -536,7 +557,7 @@ exports.addAgent = function(agent,serverInfo) {
 			  	}
 			  	function_vars = {agent: agent, commands: install_commands, serverInfo: serverInfo};
 			var exec = [
-			            packAgent.bind(function_vars), 
+			            //packAgent.bind(function_vars), 
 			            deliverAgent.bind(function_vars), 
 			            install.bind(function_vars),
 			            waitForAgentStartUp.bind(function_vars),
@@ -553,7 +574,8 @@ exports.addAgent = function(agent,serverInfo) {
 					db.find({_id: agent._id}, function(err, docs) {
 						if (docs.length > 0) {
 							agent = docs[0];
-							agent.status=undefined;
+							agent.status='READY';
+							agent.message=undefined
 							agent.progress =0;
 							eventEmitter.emit('agent-update',agent);
 						}
