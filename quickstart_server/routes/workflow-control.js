@@ -79,6 +79,8 @@ initAgents = function(credentials, agents, callback) {
 	
 }
 
+
+
 exports.loadAgentsForEnvironment = function(req, res) {
 	var environment = req.body.environment;
 	loadAgentsForEnvironment(environment, function (err, environment) {
@@ -132,14 +134,17 @@ execute = function(environment,workflow,callback) {
 
 	var agents = workflow.agents;
 	
-	verifyAgents(agents, function(err) {
-		if (err) {
-			logger.error("no all agents available");
-		}
+	//verifyAgents(agents, function(err) {
+	//	if (err) {
+	//		logger.error("no all agents available");
+	//		callback
+	//	}
 		
 		var completedTasks = new Array( workflow.taskList.length);
-		for (task in workflow.taskList) {
-			performTask(task, function(err,task){
+		for (taskIndex in workflow.taskList) {
+			var task =  workflow.taskList[taskIndex];
+			logger.debug(task);
+			performTask(environment, task, function(err,task){
 				if(err) {
 					completedTasks[task.id] = {
 						status : "ERROR",
@@ -157,13 +162,34 @@ execute = function(environment,workflow,callback) {
 		}
 		callback(undefined, completedTasks);
 	
-	});
+	//});
 
 };
-exports.execute = execute;
+exports.executeWorkflow = function(req, res) {
+	var environment = req.body.environment;
+	var workflow = req.body.workflow;
+	if (environment && workflow) {
+		execute(environment, workflow, function(err, runWorkflow) {
+			if (err) {
+				logger.error(err.message);
+				res.send(500, err);
+			} else {
+				res.json(runWorkflow);
+			}
+		});
+	} else {
+		if (!environment) {
+			logger.error("environment is not defined.")
+		}
+		if (!workflow) {
+			logger.error("workflow is not defined.")
+		}
+		res.send(500, new Error("environment and workflow are required"));
+	}
+};
 
 
-seriesTask = function(task, callback) {
+seriesTask = function(environment, task, callback) {
 	var subtasks = task.subtasks;
 	var agent = task.agent
 	var executeTasks = new Array[jobs.length];
@@ -199,22 +225,21 @@ seriesTask = function(task, callback) {
     });
 };
 
-paralellTask = function(task, callback) {
-	var subtasks = task.subtasks;
-	var agent = task.agent
-	var executeTasks = new Array[jobs.length];
-	runningTasks[task.id] = task;
+paralellTask = function(environment, task, callback) {
+	var job = task.job;
+	logger.debug(task);
+	var executeTasks = new Array(task['agents'].length);
+	initRunningTask(environment,task);
 	for (var agentIndex=0; agentIndex< task.agents.length; agentIndex++) {
 		var agent = task.agents[agentIndex];
-		for (var index=0; index< task.jobs.length; index++) {
-			var job = task.jobs[index];
-			executeTasks[index] = function(callback) {
-				jobTask(this.agent, this.job, callback);
-			}.bind({agent: agent, job: job});
-		}
+		var job = task.job;
+		executeTasks[agentIndex] = function(callback) {
+			jobTask(task, this.agent, this.job, callback);
+		}.bind({agent: agent, job: task.job});
+
 	}
 	
-	async.paralell(executeTasks,function(err,task) {
+	async.parallel(executeTasks,function(err,task) {
 		if (err) {
 
 			logger.error('job error' + err);
@@ -231,41 +256,77 @@ paralellTask = function(task, callback) {
 		
 		clearInterval(progressCheck);
         logger.info("done");
+        
         callback(undefined,task);
     });
 };
 
-jobTask = function(agent, job, callback) {
+var initRunningTask = function(environment, task) {
 
-	executeControl.executeJob(agent, job, function(err) {
-		if (err) {
-			callback(err,agent, job);
+	if (!runningTasks[task.id]) {
+		runningTasks[task.id] = {};
+	}
+	for (agentIndex in environment.agents) {
+		var agent = environment.agents[agentIndex];
+		if (!runningTasks[task.id][agent._id]) {
+			runningTasks[task.id][agent._id] = {};
 		}
-		callback(undefined, agent, job);
-	});
+	}
+};
+
+jobTask = function(task, agent, job, callback) {
+	if (task && agent && job) {
+		if (!job.id) {
+			//try to look up the job from the repository
+			fileControl.fileContent(
+		}
+		logger.debug(task);
+		logger.debug(job);
+		logger.debug(agent);
+		logger.info("executing: "+job.id+" of "+task.id+" on "+agent.host);
+		runningTasks[task.id].agentJobs[agent._id][job.id]=job;
+		executeControl.executeJob(agent, job, function(err) {
+			if (err) {
+				eventEmitter.emit('task-error',task,agent,job);
+			}
+			runningTasks[task.id].agentJobs[agent._id][job.id] = job;
+			runningTasks[task.id].agentJobs[agent._id][job.id].callback = callback;
+			runningTasks[task.id].agentJobs[agent._id][job.id].taskId = task.id;
+		});
+	} else {
+		logger.error("Unable execute job: ");
+		if (!task) {
+			logger.error("task is null");
+		}
+		if (!agent) {
+			logger.error("agent is null");
+		}
+		if (!job) {
+			logger.error("job is null");
+		}
+	}
 
 };
 
 
 var taskTypes = {
-	seriesTask : seriesTask,
-	paralellTask: paralellTask,
-	jobTask: jobTask
+	series : seriesTask,
+	paralell: paralellTask,
+	job: jobTask
 };
 
-performTask = function(task,callback) {
+performTask = function(environment, task,callback) {
 	
-	taskTypes[task.type](task, callback);
+	taskTypes[task.type](environment,task, callback);
 };
 
 var eventHandler = function() {
-
 
 	agentControl.eventEmitter.on('agent-error', function(agent) {
 		
 		if (agent) {
 			//see if the agent is part of a running task
-			for (task in runningJobs) {
+			for (task in runningTasks) {
 				var index = task.agentJobs.map(function(e) { return e.agentId; }).indexOf(agent._id);
 				if (index > -1) {
 					completeTask(task.id,new Error("Agent: "+agent.designation+"("+agent.user+"@"+agent.host+":"+agent.host+") errored out before task"));
@@ -279,7 +340,7 @@ var eventHandler = function() {
 	agentControl.eventEmitter.on('agent-delete', function(agent) {
 		if (agent) {
 			//see if the agent is part of a running task
-			for (task in runningJobs) {
+			for (task in runningTasks) {
 				var index = task.agentJobs.map(function(e) { return e.agentId; }).indexOf(agent._id);
 				if (index > -1) {
 					completeTask(task.id,new Error("Agent: "+agent.designation+"("+agent.user+"@"+agent.host+":"+agent.host+") was deleted before task completion"));
@@ -295,7 +356,7 @@ var eventHandler = function() {
 		if (agent && job) {
 			 var taskId = job.taskId;
 			
-			runningJobs[taskId].agentJobs[job.id] = job;
+			runningTasks[taskId].agentJobs[job.id] = job;
 		}
 
 	});
@@ -326,18 +387,33 @@ var eventHandler = function() {
 var completeTaskJob = function(taskId, agent, job, err) {
 
 	if (err) {
-		runningJobs[taskId].agentJobs[job.id].callback(err);
+		runningTasks[taskId].agentJobs[agent._id][job.id].callback(err);
 		return;
 	}
-	runningJobs[taskId].agentJobs[job.id].callback();
+	runningTasks[taskId].agentJobs[agent._id][job.id].status="COMPLETE";
+	runningTasks[taskId].agentJobs[agent._id][job.id].callback();
+	
+	for (agentJob in runningTasks[taskId].agentJobs) {
+		for (job in agentJob) {
+			if (job.status != "COMPLETE")  {
+				return;
+			}
+		}
+	}
+	
+	completeTask(taskId);
+	
 		
 }
 
-var completeTask = function(taskId,err) {
+var completeTask = function(taskId, err) {
 	if (err) {
-		runningJobs[taskId].status = "ERROR";
+		runningTasks[taskId].status = "ERROR";
+		eventEmitter.emit("task-error", runningTasks[taskId]);
+		returnl
 	} else {
-		runningJobs[taskId].status = "COMPLETE";
+		runningTasks[taskId].status = "COMPLETE";
+		eventEmitter.emit("task-complete", runningTasks[taskId]);
 	}
 }
 

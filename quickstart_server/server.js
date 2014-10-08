@@ -116,9 +116,25 @@ app.get('/api/runningJobsList', api.runningJobList);
 //workflow api
 app.post('/api/loadAgentsForEnvironment', workflowControl.loadAgentsForEnvironment);
 app.post('/api/initAgents', workflowControl.initAgents);
+app.post('/api/executeWorkflow', workflowControl.executeWorkflow);
 
 //redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
+
+/**
+* Start Server
+*/
+agentControl.packAgent( function (err) {
+	if (err) {
+		process.exit();
+	}
+	http.listen(port, function(){
+	  logger.info('listening on *:'+port);
+	  
+	});
+
+});
+
 
 //do a heartbeat check each minute and make sure socket connections are made
 var agentCheck = function() {
@@ -194,19 +210,6 @@ var agentCheck = function() {
 agentCheck();
 setInterval(agentCheck,60000);
 
-agentControl.packAgent();
 
-/**
-* Start Server
-*/
-agentControl.packAgent( function (err) {
-	if (err) {
-		process.exit();
-	}
-	http.listen(port, function(){
-	  logger.info('listening on *:'+port);
-	  
-	});
 
-});
 

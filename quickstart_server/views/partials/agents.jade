@@ -36,7 +36,7 @@
 		.col-md-4.col-lg-4
 			i.glyphicon.glyphicon-remove(ng-click='deleteAgent(agent)' ) &nbsp;
 			i.glyphicon.glyphicon-hdd.agent-ready( ng-show="agent.status=='READY'")
-			i.glyphicon.glyphicon-hdd.agent-error( ng-show="agent.status=='ERROR'")
+			i.glyphicon.glyphicon-hdd.agent-error.blink( ng-show="agent.status=='ERROR'")
 			i.glyphicon.glyphicon-hdd.agent-busy( ng-show="agent.status !='READY' && agent.status !='ERROR'")  
 			&nbsp;
 			a(href="http://{{agent.host}}:{{agent.port}}" target="__blank")
