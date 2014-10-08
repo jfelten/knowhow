@@ -278,7 +278,7 @@ jobTask = function(task, agent, job, callback) {
 	if (task && agent && job) {
 		if (!job.id) {
 			//try to look up the job from the repository
-			fileControl.fileContent(
+			//fileControl.fileContent(
 		}
 		logger.debug(task);
 		logger.debug(job);

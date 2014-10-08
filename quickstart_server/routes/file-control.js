@@ -189,7 +189,15 @@ exports.addFile = function(addPath, fileName, isDirectory, callback) {
 
 };
 
-exports.fileContent = function (filePath,repo, callback) {
+exports.load = function(repoURL) {
+	fileURL =url.parse(repofilename);
+	logger.debug("repo="+fileURL.protocol);
+	logger.debug("file="+fileURL.pathname);
+	repoDir = repos[fileURL.protocol];
+	filePath = repoDir+fileURL.path;
+}
+
+exports.fileContent = function (filePath,repo,callback) {
 	require('istextorbinary').isText(filePath, new Buffer(8), function(err, result){
 		if (err) {
 			callback(err,undefined);
