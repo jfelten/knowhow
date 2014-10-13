@@ -16,9 +16,9 @@
 							{{key}}
 					li.divider
 		.workflows-nav-buttons(ng-hide="environments.length == 0")
-			button.btn.btn-secondary(type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="deleteEnv()" )|delete env
+			button.btn.btn-secondary(type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="deleteEnv()" )|delete env file
 			span.pull-right
-				button.btn.btn-secondary(type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="addEnv()" )|add env		
+				button.btn.btn-secondary(type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="addEnv()" )|add env file		
 	
 		span(ng-if="loading_environments") ...loading...
 		.workflows-tree
@@ -34,11 +34,11 @@
 		.workflows-tree
 			abn-tree(tree-data="workflows" tree-control="workflow_tree" on-select="tree_handler(branch)" expand-level="2" initial-selection="weblogic" )
 	.workflows-control
-		.row(ng-show="selectedEnv")
+		.row(ng-show="selectedEnv || selectedEnvBranch")
 			.col-md-12.col-lg-12
 				tabset
-					tab(heading="Connect {{environment.id}}")
-							.row.agent-table-header
+					tab(ng-show="selectedEnv" heading="{{env_tabs[0].title}}" active="env_tabs[0].active" disabled="env_tabs[0].disabled")
+							.row.agent-table-header(ng-show="selectedEnv")
 								.col-md-2.col-lg-2
 									h4
 										| {{workflow.id}} Agents
@@ -57,13 +57,13 @@
 											&nbsp;
 											button.btn.btn-primary(ng-click='initAgents(credentials)' ) Init Agents
 							.workflow-env-container
-								.row(ng-repeat="agent in environment.agents")
+								.row(ng-repeat="(key, agent) in environment.agents")
 									.col-md-4.col-lg-4
 										i.glyphicon.glyphicon-hdd.agent-ready( ng-show="agent.status=='READY'")
-										i.glyphicon.glyphicon-hdd.agent-error( ng-show="agent.status!='READY'")
+										i.glyphicon.glyphicon-hdd.agent-error.blink( ng-show="agent.status!='READY'")
 										&nbsp;
 										a(href="http://{{agent.host}}:{{agent.port}}" target="__blank")
-													{{agent.designation}}({{agent.user}}@{{agent.host}}:{{agent.port}})
+													{{key}}({{agent.user}}@{{agent.host}}:{{agent.port}})
 									.col-md-4.col-lg-4(ng-show="agent.progress >0")
 										progressbar(animate="agent.progress" value="agent.progress" type="success")
 											{{agent.status}}
@@ -72,7 +72,7 @@
 											{{agent.job.status}}
 										
 	
-					tab(heading="Edit {{environment.id}}")
+					tab(ng-show="selectedEnvBranch" heading="{{env_tabs[1].title}}" active="env_tabs[1].active" disabled="env_tabs[1].disabled")
 						.row
 							.col-md-6.col-lg-6.btn-group
 								.pull-left

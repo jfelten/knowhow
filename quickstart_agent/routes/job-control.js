@@ -313,13 +313,14 @@ JobControl = function(io) {
 			fileControl.forkStream (stream, data.destination, function(err, streams) {
 				logger.debug("forked: "+  data.name+" into "+streams.length+" streams.");
 				for (fileStream in streams) {
+					
 					var dest = streams[fileStream].destination;
 					if (job.script && job.script.env) {
 						job.script.env.working_dir= job.working_dir;
 						dest = fileControl.replaceVars(streams[fileStream].destination, job.script.env);
 					}
-					logger.debug("saving: "+ data.name+" to "+dest);
-					var overwrite = (job.options && !job.options.dontUploadIfFileExists==true);
+					logger.debug("saving: "+ data.name+" to "+dest+" dontUpload="+job.options.dontUploadIfFileExists);
+					var overwrite = (job.options && job.options.dontUploadIfFileExists!=true);
 					var isDirectory = data['isDirectory']
 					fileControl.saveFile(streams[fileStream].stream, data.name, data.fileSize, dest, socket, overwrite, isDirectory, job);
 				}

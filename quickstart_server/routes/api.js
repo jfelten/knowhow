@@ -172,6 +172,9 @@ exports.logs = function(req,res) {
 };
 
 exports.execute = function(req,res) {
+
+
+	
 	var agent = req.body.agent;
 	var job =  req.body.job;
 	

@@ -42,11 +42,17 @@ exports.saveFile = function(stream, name, size, destination, socket, overwrite,i
         });
 	}
 	var filename = pathlib.resolve(destination+pathlib.sep+name);
+	if (!job.fileProgress[filename]) {
+		job.fileProgress[filename] = {
+			Uploaded: false
+			
+		}
+	}
 	if (fs.existsSync(filename)) {
 		logger.debug(filename+' already exists overwrite='+overwrite);
-		if (overwrite == true) {
+		if (overwrite == false) {
 			job.fileProgress[filename].uploadComplete=true;
-			socket.emit('End', {message: 'Filename '+filename+' already exists and dontUploadIfFileExists is true for: '+jobId, jobId: jobId,  fileName: data.name} );
+			socket.emit('End', {message: 'Filename '+filename+' already exists and dontUploadIfFileExists is true for: '+job.id, jobId: job.id,  fileName: filename} );
 			return;
 		} else {
 			stat = fs.statSync(filename);
@@ -116,7 +122,7 @@ exports.replaceVars = function(input, envVars, callback) {
 		var dollarRE = /\$\w+/g
 		var dollarBracketRE = /\${\w*}/g
 		for (variable in envVars) {
-			//logger.debug("replacing: "+variable);
+			//¬48logger.debug("replacing: "+variable);
 			output = replaceVar(output, dollarRE,variable);
 			output =  replaceVar(output, dollarBracketRE,variable);
 		}

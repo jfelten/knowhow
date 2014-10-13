@@ -15,6 +15,7 @@ workflow_module.factory("qs_workflow", ["$http","$modal", function ($http,$modal
 		socket.on('agent-update', function(agent){
 		     console.log('agent update message received');
 		     console.log(self.watchedEnvironment);
+		     console.log(this.env);
 		     self.watchedEnvironment = updateWatchedEnvironment(this.env, agent);
 		     $scope.$apply();
 		 }.bind({env: this.watchedEnvironment})
@@ -117,33 +118,39 @@ workflow_module.factory("qs_workflow", ["$http","$modal", function ($http,$modal
 	};
 	
 	var updateWatchedEnvironment = function(environment, agent) {
-		if (agent && agent._id) {
-			var index = environment.agents.map(function(e) { return e._id; }).indexOf(agent._id);
-			console.log("updating object at index: "+index);
-			if (index > -1) {
-		    	//environment.agents[index].progress=agent.progress;
-		    	//environment.agents[index].message=agent.message;
-		  		//environment.agents[index].status="ERROR";//agent.status;
-		  		environment.agents.splice(index, 1);
-				environment.agents.push(agent);
-				return environment;
-			}
-	  		
+		if (agent) {
+			for (envDesignation in environment.agents) {
+				//console.log("updating: "+envDesignation+" id: "+agent._id+" host: "+agent.host+" port "+agent.port);
+				if (agent._id==environment.agents[envDesignation]._id 
+					|| (agent.host == environment.agents[envDesignation].host 
+					   && agent.port == environment.agents[envDesignation].port)
+					) {
+					environment.agents[envDesignation]._id=agent._id;
+					environment.agents[envDesignation].user=agent.user;
+					environment.agents[envDesignation].progress=agent.progress;
+					environment.agents[envDesignation].status=agent.status;
+					environment.agents[envDesignation].message=agent.message;
+					console.log("updated: "+envDesignation);
+					break;
+				}
+			}	
+			return environment;  		
 	    }
 	  
 	};
 	
 	var updateJobsForEnvironment = function(environment,agent,job) {
-	    	if (agent && job && agent._id) {
-	    		var index = environment.agents.map(function(e) { return e._id; }).indexOf(agent._id);
-	    		if (index > -1) {
-			    	//environment.agents[index].progress=agent.progress;
-			    	//environment.agents[index].message=agent.message;
-			  		//environment.agents[index].status="ERROR";//agent.status;
-			  		environment.agents.splice(index, 1);
-			  		agent.job = {id: job.id, progress: job.progress, status: job.status}
-					environment.agents.push(agent);
-					
+	    	if (environment && agent && job ) {
+	    		for (envDesignation in environment.agents) {
+				//console.log("updating: "+envDesignation+" id: "+agent._id+" host: "+agent.host+" port "+agent.port);
+					if (agent._id==environment.agents[envDesignation]._id 
+						|| (agent.host == environment.agents[envDesignation].host 
+						   && agent.port == environment.agents[envDesignation].port)
+						) {
+		    		
+				  			environment.agents[envDesignation].job = {id: job.id, progress: job.progress, status: job.status};
+				  			break;
+				  	}
 				}
 			}
 		    return environment;

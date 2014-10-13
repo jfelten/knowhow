@@ -189,15 +189,33 @@ exports.addFile = function(addPath, fileName, isDirectory, callback) {
 
 };
 
-exports.load = function(repoURL) {
-	fileURL =url.parse(repofilename);
+exports.load = function(repoURL, callback) {
+	fileURL =url.parse(repoURL);
 	logger.debug("repo="+fileURL.protocol);
 	logger.debug("file="+fileURL.pathname);
+	repo = fileURL.protocol;
 	repoDir = repos[fileURL.protocol];
 	filePath = repoDir+fileURL.path;
+
+	if (fs.existsSync(filePath)) {
+	
+		fs.readFile(filePath, 'utf8', function (err,data) {
+		  if (err) {
+		    return logger.error(err.message);
+		    callback(err);
+		  }
+		  console.log(data);
+		  callback(undefined, data);
+		});
+		
+	} else {
+		callback(new Error('job does not exist: '+repoURL));
+	}
+	
+	
 }
 
-exports.fileContent = function (filePath,repo,callback) {
+fileContent = function (filePath,repo,callback) {
 	require('istextorbinary').isText(filePath, new Buffer(8), function(err, result){
 		if (err) {
 			callback(err,undefined);
@@ -219,6 +237,7 @@ exports.fileContent = function (filePath,repo,callback) {
 
 	//callback(new Error("unable to retrieve file content"),undefined,undefined);
 };
+exports.fileContent=fileContent;
 
 exports.dirTree = dirTree;
 exports.saveFile = saveFile;

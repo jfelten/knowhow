@@ -10,6 +10,7 @@ var ss = require('socket.io-stream');
 var zlib = require('zlib');
 var fstream = require('fstream');
 var tar = require('tar');
+var domain = require('domain');
 //deliver the agent files
 
 var pathlib = require('path');
@@ -57,40 +58,91 @@ updateJob = function(agent, job, callback ) {
 
 exports.updateJob = updateJob;
 
-initiateJob = function(agentId, jobId, callback ) {
-	if (currentJobs[agentId] != undefined && currentJobs[agentId][jobId] != undefined) {
-		//if (currentJobs[agentId].fileSocket != undefined) {
-		//	currentJobs[agentId].fileSocket.close();
-		//}
-		//if (currentJobs[agentId][jobId].eventSocket != undefined) {
-		//	currentJobs[agentId][jobId].eventSocket.close();
-		//}
-		//for (uploadFile in currentJobs[agentId][jobId].fileProgress) {
-		//	if (currentJobs[agentId][jobId].fileProgress[uploadFile].readStream != null) {
-		//		currentJobs[agentId][jobId].fileProgress[uploadFile].readStream.close();
-		//	}
-	    //}
-		clearTimeout(currentJobs[agentId][jobId].timeout);
-	    clearInterval(currentJobs[agentId][jobId].fileCheck);
-	    delete currentJobs[agentId][jobId];
+checkFiles = function(job, callback) {
+	files=job.files;
+
+	for (uploadFile in files) {
+	    
+	    
+		var file = files[uploadFile];
+		file.source = replaceVars(file.source, job.script.env) 
+		job.files[uploadFile] = file;
+		
+		var filepath= fileControl.getFilePath(file.source);
+			
+		if (!fs.existsSync(filepath))  {
+			if (callback) {
+				callback(new Error(file.source+" does not exist."));
+			}
+			return false;;
+		}
+
 	}
-	 
-    if (callback) {
-    	callback();
-    }
+	if (callback) {
+		callback(undefined, job);
+	}
+}
+
+replaceVars = function(input, envVars) {
+	var output = input;
+	if (envVars) {
+		logger.debug("input="+input);
+	    replaceVar = function(inputString, regEx,varName) {
+		    var iteration=0;
+			while( res = regEx.exec( inputString) ){
+				 for (i=0; i < res.length; i++) {
+			        var replaceVal = res[i];
+			    	var value = envVars[replaceVal.replace('\${','').replace('}','')];
+			    	inputString=inputString.replace(replaceVal,value);
+			      }
+			      if (regEx.exec(inputString) ) {
+			      	inputString = replaceVar(inputString, regEx,varName);
+			      }
+			}
+			//logger.debug(inputString);
+			return inputString;
+		}
+		
+		var dollarRE = /\$\w+/g
+		var dollarBracketRE = /\${\w*}/g
+		for (variable in envVars) {
+			//logger.debug("replacing: "+variable);
+			output = replaceVar(output, dollarRE,variable);
+			output =  replaceVar(output, dollarBracketRE,variable);
+		}
+		logger.debug("output="+output);
+	}	
+	return output;
+};
+
+initiateJob = function(agentId, jobId, callback ) {
+	if (currentJobs[agentId] && currentJobs[agentId][jobId] &&  currentJobs[agentId][jobId].progress >0) {
+		logger.debug(currentJobs[agentId][jobId]);
+		cancelJob(agentId, jobId);
+		if (callback) {
+			callback(new Error("job: "+jobId+" already running on "+agentId));
+		}
+	} else if (callback) {
+	    callback();
+	}
 }
 
 exports.initiateJob = initiateJob;
 
 cancelJob = function(agentId, jobId, callback ) {
 	if (currentJobs[agentId] != undefined && currentJobs[agentId][jobId] != undefined) {
-		//if (currentJobs[agentId].fileSocket != undefined) {
-		//	currentJobs[agentId].fileSocket.close();
-		//}
-		//if (currentJobs[agentId][jobId].eventSocket != undefined) {
-		//	currentJlobs[agentId][jobId].eventSocket.close();
-		//}
+
 		for (uploadFile in currentJobs[agentId][jobId].fileProgress) {
+			if (currentJobs[agentId][jobId].fileProgress[uploadFile] && 
+				currentJobs[agentId][jobId].fileProgress[uploadFile].gzip) {
+			
+				currentJobs[agentId][jobId].fileProgress[uploadFile].gzip.close();
+			}
+			if (currentJobs[agentId][jobId].fileProgress[uploadFile] && 
+				currentJobs[agentId][jobId].fileProgress[uploadFile].tar) {
+			
+				currentJobs[agentId][jobId].fileProgress[uploadFile].tar.close();
+			}
 			if (currentJobs[agentId][jobId].fileProgress[uploadFile].readStream != null) {
 				currentJobs[agentId][jobId].fileProgress[uploadFile].readStream.close();
 			}
@@ -115,18 +167,21 @@ completeJob = function(agent,job) {
 		var agentId = agent._id;
 		logger.info("completing "+jobId+" on "+agentId);
 		if (currentJobs[agentId][jobId]) {
-			//if (currentJobs[agentId].fileSocket) {
-			//	logger.debug("closing file socket.");
-			//	currentJobs[agentId].fileSocket.disconnect();
-			//}
-			//if (currentJobs[agentId][jobId].eventSocket) {
-			//	logger.debug("closing event socket.");
-			//	currentJobs[agentId][jobId].eventSocket.close();
-			//}
 			logger.debug("closing read streams.");
 			if (currentJobs[agentId][jobId].fileProgress && currentJobs[agentId][jobId].fileProgress.length >0 ) {
 				logger.debug("closing files.");
 				for (uploadFile in currentJobs[agentId][jobId].fileProgress) {
+					if (currentJobs[agentId][jobId].fileProgress[uploadFile] && 
+						currentJobs[agentId][jobId].fileProgress[uploadFile].gzip) {
+					
+						currentJobs[agentId][jobId].fileProgress[uploadFile].gzip.close();
+					}
+					if (currentJobs[agentId][jobId].fileProgress[uploadFile] && 
+						currentJobs[agentId][jobId].fileProgress[uploadFile].tar) {
+					
+						currentJobs[agentId][jobId].fileProgress[uploadFile].tar.close();
+					}
+				
 					if (currentJobs[agentId][jobId].fileProgress[uploadFile] && 
 					currentJobs[agentId][jobId].fileProgress[uploadFile].readStream) {
 					
@@ -155,7 +210,7 @@ completeJob = function(agent,job) {
 }
 exports.completeJob = completeJob;
 
-exports.cancelJobOnAgent = function(agent,job,callback) {
+var cancelJobOnAgent = function(agent,job,callback) {
 
 	var jobId = job.id;
 	var agentId = agent._id;
@@ -164,102 +219,149 @@ exports.cancelJobOnAgent = function(agent,job,callback) {
 
 	//cancelJob(agentId, jobId)
 	
-	callback();
+	if (callback) {
+		callback();
+	}
 }
 
+exports.cancelJobOnAgent = cancelJobOnAgent;
+
 exports.executeJob = function(agent,job,callback) {
-
-	var jobId = job.id;
-	var agentId = agent._id;
 	
-
-	var headers = {
-		    'Content-Type' : 'application/json',
-		    'Content-Length' : Buffer.byteLength(JSON.stringify(job) , 'utf8'),
-		    'Content-Disposition' : 'form-data; name="script"'
-		};
-
-	// the post options
-	var options = {
-	    host : agent.host,
-	    port : agent.port,
-	    path : '/api/execute',
-	    method : 'POST',
-	    headers : headers
-	};
-
-	logger.info('Starting Job: '+job.id+' on '+agent.user+'@'+agent.host+':'+agent.port);
-
-	// do the POST call
-	var reqPost = http.request(options, function(res) {
-		logger.debug("statusCode: ", res.statusCode);
-	    // uncomment it for header details
-		//logger.debug("headers: ", res.headers);
-
-		 
-
-	    res.on('data', function(d) {
-	    	logger.debug('result:\n');
-	        process.stdout.write(d+'\n');
-	        if (res.statusCode != 200) {
-			 	logger.error("Unable to execute Job. Response code:"+res.statusCode);
-			 	callback(new Error(JSON.parse(d).message));
-			 	return;
-			 }
-	        logger.debug('\n\nJob request sent. Listening for events and uploading files');
-	        job.progress=1;
-	        job.status="initializing job"
-	        job.progress=1;
-	        eventEmitter.emit('job-update',agent,job);
+	var d = domain.create();
+	
+	d.on('error', function(er) {
+	      logger.error('execution error', er.stack);
+	
+	      // Note: we're in dangerous territory!
+	      // By definition, something unexpected occurred,
+	      // which we probably didn't want.
+	      // Anything can happen now!  Be very careful!
+	
+	      //try {
+	        // make sure we close down within 30 seconds
+	        //var killtimer = setTimeout(function() {
+	        //  process.exit(1);
+	        //}, 30000);
+	        // But don't keep the process open just for that!
+	        //killtimer.unref();
+	        cancelJobOnAgent(agent,job, function() {
+	        	cancelJob(agent._id,job.id);
+	        });
 	        
-			
-		    //do the work
-//		    try {
-				
-				if (currentJobs[agentId] == undefined) {
-					currentJobs[agentId] = {};
-				}
-				
-		    	
-		    	initiateJob(agentId, jobId, function() {//cancel the existing job if it is running
-		    		currentJobs[agentId][jobId] = job;
-		    		currentJobs[agentId].agent=agent;
-			    		uploadFiles(agent,job,function(err) {
-			    			if (err) {
-			    				callback(err);
-			    				return;
-			    			} else {
-			    				setJobTimer(agent, job);
-			    				callback(null,jobId+' execution started');
-			    			}
-			    		});
-
-		    	});
-		    	
-		    	
-//		    } catch (err) {
-//		      currentJobs[agentId][jobId].eventSocket.emit('job-cancel',jobId);
-//		    	logger.error(err);
-//		    	logger.error("problem uploading files");
-//		    	cancelJob(agentId, jobId);
-//		    	callback(new Error("Unable to start job id: "+jobId));
-//		    	return;
-//		    }
-		    
-	    });
+	
+	      //} catch (er2) {
+	        // oh well, not much we can do at this point.
+	       // console.error('Error sending 500!', er2.stack);
+	      //}
 	});
-
-
-	reqPost.write(JSON.stringify(job));
-	reqPost.end();
-	reqPost.on('error', function(e) {
-	    logger.error(e);
-	    callback(e);
-	});
+	d.run(function() {
+		var jobId = job.id;
+		var agentId = agent._id;
+		
+		checkFiles(job, function(err,checkedJob) {
+			if (err) {
+				callback(err);
+				return;
+			}
+			job=checkedJob;
+			var headers = {
+			    'Content-Type' : 'application/json',
+			    'Content-Length' : Buffer.byteLength(JSON.stringify(job) , 'utf8'),
+			    'Content-Disposition' : 'form-data; name="script"'
+			};
+	
+			// the post options
+			var options = {
+			    host : agent.host,
+			    port : agent.port,
+			    path : '/api/execute',
+			    method : 'POST',
+			    headers : headers
+			};
+		
+			logger.info('Starting Job: '+job.id+' on '+agent.user+'@'+agent.host+':'+agent.port);
+		
+			// do the POST call
+			var reqPost = http.request(options, function(res) {
+				logger.debug("statusCode: ", res.statusCode);
+			    // uncomment it for header details
+				//logger.debug("headers: ", res.headers);
+		
+				 
+		
+			    res.on('data', function(d) {
+			    	logger.debug('result:\n');
+			        process.stdout.write(d+'\n');
+			        if (res.statusCode != 200) {
+					 	logger.error("Unable to execute Job. Response code:"+res.statusCode);
+					 	callback(new Error(JSON.parse(d).message));
+					 	return;
+					 }
+			        logger.debug('\n\nJob request sent. Listening for events and uploading files');
+			        job.progress=1;
+			        job.status="initializing job"
+			        job.progress=1;
+			        eventEmitter.emit('job-update',agent,job);
+			        
+					
+				    //do the work
+	
+						
+						if (currentJobs[agentId] == undefined) {
+							currentJobs[agentId] = {};
+						}
+						
+				    	logger.info("initializing: "+job.id+" on: "+agent.host+":"+agent.port);
+				    	initiateJob(agentId, jobId, function(err) {//cancel the existing job if it is running
+				    		if (err) {
+				    			callback(err);
+				    			return;
+				    		}
+				    		logger.info("job: "+job.id+" initialized on: "+agent.host+":"+agent.port);
+				    		currentJobs[agentId][jobId] = job;
+				    		currentJobs[agentId].agent=agent;
+					   		uploadFiles(agent,job,function(err) {
+					    			if (err) {
+					    				callback(err);
+					    				return;
+					    			} else {
+					    				setJobTimer(agent, job);
+					    				callback(null,jobId+' execution started');
+					    			}
+					    		});
+		
+				    	});
+				    	
+				    	
+		//		    } catch (err) {
+		//		      currentJobs[agentId][jobId].eventSocket.emit('job-cancel',jobId);
+		//		    	logger.error(err);
+		//		    	logger.error("problem uploading files");
+		//		    	cancelJob(agentId, jobId);
+		//		    	callback(new Error("Unable to start job id: "+jobId));
+		//		    	return;
+		//		    }
+				    
+			    });
+			});
+		
+		
+			reqPost.write(JSON.stringify(job));
+			reqPost.end();
+			reqPost.on('error', function(e) {
+			    logger.error(e);
+			    callback(e);
+			    return;
+			});
+		});
+		});
+		
 }
 
 	
 function uploadFiles(agent,job, callback) {
+	logger.info("uploading files for: "+job.id+" to "+agent.host+":"+agent.port);
  	var agentId = agent._id;
 	var jobId=job.id;
 	files=job.files;
@@ -280,21 +382,37 @@ function uploadFiles(agent,job, callback) {
 		
 		var total = 0;
 		try {
-			var stats = fs.statSync(filepath);
-			var fileSizeInBytes = stats["size"];
-			var isDirectory = stats.isDirectory();	
-		    logger.info("uploading "+filepath);
-			var stream = ss.createStream();
+			if (fs.existsSync(filepath))  {
 			
-			if(isDirectory) {
-				currentJobs[agentId][jobId].fileProgress[fileName].readStream = fstream.Reader({ 'path': filepath, 'type': 'Directory' }).pipe(tar.Pack()) /* Convert the directory to a .tar file */
-				.pipe(zlib.Gzip());
+				var stats = fs.statSync(filepath);
+				var fileSizeInBytes = stats["size"];
+				var isDirectory = stats.isDirectory();	
+			    logger.info("uploading "+filepath);
+				var stream = ss.createStream();
+				
+				if(isDirectory) {
+					currentJobs[agentId][jobId].gzip = zlib.Gzip();
+					currentJobs[agentId][jobId].tar = tar.Pack();
+					currentJobs[agentId][jobId].fileProgress[fileName].readStream = fstream.Reader({ 'path': filepath, 'type': 'Directory' })
+					.pipe(currentJobs[agentId][jobId].tar).on('error', function(err) {/* Convert the directory to a .tar file */
+						logger.error("tar pack interrupted: "+err.message);
+					}) 
+					.pipe(currentJobs[agentId][jobId].gzip).on('error', function(err) {
+						logger.error("gzip compression interrupted: "+err.message);
+					});
+				} else {
+					//currentJobs[agentId][jobId].fileProgress[fileName].readStream = fs.createReadStream(filepath,{autoClose: true, highWaterMark: 32 * 1024});
+					currentJobs[agentId][jobId].gzip = zlib.Gzip();
+					currentJobs[agentId][jobId].fileProgress[fileName].readStream = fstream.Reader(filepath)
+					.pipe(currentJobs[agentId][jobId].gzip).on('error', function(err) {
+						logger.error("gzip compression interrupted: "+err.message);
+					});
+				}
+				ss(currentJobs[agentId].fileSocket).emit('agent-upload', stream, {name: fileName, jobId: jobId, fileSize: fileSizeInBytes, destination: file.destination, isDirectory: isDirectory });
+				currentJobs[agentId][jobId].fileProgress[fileName].readStream.pipe(stream );
 			} else {
-				//currentJobs[agentId][jobId].fileProgress[fileName].readStream = fs.createReadStream(filepath,{autoClose: true, highWaterMark: 32 * 1024});
-				currentJobs[agentId][jobId].fileProgress[fileName].readStream = fstream.Reader(filepath).pipe(zlib.Gzip());
+				throw new Error(filepath+" does not exist");
 			}
-			ss(currentJobs[agentId].fileSocket).emit('agent-upload', stream, {name: fileName, jobId: jobId, fileSize: fileSizeInBytes, destination: file.destination, isDirectory: isDirectory });
-			currentJobs[agentId][jobId].fileProgress[fileName].readStream.pipe(stream );
 		    
 		} catch(err) {
 		    var badFile = fileControl.getFilePath(files[uploadFile].source);
@@ -396,9 +514,9 @@ function setJobTimer(agent, job) {
 			    		    if (numFilesUploaded >= job.files.length) {
 			    		    	logger.info("all files are uploaded.");
 			    		    	logger.info(jobId+" all files sent...");
-				    			for (index in currentJobs[agentId][jobId].fileProgress) {
-						    		currentJobs[agentId][jobId].fileProgress[index].readStream.close();
-						        }
+				    			//for (index in currentJobs[agentId][jobId].fileProgress) {
+						    	//	currentJobs[agentId][jobId].fileProgress[index].readStream.close();
+						        //}
 						        //currentJobs[agentId].fileSocket.close();
 						        currentJobs[agentId][jobId].uploadComplete=true;
 						       	clearTimeout(currentJobs[agentId][jobId].timeout);
@@ -407,10 +525,10 @@ function setJobTimer(agent, job) {
 			    		} else if (uploadFile.error == true) {
 			    			logger.error(jobId+" error aborting upload.");
 			    			uploadFile.socket.emit('client-upload-error', {name: fileName, jobId: jobId, fileSize: fileSizeInBytes, destination: file.destination } );	
-			        		for (index in currentJobs[agentId][jobId].fileProgress) {
-					    		fileProgress[index].readStream.close();
-					    		socket.emit('client-upload-error', {name: fileName, jobId: jobId, fileSize: fileSizeInBytes, destination: file.destination } );
-					        }
+			        		//for (index in currentJobs[agentId][jobId].fileProgress) {
+					    	//	fileProgress[index].readStream.close();
+					    	//	socket.emit('client-upload-error', {name: fileName, jobId: jobId, fileSize: fileSizeInBytes, destination: file.destination } );
+					        //}
 					        //currentJobs[agentId][jobId].eventSocket.emit('job-cancel',jobId);
 			    		}
 			    	}

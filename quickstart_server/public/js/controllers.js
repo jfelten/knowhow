@@ -138,7 +138,7 @@ var myModule = angular.module('myApp.controllers', []).
     socket.on('job-cancel', function(agent,job){
       console.log('job cancel message received');
       updateRunningJobs(agent,job);
-      $scope.message=job.id+" "+cancelled;
+      $scope.message=job.id+" cancelled";
 	  $scope.$apply();
       
     });
@@ -204,11 +204,12 @@ var myModule = angular.module('myApp.controllers', []).
 	    	  qs_repo.loadFile($scope.selectedRepo, branch.path, function(err,data) {
 	    	    console.log("data="+data);
 	    	  	if (branch.ext=='.json') {
-  		    		editor.setMode('code');
+	    	  		
   		    		editor.setText(data);
+  		    		editor.setMode('code')
   		      	} else {
-  		    		editor.setMode('text');
   		    		editor.setText(data);
+  		    		editor.setMode('text')
   		    	}
   		      });
 	      		    		
@@ -326,7 +327,7 @@ var myModule = angular.module('myApp.controllers', []).
 			        console.log("submitted job request");
 			    }).
 			    error(function (data, status, headers, config) {
-			    	$scope.message = 'Unable to contact Agent http status: '+status;
+			    	$scope.message = data.message+' : '+status;
 			    });
 	  };
 	  $scope.execute = function() {
@@ -460,7 +461,7 @@ var myModule = angular.module('myApp.controllers', []).
 			      data: data
 			    }).
 			    success(function(data) {
-			    	
+			    	console.log(data);
 			    	qs_workflow.watchEnvironment(data);
 			    	var socket = io();
 				  	qs_workflow.listenForAgentEvents($scope, socket);
@@ -477,7 +478,7 @@ var myModule = angular.module('myApp.controllers', []).
 	  		$scope.master = angular.copy(credentials);
 	  		var data = {
 	  			credentials: credentials,
-		    	agents: $scope.workflow.agents
+		    	environment: $scope.environment
 		    };
 		    
 	  		$http({
@@ -527,12 +528,12 @@ var myModule = angular.module('myApp.controllers', []).
 	    
 	  };
 	$scope.addEnv = function() {
-		qs_repo.openNewFileModal($scope.selectedFile, $scope.selectedRepoName, $scope.environments_tree, 'addFile');
+		qs_repo.openNewFileModal( $scope.selectedEnvBranch, $scope.selectedRepoName, $scope.environments_tree, 'addFile');
 		
 	}
 	$scope.deleteEnv = function () {
-	  	qs_repo.deleteFile($scope.selectedFile, $scope.selectedRepoName, false, function(err,data) {
-	  		var deleted_branch = $scope.selectedFile;
+	  	qs_repo.deleteFile($scope.selectedEnvBranch, $scope.selectedRepoName, false, function(err,data) {
+	  		var deleted_branch =  $scope.selectedEnvBranch;
 	  		if ( $scope.environments_tree.get_parent_branch(deleted_branch)) {
 	  			var parent_branch =  $scope.environments_tree.get_parent_branch(deleted_branch);
 	  			 $scope.environments_tree.select_branch(parent_branch);
@@ -607,22 +608,36 @@ var myModule = angular.module('myApp.controllers', []).
 	     
 	    	  
     	};
+    	
+    	$scope.env_tabs = [
+		    { title:'Connect ', content:'Connect ', disabled: false  },
+		    { title:'Edit', content:'Edit', disabled: false }
+		  ];
+    	
       	$scope.env_tree_handler = function(branch) {
 	  	  //console.log(branch);
 	      console.log('selection='+branch.label+ ' navigating='+navigating+' ext='+branch.ext+' type='+branch.type);
 	     
 	      $scope.env_message = undefined;
+	      $scope.selectedEnvBranch = branch;
 	      if (branch.type == 'file') {
 	    	  qs_repo.loadFile($scope.selectedRepo, branch.path, function(err,data) {
 	    	    //console.log("data="+data);
-	    	  	if (branch.ext=='.json') {
+	    	  	if (branch.label=='environment.json') {
 	    	  		$scope.selectedEnv = branch; 
 	    	  		env_editor.setText(data);
   		    		env_editor.setMode('code');
-  		    		loadAgentsForEnvironment(JSON.parse(data));
+  		    		var environment = JSON.parse(data)
+  		    		loadAgentsForEnvironment(environment);
+  		    		$scope.env_tabs[0].title = 'connect '+environment.id;
+  		    		$scope.env_tabs[0].active = true
+  		    		$scope.env_tabs[1].title = 'Edit '+$scope.selectedEnvBranch.label;
   		      	} else {
+  		      		console.log("loading text")
   		    		env_editor.setMode('text');
   		    		env_editor.setText(data);
+  		    		$scope.env_tabs[1].title = 'Edit '+$scope.selectedEnvBranch.label;
+  		    		$scope.env_tabs[1].active = true
   		    	}
   		      });
 	      		    		
@@ -670,20 +685,22 @@ var myModule = angular.module('myApp.controllers', []).
 	  };
 	  
 	  $scope.saveEnv = function() {
-	  	if($scope.selectedEnv) {
+	  	if ($scope.selectedEnv && $scope.selectedEnvBranch.ext=='.json') {
 	  		  try {
 	  		  	JSON.parse(env_editor.getText());
-	  		  	qs_repo.saveFile($scope.selectedEnv.path, env_editor.get(), function(err, message) {
-			  		$scope.env_message = message;
-			  	});
-	  		  
 	  		  } catch(err) {
 	  		  	console.log(err);
-	  		  	console.log(env_editor.get());
+	  		  	//console.log(env_editor.get());
 	  		  	$scope.env_message = "JSON must be valid before saving: "+err.message;
+	  		  	return;
 	  		  }
-			  
-		}
+  
+		 }
+		 console.log("saving env file");
+  		 qs_repo.saveFile($scope.selectedEnvBranch.path, env_editor.getText(), function(err, message) {
+		  	 $scope.env_message = message;
+		 });
+
 	  };
 	  
 	  $scope.executeWorkflow = function() {
@@ -712,11 +729,11 @@ var myModule = angular.module('myApp.controllers', []).
 			      data: data
 			    }).success(function (data, status, headers, config) {
 			        $scope.agentInfo = data;
-			        loadJobs();
 			        console.log("submitted workflow request");
 			    }).
 			    error(function (data, status, headers, config) {
-			    	$scope.message = 'Unable to contact server http status: '+status;
+			    	$scope.message = data.message+' : '+status;
+			    	//$scope.message = 'Unable to contact server http status: '+status;
 			    });
 	  };
 	  
@@ -750,7 +767,7 @@ var myModule = angular.module('myApp.controllers', []).
 			        console.log("submitted job request");
 			    }).
 			    error(function (data, status, headers, config) {
-			    	$scope.message = 'Unable to contact Agent http status: '+status;
+			    	$scope.message = data.message+' : '+status;
 			    });
 	  };
 	  
