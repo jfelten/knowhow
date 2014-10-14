@@ -3,7 +3,6 @@ var mkdirp = require('mkdirp');
 var zlib = require('zlib');
 var tar = require('tar');
 var rimraf = require('rimraf');
-var fstream = require('fstream');
 var pathlib=require("path");
 
 exports.forkStream = function(stream, destinations, callback) {

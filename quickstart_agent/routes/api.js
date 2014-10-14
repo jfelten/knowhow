@@ -1,12 +1,16 @@
 require('./agent-control');
-
 require('./job-control');
+var crypto = require('crypto');
 var agent = require('../agent');
 var agentControl = new AgentControl(agent.io);
 var jobControl = new JobControl(agent.io);
 var loggerControl = new LoggerControl(agent.io);
 var agentInfo = agentControl.initAgent(agent.agentData);
-var serverInfo;
+var serverInfo = {
+	host: undefined,
+	port: undefined,
+	cryptoKey: undefined
+};
 var rimraf = require('rimraf');
 
 var logger=require('./log-control').logger;
@@ -30,8 +34,13 @@ exports.deleteAgent = function(req,res) {
 exports.registerAgent = function(req,res) {
 	logger.info("register agent");
 	var agent = req.data;
-	agentControl.registerAgent(agent);
-	res.json({ok:true});
+	agentControl.registerAgent(agent,function(err) {
+		if (err) {
+		
+		} else {
+			res.json({ok:true});
+		}
+	});
 	
 };
 
@@ -48,6 +57,19 @@ exports.registerServer = function(req,res) {
 	
 };
 
+exports.updateAgentInfo = function (req,res) {
+	logger.debug("updating agent info");
+	var agent = req.body;
+	logger.debug(agent);
+	var props = Object.getOwnPropertyNames(agent);
+	props.forEach(function(prop){
+		 logger.debug('updateAgentInfo: updating property: agent.'+prop);
+		 agentInfo[prop]=agent[prop];
+	});
+	res.json({registered:true});
+	
+}
+
 exports.execute = function(req,res) {
 	logger.info("execute");
 	var job = req.body;
@@ -57,7 +79,7 @@ exports.execute = function(req,res) {
 			logger.info("execute");
 			res.json(500, {"message": "job id: '+job.id+' already running"} );
 		} else {
-			jobControl.execute(job, function(err, job) {
+			jobControl.execute(job, agentInfo, serverInfo, function(err, job) {
 				if (err) {
 					res.send(500, {"message": err.message});
 				}
@@ -102,5 +124,4 @@ exports.agentInfo = function(req,res) {
 	res.json(agentInfo);
 };
 
-
-
+ 
