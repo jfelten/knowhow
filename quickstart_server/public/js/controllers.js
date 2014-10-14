@@ -708,7 +708,7 @@ var myModule = angular.module('myApp.controllers', []).
 			  $scope.message='Please connect all agents before attempting a workflow';
 			  return;
 		  }
-		  
+		  $scope.message='';
 		  //get the content from the json editor
 		  var workflow;
 		  try {

@@ -65,7 +65,7 @@ app.get('/delete',api.deleteAgent);
 
 app.post('/api/registerAgent',api.registerAgent);
 app.post('/api/registerServer',api.registerServer);
-
+app.post('/api/updateAgentInfo',api.updateAgentInfo);
 
 app.get('/status',function(req, res) {
 	logger.info("request for agent status");

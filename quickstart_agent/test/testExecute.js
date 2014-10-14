@@ -15,6 +15,7 @@ agent = {
 job = {
 		  "id": "weblogic 10.2 install",
 		  "download_dir": "./downloads",
+		  "user": "weblogic",
 		  "files": [
 		            "/repo/rawfiles/weblogic/wls1036_dev.zip"
 		          ],

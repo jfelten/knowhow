@@ -29,7 +29,8 @@ getServerInfo = function() {
 	serverInfo = {
 			name: os.hostname(),
 		    started: startTime,
-		    port: server.port	
+		    port: server.port,
+		    cryptoKey: 	'd6F3Efea'
 	};
 	return serverInfo;
 };

@@ -1,6 +1,6 @@
 var async = require('async');
 require('shelljs/global');
-
+var crypto = require('crypto');
 
 var logger=require('./log-control').logger;
 
@@ -18,16 +18,30 @@ cancelRunningJob: function() {
 	}
 }, 
 
-executeSync: function(job, eventEmitter) {
+executeSync: function(job, agentInfo, serverInfo, eventEmitter) {
 
 
 	currentlyRunningJob = job;
-	logger.info('executeSync executing:');
+	logger.info('executeSync executing: ');
     logger.debug(job);
 	var workingDir = job.script.working_dir;
 	var envVars=job.script.env;
-
-	
+	logger.info("agent.user="+agentInfo.user+" job.user="+job.user);
+	var sudoCMD = '';
+	if (job.user != agentInfo.user) {
+		var decrypt = function(text){
+			if (serverInfo.cryptoKey) {
+				var decipher = crypto.createDecipher('aes-256-cbc',serverInfo.cryptoKey)
+				var dec = decipher.update(text,'hex','utf8')
+				dec += decipher.final('utf8');
+				return dec;
+			} else {
+				return text;
+			}
+		};	
+		logger.info("using sudo to run job as: "+job.user);
+  		sudoCMD = 'echo \"'+decrypt(agentInfo.password)+'\" | sudo -S -u '+job.user+' ';
+	}
 	
 	
 	//execute the commands syncronously
@@ -124,7 +138,7 @@ executeSync: function(job, eventEmitter) {
 		    }
 
 	    	logger.info(this.index+".) "+this.command);
-			exec(this.command, {silent:false},function(code, output) {
+			exec(sudoCMD+this.command, {silent:false},function(code, output) {
 				  logger.info('Exit code:', code);
 				  logger.info('Program output:', output);
 				  if (code > 0) {

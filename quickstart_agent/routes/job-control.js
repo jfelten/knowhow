@@ -10,6 +10,7 @@ var ss = require('socket.io-stream');
 var mkdirp = require('mkdirp');
 var zlib = require('zlib');
 var tar = require('tar');
+var domain = require('domain');
 var fileControl = require('./file-control');
 
 //constants
@@ -79,6 +80,7 @@ initiateJob = function(job, callback) {
 		eventEmitter.emit('job-update',job);
 		callback(undefined, job);
 	} catch (err) {
+		logger.error(err.stack);
 		logger.error("unable to initialize job: "+job.id);
 		logger.error(err);
 		callback(err, job)
@@ -116,42 +118,52 @@ cancelJob = function(job) {
 
 exports.cancelJob=cancelJob;
 
-execute = function(job,callback) {
-	logger.info("executing: "+job.id);
-	initiateJob(job, function(err,job) {
-		if (err) {
-			logger.error(err);
-		    if (job) {
-				job.status="Error Initializing job";
-				cancelJob(job);
-				callback(err,job);
-			} else {
-				callback(err,{});
-			}
-						
-			return;
-		}
-		callback(undefined,job);
-		waitForFiles(job, function(err, job) {
+execute = function(job, agentInfo, serverInfo, callback) {
+
+	var d = domain.create();
+	
+	d.on('error', function(er) {
+	      logger.error('execution error', er.stack);
+	      job.status="Error "+er.message;
+		  cancelJob(job);	
+	});
+	d.run(function() {
+		logger.info("executing: "+job.id);
+		initiateJob(job, function(err,job) {
 			if (err) {
-				job.status="Error receiving required files";
-				job.progress=0;
-				job.error=true;
-				cancelJob(job);	
+				logger.error(err);
+			    if (job) {
+					job.status="Error Initializing job";
+					cancelJob(job);
+					callback(err,job);
+				} else {
+					callback(err,{});
+				}
+							
 				return;
 			}
-			logger.info("all files received - executing job");
-			job.status="All files Received.";
-			eventEmitter.emit('job-update',job);
-			try {
-				commandShell.executeSync(job, eventEmitter);
-			}
-			catch (err) {
-				job.status="Error "+err;
-				cancelJob(job);	
-			}
+			callback(undefined,job);
+			waitForFiles(job, function(err, job) {
+				if (err) {
+					job.status="Error receiving required files";
+					job.progress=0;
+					job.error=true;
+					cancelJob(job);	
+					return;
+				}
+				logger.info("all files received - executing job");
+				job.status="All files Received.";
+				eventEmitter.emit('job-update',job);
+				try {
+					commandShell.executeSync(job, agentInfo, serverInfo, eventEmitter);
+				}
+				catch (err) {
+					job.status="Error "+err;
+					cancelJob(job);	
+				}
+			});
+		
 		});
-	
 	});
 	
 	
