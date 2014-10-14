@@ -624,14 +624,15 @@ var myModule = angular.module('myApp.controllers', []).
 	    	  qs_repo.loadFile($scope.selectedRepo, branch.path, function(err,data) {
 	    	    //console.log("data="+data);
 	    	  	if (branch.label=='environment.json') {
+	    	  		$scope.env_tabs[0].active = true
 	    	  		$scope.selectedEnv = branch; 
-	    	  		env_editor.setText(data);
-  		    		env_editor.setMode('code');
+  		    		env_editor.setMode('text');
   		    		var environment = JSON.parse(data)
   		    		loadAgentsForEnvironment(environment);
+  		    		env_editor.set(environment);
   		    		$scope.env_tabs[0].title = 'connect '+environment.id;
-  		    		$scope.env_tabs[0].active = true
   		    		$scope.env_tabs[1].title = 'Edit '+$scope.selectedEnvBranch.label;
+  		    		
   		      	} else {
   		      		console.log("loading text")
   		    		env_editor.setMode('text');
@@ -641,10 +642,7 @@ var myModule = angular.module('myApp.controllers', []).
   		    	}
   		      });
 	      		    		
-	      }		    	
-	    	  
-
-	     
+	      }		    	  
 	    	  
     	};
 	  //tree controls
