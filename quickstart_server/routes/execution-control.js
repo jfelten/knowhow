@@ -497,11 +497,13 @@ function setJobTimer(agent, job) {
 				    	//	currentJobs[agentId][jobId].fileProgress[index].readStream.close();
 				        //}
 				        //agentEvents.agentSockets[agentId].fileSocket.close();
-				        currentJobs[agentId][jobId].error=true;
-				       	clearTimeout(currentJobs[agentId][jobId].timeout);
-		    			clearInterval(currentJobs[agentId][jobId].fileCheck);
-		    			eventEmitter.emit("job-error",job);
-		    			cancelJob(agentId, jobId);
+				        if (currentJobs[agentId][jobId]) {
+					        currentJobs[agentId][jobId].error=true;
+					       	clearTimeout(currentJobs[agentId][jobId].timeout);
+			    			clearInterval(currentJobs[agentId][jobId].fileCheck);
+			    			eventEmitter.emit("job-error",job);
+			    			cancelJob(agentId, jobId);
+			    		}	
 		    		}
 		    		return;
 		    	}
