@@ -322,21 +322,30 @@ JobControl = function(io) {
 	        job.progress=(job.progress)+1;
 	        updateJob(job);
 			
-			fileControl.forkStream (stream, data.destination, function(err, streams) {
-				logger.debug("forked: "+  data.name+" into "+streams.length+" streams.");
-				for (fileStream in streams) {
-					
-					var dest = streams[fileStream].destination;
-					if (job.script && job.script.env) {
-						job.script.env.working_dir= job.working_dir;
-						dest = fileControl.replaceVars(streams[fileStream].destination, job.script.env);
+			try {
+				fileControl.forkStream (stream, data.destination, function(err, streams) {
+					logger.debug("forked: "+  data.name+" into "+streams.length+" streams.");
+					for (fileStream in streams) {
+						
+						var dest = streams[fileStream].destination;
+						if (job.script && job.script.env) {
+							job.script.env.working_dir= job.working_dir;
+							dest = fileControl.replaceVars(streams[fileStream].destination, job.script.env);
+						}
+						logger.debug("saving: "+ data.name+" to "+dest+" dontUpload="+job.options.dontUploadIfFileExists);
+						var overwrite = (job.options && job.options.dontUploadIfFileExists!=true);
+						var isDirectory = data['isDirectory']
+						fileControl.saveFile(streams[fileStream].stream, data.name, data.fileSize, dest, socket, overwrite, isDirectory, job);
 					}
-					logger.debug("saving: "+ data.name+" to "+dest+" dontUpload="+job.options.dontUploadIfFileExists);
-					var overwrite = (job.options && job.options.dontUploadIfFileExists!=true);
-					var isDirectory = data['isDirectory']
-					fileControl.saveFile(streams[fileStream].stream, data.name, data.fileSize, dest, socket, overwrite, isDirectory, job);
-				}
-			});
+				});
+			} catch(err) {
+				socket.emit('Error', {message: 'Unable to save: '+data.name+' for job: '+jobId, jobId: jobId, name: data.name} );
+				logger.error(err.message);
+				logger.error(err.stack);
+				job.message = 'upload error: '+data.name;
+				eventEmitter.emit('job-error',job);
+				return;
+			}
 		       
 		});
 			

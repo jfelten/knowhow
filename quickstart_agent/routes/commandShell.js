@@ -26,6 +26,10 @@ executeSync: function(job, agentInfo, serverInfo, eventEmitter) {
     logger.debug(job);
 	var workingDir = job.script.working_dir;
 	var envVars=job.script.env;
+	
+	//change to the correct dir
+	cd(job.working_dir);
+	
 	logger.info("agent.user="+agentInfo.user+" job.user="+job.user);
 	var sudoCMD = '';
 	if (job.user != agentInfo.user) {
@@ -41,6 +45,9 @@ executeSync: function(job, agentInfo, serverInfo, eventEmitter) {
 		};	
 		logger.info("using sudo to run job as: "+job.user);
   		sudoCMD = 'echo \"'+decrypt(agentInfo.password)+'\" | sudo -S -u '+job.user+' ';
+  		
+  		//make sure all files are read/write executeable by other users
+  		execSync('chmod -R a+rwx '+job.working_dir);
 	}
 	
 	
@@ -108,11 +115,6 @@ executeSync: function(job, agentInfo, serverInfo, eventEmitter) {
 	var progress= progresStepSize;
 	job.status="Environment Set";
 	eventEmitter.emit('job-update',job);
-	
-	
-	//change to the correct dir
-	cd(job.working_dir);
-
 	
 	//execute the commands in series
 	var currentProgress =0;
