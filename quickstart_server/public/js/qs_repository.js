@@ -64,7 +64,7 @@ var addFile = function(selectedNode, repo, newFile, tree, isDirectory) {
 	  this.$http.get('/api/addFile?path='+selectedNode.path+'&fileName='+newFile+'&isDirectory='+isDirectory
       ).success(function(data) {
     	  selectedNode.children.push(data);
-          tree.expand_all(selectedNode);
+          //tree.expand_all(selectedNode);
           //tree.select_branch(selectedNode);
       });
       
