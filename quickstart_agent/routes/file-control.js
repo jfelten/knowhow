@@ -85,13 +85,13 @@ exports.saveFile = function(stream, name, size, destination, socket, overwrite,i
 		if (isDirectory == true) {
 			stream.pipe(zlib.createGunzip()).pipe(tar.Extract(options))
 		} else {
-    		stream.pipe(zlib.createGunzip()).pipe(fs.createWriteStream(filename).on('error', fucntion(err) {
+    		stream.pipe(zlib.createGunzip()).pipe(fs.createWriteStream(filename).on('error', function(err) {
     			logger.error("cannot save: "+filename );
     			logger.error(err.message);
     			logger.error(err.stack);
     			socket.emit('Error', {message: 'Invalid file: '+filename, jobId: job.id, name: filename} );
     			return;
-    		});
+    		}));
     	}
 	            
 
