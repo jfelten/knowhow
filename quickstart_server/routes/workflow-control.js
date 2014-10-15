@@ -56,10 +56,19 @@ initAgents = function(credentials, agents, callback) {
 						callback(err, agents);
 						return;
 					}
-					initAgent.login = credentials.login;
-					initAgent.password = credentials.password;
-					logger.info("initializing agent: "+initAgent.login+"@"+initAgent.host+":"+initAgent.port);
-					agentControl.addAgent(initAgent, api.getServerInfo());
+					newAgent = {}; //order of the attributes matters
+					newAgent.login = credentials.login;
+					newAgent.password = credentials.password;
+					newAgent.host =  initAgent.host;
+					
+					if (credentials.user) {
+						newAgent.user = credentials.user;
+					} else {
+						newAgent.user = credentials.login;
+					}
+					newAgent.port =  parseInt(initAgent.port);
+					logger.info("initializing agent: "+newAgent.user+"@"+newAgent.host+":"+newAgent.port);
+					agentControl.addAgent(newAgent, api.getServerInfo());
 					callback();
 				});
 			} else if (callback) {
@@ -115,6 +124,7 @@ loadAgentsForEnvironment = function(environment, callback) {
 					if (loadedAgent) {
 						environment.agents[designation]=loadedAgent;
 					}
+					logger.debug(environment.agents[designation]);
 					callback();
 				});
 			}.bind({designation: designation});

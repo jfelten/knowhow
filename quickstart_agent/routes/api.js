@@ -20,14 +20,11 @@ var agentEventHandler = new AgentEventHandler(agent.io,agentControl);
 require('shelljs/global');
 
 exports.deleteAgent = function(req,res) {
-	if (agentInfo.mode != "production") {
-		logger.info("deleting agent disabled in dev mode");
-		res.json({error:"delete agent disabled in development mode"});
-		return;
-	} else {
-		process.exit();
+	
+	res.json({OK:true});
+	process.exit();
 
-	}
+
 };
 
 

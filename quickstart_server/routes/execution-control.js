@@ -131,7 +131,7 @@ exports.initiateJob = initiateJob;
 
 cancelJob = function(agentId, jobId, callback ) {
 	if (currentJobs[agentId] != undefined && currentJobs[agentId][jobId] != undefined) {
-
+	/*
 		for (uploadFile in currentJobs[agentId][jobId].fileProgress) {
 			if (currentJobs[agentId][jobId].fileProgress[uploadFile] && 
 				currentJobs[agentId][jobId].fileProgress[uploadFile].gzip) {
@@ -146,7 +146,7 @@ cancelJob = function(agentId, jobId, callback ) {
 			if (currentJobs[agentId][jobId].fileProgress[uploadFile].readStream != null) {
 				currentJobs[agentId][jobId].fileProgress[uploadFile].readStream.close();
 			}
-	    }
+	    }*/
 		clearTimeout(currentJobs[agentId][jobId].timeout);
 	    clearInterval(currentJobs[agentId][jobId].fileCheck);
 	    eventEmitter.emit('job-cancel',currentJobs[agentId].agent, currentJobs[agentId][jobId]);
@@ -170,6 +170,7 @@ completeJob = function(agent,job) {
 			logger.debug("closing read streams.");
 			if (currentJobs[agentId][jobId].fileProgress && currentJobs[agentId][jobId].fileProgress.length >0 ) {
 				logger.debug("closing files.");
+				/*
 				for (uploadFile in currentJobs[agentId][jobId].fileProgress) {
 					if (currentJobs[agentId][jobId].fileProgress[uploadFile] && 
 						currentJobs[agentId][jobId].fileProgress[uploadFile].gzip) {
@@ -187,7 +188,7 @@ completeJob = function(agent,job) {
 					
 						currentJobs[agentId][jobId].fileProgress[uploadFile].readStream.close();
 					}
-			    }
+			    }*/
 			}
 			logger.debug("removed read streams.");
 			if (currentJobs[agentId][jobId].timeout) {
@@ -467,10 +468,12 @@ function setJobTimer(agent, job) {
     }
     if (job && job.files && job.files.length >0 ) {
 	   currentJobs[agentId][jobId].timeout = setTimeout(function() {
-	    	clearInterval(currentJobs[agentId][jobId].fileCheck);
-	    	currentJobs[agentId][jobId].status=("Timeout - job cancelled");
-	    	logger.error("job timed out for: "+jobId);
-	        //currentJobs[agentId][jobId].eventSocket.emit('job-cancel',jobId);
+	   		if (currentJobs[agentId][jobId]) {
+		    	clearInterval(currentJobs[agentId][jobId].fileCheck);
+		    	currentJobs[agentId][jobId].status=("Timeout - job cancelled");
+		    	logger.error("job timed out for: "+jobId);
+		        //currentJobs[agentId][jobId].eventSocket.emit('job-cancel',jobId);
+		    }
 	    }, timeoutms);
 	    
 	    var checkInterval = 10000; //10 seconds
@@ -490,9 +493,9 @@ function setJobTimer(agent, job) {
 		    		missedHeartbeats++;
 		    		if (missedHeartbeats>= maxMissedHeartbeats) {
 				    	logger.info(jobId+" lost contact with agent.");
-		    			for (index in currentJobs[agentId][jobId].fileProgress) {
-				    		currentJobs[agentId][jobId].fileProgress[index].readStream.close();
-				        }
+		    			//for (index in currentJobs[agentId][jobId].fileProgress) {
+				    	//	currentJobs[agentId][jobId].fileProgress[index].readStream.close();
+				        //}
 				        //agentEvents.agentSockets[agentId].fileSocket.close();
 				        currentJobs[agentId][jobId].error=true;
 				       	clearTimeout(currentJobs[agentId][jobId].timeout);
@@ -549,15 +552,21 @@ function setJobTimer(agent, job) {
 exports.getRunningJobsList = function(callback) {
 	var runningJobs = {}
 	for (agentId in currentJobs) {
-		for (jobId in currentJobs[agentId]) {
-			if (currentJobs[agentId][jobId] && currentJobs[agentId][jobId].progress >0) {
-				runningJobs[agentId] = {};
-				runningJobs[agentId][jobId] = {};
-				runningJobs[agentId][jobId].progress = currentJobs[agentId][jobId].progress;
-				runningJobs[agentId][jobId].status = currentJobs[agentId][jobId].status;
-				runningJobs[agentId].agent = currentJobs[agentId].agent;
+		agentControl.doesAgentIdExist(agentId, function(err) {
+			if (err) {
+				delete currentJobs[agentId];
+			} else {
+				for (jobId in currentJobs[agentId]) {
+					if (currentJobs[agentId][jobId] && currentJobs[agentId][jobId].progress >0) {
+						runningJobs[agentId] = {};
+						runningJobs[agentId][jobId] = {};
+						runningJobs[agentId][jobId].progress = currentJobs[agentId][jobId].progress;
+						runningJobs[agentId][jobId].status = currentJobs[agentId][jobId].status;
+						runningJobs[agentId].agent = currentJobs[agentId].agent;
+					}
+				}
 			}
-		}
+		});
 	}
 	if (callback) {
 		callback(runningJobs);

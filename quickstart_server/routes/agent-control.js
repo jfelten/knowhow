@@ -1,3 +1,4 @@
+var crypto = require('crypto');
 var logger=require('./log-control').logger;
 var async = require('async');
 var zlib = require('zlib');
@@ -71,6 +72,7 @@ heartbeat = function(agent, callback) {
         //res.end();
 	});
 	request.on('error', function(er) {
+		//logger.error(er.stack);
 		logger.error('heartbeat could not connect to agent: '+agent.host,er);
 		callback(new Error("unable to connect"),agent);
 	});
@@ -104,18 +106,24 @@ function loadAgent(agent, callback) {
 		callback(new Error("no agent provided"));
 		return;
 	}
-	var queryParmams = {}
-	if (agent.user) {
-		queryParmams.user=agent.user
-	}
+	var queryParams = {};
+	
+	//order of the query params matters
 	if (agent.host) {
-		queryParmams.host=agent.host
+		//queryParams.push({"host": agent.host});
+		queryParams.host=agent.host;
 	}
 	if (agent.port) {
-		queryParmams.port=agent.port;
+		//queryParams.push({"port": agent.port});
+		queryParams.port=parseInt(agent.port);
 	}
-	
-	db.findOne(queryParmams, function(err, doc) {
+	if (agent.user) {
+		queryParams.user=agent.user;
+	}
+	logger.debug("query agents:");
+	logger.debug(queryParams);
+	db.find(queryParams, function(err, doc) {
+		logger.debug(doc);
 		if (err) {
 			callback(err);
 			return;
@@ -124,12 +132,32 @@ function loadAgent(agent, callback) {
 //			console.log(agent);
 //		});
 		if (callback) {
-			callback(undefined, doc);
+			callback(undefined, doc[0]);
 		}
 	  });
 };
 
 exports.loadAgent = loadAgent;
+
+exports.doesAgentIdExist = function(agentId, callback) {
+	var queryParmams = {}
+	queryParams._id = agentId;
+	db.findOne(queryParmams, function(err, doc) {
+		if (err) {
+			if (callback) {
+				callback(err);
+			}
+			return false;
+		}
+//		docs.forEach(function(agent) {
+//			console.log(agent);
+//		});
+		if (callback) {
+			callback(undefined, doc);
+		}
+		return true;
+	  });
+}
 
 initAgent = function(agent) {
 	agent_prototype = {
@@ -154,6 +182,7 @@ initAgent = function(agent) {
 	if (agent.login != undefined && agent.user == "") {
 		agent.user = agent.login;
 	}
+	agent.password=encrypt(agent.password, serverInfo.cryptoKey);
 	logger.info("initialized agent: "+agent.user+"@"+agent.host+":"+agent.port);
 	return agent;
 };
@@ -202,14 +231,14 @@ exports.deleteAgent = function( agent, callback) {
 
 install = function(main_callback) {
 	var agent = this.agent;
+	var serverInfo = this.serverInfo;
 	var commands = this.commands;
 	var execCommands = new Array(commands.length);
-	for (index in commands) {
-		logger.info("queueing "+index+":"+commands[index]);
-		var command = commands[index];
-	    execCommands[index] = function(callback) {
-	    	var comm = ''+this.cmd;
-	    	logger.debug(this.idx+" - "+comm);
+	
+	//for starting agent as a different user
+
+	execCommand = function(callback) {
+	    	var comm = this.cmd;
 	    	var conn = new Connection();
 	    	conn.on('ready', function() {
 	    		
@@ -252,7 +281,7 @@ install = function(main_callback) {
 			  host: agent.host,
 			  port: 22,
 			  username: agent.login,
-			  password: agent.password
+			  password: decrypt(agent.password,serverInfo.cryptoKey)
 			});
 	    	conn.on('error', function(er) {
 	    		logger.error('unable to connect to: '+agent.host,er.message);
@@ -260,8 +289,19 @@ install = function(main_callback) {
 	    	});
 	    	
 	    	
-		}.bind( {'cmd': command, 'idx': index});
+		};
+	var sudoCMD = '';
+	if (agent.login != agent.user) {	
+		logger.info("using sudo to run job as: "+agent.user);
+  		sudoCMD = 'echo \"'+decrypt(agent.password,serverInfo.cryptoKey)+'\" | sudo -S -u '+agent.user+' ';
+	}
+	var cleanUpCmd = "rm -rf /tmp/"+agent_archive_name
+	for (index in commands) {
+		logger.info("queueing "+index+":"+commands[index]);
+		var command = commands[index];
+	    execCommands[index] = execCommand.bind( {'cmd': sudoCMD+command, 'idx': index});
 	};
+	execCommands[commands.length] = execCommand.bind( {'cmd': cleanUpCmd, 'idx': commands.length});
 	async.series(execCommands,function(err) {
 		if (err) {
 			agent.progress=0;
@@ -374,6 +414,57 @@ registerServer = function(callback) {
 
 };
 
+updateAgentInfoOnAgent = function(callback) {
+	var agent = this.agent;
+	var serverInfo = this.serverInfo
+	logger.info('updating agent properties on: '+agent.host+':'+agent.port);
+	// prepare the header
+	var headers = {
+	    'Content-Type' : 'application/json',
+	    'Content-Length' : Buffer.byteLength(JSON.stringify(agent) , 'utf8'),
+	    'Content-Disposition' : 'form-data; name="agents'
+	};
+
+	// the post options
+	var options = {
+	    host : agent.host,
+	    port : agent.port,
+	    path : '/api/updateAgentInfo',
+	    method : 'POST',
+	    headers : headers
+	};
+
+	// do the POST call
+	var reqPost = http.request(options, function(res) {
+	    console.log("statusCode: ", res.statusCode);
+	    // uncomment it for header details
+	  console.log("headers: ", res.headers);
+
+	    res.on('data', function(data) {
+	    	if (JSON.parse(data).registered) {
+	    		logger.info('updated agent properties');
+	    		callback();
+	    	} else {
+	    		agent.message = 'Unable to update agent properties';
+	    		eventEmitter.emit('agent-error',agent);
+	    		callback(new Error('Unable to update agent properties'));
+	    	}
+	        logger.info('update agent complete');
+	    });
+	});
+
+	// write the json data
+	reqPost.write(JSON.stringify(agent));
+	reqPost.end();
+	reqPost.on('error', function(e) {
+	    logger.error("Unable to update agent properties - connection error");
+	    agent.message = 'Unable to update agent properties';
+		eventEmitter.emit('agent-error',agent);
+		callback(e);
+	});
+
+};
+
 checkAgent = function(callback) {
 	var agent = this.agent;
 	
@@ -470,11 +561,11 @@ deliverAgent = function(callback) {
 	var client = new Client({
 		host: agent.host,
 	    username: agent.login,
-	    password: agent.password,
-	    path: '/home/'+agent.login+'/'+agent._id+'/'+agent_archive_name
+	    password: decrypt(agent.password,this.serverInfo.cryptoKey),
+	    path: '/tmp/'+agent_archive_name
 	});
 
-	client.upload(__dirname+"/../"+agent_archive_name, '/home/'+agent.login+'/'+agent._id+'/'+agent_archive_name, function(err){
+	client.upload(__dirname+"/../"+agent_archive_name, '/tmp/'+agent_archive_name, function(err){
 		if (err) {
 			logger.info(err);
 			callback(err);
@@ -495,8 +586,9 @@ deliverAgent = function(callback) {
 		//callback();
 	    });
 	client.on('error',function (err) {
+		logger.error(err.stack);
 		agent.progress=0;
-		agent.message = 'unable to transfer agent';
+		agent.message = 'unable to transfer agent: '+err.message;
 		eventEmitter.emit('agent-error', agent);
 		logger.error('error delivering agent: ', err);
 		callback(new Error("stop"));
@@ -532,27 +624,27 @@ exports.addAgent = function(agent,serverInfo) {
 			return;
 		}
 		
-        agent=initAgent(agent);
+        agent=initAgent(agent,serverInfo);
     	db.insert(agent, function (err, newDoc) {   
 		    logger.debug("added agent: "+newDoc);
 		    agent=newDoc;
 			eventEmitter.emit('agent-add',agent);
 
-			install_commands=['rm -rf '+agent._id+'/quickstart_agent',
-			  	          	'tar xzf '+agent._id+'/'+agent_archive_name+' -C '+agent._id,
+			install_commands=['rm -rf '+agent._id,
+							'mkdir -p '+agent._id,
+			  	          	'tar xzf /tmp/'+agent_archive_name+' -C '+agent._id,
 			  	            'tar xzf '+agent._id+'/quickstart_agent/node*.tar.gz -C '+agent._id,
-			  	            'nohup '+agent._id+'/node*/bin/node '+agent._id+'/quickstart_agent/agent.js --port='+agent.port+' --user='+agent.user+' --login='+agent.login+' --_id='+agent._id+' --mode=production > /dev/null 2>&1 &',
-			  	            'rm '+agent._id+'/'+agent_archive_name
+			  	            'rm '+agent._id+'/quickstart_agent/node*.tar.gz',
+			  	            'nohup '+agent._id+'/node*/bin/node '+agent._id+'/quickstart_agent/agent.js --port='+agent.port+' --user='+agent.user+' --login='+agent.login+' --_id='+agent._id+' --mode=production > /dev/null 2>&1 &'
 			  	];
 
 			  	if (agent.user != agent.login) {
-			  		install_commands=['mkdir -p /tmp/agent',
-			  		                'tar xzf '+agent._id+'/'+agent_archive_name+' -C /tmp/agent',
-			  		  	          	'tar xzf /tmp/agent/quickstart_agent/node*.tar.gz -C /tmp/agent',
-			  		  	            'sudo -u '+agent.user+' cp -R /tmp/agent /tmp/'+agent._id,
-			  		  	            'rm -rf /tmp/agent',
-			  		  	            'sudo -u '+agent.user+' nohup /tmp/'+agent._id+'/node*/bin/node /tmp/'+agent._id+'/quickstart_agent/agent.js --port='+agent.port+' --user='+agent.user+' --login='+agent.login+' --_id='+agent._id+' --mode=development > /dev/null 2>&1 &',
-			  		  	            'rm -rf /home/'+agent.login+'/'+agent._id
+			  		install_commands=['rm -rf /tmp/'+agent._id,
+									'mkdir -p /tmp/'+agent._id,
+			  						'tar xzf /tmp/'+agent_archive_name+' -C /tmp/'+agent._id,
+			  		  	          	'tar xzf /tmp/'+agent._id+'/quickstart_agent/node*.tar.gz -C /tmp/'+agent._id,
+			  		  	          	'rm -rf /tmp/'+agent._id+'/quickstart_agent/node*.tar.gz',
+			  		  	            'nohup /tmp/'+agent._id+'/node*/bin/node /tmp/'+agent._id+'/quickstart_agent/agent.js --port='+agent.port+' --user='+agent.user+' --login='+agent.login+' --_id='+agent._id+' --mode=development > /dev/null 2>&1 &'
 			  		  	            ];
 			  	}
 			  	function_vars = {agent: agent, commands: install_commands, serverInfo: serverInfo};
@@ -562,6 +654,7 @@ exports.addAgent = function(agent,serverInfo) {
 			            install.bind(function_vars),
 			            waitForAgentStartUp.bind(function_vars),
 			            registerServer.bind(function_vars),
+			            updateAgentInfoOnAgent.bind(function_vars),
 			            getStatus.bind(function_vars)];
 			try {
 				async.series(exec,function(err) {
@@ -590,8 +683,20 @@ exports.addAgent = function(agent,serverInfo) {
 		
 	});
 };
-	
-	
+
+function encrypt(text, cryptoKey){
+	var cipher = crypto.createCipher('aes-256-cbc',cryptoKey)
+	var crypted = cipher.update(text,'utf8','hex')
+	crypted += cipher.final('hex');
+	return crypted;
+}
+ 
+function decrypt(text, cryptoKey){
+	var decipher = crypto.createDecipher('aes-256-cbc',cryptoKey)
+	var dec = decipher.update(text,'hex','utf8')
+	dec += decipher.final('utf8');
+	return dec;
+}
 
 
 

@@ -92,7 +92,7 @@ AgentControl = function(io) {
 AgentControl.prototype.initAgent = initAgent;
 AgentControl.prototype.execute = execute;
 AgentControl.prototype.eventEmitter = eventEmitter;
-AgentControl.prototype.registerServer = function registerAgent(server) {
+AgentControl.prototype.registerServer = function (server) {
 	  logger.info(server);
 	  this.serverInfo=server;
 	};

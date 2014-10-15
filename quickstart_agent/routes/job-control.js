@@ -226,9 +226,8 @@ waitForFiles = function(job,callback) {
 		    		totalUploaded+=fileSizeInBytes;
 		    		job.fileProgress[filename]['Uploaded'] = fileSizeInBytes;
 			    	if(job.fileProgress[filename]['error'] == true) {
-			    		job.fileProgress[filename].uploadComplete=true;
-			    		eventEmitter.emit('upload-complete',job);
-			    		updateJob(job);
+			    		logger.error("problem receiving: "+filename+" cancelling job: "+job.id);
+			    		cancelJob(job)
 			    	} else if(fileSizeInBytes === job.fileProgress[filename]['FileSize']) {
 			    		job.fileProgress[filename].uploadComplete=true;
 			    		if (job.fileProgress[filename].fileWriter) {
@@ -249,6 +248,7 @@ waitForFiles = function(job,callback) {
 	    	if (numFilesUploaded >= Object.keys(job.fileProgress).length) {
     			clearTimeout(timeout);
     			clearInterval(fileCheck);
+    			logger.info("upload complete: num files received="+numFilesUploaded+" expected: "+Object.keys(job.fileProgress).length);
     			eventEmitter.emit('upload-complete',job);
     			callback(undefined, job);
     		}  else if ((jobQueue[job.id] && jobQueue[job.id].disconnected == true )|| !jobInProgress) {
