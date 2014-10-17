@@ -560,15 +560,15 @@ exports.getRunningJobsList = function(callback) {
 			if (err) {
 				delete currentJobs[agentId];
 			} else {
-				logger.debug(currentJobs[agentId]);
-				for (job in currentJobs[agentId]) {
-					logger.info("found: "+job.id);
-					if (job.id) {
-						if (currentJobs[agentId][job.id] && currentJobs[agentId][jobId].progress >0) {
+				//logger.debug(currentJobs[agentId]);
+				for (key in currentJobs[agentId]) {
+					logger.info("found: "+key);
+					if (currentJobs[agentId][key] && currentJobs[agentId][key].id 
+						&& currentJobs[agentId][key].progress >0) {
 							runningJobs[agentId] = {};
-							runningJobs[agentId][job.id] = {};
-							runningJobs[agentId][job.id].progress = currentJobs[agentId][jobId].progress;
-							runningJobs[agentId][job.id].status = currentJobs[agentId][jobId].status;
+							runningJobs[agentId][key] = {};
+							runningJobs[agentId][key].progress = currentJobs[agentId][key].progress;
+							runningJobs[agentId][key].status = currentJobs[agentId][key].status;
 							runningJobs[agentId].agent = currentJobs[agentId].agent;
 						}
 					}
