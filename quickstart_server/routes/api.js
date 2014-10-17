@@ -192,7 +192,7 @@ exports.execute = function(req,res) {
 	});
 };
 
-exports.cancel = function(req,res) {
+exports.cancelJob = function(req,res) {
 	var agent = req.body.agent;
 	var job =  req.body.job;
 	
