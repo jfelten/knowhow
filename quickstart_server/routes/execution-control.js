@@ -216,13 +216,14 @@ var cancelJobOnAgent = function(agent,job,callback) {
 	var jobId = job.id;
 	var agentId = agent._id;
 	
-	agent.eventSocket.emit("job-cancel",job);
-
-	//cancelJob(agentId, jobId)
+	eventEmitter.emit('cancel-job-on-agent',agent,job);
+	cancelJob(agentId,jobId, function() {
+		if (callback) {
+			callback();
+		}
+	});
 	
-	if (callback) {
-		callback();
-	}
+
 }
 
 exports.cancelJobOnAgent = cancelJobOnAgent;
@@ -554,17 +555,22 @@ function setJobTimer(agent, job) {
 exports.getRunningJobsList = function(callback) {
 	var runningJobs = {}
 	for (agentId in currentJobs) {
+		logger.info("getting jobs for: "+agentId);
 		agentControl.doesAgentIdExist(agentId, function(err) {
 			if (err) {
 				delete currentJobs[agentId];
 			} else {
-				for (jobId in currentJobs[agentId]) {
-					if (currentJobs[agentId][jobId] && currentJobs[agentId][jobId].progress >0) {
-						runningJobs[agentId] = {};
-						runningJobs[agentId][jobId] = {};
-						runningJobs[agentId][jobId].progress = currentJobs[agentId][jobId].progress;
-						runningJobs[agentId][jobId].status = currentJobs[agentId][jobId].status;
-						runningJobs[agentId].agent = currentJobs[agentId].agent;
+				logger.debug(currentJobs[agentId]);
+				for (job in currentJobs[agentId]) {
+					logger.info("found: "+job.id);
+					if (job.id) {
+						if (currentJobs[agentId][job.id] && currentJobs[agentId][jobId].progress >0) {
+							runningJobs[agentId] = {};
+							runningJobs[agentId][job.id] = {};
+							runningJobs[agentId][job.id].progress = currentJobs[agentId][jobId].progress;
+							runningJobs[agentId][job.id].status = currentJobs[agentId][jobId].status;
+							runningJobs[agentId].agent = currentJobs[agentId].agent;
+						}
 					}
 				}
 			}

@@ -140,9 +140,9 @@ function loadAgent(agent, callback) {
 exports.loadAgent = loadAgent;
 
 exports.doesAgentIdExist = function(agentId, callback) {
-	var queryParmams = {}
+	var queryParams = {}
 	queryParams._id = agentId;
-	db.findOne(queryParmams, function(err, doc) {
+	db.findOne(queryParams, function(err, doc) {
 		if (err) {
 			if (callback) {
 				callback(err);

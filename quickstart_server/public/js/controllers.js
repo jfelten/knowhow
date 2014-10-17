@@ -162,7 +162,7 @@ var myModule = angular.module('myApp.controllers', []).
 	      	$scope.runningJobs[agent._id][job.id].progress=job.progress;
 	      	$scope.runningJobs[agent._id][job.id].status=job.status;
 	      	$scope.runningJobs[agent._id][job.id].id=job.id;
-	      	$scope.runningJobs[agent._id].agent={user: agent.user, host: agent.host, port: agent.port};
+	      	$scope.runningJobs[agent._id].agent={_id: agent._id, user: agent.user, host: agent.host, port: agent.port};
 	    }
 	  
     };
@@ -297,33 +297,20 @@ var myModule = angular.module('myApp.controllers', []).
 	  var navigating = false;
 
 	  
-	  $scope.cancel = function() {
-		  if (!$scope.selectedAgent) {
-			  $scope.message='Please select an agent to execute';
-			  return;
-		  }
-		  
-		  //get the content from the json editor
-		  var job;
-		  try {
-			  job = editor.get();
-		      //JSON.parse(jjob);
-		    } catch (e) {
-		    	console.log('error getting job data.')
-		    	$scope.message='Invalid JSON - please fix.';
-		        return;
-		    }
+	  $scope.cancel = function(agent, job) {
+
+
 		    var data = {
-		    	agent: $scope.selectedAgent,
+		    	agent: agent,
 		    	job: job
 		    };
 		    $http({
 			      method: 'POST',
-			      url: '/api/cancel',
+			      url: '/api/cancelJob',
 			      data: data
 			    }).success(function (data, status, headers, config) {
 			        $scope.agentInfo = data;
-			        $scope.message = job.id+' cancel request submitted to agent: '+$scope.selectedAgent.user+'@'+$scope.selectedAgent.host+':'+$scope.selectedAgent.port
+			        $scope.message = job.id+' cancel request submitted to agent: '+agent.user+'@'+agent.host+':'+agent.port
 			        console.log("submitted job request");
 			    }).
 			    error(function (data, status, headers, config) {
@@ -735,24 +722,10 @@ var myModule = angular.module('myApp.controllers', []).
 			    });
 	  };
 	  
-	  $scope.cancel = function() {
-		  if (!$scope.selectedAgent) {
-			  $scope.message='Please select an agent to execute';
-			  return;
-		  }
+	  $scope.cancel = function(agent, job) {
 		  
-		  //get the content from the json editor
-		  var job;
-		  try {
-			  job = editor.get();
-		      //JSON.parse(jjob);
-		    } catch (e) {
-		    	console.log('error getting job data.')
-		    	$scope.message='Invalid JSON - please fix.';
-		        return;
-		    }
 		    var data = {
-		    	agent: $scope.selectedAgent,
+		    	agent: agent,
 		    	job: job
 		    };
 		    $http({

@@ -231,6 +231,14 @@ function AgentEventHandler(io) {
 		 	logger.error("invalid job error event");
 		 }
 	});
+	executionControl.eventEmitter.on('cancel-job-on-agent', function(agent, job) {
+		if (job && agent) {
+			logger.info("sending cancel for "+job.id+' on '+agent.host);
+			agentSockets[agent._id].eventSocket.emit('job-cancel',job);
+		 } else {
+		 	logger.error("invalid job error event");
+		 }
+	});
 	
 }
 

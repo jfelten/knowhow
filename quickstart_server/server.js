@@ -110,7 +110,7 @@ app.post('/api/logs',api.logs);
 app.post('/api/agentEvent', api.agentEvent);
 app.get('/api/agentEvent', api.agentEvent);
 app.post('/api/execute', api.execute);
-app.post('/api/cancel', api.cancel);
+app.post('/api/cancelJob', api.cancelJob);
 app.get('/api/runningJobsList', api.runningJobList);
 
 //workflow api
