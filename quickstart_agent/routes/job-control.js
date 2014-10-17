@@ -53,7 +53,7 @@ initiateJob = function(job, callback) {
 		//check for relative paths and substitute working directory path
 
 		if (job.working_dir) {
-			job.working_dir = pathlib.resolve(workingDir);
+			job.working_dir = pathlib.resolve(job.working_dir);
 		}
 
 		job.status="initialized";
