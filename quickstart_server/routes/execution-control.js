@@ -570,7 +570,6 @@ exports.getRunningJobsList = function(callback) {
 							runningJobs[agentId][key].progress = currentJobs[agentId][key].progress;
 							runningJobs[agentId][key].status = currentJobs[agentId][key].status;
 							runningJobs[agentId].agent = currentJobs[agentId].agent;
-						}
 					}
 				}
 			}
