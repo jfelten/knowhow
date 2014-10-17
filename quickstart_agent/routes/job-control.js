@@ -51,29 +51,11 @@ initiateJob = function(job, callback) {
 		job.progress=0;
 		job.totalFileSize=0;
 		//check for relative paths and substitute working directory path
-		var downloadDir = job.download_dir;
-		if (downloadDir == undefined) {
-			downloadDir = ".";
-		};
-		var workingDir = job.working_dir;
-		var workingDirVar="${"+WORKING_DIR_VAR+"}";
-		if (downloadDir.indexOf(workingDirVar) > -1){
-			downloadDir=downloadDir.replace( workingDirVar,workingDir);
+
+		if (job.working_dir) {
+			job.working_dir = pathlib.resolve(workingDir);
 		}
-		workingDirVar="$"+WORKING_DIR_VAR;
-		if (downloadDir.indexOf(workingDirVar) > -1){
-			downloadDir=downloadDir.replace( workingDirVar,workingDir);
-		}
-	    fs.stat(downloadDir, function (err, stat) {
-	        if (err) {
-	          // file does not exist
-	          if (err.errno == 2) {
-	            fs.mkdir(downloadDir);
-	          }
-	        }
-	    });
-	    job.working_dir = pathlib.resolve(workingDir);
-		job.download_dir = pathlib.resolve(downloadDir);
+
 		job.status="initialized";
 		jobQueue[job.id]=job;
 		logger.debug("job id:"+job.id+" initialized using working directory: "+job.working_dir);
