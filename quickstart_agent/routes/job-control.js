@@ -48,7 +48,6 @@ initiateJob = function(job, callback) {
 		jobInProgress = job.id;
 		job.fileProgress = {};
 		jobQueue[job.id] =job;
-		job.progress=0;
 		job.totalFileSize=0;
 		//check for relative paths and substitute working directory path
 
@@ -176,7 +175,7 @@ waitForFiles = function(job,callback) {
 	    
 	    var checkInterval = 5000; //5 second
 	    //wait until all files are received
-	    var lastProgress=0;
+	    var lastProgress=1;
 	    var numChecks = 0;
 	    var fileCheck = setInterval(function() {
 	    
@@ -241,7 +240,7 @@ waitForFiles = function(job,callback) {
     			callback(new Error("server disconnected before upload complete"), job);
     		}
 	    	
-	    	job.progress=Math.floor((totalUploaded/job.totalFileSize)*100)
+	    	job.progress=Math.ceil((totalUploaded/job.totalFileSize)*100)
             if (job.progress > lastProgress ) {
             	lastProgress=job.progress;
             	updateJob(job);
@@ -288,7 +287,7 @@ JobControl = function(io) {
 		    
 		    jobId = data['jobId'];
 			var job = jobQueue[jobId];
-			var lastProgress=0;
+			var lastProgress=1;
 			if (job == undefined) {
 				socket.emit('Error', {message: 'No active Job with id: '+jobId, jobId: jobId, name: data.name} );
 				eventEmitter.emit('job-error',job);

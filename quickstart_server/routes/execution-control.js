@@ -122,8 +122,17 @@ initiateJob = function(agentId, jobId, callback ) {
 		if (callback) {
 			callback(new Error("job: "+jobId+" already running on "+agentId));
 		}
-	} else if (callback) {
-	    callback();
+	} else {
+		if (!currentJobs[agentId]) {
+			currentJobs[agentId] = {};
+		}
+		currentJobs[agentId][jobId] = {};
+		currentJobs[agentId][jobId].status="initiated";
+		currentJobs[agentId][jobId].progres=1;
+		
+		if (callback) {
+	    	callback();
+	    }
 	}
 }
 
@@ -301,7 +310,6 @@ exports.executeJob = function(agent,job,callback) {
 					 	return;
 					 }
 			        logger.debug('\n\nJob request sent. Listening for events and uploading files');
-			        job.progress=1;
 			        job.status="initializing job"
 			        job.progress=1;
 			        eventEmitter.emit('job-update',agent,job);
@@ -554,30 +562,36 @@ function setJobTimer(agent, job) {
 
 exports.getRunningJobsList = function(callback) {
 	var runningJobs = {}
-	for (agentId in currentJobs) {
+	async.each(Object.keys(currentJobs), function(agentId, callback) {
 		logger.info("getting jobs for: "+agentId);
-		agentControl.doesAgentIdExist(agentId, function(err) {
+		agentControl.doesAgentIdExist(agentId, function(err, existingAgent) {
 			if (err) {
-				delete currentJobs[agentId];
+				delete currentJobs[existingAgent._id];
 			} else {
 				//logger.debug(currentJobs[agentId]);
-				for (key in currentJobs[agentId]) {
+				for (key in currentJobs[existingAgent._id]) {
 					logger.info("found: "+key);
-					if (currentJobs[agentId][key] && currentJobs[agentId][key].id 
-						&& currentJobs[agentId][key].progress >0) {
-							runningJobs[agentId] = {};
-							runningJobs[agentId][key] = {};
-							runningJobs[agentId][key].progress = currentJobs[agentId][key].progress;
-							runningJobs[agentId][key].status = currentJobs[agentId][key].status;
-							runningJobs[agentId].agent = currentJobs[agentId].agent;
+					if (currentJobs[existingAgent._id][key] && currentJobs[existingAgent._id][key].progress
+						&& currentJobs[existingAgent._id][key].progress >0 ) {
+							runningJobs[existingAgent._id] = {};
+							runningJobs[existingAgent._id][key] = {};
+							runningJobs[existingAgent._id][key].id = currentJobs[existingAgent._id][key].id;
+							runningJobs[existingAgent._id][key].progress = currentJobs[existingAgent._id][key].progress;
+							runningJobs[existingAgent._id][key].status = currentJobs[existingAgent._id][key].status;
+							runningJobs[existingAgent._id].agent = currentJobs[existingAgent._id].agent;
 					}
 				}
 			}
+			callback();
 		});
-	}
-	if (callback) {
-		callback(runningJobs);
-	}
+	}, function(err) {
+		if (err) {
+			logger.error("problem getting running jobs: "+err.message);
+		}
+		if (callback) {
+			callback(runningJobs);
+		}
+	});
 }
 
 var getDirectoryCompressionStream = function(fstream, callback) {

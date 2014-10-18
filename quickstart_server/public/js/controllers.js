@@ -159,7 +159,9 @@ var myModule = angular.module('myApp.controllers', []).
 	        } else if (!$scope.runningJobs[agent._id][job.id]) {
 	        	$scope.runningJobs[agent._id][job.id] = {}
 	        }
-	      	$scope.runningJobs[agent._id][job.id].progress=job.progress;
+	        if (job.progress){
+	      		$scope.runningJobs[agent._id][job.id].progress=job.progress;
+	      	}
 	      	$scope.runningJobs[agent._id][job.id].status=job.status;
 	      	$scope.runningJobs[agent._id][job.id].id=job.id;
 	      	$scope.runningJobs[agent._id].agent={_id: agent._id, user: agent.user, host: agent.host, port: agent.port};
