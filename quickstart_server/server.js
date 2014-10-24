@@ -43,7 +43,7 @@ var compress = require('compression')();
 app.use(compress);
 
 //app.use(express.static(__dirname+'/html' ));
-app.use('/repo', express.static(__dirname+'/repo'));
+//app.use('/repo', express.static(__dirname+'/repo'));
 
 var port = 3001;
 exports.port = port;
@@ -58,8 +58,6 @@ app.set('view engine', 'jade');
 app.use(morgan('dev'));
 app.use(bodyParser());
 app.use(methodOverride());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/repo', express.static(path.join(__dirname, 'repo')));
 var env = process.env.NODE_ENV || 'development';
 
 //development only
@@ -95,7 +93,7 @@ app.get('/modals/:name', routes.modals);
 //JSON API
 app.get('/api/serverInfo', api.serverInfo);
 app.get('/api/connectedAgents', api.listAgents);
-app.get('/api/fileListForRepo', api.fileListForRepo);
+app.get('/api/fileListForDir', api.fileListForDir);
 app.get('/api/fileContent', api.fileContent);
 app.get('/api/saveFile', api.saveFile);
 app.get('/api/repoList', api.repoList);
@@ -118,6 +116,32 @@ app.post('/api/loadAgentsForEnvironment', workflowControl.loadAgentsForEnvironme
 app.post('/api/initAgents', workflowControl.initAgents);
 app.post('/api/executeWorkflow', workflowControl.executeWorkflow);
 
+//repo urls
+var API = require('./routes/repository-control').api;
+for (index in API.routes) {
+	var route = API.routes[index];
+	
+	//logger.info(route.callback);
+	if (route) {
+		if (route.httpType == "POST") {
+			logger.info("adding route: "+route.httpType+" "+route.APICall);
+			app.post(route.APICall,route.callback);
+		} else if(route.httpType == "GET") {
+			logger.info("adding route: "+route.httpType+" "+route.APICall);
+			app.get(route.APICall,route.callback);
+		}
+	}
+}
+
+app.use(function(req, res, next) {
+  if (req.path.indexOf("download") > -1)
+    res.attachment(); //short for res.set('Content-Disposition', 'attachment')
+  next();
+});
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/repo', express.static(path.join(__dirname, 'repo')));
+
+
 //redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
 
@@ -134,7 +158,6 @@ agentControl.packAgent( function (err) {
 	});
 
 });
-
 
 //do a heartbeat check each minute and make sure socket connections are made
 var agentCheck = function() {

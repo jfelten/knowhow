@@ -145,6 +145,32 @@ p
 	overflow-x scroll
 	width 800px 
 	height 300px
+
+.repositories-page
+ 	float top
+.repositories-nav
+	padding 0px 10px 10px 0px
+	float left
+	width 350px
+	.repositories-nav-buttons
+		float top
+		clear left
+	.repositories-tree
+		float bottom
+	
+.repositories-control
+	float bottom
+	width 600px 
+	height: 750px
+	float left
+	.repositories-message-block
+		float right
+		color red
+	.repositories-buttons
+		float right
+	.repositories-textarea
+		width 800px 
+		height: 700px
 	
 .agent-form
 	h2
@@ -232,4 +258,24 @@ p
 }
 @-webkit-keyframes blink {
   to { visibility: hidden; }
+}
+
+.btn-upload-file {
+    position relative
+    overflow hidden
+}
+.btn-upload-file input[type=file] {
+    position absolute
+    top 0
+    right 0
+    min-width 100%
+    min-height 100%
+    font-size 100px
+    text-align right
+    filter alpha
+    opacity 0
+    outline none
+    background white
+    cursor inherit
+    display block
 }

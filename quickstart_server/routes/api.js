@@ -43,11 +43,10 @@ exports.serverInfo = function (req, res) {
   res.json(getServerInfo());
 };
 
-exports.fileListForRepo = function (req,res) {
-	var repo = req.query.repo;
+exports.fileListForDir = function (req,res) {
 	var dir = req.query.dir;
-	logger.info('request for files in: '+repo+' in dir: '+dir);
-	var dirTree = fileControl.getDirTreeForRepo(repo, dir,function(err, tree) {
+	
+	fileControl.getDirTree(dir, function(err, tree) {
 		if (err) {
 			res.send(500, err);
 		} else {
@@ -96,8 +95,7 @@ exports.addFile = function(req,res) {
 
 exports.deleteFile = function(req,res) {
 	var fileName = req.query.fileName;
-	var repo = req.query.baseDir;
-	fileControl.deleteFile(repo, fileName,function(err) {
+	fileControl.deleteFile(fileName,function(err) {
 		if (err) {
 			res.send(500, err);
 			return;

@@ -12,7 +12,8 @@ angular.module('myApp', [
   'ngRoute',
   'angularBootstrapNavTree',
   'qs_repository',
-  'qs_workflow'
+  'qs_workflow',
+  'angularFileUpload'
 ]).
 config(function ($routeProvider, $locationProvider) {
   $routeProvider.
@@ -41,7 +42,7 @@ config(function ($routeProvider, $locationProvider) {
           controller: 'AboutController'
         }).
     otherwise({
-      redirectTo: '/agents'
+      //redirectTo: '/agents'
     });
 
   $locationProvider.html5Mode(true);

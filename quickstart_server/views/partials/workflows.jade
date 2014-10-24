@@ -12,8 +12,8 @@
 						span.caret
 				ul.dropdown-menu(role="menu")
 					li(ng-repeat="(key, repo) in fileRepos")
-						a(ng-click="selectRepo(key)") 
-							{{key}}
+						a(ng-click="selectRepo(repo)") 
+							{{repo.label}}
 					li.divider
 		.workflows-nav-buttons(ng-hide="environments.length == 0")
 			button.btn.btn-secondary(type="button" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="deleteEnv()" )|delete env file

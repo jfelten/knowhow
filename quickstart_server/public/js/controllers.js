@@ -180,7 +180,7 @@ var myModule = angular.module('myApp.controllers', []).
 	    
 	  };
   
-  	  $http.get('/api/repoList').
+  	  $http.get('/repo/listRepositories').
 	    success(function(data) {
 	    	$scope.fileRepos = data;
 	    	//qs_repo.loadRepo($scope, 'leapfrog:');
@@ -225,7 +225,7 @@ var myModule = angular.module('myApp.controllers', []).
 	
 	  //$scope.addFile = addFile;
 	  $scope.deleteFile = function () {
-	  	qs_repo.deleteFile($scope.selectedFile, $scope.selectedRepoName, false, function(err,data) {
+	  	qs_repo.deleteFile($scope.selectedFile, false, function(err,data) {
 	  		var deleted_branch = $scope.selectedFile;
 	  		if (tree.get_parent_branch(deleted_branch)) {
 	  			var parent_branch = tree.get_parent_branch(deleted_branch);
@@ -280,11 +280,11 @@ var myModule = angular.module('myApp.controllers', []).
 		  selectAgent.textContent=agent.user+'@'+agent.host+':'+agent.port;
 	  };
 	  
-	  $scope.selectRepo = function(key) {
-		  console.log('selected repo: '+key);
-		  $scope.selectedRepoName = key;
-	      $scope.selectedRepo = $scope.fileRepos[key];
-	  	  qs_repo.loadRepo(key,'jobs',function(err, data) {
+	  $scope.selectRepo = function(selectedRepo) {
+		  console.log('selected repo: '+selectedRepo.label);
+		  $scope.selectedRepoName = selectedRepo.label;
+	      $scope.selectedRepo = selectedRepo;
+	  	  qs_repo.loadRepo(selectedRepo,'jobs',function(err, data) {
 	  		if(err) {
 	  			alert("unable to load repository");
 	  			
@@ -293,7 +293,7 @@ var myModule = angular.module('myApp.controllers', []).
 	  	  });
 		  $scope.repoSelect.isopen = !$scope.repoSelect.isopen;
 		  var selectRepo = document.getElementById('selectRepo');
-		  selectRepo.textContent=key;
+		  selectRepo.textContent=selectedRepo.label;
 	  };
 	  
 	  var navigating = false;
@@ -405,7 +405,7 @@ var myModule = angular.module('myApp.controllers', []).
   	
     
   
-  	  $http.get('/api/repoList').
+  	  $http.get('/repo/listRepositories').
 	    success(function(data) {
 	    	$scope.fileRepos = data;
 	    });
@@ -481,10 +481,10 @@ var myModule = angular.module('myApp.controllers', []).
 	  
 	  };
 	  
-	  $scope.selectRepo = function(key) {
-		  console.log('selected repo: '+key);
-		  $scope.selectedRepo=key
-		  qs_repo.loadRepo(key,'environments',function(err, data) {
+	  $scope.selectRepo = function(selectedRepo) {
+		  console.log('selected repo: '+selectedRepo.name);
+		  $scope.selectedRepo=selectedRepo
+		  qs_repo.loadRepo(selectedRepo,'environments',function(err, data) {
 	  		if(err) {
 	  			alert("unable to load repository");
 	  			
@@ -493,7 +493,7 @@ var myModule = angular.module('myApp.controllers', []).
 	  		console.log('env_container='+env_container);
 	  		env_editor = new JSONEditor(env_container,options);
 	  		$scope.environments=data;
-			  qs_repo.loadRepo(key,'workflows',function(err, data) {
+			  qs_repo.loadRepo(selectedRepo,'workflows',function(err, data) {
 		  		if(err) {
 		  			alert("unable to load repository");
 		  			
@@ -503,7 +503,7 @@ var myModule = angular.module('myApp.controllers', []).
 		  });
 		  $scope.repoSelect.isopen = !$scope.repoSelect.isopen;
 		  var selectRepo = document.getElementById('selectRepo');
-		  selectRepo.textContent=key;
+		  selectRepo.textContent=selectedRepo.label;
 	  };
 	  
 	  $scope.toggled = function(open) {
@@ -521,7 +521,7 @@ var myModule = angular.module('myApp.controllers', []).
 		
 	}
 	$scope.deleteEnv = function () {
-	  	qs_repo.deleteFile($scope.selectedEnvBranch, $scope.selectedRepoName, false, function(err,data) {
+	  	qs_repo.deleteFile($scope.selectedEnvBranch, false, function(err,data) {
 	  		var deleted_branch =  $scope.selectedEnvBranch;
 	  		if ( $scope.environments_tree.get_parent_branch(deleted_branch)) {
 	  			var parent_branch =  $scope.environments_tree.get_parent_branch(deleted_branch);
@@ -550,7 +550,7 @@ var myModule = angular.module('myApp.controllers', []).
 		
 	}
 	$scope.deleteFile = function () {
-	  	qs_repo.deleteFile($scope.selectedFile, $scope.selectedRepoName, false, function(err,data) {
+	  	qs_repo.deleteFile($scope.selectedFile, false, function(err,data) {
 	  		var deleted_branch = $scope.selectedFile;
 	  		if (tree.get_parent_branch(deleted_branch)) {
 	  			var parent_branch = tree.get_parent_branch(deleted_branch);
@@ -592,10 +592,7 @@ var myModule = angular.module('myApp.controllers', []).
   		      });
 	      		    		
 	      }		    	
-	    	  
-
-	     
-	    	  
+	    	 	  
     	};
     	
     	$scope.env_tabs = [
@@ -638,7 +635,7 @@ var myModule = angular.module('myApp.controllers', []).
 	
 	  //$scope.addFile = addFile;
 	  $scope.deleteFile = function () {
-	  	qs_repo.deleteFile($scope.selectedFile, $scope.selectedRepoName, false, function(err,data) {
+	  	qs_repo.deleteFile($scope.selectedFile, false, function(err,data) {
 	  		var deleted_branch = $scope.selectedFile;
 	  		if (tree.get_parent_branch(deleted_branch)) {
 	  			var parent_branch = tree.get_parent_branch(deleted_branch);
@@ -745,4 +742,230 @@ var myModule = angular.module('myApp.controllers', []).
 	  };
 	  
 	  
-  });
+  }).controller('RepositoriesController', function ($scope, $modal, $http, $log, $timeout, qs_repo, $upload) {
+  	$scope.repoData = [];
+  	$scope.repoTree = {};
+  	
+    var loadRepos = function() {
+    	$http.get('/repo/listRepositories').
+	    success(function(data) {
+	    	$scope.repoData = data;
+	    });
+    };
+    loadRepos();
+    
+    var options = {
+	    mode: 'code',
+	    modes: ['code', 'form', 'text', 'tree', 'view'], // allowed modes
+	    error: function (err) {
+	      console.log(err.toString);
+	      alert(err.toString());
+	    }
+	  };
+	
+	var repo_container, repo_editor; 
+	$timeout(function() {
+        repo_container = document.getElementById('jsoneditor');
+		console.log('repo_container='+repo_container);
+		repo_editor = new JSONEditor(repo_container,options);
+    }, 1000);
+    
+	
+    $scope.repo_tabs = [
+	      	{ title:'Edit File', content:'Edit', disabled: false  },
+		    { title:'Edit Repo', content:'Edit Repo', disabled: false  },
+		    { title:'New Repository', content:'New Repository', active: true, disabled: false }
+		  ];
+	$scope.repo_message = undefined;
+    
+    $scope.repo_tree_handler = function(branch) {
+	  	  console.log(branch);
+	      console.log('selection='+branch.label+ ' ext='+branch.ext+' type='+branch.type);
+	      $scope.currentFile = branch;
+	      if (branch.type == 'repo') {
+	         $scope.selectedRepo = branch;
+	         qs_repo.loadRepo(branch,'',function(err, data) {
+		  		if(err) {
+		  			alert("unable to load repository: "+err.message);
+		  			
+		  		}
+		  		$scope.repo_tabs[1].title = 'Edit Repo '+branch.label;
+  		        $scope.repo_tabs[1].active = true
+		  		branch.children=data[0].children;
+		  		$scope.repoTree.expand_branch(branch);
+		  		
+		  	  });
+	      	console.log("loading repo");
+	      } else if (branch.type == 'file') {
+	      	  $scope.selectedFile = branch;
+	    	  qs_repo.loadFile($scope.selectedRepo, branch.path, function(err,data) {
+	    	    //console.log("data="+data);
+	    	  	
+  		      console.log("loading text");
+  		      repo_editor.setMode('text');
+  		      repo_editor.setText(data);
+  		      $scope.repo_tabs[0].title = 'Edit '+branch.label;
+  		      $scope.repo_tabs[0].active = true
+  		    
+  		      });
+	      		    		
+	      }		    	  
+	    	  
+    	};
+    	
+    $scope.addRepo = function(newRepo) {
+    	qs_repo.addRepo(newRepo,function(err, addedRepo) {
+    		if (err) {
+    			$scope.repo_message="unable to create repo: "+err.message
+    			return;
+    		}
+    		loadRepos();
+    		$scope.repoTree.select_branch(addedRepo);
+    		$scope.repo_message="repo: "+addedRepo.name+" created.";
+    	});
+    }
+    
+    $scope.updateRepo = function(existingRepo) {
+    	qs_repo.updateRepo(existingRepo,function(err, updatedRepo) {
+    		if (err) {
+    			$scope.repo_message="unable to update repo: "+err.message
+    			return;
+    		}
+    		loadRepos();
+    		$scope.repoTree.select_branch(updatedRepo);
+    		$scope.repo_message="repo: "+updatedRepo.name+" updated.";
+    	});
+    }
+    
+    $scope.deleteFile = function() {
+    	if ($scope.currentFile) {
+    		var type = $scope.currentFile.type;
+    		var repoName = $scope.currentFile.label;
+    		var deleted_branch = {
+    			_id: $scope.currentFile._id,
+    			type:  $scope.currentFile.type,
+    			label: $scope.currentFile.label,
+    			name: $scope.currentFile.label,
+    			path: $scope.currentFile.path
+    		};
+    		
+	    	qs_repo.deleteFile(deleted_branch, false, function(err,data) {
+	    		var repoTree = $scope.repoTree;
+	    		if (err) {
+	    			$scope.repo_message="unable to delete repo: "+err.message
+	    			return;
+	    		}
+	    		
+	    		if (type == "repo") {
+		    		loadRepos();
+		    		//repoTree.select_branch(addedRepo);
+		    		$scope.repo_message="repo: "+repoName+" deleted.";
+		    		$scope.selectedRepo=undefined;
+		    			
+		    	} else if (repoTree.get_parent_branch(deleted_branch)) {
+		  			var parent_branch = repoTree.get_parent_branch(deleted_branch);
+		  			repoTree.select_branch(parent_branch);
+		  			var newChildren = [];
+		  			var oldChildren = tree.get_children(parent_branch);
+		  			for (var child in oldChildren) {
+		  				console.log(child.path+" "+deleted_branch.path);
+		  				if (oldChildren[child].path != deleted_branch.path) {
+		  					newChildren.push(oldChildren[child]);
+		  				} else {
+		  					console.log("removing deleted branch from tree");
+		  				}
+		  			}
+		  			console.log(parent_branch);
+		  			console.log(newChildren);
+		  			parent_branch.children =  newChildren;
+		    	}
+	    	});
+   		 }
+    
+    }
+    
+    $scope.onFileSelect = function($files, newRepo) {
+	    //$files: an array of files selected, each file has name, size, and type.
+	    var re = new RegExp('/', 'g');
+	    var createRepo = {
+	    	path: newRepo.path.replace(re,'~'),
+	    	name: newRepo.name
+	    }
+	    console.log(createRepo);
+	    for (var i = 0; i < $files.length; i++) {
+	      var file = $files[i];
+	      $scope.upload = $upload.upload({
+	        url: '/repo/uploadRepoTarBall', //upload.php script, node.js route, or servlet url
+	        //method: 'POST' or 'PUT',
+	        //headers: {'header-key': 'header-value'},
+	        //withCredentials: true,
+	        //data: {newRepo: newRepo},
+	        file: file, // or list of files ($files) for html5 only
+	        fileName: JSON.stringify(createRepo),//'doc.jpg' or ['1.jpg', '2.jpg', ...] // to modify the name of the file(s)
+	        // customize file formData name ('Content-Disposition'), server side file variable name. 
+	        //fileFormDataName: myFile, //or a list of names for multiple files (html5). Default is 'file' 
+	        // customize how data is added to formData. See #40#issuecomment-28612000 for sample code
+	        //formDataAppender: function(formData, key, val){}
+	      }).progress(function(evt) {
+	      	$scope.uploadProgress = parseInt(100.0 * evt.loaded / evt.total);
+	        console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+	      }).success(function(data, status, headers, config) {
+	      	console.log(data);
+	        loadRepos();
+    		//$scope.repoTree.select_branch(data);
+    		$scope.repo_message="repo: "+ newRepo.name+" imported from "+newRepo.fileName;
+    		$scope.uploadProgress = undefined;
+	        
+	      }).error(function(data, status, headers, config) {
+	      	$scope.repo_message="unable to import repo: "+data;
+	      	console.log(data);
+	      	console.log(headers);
+	      	console.log(config);
+	      	$scope.uploadProgress = undefined;
+	      });
+	      //.then(success, error, progress); 
+	      // access or attach event listeners to the underlying XMLHttpRequest.
+	      //.xhr(function(xhr){xhr.upload.addEventListener(...)})
+	    }
+	    /* alternative way of uploading, send the file binary with the file's content-type.
+	       Could be used to upload files to CouchDB, imgur, etc... html5 FileReader is needed. 
+	       It could also be used to monitor the progress of a normal http post/put request with large data*/
+	    // $scope.upload = $upload.http({...})  see 88#issuecomment-31366487 for sample code.
+  };
+  
+   $scope.downloadTarBall = function(repo) {
+    	
+    	var data = {
+		    	repo: repo,
+		    }
+    	$http({
+		      method: 'POST',
+		      url: '/repo/downloadRepoTarBall',
+		      data: data
+		    }).success(function (data, status, headers, config) {
+		        console.log("got tarball");
+		    }).
+		    error(function (data, status, headers, config) {
+		    	$scope.repo_message="unable to download: "+data;
+		    });
+    }
+    
+    $scope.importFromHost = function(newRepo) {
+    	var data = {
+		    	newRepo: newRepo,
+		    }
+    	$http({
+		      method: 'POST',
+		      url: '/repo/importRepoFromServer',
+		      data: data
+		    }).success(function (data, status, headers, config) {
+		        loadRepos();
+    			$scope.repoTree.select_branch(data);
+    			$scope.repo_message="repo: "+ data.label+" imported.";
+		    }).
+		    error(function (data, status, headers, config) {
+		    	$scope.repo_message="unable to import repo: "+data;
+		    });
+    }
+    
+ });

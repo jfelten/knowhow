@@ -5,15 +5,9 @@ var filepath = require('path');
 var url = require('url') ;
 var mkdirp = require('mkdirp');
 var mime = require('mime');
+var repoControl = require('./repository-control');
 
-repos = {
-	"quickstart:": filepath.normalize(__dirname+".."+filepath.sep+".."+filepath.sep+"repo"),
-	"leapfrog:": filepath.normalize("/repo/leapfrog"),
-	"rawpackages:": filepath.normalize("/repo/rawpackages"),
-    "atgcrs:": filepath.normalize("/repo/atgcrs")
-};
 
-exports.repos = repos;
 
 
 exports.getFilePath = function(repofilename) {
@@ -24,50 +18,42 @@ exports.getFilePath = function(repofilename) {
 	return repoDir+fileURL.path;
 };
 
-getDirTreeForRepo = function(repo, dir, callback) {
-	var filename = repos[repo];
-	
-	if (!dir) {
-		logger.info("retrieving tree for : "+filename);
-	} else {
-		logger.info("retrieving tree for : "+filename+filepath.sep+dir);
-		filename = filename+filepath.sep+dir;
-	}
-	logger.info("repo file loc="+filename);
-	
-	var tree=  dirTree(filename);
+getDirTree= function(dir, callback) {
+	logger.info("loading dir: "+dir);
+	var tree=  dirTree(dir);
 	callback(undefined, tree);
-	
-	
 };
 
-exports.getDirTreeForRepo = getDirTreeForRepo;
+exports.getDirTree = getDirTree;
 
 dirTree = function (filename) {
 
 	logger.debug("basename="+filepath.basename(filename)+" filename="+filename);
-    var stats = fs.lstatSync(filename),
-    info = {
-        path: filename,
-        label: filepath.basename(filename),
-        ext:  filepath.extname(filename)
-    };
+	if (fs.existsSync(filename)) {
+	    var stats = fs.lstatSync(filename),
+	    info = {
+	        path: filename,
+	        label: filepath.basename(filename),
+	        ext:  filepath.extname(filename)
+	    };
+	    
+	
+	    if (stats.isDirectory()) {
+	        info.type = "folder";
+	        info.children = fs.readdirSync(filename).map(function(child) {
+	        	return dirTree(filename + '/' + child);
+	        });
+	        
+	    } else {
+	        // Assuming it's a file. In real life it could be a symlink or
+	        // something else!
+	        info.type = "file";
+	    	//return path.basename(filename);
+	    }
+	    return info;
+	}    
+
     
-
-    if (stats.isDirectory()) {
-        info.type = "folder";
-        info.children = fs.readdirSync(filename).map(function(child) {
-        	return dirTree(filename + '/' + child);
-        });
-        
-    } else {
-        // Assuming it's a file. In real life it could be a symlink or
-        // something else!
-        info.type = "file";
-    	//return path.basename(filename);
-    }
-
-    return info;
 };
 
 if (module.parent == undefined) {
@@ -91,9 +77,8 @@ saveFile = function(file, data, res) {
 	}); 
 };
 
-exports.deleteFile = function(repo, filename, callback) {
-	repoDir = repos[repo];
-	var filePath=repoDir+filepath.sep+filename;
+exports.deleteFile = function(filename, callback) {
+
 	logger.debug("deleting: "+filename);
 	stat = fs.statSync(filename);
 	

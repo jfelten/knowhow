@@ -1,8 +1,63 @@
 var repo_module = angular.module('qs_repository', []);
 
-var loadRepo = function(repoName, subDir, callback) {
+var addRepo = function(newRepo,callback) {
+    	var data = {
+		    	newRepo: newRepo,
+		    };
+	    this.$http({
+		      method: 'POST',
+		      url: '/repo/newFileRepo',
+		      data: data
+		    }).success(function (data, status, headers, config) {
+		        console.log("added new Repo");
+		        callback(undefined, data)
+		    }).
+		    error(function (data, status, headers, config) {
+		    	callback(new Error(data));
+		    	//$scope.message = 'Unable to contact server http status: '+status;
+		    });
+    }
+    
+var updateRepo = function(existingRepo,callback) {
+    	var data = {
+		    	existingRepo: existingRepo,
+		    };
+	    this.$http({
+		      method: 'POST',
+		      url: '/repo/updateFileRepo',
+		      data: data
+		    }).success(function (data, status, headers, config) {
+		        console.log("updated Repo");
+		        callback(undefined, data)
+		    }).
+		    error(function (data, status, headers, config) {
+		    	callback(new Error(data));
+		    	//$scope.message = 'Unable to contact server http status: '+status;
+		    });
+    }
 
-	    this.$http.get('/api/fileListForRepo?repo='+repoName+'&dir='+subDir).
+var deleteRepo = function(repo,callback) {
+		console.log("deleting repo: "+repo._id);
+    	var data = {
+		    	repo: repo,
+		    };
+	    this.$http({
+		      method: 'POST',
+		      url: '/repo/deleteFileRepo',
+		      data: data
+		    }).success(function (data, status, headers, config) {
+		        console.log("deleted");
+		        callback(undefined, data)
+		    }).
+		    error(function (data, status, headers, config) {
+		    	callback(new Error(data.message+' : '+status));
+		    	//$scope.message = 'Unable to contact server http status: '+status;
+		    });
+    }
+
+var loadRepo = function(repo, subDir, callback) {
+
+	    this.$http.get('/api/fileListForDir?dir='+repo.path+'/'+subDir).
 	    success(function(data) {
 	    	var files = data.children;
 	    	if (callback){
@@ -70,54 +125,76 @@ var addFile = function(selectedNode, repo, newFile, tree, isDirectory) {
       
 };
   
-var deleteFile = function(selectedNode, repo, force, callback) {
-	  console.log("delete file: selectedFile="+selectedNode.path+" selectedRepo="+repo+" type="+selectedNode.type );
+var deleteFile = function(selectedNode, force, callback) {
+	  console.log("delete file: selectedFile="+selectedNode.path+" type="+selectedNode.type );
 	
 	  
 	  //pop up warning if a dir
 	  if (force != true && selectedNode.type == "folder") {
 		 console.log("directory check");
-		 openDeleteFileModal(selectedNode, repo, this.$modal, callback);
-	  } else {
+		 openDeleteFileModal(selectedNode, this.$modal, callback);
+	  } else if (force != true && selectedNode.type == "repo") {
+		 console.log("directory check");
+		 openDeleteFileModal(selectedNode, this.$modal, callback);
+	  } 
 	  
-			  
-	  //submit the delete request
-		this.$http.get('/api/deleteFile?fileName='+selectedNode.path+'&selectedRepo='+repo).success(function(data) {
-	    	  
-	    	  
+	  
+	  else {//submit the delete request
+	  	if (selectedNode.type == "repo") {
+	  		var data = {
+		    	repo: selectedNode,
+		    };
+		    this.$http({
+			      method: 'POST',
+			      url: '/repo/deleteFileRepo',
+			      data: data
+			    }).success(function (data, status, headers, config) {
+			        console.log("deleted");
+			        callback(undefined, data)
+			    }).
+			    error(function (data, status, headers, config) {
+			    	callback(new Error(data.message+' : '+status));
+			    	//$scope.message = 'Unable to contact server http status: '+status;
+			    });
+	  	} else {
+	  		this.$http.get('/api/deleteFile?fileName='+selectedNode.path).success(function(data) {
 	    	  callback(data);
 	      });
+	  	}
+			  
+	  
+		
 	 }
       
 };
 
-var openDeleteFileModal = function(selectedNode, repo, $modal, callback) {
+var openDeleteFileModal = function(selectedNode, $modal, callback) {
 	var modalInstance ={};
-		var dirWarningModalController=  function ($rootScope, $scope, $modal, $log, qs_repo) {
+	var dirWarningModalController=  function ($rootScope, $scope, $modal, $log, qs_repo) {
+
+
+	  $scope.ok = function () {
+	    qs_repo.deleteFile(selectedNode, true, callback);
+	    modalInstance.close('ok');
+	  };
 	
-	
-		  $scope.ok = function () {
-		    qs_repo.deleteFile(selectedNode, repo, true, callback);
-		    modalInstance.close('ok');
-		  };
-		
-		  $scope.cancel = function () {
-		    console.log("nope I really don't want to do it");
-		    modalInstance.dismiss('cancel');
-		  };
-	
-	    };
-	    modalInstance = $modal.open({
-	      templateUrl: 'directoryWarning',
-	      controller: dirWarningModalController,
-	      size: ''
-	    });
-	
-	    modalInstance.result.then(function (selectedItem) {
-	      $scope.selected = selectedItem;
-	    }, function () {
-	      $log.info('Modal dismissed at: ' + new Date());
-	    });
+	  $scope.cancel = function () {
+	    console.log("nope I really don't want to do it");
+	    modalInstance.dismiss('cancel');
+	  };
+
+    };
+    modalInstance = $modal.open({
+      templateUrl: 'directoryWarning',
+      controller: dirWarningModalController,
+      size: ''
+    });
+
+    modalInstance.result.then(function (selectedItem) {
+      //$scope.selected = selectedItem;
+    }, function () {
+      $log.info('Modal dismissed at: ' + new Date());
+    });
 	    
 	    
   
@@ -210,6 +287,8 @@ repo_module.controller('newFileModalController', function($scope) {
 
 repo_module.factory("qs_repo", ["$http","$modal", function ($http,$modal,qs_repo) {
    	return {
+   		addRepo : addRepo.bind({$http: $http}),
+   		deleteRepo : addRepo.bind({$http: $http}),
    	  	loadRepo: loadRepo.bind({$http: $http}),
    	  	loadFile: loadFile.bind({$http: $http}),
    	  	saveFile: saveFile.bind({$http: $http}),
