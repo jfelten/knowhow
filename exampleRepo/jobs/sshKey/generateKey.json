@@ -1,0 +1,16 @@
+{
+  "id": "generate ssh key",
+  "working_dir": "~/.ssh",
+  "options": {
+    "dontUploadIfFileExists": false,
+    "timeoutms": 3600000
+  },
+  "files": [],
+  "script": {
+    "env": {
+      
+    },
+    "commands": []
+      
+  }
+}

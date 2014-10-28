@@ -1,0 +1,13 @@
+{
+  "id": "my environment",
+  "agents": {
+    "LaunchPad Server": {
+      "host": "localhost",
+      "port": 3000
+    },
+    "myOtherHost": {
+      "host": "myOtherHost",
+      "port": 3000
+    }
+  }
+}

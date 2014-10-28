@@ -1,0 +1,9 @@
+extends ../layout
+
+block content
+	h3 Tailing logs - Full log file&nbsp;
+		a(href="/log-files/agent.log.json", target="_blank") here:
+	
+	.log-container#log-container(ng-bind-html="logs")
+		{{logs}}
+	
