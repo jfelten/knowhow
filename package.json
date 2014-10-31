@@ -1,0 +1,42 @@
+{
+  "name": "knowhow",
+  "version": "0.0.0",
+  "description": "KnowHow is an environment management/workflow tool that can execute tasks on any host.",
+  "main": "knowhow_server/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+	    "knowhow_agent": "~0.0.1",
+	    "knowhow_server": "~0.0.1"
+  }
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jfelten/knowhow.git"
+  },
+  "keywords": [
+    "remote",
+    "task",
+    "management",
+    "workflow",
+    "job",
+    "control",
+    "puppet",
+    "chef"
+  ],
+  "author": "John Felten",
+  "license": "GPL-3.0+",
+  "bugs": {
+    "url": "https://github.com/jfelten/knowhow/issues"
+  },
+  "homepage": "https://github.com/jfelten/knowhow",
+  "scripts" :
+	  { 
+	    "start": "scripts/startKHServer.js"
+	  },
+  "bin": {
+		"startLPServer.js": "scripts/startKHServer.sh",
+		"startLPAgent.js": "scripts/startKHServer.sh"
+		}
+
+}
