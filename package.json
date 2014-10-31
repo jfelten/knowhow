@@ -35,8 +35,8 @@
 	    "start": "scripts/startKHServer.js"
 	  },
   "bin": {
-		"startLPServer.js": "scripts/startKHServer.sh",
-		"startLPAgent.js": "scripts/startKHServer.sh"
+		"startLPServer.sh": "scripts/startKHServer.sh",
+		"startLPAgent.sh": "scripts/startKHServer.sh"
 		}
 
 }
