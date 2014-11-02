@@ -1,6 +1,6 @@
 {
   "name": "knowhow",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "KnowHow is an environment management/workflow tool that can execute tasks on any host.",
   "main": "knowhow_server/server.js",
   "scripts": {
@@ -35,8 +35,8 @@
 	    "start": "scripts/startKHServer.js"
 	  },
   "bin": {
-		"startLPServer.sh": "scripts/startKHServer.sh",
-		"startLPAgent.sh": "scripts/startKHServer.sh"
+		"startKHServer": "scripts/startKHServer.sh",
+		"startKHAgent": "scripts/startKHServer.sh"
 		}
 
 }
