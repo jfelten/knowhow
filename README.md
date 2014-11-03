@@ -12,7 +12,8 @@ We have tried to make the install as painless as possible.
 For node users:
 npm install -g knowhow
 
-For everyone else there is an RPM that includes a nodejs binary
+For everyone else there is an RPM that includes a nodejs binary:
+
 sudo rpm -ivh https://github.com/jfelten/knowhow/raw/master/knowhow-0.0.2-1.el6.x86_64.rpm
 
 Getting Started
