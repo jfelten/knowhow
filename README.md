@@ -31,6 +31,10 @@ To run a knowhow server directly from a cloned project:
   
 To run a knowhow agent directly from a cloned project:
 
-    node node_modules/knowhow_agent/agent.js entry points.
+    node node_modules/knowhow_agent/agent.js
     
 Open the knowhow server in a browser Ex: [http://localhost:3001](http://localhost:3001)
+
+# Example Repository
+
+The [example repository](https://github.com/jfelten/knowhow_example_repo) acts as a tutorial.  Import this repository to get started.  Navigate to Repositories tab and then select the "New Repository" sub tab.
