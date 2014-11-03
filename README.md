@@ -33,4 +33,4 @@ To run a knowhow agent directly from a clone project
 
     node node_modules/knowhow_agent/agent.js entry points.
 
-### Open a browser window --> navigate to localhost:3001
+#### Open the knowhow server in a browser -->  Ex: [http://localhost:3001](http://localhost:3001)
