@@ -7,8 +7,19 @@ KnowHow is a tool that can be used to run any task on any cluster of machines vi
 
 Installation
 ============
+We have tried to make the install as painless as possible.
 
-Get the code and run it.
+For node users:
+npm install -g knowhow
 
-Via GIT: git clone 
-Via npm: npm install knowhow
+For everyone else there is an RPM that includes a nodejs binary
+sudo rpm -ivh https://github.com/jfelten/knowhow/raw/master/knowhow-0.0.2-1.el6.x86_64.rpm
+
+Getting Started
+============
+To start the server execute: startKHServer
+To start the agent execute: startKHAgent
+
+If you cloned the project you run the node_modules/knowhow_server/server.js and node_modules/knowhow_agent/agent.js entry points.  Ex node server.js.
+
+next import the examples repository
