@@ -29,7 +29,7 @@ To run a knowhow server directly from a cloned project:
 
     node node_modules/knowhow_server/server.js
   
-To run a knowhow agent directly from a clone project
+To run a knowhow agent directly from a cloned project:
 
     node node_modules/knowhow_agent/agent.js entry points.
     
