@@ -19,6 +19,7 @@ sudo rpm -ivh https://github.com/jfelten/knowhow/raw/master/knowhow-0.0.2-1.el6.
 Getting Started
 ============
 To start the server execute: startKHServer
+
 To start the agent execute: startKHAgent
 
 If you cloned the project you run the node_modules/knowhow_server/server.js and node_modules/knowhow_agent/agent.js entry points.  Ex node server.js.
