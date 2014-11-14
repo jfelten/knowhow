@@ -1,14 +1,14 @@
 {
   "name": "knowhow",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "KnowHow is an environment management/workflow tool that can execute tasks on any host.",
   "main": "knowhow_server/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "scripts/startKHServer.js"
   },
   "dependencies": {
-	    "knowhow-agent": "0.0.x",
-	    "knowhow-server": "0.0.x"
+    "knowhow-agent": "0.0.x",
+    "knowhow-server": "0.0.x"
   },
   "repository": {
     "type": "git",
@@ -30,13 +30,8 @@
     "url": "https://github.com/jfelten/knowhow/issues"
   },
   "homepage": "https://github.com/jfelten/knowhow",
-  "scripts" :
-	  { 
-	    "start": "scripts/startKHServer.js"
-	  },
   "bin": {
-		"startKHServer": "scripts/startKHServer.sh",
-		"startKHAgent": "scripts/startKHServer.sh"
-		}
-
+    "startKHServer": "scripts/startKHServer.sh",
+    "startKHAgent": "scripts/startKHServer.sh"
+  }
 }
