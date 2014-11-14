@@ -1,1 +1,0 @@
-{"taskList":[{"name":"Generate ssh keys on this host","type":"paralell","agents":["This Host"],"options":{},"jobref":"exampleRepo:///jobs/sshKeys/generateSSHKey.json"},{"name":"Update keys on all hosts","type":"paralell","agents":["myOtherHost","myOtherHost2"],"options":{},"jobref":"exampleRepo:///jobs/sshKeys/10.3.6/updateSSHKey.json"}]}

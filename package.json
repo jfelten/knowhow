@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-	    "knowhow_agent": "~0.0.1",
-	    "knowhow_server": "~0.0.1"
+	    "knowhow-agent": "0.0.x",
+	    "knowhow-server": "0.0.x"
   },
   "repository": {
     "type": "git",
