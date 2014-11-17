@@ -7,7 +7,6 @@
     "start": "scripts/startKHServer.js"
   },
   "dependencies": {
-    "knowhow-agent": "*",
     "knowhow-server": "*"
   },
   "repository": {
