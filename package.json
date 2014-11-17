@@ -1,6 +1,6 @@
 {
   "name": "knowhow",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "KnowHow is an environment management/workflow tool that can execute tasks on any host.",
   "main": "knowhow_server/server.js",
   "scripts": {
