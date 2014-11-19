@@ -1,4 +1,4 @@
 #!/bin/bash
 
-./startKHAgent.sh
-./startSKServer.sh
+./startKHAgent_inc.sh
+./startSKServer_inc.sh
