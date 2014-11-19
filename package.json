@@ -33,6 +33,7 @@
   "homepage": "https://github.com/jfelten/knowhow",
   "bin": {
     "startKHServer": "scripts/startKHServer.sh",
-    "startKHAgent": "scripts/startKHServer.sh"
+    "startKHAgent": "scripts/startKHAgent.sh",
+    "startKH": "scripts/startKH.sh"
   }
 }
