@@ -1,4 +1,3 @@
- cat knowhow.SPEC
 Summary:	knowhow agent and server bundle
 Name:		knowhow
 Version:	<version>
