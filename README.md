@@ -13,7 +13,7 @@ For node users:
 
 For everyone else there is an RPM that includes a nodejs binary:
 
-    sudo rpm -ivh https://github.com/jfelten/knowhow/raw/master/knowhow-0.0.2-1.el6.x86_64.rpm
+    sudo rpm -ivh https://github.com/jfelten/knowhow/raw/master/dist/knowhow-0.0.2-1.el6.x86_64.rpm
 
 # Getting Started
 
