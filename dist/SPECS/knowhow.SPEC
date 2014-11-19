@@ -36,6 +36,7 @@ rm -f /usr/bin/startKH*
 %post -p /bin/bash
 ln -s /usr/lib/node_modules/knowhow/scripts/startKHServer_inc.sh /usr/bin/startKHServer
 ln -s /usr/lib/node_modules/knowhow/scripts/startKHAgent_inc.sh /usr/bin/startKHAgent
+ln -s /usr/lib/node_modules/knowhow/scripts/startKH_inc.sh /usr/bin/startKH
 echo "knowhow <version> install files have been installed"
 
 %files
