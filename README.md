@@ -52,7 +52,9 @@ For everyone else there is an RPM that includes a nodejs binary:
 
 To start the server execute: 
 
-    startKHServer
+    startKHServer 
+    
+please follow the getting started section here: [knowhow-server](https://github.com/jfelten/knowhow-server)
 
 To start the agent execute: 
 
