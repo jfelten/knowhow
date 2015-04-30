@@ -9,7 +9,8 @@
   "dependencies": {
     "knowhow-shell": "*",
     "knowhow-agent": "*",
-    "knowhow-server": "*"
+    "knowhow-server": "*",
+    "knowhow-api": "*"
   },
   "repository": {
     "type": "git",
@@ -35,5 +36,6 @@
     "startKHServer": "scripts/startKHServer.sh",
     "startKHAgent": "scripts/startKHAgent.sh",
     "startKH": "scripts/startKH.sh"
+    "KHCommand": "scripts/KHCommand.sh"
   }
 }
