@@ -35,7 +35,7 @@
   "bin": {
     "startKHServer": "scripts/startKHServer.sh",
     "startKHAgent": "scripts/startKHAgent.sh",
-    "startKH": "scripts/startKH.sh"
+    "startKH": "scripts/startKH.sh",
     "KHCommand": "scripts/KHCommand.sh"
   }
 }
