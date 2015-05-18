@@ -37,5 +37,6 @@
     "startKHAgent": "scripts/startKHAgent.sh",
     "startKH": "scripts/startKH.sh",
     "KHCommand": "scripts/KHCommand.sh"
-  }
+  },
+  "preferGlobal": true
 }
