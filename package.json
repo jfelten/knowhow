@@ -2,15 +2,16 @@
   "name": "knowhow",
   "version": "0.0.15",
   "description": "KnowHow is an environment management/workflow tool that can execute tasks on any host.",
-  "main": "knowhow_server/server.js",
+  "main": "index.js",
   "scripts": {
     "start": "scripts/startKHServer.js"
   },
   "dependencies": {
-    "knowhow-shell": "*",
+    "async": "^1.0.0",
     "knowhow-agent": "*",
+    "knowhow-api": "*",
     "knowhow-server": "*",
-    "knowhow-api": "*"
+    "knowhow-shell": "*"
   },
   "repository": {
     "type": "git",
