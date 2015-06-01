@@ -21,7 +21,7 @@ var getPackageVersion = function(packageName, callback) {
 	    ]
 	  }
 	}
-	var KnowhowShell = require('../knowhow-shell');
+	var KnowhowShell = require('knowhow-shell');
 	var knowhowShell = new KnowhowShell();
 	knowhowShell.executeJob(versionJob, function(err, jobRuntime) {
 		if(err) {
