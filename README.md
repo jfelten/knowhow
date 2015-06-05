@@ -16,6 +16,7 @@ KnowHow is a tool that can be used to run any task on any cluster of machines vi
 ##Subprojects
 * [knowhow-agent](https://github.com/jfelten/knowhow-agent) manages execution on a single host
 * [knowhow-server](https://github.com/jfelten/knowhow-server) manages over execution of jobs, repositories and workflows
+* [knowhow-api](https://github.com/jfelten/knowhow-api) nodejs api to knowhow server functionality
 * [knowhow-example-repo](https://github.com/jfelten/knowhow_example_repo) examples of jobs and workflows 
 * [knowhow-shell](https://github.com/jfelten/knowhow-shell) a node api for executing knowhow json jobs
 
