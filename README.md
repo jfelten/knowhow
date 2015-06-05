@@ -30,6 +30,10 @@ A knowhow agent is a simple web application that provides a control interface to
 
 Knowhow-server, this project, manages agents, jobs, workflows and repositories.  It is a web application accessed through the browser [http://localhost:3001](http://localhost:3001).
 
+####[knowhow-api](https://github.com/jfelten/knowhow-api)
+
+Knowhow-api provides a nodejs programming interface to a knowhow server.  It supports all functionality available via the knowhow server web GUI, and allows full automation of a knowhow server.  It also includes the command tool KHCommand, which allows any api command to be executed from a shell script.
+
 ####[repository](https://github.com/jfelten/knowhow_example_repo)
 
 A collection of json objects, and other dependent files that represent jobs, environments, and workflows.  Repositories are currently file based and is a directory with the following top folders: environments, jobs, workflows.  Each folder contains the specifc types of objects: jobs for job objects, environments environment json objects, and workflows for workflow objects.  The may be other nested folder structures underneath one of the top 3 directories.  Eventually there will be database based repositories.  See [knowhow_example_repo](https://github.com/jfelten/knowhow_example_repo) for an example repository structure.
@@ -66,7 +70,7 @@ please follow the getting started section here: [knowhow-server](https://github.
 
 To start the agent execute: 
 
-    startKHAgent
+    startKHAgent --port=<PORT_NUM> default port is 3001 if not supplied
 
 To run a knowhow server directly from a cloned project:
 
