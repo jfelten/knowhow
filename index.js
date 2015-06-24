@@ -21,25 +21,26 @@ var getPackageVersion = function(packageName, callback) {
 	    ]
 	  }
 	}
-	var KnowhowShell = require('knowhow-shell');
+	var KnowhowShell = require('../knowhow-shell');
 	var knowhowShell = new KnowhowShell();
-	knowhowShell.executeJob(versionJob, function(err, jobRuntime) {
+	knowhowShell.executeJobAsSubProcess(versionJob, function(err, jobRuntime) {
 		if(err) {
 			console.error("unable to get version for packaage: "+packageName+" "+err.message);
 			callback(err);	
 			
 		} else {
-			callback(undefined, jobRuntime.completedCommands[0].output);
+			console.log(jobRuntime);
+			callback(undefined, jobRuntime.scriptRuntime.completedCommands[0].output);
 		}
 	});
 };
 
 var getInstalledVersions = function() {
 	var knowhow = require('./package.json');
-	var knowhowShell = require('./node_modules/knowhow-shell/package.json');
-	var knowhowApi = require('./node_modules/knowhow-api/package.json');
-	var knowhowServer = require('./node_modules/knowhow-server/package.json');
-	var knowhowAgent = require('./node_modules/knowhow-agent/package.json');
+	var knowhowShell = require('knowhow-shell/package.json');
+	var knowhowApi = require('knowhow-api/package.json');
+	var knowhowServer = require('knowhow-server/package.json');
+	var knowhowAgent = require('knowhow-agent/package.json');
 	
 	var versions = {
 		'knowhow': knowhow.version,
@@ -58,7 +59,7 @@ var getNewestVersions = function(callback) {
 	var packages = ['knowhow', 'knowhow-shell', 'knowhow-api', 'knowhow-server', 'knowhow-agent'];
 	var versions = {};
 	
-	async.eachSeries(packages, function(package, cb) {
+	async.each(packages, function(package, cb) {
 		getPackageVersion(package, function(err, version) {
 			if (err) {
 				cb(err);
@@ -73,12 +74,14 @@ var getNewestVersions = function(callback) {
 
 }
 
+exports.getNewestVersions = getNewestVersions;
 exports.installedVersions = getInstalledVersions();
 
+/*
 getNewestVersions(function(newestVersions) {
 	exports.newestVersions = newestVersions;
 	console.log(exports.newestVersions);
 	console.log(exports.installedVersions);
-});
+});*/
 
 
